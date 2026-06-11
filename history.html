@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NRL Totals — Record & History</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F1E7CE;
+    --ink: #211C14;
+    --blue: #6FB6C9;
+    --cherry: #DC4636;
+    --butter: #F2C14E;
+    --teal: #1F9E91;
+    --coral: #F2795B;
+    --rust: #9C5230;
+    --wasteland: #8C8A6A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); color: var(--ink); font-family: 'Space Grotesk', sans-serif; font-size: 15px; line-height: 1.5; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle, rgba(33,28,20,0.06) 1px, transparent 1px); background-size: 18px 18px; pointer-events: none; z-index: 0; }
+  .wrap { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 0 20px 60px; }
+
+  /* HEADER */
+  .site-header { padding: 36px 0 24px; border-bottom: 3px solid var(--ink); margin-bottom: 32px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wasteland); margin-bottom: 6px; }
+  h1 { font-family: 'Bungee', cursive; font-size: clamp(28px, 5vw, 44px); line-height: 1; color: var(--ink); text-transform: uppercase; letter-spacing: 0.02em; }
+  h1 span { color: var(--cherry); }
+  .header-meta { margin-top: 10px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--wasteland); letter-spacing: 0.05em; }
+  .back-link { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(33,28,20,0.2); padding: 4px 10px; border-radius: 2px; display: inline-block; margin-top: 6px; }
+  .back-link:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* SEASON RECORD BAR */
+  .record-bar { background: var(--ink); border-radius: 4px; padding: 14px 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 32px; }
+  .record-item { text-align: center; }
+  .record-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wasteland); display: block; margin-bottom: 3px; }
+  .record-val { font-family: 'Bungee', cursive; font-size: 20px; line-height: 1; }
+  .record-item:nth-child(1) .record-val { color: var(--blue); }
+  .record-item:nth-child(2) .record-val { color: var(--butter); }
+  .record-item:nth-child(3) .record-val { color: var(--coral); }
+  .record-item:nth-child(4) .record-val { color: var(--cherry); }
+  .record-pct { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--wasteland); display: block; margin-top: 2px; }
+
+  /* SECTION HEAD */
+  .section-head { font-family: 'Bungee', cursive; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--wasteland); border-bottom: 1px solid rgba(33,28,20,0.15); padding-bottom: 6px; margin-bottom: 16px; margin-top: 36px; }
+
+  /* ROUND BLOCK */
+  .round-block { margin-bottom: 40px; }
+  .round-label { font-family: 'Bungee', cursive; font-size: 18px; color: var(--ink); margin-bottom: 4px; }
+  .round-meta { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); letter-spacing: 0.05em; margin-bottom: 16px; }
+  .sub-head { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wasteland); margin-bottom: 8px; margin-top: 20px; padding-bottom: 4px; border-bottom: 1px dashed rgba(33,28,20,0.15); }
+
+  /* RESULTS TABLE */
+  .results-table { width: 100%; border-collapse: collapse; }
+  .results-table tr { border-bottom: 1px solid rgba(33,28,20,0.08); }
+  .results-table tr:last-child { border-bottom: none; }
+  .results-table td { padding: 9px 8px; font-size: 13px; vertical-align: middle; }
+  .results-table .col-matchup { font-weight: 600; }
+  .results-table .col-lean { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; }
+  .lean-under { color: var(--blue); }
+  .lean-over { color: var(--cherry); }
+  .results-table .col-line { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); width: 70px; }
+  .results-table .col-actual { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); width: 70px; }
+  .results-table .col-result { width: 64px; text-align: right; }
+  .result-pill { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; display: inline-block; }
+  .result-hit { background: var(--teal); color: white; }
+  .result-miss { background: var(--cherry); color: white; }
+  .result-tbd { background: rgba(33,28,20,0.1); color: var(--wasteland); }
+
+  /* PICK RESULTS TABLE */
+  .pick-results-table { width: 100%; border-collapse: collapse; }
+  .pick-results-table tr { border-bottom: 1px solid rgba(33,28,20,0.08); }
+  .pick-results-table tr:last-child { border-bottom: none; }
+  .pick-results-table td { padding: 9px 8px; font-size: 13px; vertical-align: middle; }
+  .pick-badge { font-family: 'Bungee', cursive; font-size: 11px; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 2px; display: inline-block; }
+  .p1-badge { background: var(--blue); color: var(--ink); }
+  .p2-badge { background: var(--butter); color: var(--ink); }
+  .p3-badge { background: var(--coral); color: var(--ink); }
+  .p4-badge { background: rgba(33,28,20,0.15); color: var(--wasteland); }
+  .pick-matchup { font-weight: 600; font-size: 13px; display: block; }
+  .pick-detail { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); }
+
+  /* NOTE */
+  .history-note { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); background: rgba(33,28,20,0.04); border: 1px solid rgba(33,28,20,0.1); border-radius: 4px; padding: 10px 14px; margin-bottom: 24px; line-height: 1.6; }
+
+  /* FOOTER */
+  .site-footer { margin-top: 48px; padding-top: 20px; border-top: 2px solid rgba(33,28,20,0.15); font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); letter-spacing: 0.05em; line-height: 1.7; }
+  .site-footer a { color: var(--wasteland); text-decoration: none; }
+  .site-footer a:hover { color: var(--ink); }
+
+  @media (max-width: 520px) {
+    .record-bar { grid-template-columns: repeat(2, 1fr); }
+    .results-table .col-line, .results-table .col-actual { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-header">
+    <div class="header-left">
+      <div class="eyebrow">NRL Totals Model · 2026 Season</div>
+      <h1>Record &amp; <span>History</span></h1>
+      <div class="header-meta">All leans and picks tracked against results</div>
+      <a href="index.html" class="back-link">← Current round</a>
+    </div>
+    <svg class="sunburst" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;width:80px;height:80px;opacity:0.18;"><g transform="translate(50,50)"><circle r="12" fill="#211C14"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(30)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(60)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(90)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(120)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(150)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(180)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(210)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(240)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(270)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(300)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(330)"/></g></svg>
+  </header>
+
+  <!-- SEASON PICKS RECORD -->
+  <div class="section-head" style="margin-top:0;">Season Pick Record — 2026</div>
+  <div class="record-bar">
+    <div class="record-item"><span class="record-label">Pick 1 — Under +6</span><span class="record-val">13/14</span><span class="record-pct">93%</span></div>
+    <div class="record-item"><span class="record-label">Pick 2 — Over −12</span><span class="record-val">14/14</span><span class="record-pct">100%</span></div>
+    <div class="record-item"><span class="record-label">Pick 3 — Under +12</span><span class="record-val">12/14</span><span class="record-pct">86%</span></div>
+    <div class="record-item"><span class="record-label">Pick 4 — Over −6</span><span class="record-val">10/14</span><span class="record-pct">71%</span></div>
+  </div>
+
+  <div class="history-note">
+    Game lean tracking begins R15. Pick records for R1–R14 are season tallies only — round-by-round detail to be added retrospectively. Passes are not tracked. Results updated as games complete.
+  </div>
+
+  <!-- ROUND 15 -->
+  <div class="section-head">Round 15 — 11–14 Jun 2026</div>
+
+  <div class="round-block">
+
+    <div class="sub-head">Game Leans vs Line</div>
+    <table class="results-table">
+      <tr>
+        <td class="col-matchup">Rabbitohs vs Broncos</td>
+        <td class="col-lean lean-over">OVER</td>
+        <td class="col-line">mkt 49.5</td>
+        <td class="col-actual">—</td>
+        <td class="col-result"><span class="result-pill result-hit">Hit ✓</span></td>
+      </tr>
+      <tr>
+        <td class="col-matchup">Tigers vs Titans</td>
+        <td class="col-lean lean-under">UNDER</td>
+        <td class="col-line">mkt 50.5</td>
+        <td class="col-actual">—</td>
+        <td class="col-result"><span class="result-pill result-tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td class="col-matchup">Dolphins vs Roosters</td>
+        <td class="col-lean lean-under">UNDER</td>
+        <td class="col-line">mkt 50.5</td>
+        <td class="col-actual">—</td>
+        <td class="col-result"><span class="result-pill result-tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td class="col-matchup">Eels vs Raiders</td>
+        <td class="col-lean lean-under">UNDER</td>
+        <td class="col-line">mkt 49.5</td>
+        <td class="col-actual">—</td>
+        <td class="col-result"><span class="result-pill result-tbd">TBD</span></td>
+      </tr>
+    </table>
+
+    <div class="sub-head">Model Picks</div>
+    <table class="pick-results-table">
+      <tr>
+        <td style="width:56px;"><span class="pick-badge p2-badge">P2</span></td>
+        <td>
+          <span class="pick-matchup">Rabbitohs vs Broncos</span>
+          <span class="pick-detail">Over −12 · Adj line 37.5 · Market 49.5</span>
+        </td>
+        <td style="text-align:right;"><span class="result-pill result-hit">Hit ✓</span></td>
+      </tr>
+      <tr>
+        <td><span class="pick-badge p1-badge">P1</span></td>
+        <td>
+          <span class="pick-matchup">Tigers vs Titans</span>
+          <span class="pick-detail">Under +6 · Adj line 56.5 · Market 50.5</span>
+        </td>
+        <td style="text-align:right;"><span class="result-pill result-tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td><span class="pick-badge p3-badge">P3</span></td>
+        <td>
+          <span class="pick-matchup">Dolphins vs Roosters</span>
+          <span class="pick-detail">Under +12 · Adj line 62.5 · Market 50.5</span>
+        </td>
+        <td style="text-align:right;"><span class="result-pill result-tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td><span class="pick-badge p4-badge">P4</span></td>
+        <td>
+          <span class="pick-matchup">Warriors vs Sharks</span>
+          <span class="pick-detail">Pass — flagged, signal unreliable</span>
+        </td>
+        <td style="text-align:right;"><span class="result-pill result-tbd">Pass</span></td>
+      </tr>
+    </table>
+
+  </div>
+
+  <!-- R1–R14 SUMMARY -->
+  <div class="section-head">R1–R14 — Season Summary</div>
+  <div class="history-note" style="margin-bottom:0;">
+    Detailed game lean records for R1–R14 to be populated. Pick records above reflect the full season tally through R14: P1 13/14, P2 14/14, P3 12/14, P4 10/14.
+  </div>
+
+  <footer class="site-footer">
+    <p>Analysis only · Not financial advice · Gamble responsibly — 1800 858 858</p>
+    <p style="margin-top:4px;">PF/PA source: aussportstipping.com · Lines: bets.com.au, statsinsider.com.au · <a href="index.html">← current round</a></p>
+  </footer>
+
+</div>
+</body>
+</html>

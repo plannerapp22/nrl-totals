@@ -8,105 +8,352 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream: #F1E7CE;
-    --ink: #211C14;
-    --blue: #6FB6C9;
-    --cherry: #DC4636;
-    --butter: #F2C14E;
-    --teal: #1F9E91;
-    --coral: #F2795B;
-    --rust: #9C5230;
-    --wasteland: #8C8A6A;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--cream); color: var(--ink); font-family: 'Space Grotesk', sans-serif; font-size: 15px; line-height: 1.5; }
-  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle, rgba(33,28,20,0.06) 1px, transparent 1px); background-size: 18px 18px; pointer-events: none; z-index: 0; }
-  .wrap { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 0 20px 60px; }
-  .site-header { padding: 36px 0 24px; border-bottom: 3px solid var(--ink); margin-bottom: 32px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wasteland); margin-bottom: 6px; }
-  h1 { font-family: 'Bungee', cursive; font-size: clamp(28px, 5vw, 44px); line-height: 1; color: var(--ink); text-transform: uppercase; letter-spacing: 0.02em; }
-  h1 span { color: var(--cherry); }
-  .header-meta { margin-top: 10px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--wasteland); letter-spacing: 0.05em; }
-  .back-link { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(33,28,20,0.2); padding: 4px 10px; border-radius: 2px; display: inline-block; margin-top: 6px; }
-  .back-link:hover { color: var(--ink); border-color: var(--ink); }
-  .sunburst { flex-shrink: 0; width: 80px; height: 80px; opacity: 0.18; }
-  .section-head { font-family: 'Bungee', cursive; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--wasteland); border-bottom: 1px solid rgba(33,28,20,0.15); padding-bottom: 6px; margin-bottom: 16px; margin-top: 36px; }
-  .method-box { border: 2px solid var(--ink); border-radius: 6px; padding: 18px 20px; margin-bottom: 32px; background: rgba(33,28,20,0.02); }
-  .method-box h3 { font-family: 'Bungee', cursive; font-size: 14px; letter-spacing: 0.05em; color: var(--ink); margin-bottom: 10px; }
-  .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .method-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wasteland); display: block; margin-bottom: 3px; }
-  .method-desc { font-size: 12px; color: var(--ink); line-height: 1.4; }
-  .game-block { margin-bottom: 36px; }
-  .game-block-header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-  .game-block-title { font-family: 'Bungee', cursive; font-size: 18px; color: var(--ink); }
-  .game-block-meta { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); letter-spacing: 0.05em; }
-  .pick-card { border-left: 4px solid var(--ink); padding: 14px 16px; margin-bottom: 10px; background: rgba(33,28,20,0.03); border-radius: 0 4px 4px 0; }
-  .pick-card.pa { border-left-color: var(--blue); }
-  .pick-card.pb { border-left-color: var(--butter); }
-  .pick-card.pc { border-left-color: var(--coral); }
-  .pick-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
-  .pick-num { font-family: 'Bungee', cursive; font-size: 11px; color: var(--wasteland); letter-spacing: 0.08em; flex-shrink: 0; }
-  .pick-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; }
-  .pick-pos-badge { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.05em; padding: 2px 7px; border-radius: 2px; text-transform: uppercase; display: inline-block; background: rgba(33,28,20,0.1); color: var(--ink); margin-left: 4px; }
-  .pick-odds { margin-left: auto; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--teal); white-space: nowrap; }
-  .pick-signals { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
-  .pick-signal { font-size: 13px; color: var(--ink); line-height: 1.45; padding-left: 18px; position: relative; }
-  .pick-signal::before { position: absolute; left: 0; color: var(--wasteland); font-size: 11px; top: 2px; }
-  .pick-signal.sig-form::before { content: '→'; }
-  .pick-signal.sig-h2h::before { content: '↩'; }
-  .pick-signal.sig-pos::before { content: '◎'; }
-  .pick-disclaimer { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--wasteland); margin-top: 6px; }
-  .odds-legend { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
-  .odds-pill { font-family: 'Space Mono', monospace; font-size: 10px; padding: 4px 10px; border-radius: 2px; border: 1px solid rgba(33,28,20,0.15); color: var(--ink); }
-  .pending-box { border: 2px dashed rgba(33,28,20,0.2); border-radius: 6px; padding: 32px 24px; text-align: center; margin-bottom: 24px; }
-  .pending-box p { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--wasteland); letter-spacing: 0.05em; line-height: 1.8; }
-  .pending-box strong { color: var(--ink); }
-  .disclaimer-bar { background: rgba(33,28,20,0.06); border-radius: 4px; padding: 10px 16px; margin-top: 32px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); letter-spacing: 0.04em; line-height: 1.7; }
-  .site-footer { margin-top: 48px; padding-top: 20px; border-top: 2px solid rgba(33,28,20,0.15); font-family: 'Space Mono', monospace; font-size: 10px; color: var(--wasteland); letter-spacing: 0.05em; line-height: 1.7; }
-  .site-footer a { color: var(--wasteland); text-decoration: none; }
-  .site-footer a:hover { color: var(--ink); }
-  @media (max-width: 520px) { .method-grid { grid-template-columns: 1fr; } .pick-odds { margin-left: 0; } }
+  :root{--cream:#F1E7CE;--ink:#211C14;--blue:#6FB6C9;--cherry:#DC4636;--butter:#F2C14E;--teal:#1F9E91;--coral:#F2795B;--wasteland:#8C8A6A;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:15px;line-height:1.5;}
+  body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(33,28,20,0.06) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;z-index:0;}
+  .wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 20px 60px;}
+  .site-header{padding:36px 0 24px;border-bottom:3px solid var(--ink);margin-bottom:32px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--wasteland);margin-bottom:6px;}
+  h1{font-family:'Bungee',cursive;font-size:clamp(28px,5vw,44px);line-height:1;color:var(--ink);text-transform:uppercase;}
+  h1 span{color:var(--cherry);}
+  .header-meta{margin-top:10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--wasteland);}
+  .back-link{font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(33,28,20,0.2);padding:4px 10px;border-radius:2px;display:inline-block;margin-top:6px;}
+  .back-link:hover{color:var(--ink);border-color:var(--ink);}
+  .sunburst{flex-shrink:0;width:80px;height:80px;opacity:0.18;}
+  .section-head{font-family:'Bungee',cursive;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--wasteland);border-bottom:1px solid rgba(33,28,20,0.15);padding-bottom:6px;margin-bottom:16px;margin-top:36px;}
+  .method-box{border:2px solid var(--ink);border-radius:6px;padding:18px 20px;margin-bottom:32px;background:rgba(33,28,20,0.02);}
+  .method-box h3{font-family:'Bungee',cursive;font-size:14px;color:var(--ink);margin-bottom:10px;}
+  .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .method-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--wasteland);display:block;margin-bottom:3px;}
+  .method-desc{font-size:12px;color:var(--ink);line-height:1.4;}
+  .game-block{margin-bottom:36px;}
+  .game-block-header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:14px;flex-wrap:wrap;}
+  .game-block-title{font-family:'Bungee',cursive;font-size:18px;color:var(--ink);}
+  .game-block-meta{font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);}
+  .game-played-badge{font-family:'Space Mono',monospace;font-size:9px;background:var(--teal);color:white;padding:2px 8px;border-radius:2px;letter-spacing:0.08em;text-transform:uppercase;}
+  .pick-card{border-left:4px solid var(--ink);padding:14px 16px;margin-bottom:10px;background:rgba(33,28,20,0.03);border-radius:0 4px 4px 0;}
+  .pick-card.pa{border-left-color:var(--blue);}.pick-card.pb{border-left-color:var(--butter);}.pick-card.pc{border-left-color:var(--coral);}
+  .pick-header{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+  .pick-num{font-family:'Bungee',cursive;font-size:11px;color:var(--wasteland);letter-spacing:0.08em;flex-shrink:0;}
+  .pick-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;}
+  .pick-pos-badge{font-family:'Space Mono',monospace;font-size:9px;font-weight:700;padding:2px 7px;border-radius:2px;text-transform:uppercase;background:rgba(33,28,20,0.1);color:var(--ink);margin-left:4px;}
+  .pick-odds{margin-left:auto;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--teal);white-space:nowrap;}
+  .pick-signals{display:flex;flex-direction:column;gap:4px;margin-bottom:8px;}
+  .pick-signal{font-size:13px;color:var(--ink);line-height:1.45;padding-left:18px;position:relative;}
+  .pick-signal::before{position:absolute;left:0;color:var(--wasteland);font-size:11px;top:2px;}
+  .pick-signal.sig-form::before{content:'\2192';}.pick-signal.sig-h2h::before{content:'\21A9';}.pick-signal.sig-pos::before{content:'\25CE';}
+  .pick-disclaimer{font-family:'Space Mono',monospace;font-size:9px;color:var(--wasteland);margin-top:6px;}
+  .odds-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+  .odds-pill{font-family:'Space Mono',monospace;font-size:10px;padding:4px 10px;border-radius:2px;border:1px solid rgba(33,28,20,0.15);color:var(--ink);}
+  .best3-block{background:var(--ink);color:var(--cream);border-radius:6px;padding:20px 24px;margin-bottom:32px;}
+  .best3-block .section-head{color:var(--butter);border-bottom-color:rgba(241,231,206,0.2);margin-top:0;}
+  .best3-item{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start;}
+  .best3-num{font-family:'Bungee',cursive;font-size:20px;color:var(--butter);line-height:1;flex-shrink:0;width:24px;}
+  .best3-detail{font-size:13px;line-height:1.5;}
+  .best3-name{font-weight:700;font-size:15px;}
+  .best3-meta{font-family:'Space Mono',monospace;font-size:10px;color:rgba(241,231,206,0.6);}
+  .disclaimer-bar{background:rgba(33,28,20,0.06);border-radius:4px;padding:10px 16px;margin-top:32px;font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);line-height:1.7;}
+  .site-footer{margin-top:48px;padding-top:20px;border-top:2px solid rgba(33,28,20,0.15);font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);line-height:1.7;}
+  .site-footer a{color:var(--wasteland);text-decoration:none;}.site-footer a:hover{color:var(--ink);}
+  @media(max-width:520px){.method-grid{grid-template-columns:1fr;}.pick-odds{margin-left:0;}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="site-header">
     <div class="header-left">
-      <div class="eyebrow">NRL Totals Model · 2026 Season</div>
+      <div class="eyebrow">NRL Totals Model &middot; 2026 Season</div>
       <h1>Try Scorer <span>Picks</span></h1>
-      <div class="header-meta">3 picks per game · Form, matchup and positional data</div>
-      <a href="index.html" class="back-link">← Current round</a>
+      <div class="header-meta">3 picks per game &middot; Form, matchup and positional data</div>
+      <a href="index.html" class="back-link">&larr; Current round</a>
     </div>
     <svg class="sunburst" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g transform="translate(50,50)"><circle r="12" fill="#211C14"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(30)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(60)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(90)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(120)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(150)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(180)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(210)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(240)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(270)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(300)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(330)"/></g></svg>
   </header>
+
   <div class="method-box">
     <h3>How Picks Are Made</h3>
     <div class="method-grid">
-      <div class="method-item"><span class="method-label">Form Strike Rate</span><div class="method-desc">Variable window — 1 to 10 games — using whichever range makes the strongest honest case. No forced averages.</div></div>
-      <div class="method-item"><span class="method-label">Positional Matchup</span><div class="method-desc">Player position × tries the opposition concede to that position. Wingers vs winger-leaky defences, hookers vs hooker-soft sides, etc.</div></div>
+      <div class="method-item"><span class="method-label">Form Strike Rate</span><div class="method-desc">ZeroTackle 2026 leaderboard &mdash; avg tries per game, verified against confirmed named 17 only.</div></div>
+      <div class="method-item"><span class="method-label">Positional Matchup</span><div class="method-desc">Player position vs tries the opposition concede to that position. Wingers vs winger-leaky defences, etc.</div></div>
       <div class="method-item"><span class="method-label">Head-to-Head</span><div class="method-desc">Career try scoring record against this specific opponent where data is available. Only included if an actual record exists.</div></div>
     </div>
   </div>
+
   <div class="section-head" style="margin-top:0;">Estimated Odds Guide</div>
   <div class="odds-legend">
-    <span class="odds-pill">🔥 $1.80–$2.50 · strong favourite</span>
-    <span class="odds-pill">✅ $2.50–$3.50 · solid case</span>
-    <span class="odds-pill">🎯 $3.50–$5.00 · value pick</span>
-    <span class="odds-pill">💎 $5.00–$8.00 · longer shot</span>
+    <span class="odds-pill">&#128293; $1.80&ndash;$2.50 &middot; strong favourite</span>
+    <span class="odds-pill">&#9989; $2.50&ndash;$3.50 &middot; solid case</span>
+    <span class="odds-pill">&#127919; $3.50&ndash;$5.00 &middot; value pick</span>
+    <span class="odds-pill">&#128142; $5.00&ndash;$8.00 &middot; longer shot</span>
   </div>
-  <div class="section-head">Round 16 — 19–22 Jun 2026</div>
-  <div class="pending-box">
-    <p><strong>Picks published each Wednesday at 9am.</strong><br>Check back after Wednesday morning for Round 16 try scorer picks.<br>All picks sourced from live NRL player stats and opposition concession data.</p>
+
+  <div class="section-head">Round 15 &mdash; 12&ndash;14 June 2026</div>
+
+  <!-- GAME 1: Rabbitohs vs Broncos (Already Played) -->
+  <div class="game-block">
+    <div class="game-block-header">
+      <div class="game-block-title">South Sydney v Brisbane</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span class="game-played-badge">Result: 48&ndash;6 (total 54)</span>
+        <div class="game-block-meta">Thu 12 Jun &middot; Accor Stadium</div>
+      </div>
+    </div>
+    <div class="pick-card pa">
+      <div class="pick-header">
+        <span class="pick-num">PICK 1</span>
+        <span class="pick-name">Alex Johnston</span>
+        <span class="pick-pos-badge">WG</span>
+        <span class="pick-odds">&#128293; $1.80&ndash;$2.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">1.58/game &middot; #2 ZeroTackle &middot; 19 tries in 12 games &mdash; #2 try scorer in the NRL</div>
+      </div>
+      <div class="pick-disclaimer">game already played &middot; verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pb">
+      <div class="pick-header">
+        <span class="pick-num">PICK 2</span>
+        <span class="pick-name">Jesse Arthars</span>
+        <span class="pick-pos-badge">WG</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.56/game &middot; #53 ZeroTackle &middot; 5 tries in 9 games</div>
+      </div>
+      <div class="pick-disclaimer">game already played &middot; verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pc">
+      <div class="pick-header">
+        <span class="pick-num">PICK 3</span>
+        <span class="pick-name">Tallis Duncan</span>
+        <span class="pick-pos-badge">CTR</span>
+        <span class="pick-odds">&#127919; $3.50&ndash;$5.00</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.38/game &middot; #67 ZeroTackle &middot; 4 tries in 11 games</div>
+      </div>
+      <div class="pick-disclaimer">game already played &middot; verify current odds on Sportsbet before betting</div>
+    </div>
   </div>
+
+  <!-- GAME 2: Dolphins vs Roosters -->
+  <div class="game-block">
+    <div class="game-block-header">
+      <div class="game-block-title">Dolphins v Roosters</div>
+      <div class="game-block-meta">Fri 12 Jun, 8:00pm &middot; Suncorp Stadium &middot; &#128308; AT RISK total</div>
+    </div>
+    <div class="pick-card pa">
+      <div class="pick-header">
+        <span class="pick-num">PICK 1</span>
+        <span class="pick-name">Jamayne Isaako</span>
+        <span class="pick-pos-badge">WG</span>
+        <span class="pick-odds">&#128293; $1.80&ndash;$2.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.92/game &middot; #8 ZeroTackle &middot; 11 tries in 12 games</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pb">
+      <div class="pick-header">
+        <span class="pick-num">PICK 2</span>
+        <span class="pick-name">Jack Bostock</span>
+        <span class="pick-pos-badge">CTR</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.80/game &middot; #72 ZeroTackle &middot; 4 tries in 5 games (small sample, strong rate)</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pc">
+      <div class="pick-header">
+        <span class="pick-num">PICK 3</span>
+        <span class="pick-name">Hugo Savala</span>
+        <span class="pick-pos-badge">5/8</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.67/game &middot; #32 ZeroTackle &middot; 6 tries in 9 games</div>
+        <div class="pick-signal sig-pos">Walker absent (Origin) &mdash; Savala is Roosters&rsquo; primary attacking threat at HB/5-8</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+  </div>
+
+  <!-- GAME 3: Warriors vs Sharks -->
+  <div class="game-block">
+    <div class="game-block-header">
+      <div class="game-block-title">Warriors v Sharks</div>
+      <div class="game-block-meta">Sat 13 Jun, 5:30pm &middot; Go Media Stadium &middot; SB: 48.5 &middot; &#129001; SOLID</div>
+    </div>
+    <div class="pick-card pa">
+      <div class="pick-header">
+        <span class="pick-num">PICK 1</span>
+        <span class="pick-name">Dallin Watene-Zelezniak</span>
+        <span class="pick-pos-badge">WG</span>
+        <span class="pick-odds">&#128293; $1.80&ndash;$2.50</span>
+      </div>
+      <div clas="pick-signals">
+        <div class="pick-signal sig-form">1.17/game &middot; #4 ZeroTackle &middot; 14 tries in 12 games</div>
+        <div class="pick-signal sig-pos">Home ground advantage at Go Media Stadium</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pb">
+      <div class="pick-header">
+        <span class="pick-num">PICK 2</span>
+        <span class="pick-name">KL Iro</span>
+        <span class="pick-pos-badge">CTR</span>
+        <span class="pick-odds">&#128293; $1.80&ndash;$2.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.82/game &middot; #14 ZeroTackle &middot; 9 tries in 11 games</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pc">
+      <div class="pick-header">
+        <span class="pick-num">PICK 3</span>
+        <span class="pick-name">Alofiana Khan-Pereira</span>
+        <span class="pick-pos-badge">WG</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">1.13/game &middot; #13 ZeroTackle &middot; 9 tries in 8 games (rising form)</div>
+        <div class="pick-signal sig-pos">Dual wing threat with DWZ &mdash; Warriors wingers dominant all season</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+  </div>
+
+  <!-- GAME 4: Eels vs Raiders -->
+  <div class="game-block">
+    <div class="game-block-header">
+      <div class="game-block-title">Eels v Raiders</div>
+      <div class="game-block-meta">Sat 13 Jun, 7:35pm &middot; CommBank Stadium &middot; &#129001; SOLID</div>
+    </div>
+    <div class="pick-card pa">
+      <div class="pick-header">
+        <span class="pick-num">PICK 1</span>
+        <span class="pick-name">Kaeo Weekes</span>
+        <span class="pick-pos-badge">FB</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.62/game &middot; #21 ZeroTackle &middot; 8 tries in 13 games &mdash; most prolific scorer on either side</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pb">
+      <div class="pick-header">
+        <span class="pick-num">PICK 2</span>
+        <span class="pick-name">Josh Addo-Carr</span>
+        <span class="pick-pos-badge">WG</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.50/game &middot; #44 ZeroTackle &middot; 6 tries in 12 games</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pc">
+      <div class="pick-header">
+        <span class="pick-num">PICK 3</span>
+        <span class="pick-name">Isaiah Iongi</span>
+        <span class="pick-pos-badge">FB</span>
+        <span class="pick-odds">&#127919; $3.50&ndash;$5.00</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.50/game &middot; #105 ZeroTackle &middot; 3 tries in 6 games (limited sample)</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+  </div>
+
+  <!-- GAME 5: Tigers vs Titans -->
+  <div class="game-block">
+    <div class="game-block-header">
+      <div class="game-block-title">Wests Tigers v Titans</div>
+      <div class="game-block-meta">Sun 14 Jun, 4:05pm &middot; Leichhardt Oval &middot; &#128994; HIGH confidence under</div>
+    </div>
+    <div class="pick-card pa">
+      <div class="pick-header">
+        <span class="pick-num">PICK 1</span>
+        <span class="pick-name">Taylan May</span>
+        <span class="pick-pos-badge">CTR</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.83/game &middot; #51 ZeroTackle &middot; 5 tries in 6 games (red-hot recent form)</div>
+        <div class="pick-signal sig-pos">Titans missing Fifita + Fa&squo;asuamaleaui (Origin) &mdash; defensive vulnerability elevated</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pb">
+      <div class="pick-header">
+        <span class="pick-num">PICK 2</span>
+        <span class="pick-name">Jayden Campbell</span>
+        <span class="pick-pos-badge">HB</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.60/game &middot; #37 ZeroTackle &middot; 6 tries in 10 games</div>
+      </div>
+      <div clas="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+    <div class="pick-card pc">
+      <div class="pick-header">
+        <span class="pick-num">PICK 3</span>
+        <span class="pick-name">Jahream Bula</span>
+        <span class="pick-pos-badge">FB</span>
+        <span class="pick-odds">&#9989; $2.50&ndash;$3.50</span>
+      </div>
+      <div class="pick-signals">
+        <div class="pick-signal sig-form">0.67/game &middot; #34 ZeroTackle &middot; 6 tries in 9 games</div>
+      </div>
+      <div class="pick-disclaimer">verify current odds on Sportsbet before betting</div>
+    </div>
+  </div>
+
+  <!-- BEST 3 -->
+  <div class="best3-block">
+    <div class="section-head">&#11088; Best 3 Picks &mdash; Round 15</div>
+    <div class="best3-item">
+      <div class="best3-num">1</div>
+      <div class="best3-detail">
+        <div class="best3-name">Dallin Watene-Zelezniak</div>
+        <div>Warriors v Sharks &middot; WG &middot; &#128293; $1.80&ndash;$2.50</div>
+        <div class="best3-meta">1.17/game &middot; #4 ZeroTackle &middot; 14 tries in 12 games &middot; home ground</div>
+      </div>
+    </div>
+    <div class="best3-item">
+      <div class="best3-num">2</div>
+      <div class="best3-detail">
+        <div class="best3-name">Alofiana Khan-Pereira</div>
+        <div>Warriors v Sharks &middot; WG &middot; &#9989; $2.50&ndash;$3.50</div>
+        <div class="best3-meta">1.13/game &middot; #13 ZeroTackle &middot; 9 tries in 8 games &middot; dual wing threat</div>
+      </div>
+    </div>
+    <div class="best3-item">
+      <div class="best3-num">3</div>
+      <div class="best3-detail">
+        <div class="best3-name">Taylan May</div>
+        <div>Wests Tigers v Titans &middot; CTR &middot; &#9989; $2.50&ndash;$3.50</div>
+        <div class="best3-meta">0.83/game &middot; #51 ZeroTackle &middot; Titans Origin-depleted (Fifita + Fa&rsquo;asuamaleaui out)</div>
+      </div>
+    </div>
+  </div>
+
   <div class="disclaimer-bar">
-    ⚠️ Always verify team sheets before betting — late Origin or injury changes can void positional matchup edges.<br>
+    &#9888;&#65039; Always verify team sheets before betting &mdash; late Origin or injury changes can void positional matchup edges.<br>
     Estimated odds are a guide only. Verify current odds on Sportsbet before placing bets.<br>
-    Analysis only · Not financial advice · Gamble responsibly — 1800 858 858
+    Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
   </div>
   <footer class="site-footer">
-    <p>Try scorer picks generated Wednesdays · Player data: nrl.com · Positional data: rugbyleagueproject.org</p>
-    <p style="margin-top:4px;"><a href="index.html">← current round</a> · <a href="history.html">record &amp; history</a></p>
+    <p>Try scorer picks generated Fridays &middot; Player data: zerotackle.com &middot; Team lists: rugbyleaguezone.com</p>
+    <p style="margin-top:4px;"><a href="index.html">&larr; current round</a> &middot; <a href="history.html">record &amp; history</a></p>
   </footer>
 </div>
 </body>

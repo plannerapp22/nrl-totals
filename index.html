@@ -3,809 +3,417 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NRL Totals â Round 15, 2026</title>
+<title>NRL Totals &mdash; Round 16, 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream: #F1E7CE;
-    --ink: #211C14;
-    --blue: #6FB6C9;
-    --cherry: #DC4636;
-    --butter: #F2C14E;
-    --teal: #1F9E91;
-    --coral: #F2795B;
-    --rust: #9C5230;
-    --wasteland: #8C8A6A;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  /* HALFTONE DOT PATTERN */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(33,28,20,0.06) 1px, transparent 1px);
-    background-size: 18px 18px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .wrap {
-    position: relative;
-    z-index: 1;
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-  }
-
-  /* ââ HEADER ââ */
-  .site-header {
-    padding: 36px 0 24px;
-    border-bottom: 3px solid var(--ink);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .header-left {}
-
-  .eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--wasteland);
-    margin-bottom: 6px;
-  }
-
-  h1 {
-    font-family: 'Bungee', cursive;
-    font-size: clamp(32px, 6vw, 52px);
-    line-height: 1;
-    color: var(--ink);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-
-  h1 span {
-    color: var(--cherry);
-  }
-
-  .header-meta {
-    margin-top: 10px;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--wasteland);
-    letter-spacing: 0.05em;
-  }
-
-  /* SUNBURST */
-  .sunburst {
-    flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    opacity: 0.18;
-  }
-
-  /* ââ SEASON RECORD BAR ââ */
-  .record-bar {
-    background: var(--ink);
-    border-radius: 4px;
-    padding: 14px 20px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-
-  .record-item {
-    text-align: center;
-  }
-
-  .record-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--wasteland);
-    display: block;
-    margin-bottom: 3px;
-  }
-
-  .record-val {
-    font-family: 'Bungee', cursive;
-    font-size: 20px;
-    line-height: 1;
-  }
-
-  .record-item:nth-child(1) .record-val { color: var(--blue); }
-  .record-item:nth-child(2) .record-val { color: var(--butter); }
-  .record-item:nth-child(3) .record-val { color: var(--coral); }
-  .record-item:nth-child(4) .record-val { color: var(--cherry); }
-
-  .record-pct {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: var(--wasteland);
-    display: block;
-    margin-top: 2px;
-  }
-
-  /* ââ SECTION HEADER ââ */
-  .section-head {
-    font-family: 'Bungee', cursive;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--wasteland);
-    border-bottom: 1px solid rgba(33,28,20,0.15);
-    padding-bottom: 6px;
-    margin-bottom: 16px;
-    margin-top: 36px;
-  }
-
-  /* ââ PARLAY BOX ââ */
-  .parlay-box {
-    background: var(--ink);
-    border-radius: 6px;
-    padding: 24px;
-    margin-bottom: 32px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .parlay-box::after {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 140px; height: 140px;
-    border-radius: 50%;
-    border: 18px solid rgba(242,193,78,0.08);
-    pointer-events: none;
-  }
-
-  .parlay-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--butter);
-    margin-bottom: 10px;
-    display: block;
-  }
-
-  .parlay-title {
-    font-family: 'Bungee', cursive;
-    font-size: 22px;
-    color: var(--cream);
-    margin-bottom: 16px;
-    line-height: 1.1;
-  }
-
-  .parlay-legs {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 18px;
-  }
-
-  .parlay-leg {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .leg-badge {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    background: var(--butter);
-    color: var(--ink);
-    padding: 2px 7px;
-    border-radius: 2px;
-    flex-shrink: 0;
-    letter-spacing: 0.05em;
-  }
-
-  .leg-text {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    color: var(--cream);
-    font-weight: 500;
-  }
-
-  .parlay-payout {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .payout-pill {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    background: rgba(241,231,206,0.08);
-    color: var(--cream);
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(241,231,206,0.15);
-  }
-
-  .payout-pill strong {
-    color: var(--butter);
-  }
-
-  /* ââ EXPECTED COMBINED TABLE ââ */
-  .exp-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 8px;
-  }
-
-  .exp-table tr {
-    border-bottom: 1px solid rgba(33,28,20,0.1);
-  }
-
-  .exp-table tr:last-child { border-bottom: none; }
-
-  .exp-table td {
-    padding: 10px 8px;
-    font-size: 14px;
-  }
-
-  .exp-table .rank {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--wasteland);
-    width: 24px;
-    text-align: center;
-  }
-
-  .exp-table .matchup {
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  .exp-table .exp-val {
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    text-align: right;
-    width: 60px;
-  }
-
-  .exp-table .market-val {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--wasteland);
-    text-align: right;
-    width: 70px;
-  }
-
-  .exp-table .signal {
-    width: 90px;
-    text-align: right;
-  }
-
-  .signal-pill {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 2px 7px;
-    border-radius: 2px;
-    text-transform: uppercase;
-    display: inline-block;
-  }
-
-  .signal-under { background: var(--blue); color: var(--ink); }
-  .signal-over { background: var(--cherry); color: white; }
-  .signal-neutral { background: var(--wasteland); color: white; }
-  .signal-pass { background: rgba(33,28,20,0.12); color: var(--wasteland); }
-
-  /* ââ GAME CARDS ââ */
-  .game-card {
-    border: 2px solid var(--ink);
-    border-radius: 6px;
-    margin-bottom: 14px;
-    overflow: hidden;
-  }
-
-  .card-header {
-    display: flex;
-    align-items: stretch;
-    border-bottom: 2px solid var(--ink);
-  }
-
-  .card-title-block {
-    padding: 10px 14px;
-    flex: 1;
-  }
-
-  .card-teams {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 1.2;
-  }
-
-  .card-meta {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: var(--wasteland);
-    margin-top: 3px;
-    letter-spacing: 0.05em;
-  }
-
-  .card-tip {
-    padding: 10px 14px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 4px;
-    border-left: 2px solid var(--ink);
-    min-width: 110px;
-  }
-
-  .tip-direction {
-    font-family: 'Bungee', cursive;
-    font-size: 15px;
-    letter-spacing: 0.05em;
-  }
-
-  .tip-line {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--wasteland);
-  }
-
-  .tip-under { color: var(--blue); }
-  .tip-over { color: var(--cherry); }
-  .tip-pass { color: var(--wasteland); }
-
-  .card-body {
-    padding: 12px 14px;
-    font-size: 13px;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-
-  .card-body .flag {
-    display: inline-block;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    background: var(--cherry);
-    color: white;
-    padding: 1px 6px;
-    border-radius: 2px;
-    margin-right: 4px;
-    letter-spacing: 0.05em;
-    vertical-align: middle;
-  }
-
-  /* ââ TOP 4 PICKS ââ */
-  .pick-card {
-    border-left: 4px solid var(--ink);
-    padding: 14px 16px;
-    margin-bottom: 14px;
-    background: rgba(33,28,20,0.03);
-    border-radius: 0 4px 4px 0;
-  }
-
-  .pick-header {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 8px;
-    flex-wrap: wrap;
-  }
-
-  .pick-num {
-    font-family: 'Bungee', cursive;
-    font-size: 13px;
-    color: var(--wasteland);
-    letter-spacing: 0.05em;
-  }
-
-  .pick-matchup {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-  }
-
-  .pick-direction {
-    font-family: 'Bungee', cursive;
-    font-size: 14px;
-    margin-left: auto;
-  }
-
-  .pick-direction.under { color: var(--blue); }
-  .pick-direction.over { color: var(--cherry); }
-  .pick-direction.pass { color: var(--wasteland); }
-
-  .pick-stats {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
-
-  .pick-stat {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--wasteland);
-  }
-
-  .pick-stat strong {
-    color: var(--ink);
-    font-weight: 700;
-  }
-
-  .pick-record {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    display: inline-block;
-    padding: 1px 7px;
-    border-radius: 10px;
-    background: var(--ink);
-    color: var(--cream);
-    margin-bottom: 8px;
-  }
-
-  .pick-dots {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .pick-dots li {
-    font-size: 13px;
-    padding-left: 16px;
-    position: relative;
-    color: var(--ink);
-    line-height: 1.45;
-  }
-
-  .pick-dots li::before {
-    content: 'â';
-    position: absolute;
-    left: 0;
-    color: var(--wasteland);
-    font-size: 11px;
-    top: 2px;
-  }
-
-  .pick-card.p1 { border-left-color: var(--blue); }
-  .pick-card.p2 { border-left-color: var(--butter); }
-  .pick-card.p3 { border-left-color: var(--coral); }
-  .pick-card.p4 { border-left-color: var(--wasteland); }
-
-  /* ââ FOOTER ââ */
-  .site-footer {
-    margin-top: 48px;
-    padding-top: 20px;
-    border-top: 2px solid rgba(33,28,20,0.15);
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--wasteland);
-    letter-spacing: 0.05em;
-    line-height: 1.7;
-  }
-
-  /* ââ RESPONSIVE ââ */
-  @media (max-width: 520px) {
-    .record-bar { grid-template-columns: repeat(2, 1fr); }
-    .exp-table .signal { display: none; }
-    .pick-direction { margin-left: 0; }
-  }
+  :root{--cream:#F1E7CE;--ink:#211C14;--blue:#6FB6C9;--cherry:#DC4636;--butter:#F2C14E;--teal:#1F9E91;--coral:#F2795B;--wasteland:#8C8A6A;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--cream);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:15px;line-height:1.5;}
+  body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(33,28,20,0.06) 1px,transparent 1px);background-size:18px 18px;pointer-events:none;z-index:0;}
+  .wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 20px 60px;}
+  .site-header{padding:36px 0 24px;border-bottom:3px solid var(--ink);margin-bottom:32px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--wasteland);margin-bottom:6px;}
+  h1{font-family:'Bungee',cursive;font-size:clamp(28px,5vw,44px);line-height:1;color:var(--ink);text-transform:uppercase;}
+  h1 span{color:var(--cherry);}
+  .header-meta{margin-top:10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--wasteland);}
+  .header-links{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;}
+  .header-link{font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;border:1px solid rgba(33,28,20,0.2);padding:4px 10px;border-radius:2px;display:inline-block;}
+  .header-link:hover{color:var(--ink);border-color:var(--ink);}
+  .sunburst{flex-shrink:0;width:80px;height:80px;opacity:0.18;}
+  .section-head{font-family:'Bungee',cursive;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--wasteland);border-bottom:1px solid rgba(33,28,20,0.15);padding-bottom:6px;margin-bottom:16px;margin-top:36px;}
+  .method-box{border:2px solid var(--ink);border-radius:6px;padding:18px 20px;margin-bottom:32px;background:rgba(33,28,20,0.02);}
+  .method-box h3{font-family:'Bungee',cursive;font-size:14px;color:var(--ink);margin-bottom:10px;}
+  .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .method-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--wasteland);display:block;margin-bottom:3px;}
+  .method-desc{font-size:12px;color:var(--ink);line-height:1.4;}
+  .game-block{margin-bottom:28px;border:1px solid rgba(33,28,20,0.12);border-radius:6px;overflow:hidden;}
+  .game-header{padding:12px 16px;background:rgba(33,28,20,0.04);border-bottom:1px solid rgba(33,28,20,0.12);display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .game-title{font-family:'Bungee',cursive;font-size:15px;color:var(--ink);}
+  .game-meta{font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);}
+  .game-body{padding:14px 16px;}
+  .verdict-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+  .verdict-badge{font-family:'Bungee',cursive;font-size:13px;padding:5px 14px;border-radius:3px;letter-spacing:0.05em;}
+  .verdict-badge.under{background:var(--teal);color:#fff;}
+  .verdict-badge.over{background:var(--cherry);color:#fff;}
+  .verdict-badge.pass{background:var(--wasteland);color:#fff;}
+  .verdict-badge.lean{background:var(--butter);color:var(--ink);}
+  .verdict-badge.watch{background:var(--coral);color:#fff;}
+  .verdict-line{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--ink);}
+  .verdict-conf{font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);margin-left:auto;}
+  .game-analysis{font-size:13px;line-height:1.55;color:var(--ink);}
+  .game-analysis .flag{color:var(--cherry);font-weight:600;}
+  .picks-section{margin-bottom:32px;}
+  .pick-card{border-left:4px solid var(--ink);padding:16px 18px;margin-bottom:12px;background:rgba(33,28,20,0.03);border-radius:0 4px 4px 0;}
+  .pick-card.p1{border-left-color:var(--blue);}
+  .pick-card.p2{border-left-color:var(--teal);}
+  .pick-card.p3{border-left-color:var(--butter);}
+  .pick-card.p4{border-left-color:var(--wasteland);}
+  .pick-header{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+  .pick-num{font-family:'Bungee',cursive;font-size:11px;color:var(--wasteland);letter-spacing:0.08em;flex-shrink:0;}
+  .pick-game{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;}
+  .pick-verdict{font-family:'Space Mono',monospace;font-size:11px;color:var(--teal);font-weight:700;white-space:nowrap;}
+  .pick-record{margin-left:auto;font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);white-space:nowrap;}
+  .pick-lines{font-family:'Space Mono',monospace;font-size:11px;color:var(--wasteland);margin-bottom:8px;}
+  .pick-lines strong{color:var(--ink);}
+  .pick-bullets{font-size:12px;line-height:1.5;color:var(--ink);}
+  .pick-bullets li{padding-left:14px;position:relative;margin-bottom:4px;}
+  .pick-bullets li::before{content:'—';position:absolute;left:0;color:var(--wasteland);}
+  .scores-table{width:100%;border-collapse:collapse;margin-bottom:24px;font-size:13px;}
+  .scores-table th{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--wasteland);padding:6px 10px;text-align:left;border-bottom:2px solid var(--ink);}
+  .scores-table td{padding:8px 10px;border-bottom:1px solid rgba(33,28,20,0.1);}
+  .scores-table td:nth-child(3),.scores-table td:nth-child(4),.scores-table td:nth-child(5){font-family:'Space Mono',monospace;font-size:11px;}
+  .scores-table td.under-cell{color:var(--teal);font-weight:700;}
+  .scores-table td.pass-cell{color:var(--wasteland);}
+  .scores-table td.watch-cell{color:var(--coral);}
+  .parlay-box{border:2px solid var(--ink);border-radius:6px;padding:20px;margin-bottom:32px;background:rgba(33,28,20,0.02);}
+  .parlay-box h3{font-family:'Bungee',cursive;font-size:14px;margin-bottom:4px;}
+  .parlay-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);margin-bottom:14px;}
+  .parlay-leg{padding:10px 0;border-bottom:1px solid rgba(33,28,20,0.1);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .parlay-leg:last-of-type{border-bottom:none;}
+  .parlay-leg-num{font-family:'Bungee',cursive;font-size:10px;color:var(--wasteland);flex-shrink:0;}
+  .parlay-leg-text{font-size:13px;color:var(--ink);}
+  .parlay-leg-line{font-family:'Space Mono',monospace;font-size:11px;color:var(--teal);font-weight:700;margin-left:auto;white-space:nowrap;}
+  .parlay-note{font-family:'Space Mono',monospace;font-size:9px;color:var(--wasteland);margin-top:10px;}
+  .track-record{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+  .track-pill{font-family:'Space Mono',monospace;font-size:10px;padding:5px 12px;border-radius:2px;border:1px solid rgba(33,28,20,0.15);color:var(--ink);}
+  .track-pill strong{color:var(--teal);}
+  .data-warning{background:rgba(242,121,91,0.12);border:1px solid rgba(242,121,91,0.3);border-radius:4px;padding:10px 14px;margin-bottom:24px;font-family:'Space Mono',monospace;font-size:10px;color:var(--ink);line-height:1.6;}
+  .disclaimer-bar{background:rgba(33,28,20,0.06);border-radius:4px;padding:10px 16px;margin-top:32px;font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);line-height:1.7;}
+  .site-footer{margin-top:48px;padding-top:20px;border-top:2px solid rgba(33,28,20,0.15);font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);line-height:1.7;}
+  .site-footer a{color:var(--wasteland);text-decoration:none;}
+  .site-footer a:hover{color:var(--ink);}
+  @media(max-width:520px){.method-grid{grid-template-columns:1fr;}.scores-table td:nth-child(4){display:none;}.pick-record{margin-left:0;}}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <!-- HEADER -->
   <header class="site-header">
     <div class="header-left">
-      <div class="eyebrow">NRL Totals Model Â· 2026 Season</div>
-      <h1>Round <span>15</span></h1>
-      <div class="header-meta">Thu 11 Jun â Sun 14 Jun Â· Origin-affected Â· 5 games</div>
+      <div class="eyebrow">NRL Totals Model &middot; 2026 Season</div>
+      <h1>Round <span>16</span></h1>
+      <div class="header-meta">Fri 19 Jun &ndash; Sun 21 Jun &middot; 7 games &middot; Generated Wed 17 Jun 2026</div>
+      <div class="header-links">
+        <a href="history.html" class="header-link">Record &amp; history</a>
+        <a href="tryscorers.html" class="header-link">Try scorer picks &rarr;</a>
+      </div>
     </div>
-    <svg class="sunburst" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(50,50)">
-        <circle r="12" fill="#211C14"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(30)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(60)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(90)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(120)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(150)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(180)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(210)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(240)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(270)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(300)"/>
-        <line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(330)"/>
-      </g>
-    </svg>
+    <svg class="sunburst" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g transform="translate(50,50)"><circle r="12" fill="#211C14"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(30)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(60)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(90)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(120)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(150)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(180)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(210)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(240)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(270)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(300)"/><line x1="0" y1="-18" x2="0" y2="-44" stroke="#211C14" stroke-width="4" stroke-linecap="round" transform="rotate(330)"/></g></svg>
   </header>
 
-  <!-- GAME-BY-GAME -->
-  <div class="section-head">Game Analysis</div>
-
-  <div class="game-card">
-    <div class="card-header">
-      <div class="card-title-block">
-        <div class="card-teams">Tigers vs Titans</div>
-        <div class="card-meta">Sun 14/6 Â· 4:05pm Â· Leichhardt Oval</div>
-      </div>
-      <div class="card-tip">
-        <div class="tip-direction tip-under">UNDER</div>
-        <div class="tip-line">50.5</div>
-      </div>
-    </div>
-    <div class="card-body">
-      Model exp 47.95 â 2.55 below market. Titans 10-2 Under on season (best in comp). Tigers coming off 64-0 loss. Both teams bottom-tier PF: Tigers 22.9, Titans 18.3 avg. No PA-inflation flag â genuine low offensive output on both sides. Market at 50.5 looks 2-3 pts too high. Best bet of the round.
+  <div class="method-box">
+    <h3>How the Model Works</h3>
+    <div class="method-grid">
+      <div><span class="method-label">Primary &mdash; H2H History</span><div class="method-desc">Head-to-head under-60 record and avg combined score since 2022. The strongest predictive signal.</div></div>
+      <div><span class="method-label">Secondary &mdash; 2026 Form</span><div class="method-desc">Season PF/PA averages and under-60 frequency. Contextual flags for depleted rosters and volatile teams.</div></div>
+      <div><span class="method-label">Tertiary &mdash; Market Line</span><div class="method-desc">O/U line as signal. Bigger gap between model exp and market = stronger edge. Lines sourced via Bet365.</div></div>
     </div>
   </div>
 
-  <div class="game-card">
-    <div class="card-header">
-      <div class="card-title-block">
-        <div class="card-teams">Dolphins vs Roosters</div>
-        <div class="card-meta">Fri 12/6 Â· 8:00pm Â· Suncorp Stadium</div>
-      </div>
-      <div class="card-tip">
-        <div class="tip-direction tip-under">UNDER</div>
-        <div class="tip-line">50.5</div>
-      </div>
+  <div class="data-warning">
+    &#9888; Form data ~3 rounds stale (R13 fallback &mdash; aussportstipping.com unavailable this week). Qualitative R14&ndash;15 context noted inline. H2H data current. Verify lines and injuries independently before betting.
+  </div>
+
+  <div class="section-head" style="margin-top:0;">Game Analysis &mdash; Round 16</div>
+
+  <!-- GAME 1 -->
+  <div class="game-block">
+    <div class="game-header">
+      <div class="game-title">Newcastle Knights v St George Illawarra Dragons</div>
+      <div class="game-meta">Fri 19 Jun &middot; 8pm AEST &middot; McDonald Jones Stadium</div>
     </div>
-    <div class="card-body">
-      Model exp 48.15 â 2.35 below market. Dolphins missing 5 Origin players, Roosters missing 7 including Walker and Tedesco. Dolphins 13.6 pts conceded/game (last 5), Roosters 14.4 pts conceded/game (last 5). Avg game total has dropped to 44 pts over the last 3 rounds. Dolphins 8-4 Under on season. Clean structural under signal.
+    <div class="game-body">
+      <div class="verdict-row">
+        <span class="verdict-badge under">UNDER</span>
+        <span class="verdict-line">48.5</span>
+        <span class="verdict-conf">&#x1F7E2; HIGH &mdash; H2H 5/5</span>
+      </div>
+      <div class="game-analysis">
+        Model exp 40.2 &mdash; 8.3 below market. Perfect 5/5 H2H under-60 record since 2022, avg combined 40.2. Last 4 meetings: [26, 37, 40, 44] &mdash; consistently low-scoring. Knights 53.8 pts avg season (75% U60); Dragons 47.1 pts avg (83% U60). Dragons volatile flag: hit 66 in last 3 but their 3-game avg includes a 29-point game. Market at 48.5 is pricing in upside that H2H doesn&apos;t support. Best structural under in the round.
+      </div>
     </div>
   </div>
 
-  <div class="game-card">
-    <div class="card-header">
-      <div class="card-title-block">
-        <div class="card-teams">Eels vs Raiders</div>
-        <div class="card-meta">Sat 13/6 Â· 7:35pm Â· CommBank Stadium</div>
-      </div>
-      <div class="card-tip">
-        <div class="tip-direction tip-under">UNDER</div>
-        <div class="tip-line">49.5</div>
-      </div>
+  <!-- GAME 2 -->
+  <div class="game-block">
+    <div class="game-header">
+      <div class="game-title">Wests Tigers v Dolphins</div>
+      <div class="game-meta">Sat 20 Jun &middot; 3pm AEST &middot; Campbelltown Sports Stadium</div>
     </div>
-    <div class="card-body">
-      Model exp exactly matches market (49.5) â no structural edge, but qualitative lean under. Raiders scored 0 pts last week. Eels missing Mitch Moses. Raiders 9-4 Under on season (2nd best in comp). Eels 4-2 Under at home. Two low-PF teams missing key playmakers.
+    <div class="game-body">
+      <div class="verdict-row">
+        <span class="verdict-badge watch">WATCH</span>
+        <span class="verdict-line">No line</span>
+        <span class="verdict-conf">&#x1F7E0; WATCH &mdash; H2H 4/4</span>
+      </div>
+      <div class="game-analysis">
+        H2H clean 4/4 under-60, avg 43.2, last 4: [36, 42, 47, 48]. <span class="flag">Volatility flag:</span> Dolphins 27% over-60 frequency, Tigers 25% &mdash; both league leaders. Context: Dolphins flogged Origin-depleted Roosters R15 (70 pts combined), now backing up 5 Origin players. No line available. WATCH &mdash; good H2H but highest combined over-60 risk in the round.
+      </div>
     </div>
   </div>
 
-  <div class="game-card">
-    <div class="card-header">
-      <div class="card-title-block">
-        <div class="card-teams">Rabbitohs vs Broncos</div>
-        <div class="card-meta">Thu 11/6 Â· 7:50pm Â· Stadium Australia</div>
-      </div>
-      <div class="card-tip">
-        <div class="tip-direction tip-under">UNDER*</div>
-        <div class="tip-line">49.5</div>
-      </div>
+  <!-- GAME 3 -->
+  <div class="game-block">
+    <div class="game-header">
+      <div class="game-title">Gold Coast Titans v Penrith Panthers</div>
+      <div class="game-meta">Sat 20 Jun &middot; 5:30pm AEST &middot; Cbus Super Stadium</div>
     </div>
-    <div class="card-body">
-      Model exp (50.05) is marginally above market (49.5) â model is essentially neutral at this price. Qualitative lean under: both teams heavily depleted, Accor Stadium last 7 games under 44 pts, Rabbitohs 4-2 Under at home. Lower confidence â structural signal has flipped since lines opened at 50.5.
+    <div class="game-body">
+      <div class="verdict-row">
+        <span class="verdict-badge under">UNDER</span>
+        <span class="verdict-line">50.5</span>
+        <span class="verdict-conf">&#x1F7E1; SOLID &mdash; H2H 4/4</span>
+      </div>
+      <div class="game-analysis">
+        Model exp 40.5 &mdash; 10.0 below market. H2H 4/4 under-60, avg 40.5. Last 4: [22, 30, 54, 56] &mdash; trend rising, but still avg only 40.5. Panthers 8% over-60 (lowest in comp). Context: Panthers recorded 64&ndash;0 over Tigers R14, but that was an outlier &mdash; Panthers season avg just 44.4 pts. Titans 42.9 pts avg (82% U60). 10-pt buffer between model exp and market is substantial. BET UNDER 50.5.
+      </div>
     </div>
   </div>
 
-  <div class="game-card">
-    <div class="card-header">
-      <div class="card-title-block">
-        <div class="card-teams">Warriors vs Sharks</div>
-        <div class="card-meta">Sat 13/6 Â· 5:30pm Â· Go Media Stadium</div>
-      </div>
-      <div class="card-tip">
-        <div class="tip-direction tip-pass">PASS</div>
-        <div class="tip-line">48.5</div>
-      </div>
+  <!-- GAME 4 -->
+  <div class="game-block">
+    <div class="game-header">
+      <div class="game-title">Canterbury Bulldogs v Manly Sea Eagles</div>
+      <div class="game-meta">Sat 20 Jun &middot; 7:35pm AEST &middot; Accor Stadium</div>
     </div>
-    <div class="card-body">
-      <span class="flag">FLAG</span> Model exp 51.35 â 2.85 above market, structural over signal. But Warriors missing 7 Origin players; season PF (30.7) not representative today. Sharks PA (24.5) elevated relative to PF (29.7) â mild PA-inflation effect. Two separate reasons the signal doesn't hold. Pass.
+    <div class="game-body">
+      <div class="verdict-row">
+        <span class="verdict-badge lean">LEAN UNDER</span>
+        <span class="verdict-line">48.5</span>
+        <span class="verdict-conf">&#x1F7E1; SOLID &mdash; H2H 5/6</span>
+      </div>
+      <div class="game-analysis">
+        Model exp 45.2 &mdash; 3.3 below market. H2H 5/6 under-60 (83%), avg 45.2. Last 4: [41, 46, 56, 66]. <span class="flag">Outlier flag:</span> last H2H 66 is a genuine outlier. Bulldogs ice-cold &mdash; last 3 games: [40, 24, 29], all under 50. Sea Eagles 47.9 pts avg (83% U60). <span class="flag">Wildcard:</span> Tom Trbojevic returns from injury (1.00 tries/game in 6 pre-injury games) &mdash; Sea Eagles attack transforms with Turbo at the back. LEAN UNDER 48.5 &mdash; monitor Trbojevic fitness before betting.
+      </div>
     </div>
   </div>
 
-  <!-- TOP 4 PICKS -->
+  <!-- GAME 5 -->
+  <div class="game-block">
+    <div class="game-header">
+      <div class="game-title">New Zealand Warriors v North Queensland Cowboys</div>
+      <div class="game-meta">Sun 21 Jun &middot; 2pm AEST &middot; One NZ Stadium, Christchurch</div>
+    </div>
+    <div class="game-body">
+      <div class="verdict-row">
+        <span class="verdict-badge watch">WATCH</span>
+        <span class="verdict-line">49.5</span>
+        <span class="verdict-conf">&#x1F7E0; WATCH &mdash; Rising trend</span>
+      </div>
+      <div class="game-analysis">
+        H2H clean 6/6 under-60 &mdash; but the trend is clearly rising: last 4 = [49, 52, 54, 56], avg 52.75. Both teams hit 60 in 2026. Warriors 48.5 pts avg (92% U60); Cowboys 49.6 pts avg (69% U60). Line at 49.5 is only 2 pts above the rising H2H average. Too close to call with confidence. WATCH &mdash; no bet.
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME 6 -->
+  <div class="game-block">
+    <div class="game-header">
+      <div class="game-title">Melbourne Storm v Canberra Raiders</div>
+      <div class="game-meta">Sun 21 Jun &middot; 4:05pm AEST &middot; AAMI Park</div>
+    </div>
+    <div class="game-body">
+      <div class="verdict-row">
+        <span class="verdict-badge under">UNDER</span>
+        <span class="verdict-line">Await line</span>
+        <span class="verdict-conf">&#x1F7E2; HIGH &mdash; H2H 6/6</span>
+      </div>
+      <div class="game-analysis">
+        Model exp 40.0 &mdash; strongest H2H record in the round. Perfect 6/6 under-60, avg 40.0 &mdash; this matchup has <em>never</em> cracked 60. Last 4: [36, 38, 46, 48]. Storm 48.6 pts avg (77% U60); Raiders 47.5 pts avg (92% U60, 2nd best in comp). Context: Raiders &ldquo;barely scoring&rdquo; in R14&ndash;15 &mdash; offensively non-functional. <span class="flag">Storm flag:</span> hit 66 in last 3 games once, but matchup-specific history dominates. No line yet &mdash; STRONG LEAN UNDER on any line above 44.
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME 7 -->
+  <div class="game-block">
+    <div class="game-header">
+      <div class="game-title">Sydney Roosters v Cronulla Sharks</div>
+      <div class="game-meta">Sun 21 Jun &middot; 6:15pm AEST &middot; Allianz Stadium</div>
+    </div>
+    <div class="game-body">
+      <div class="verdict-row">
+        <span class="verdict-badge pass">PASS</span>
+        <span class="verdict-line">No line</span>
+        <span class="verdict-conf">&#x2B1C; PASS</span>
+      </div>
+      <div class="game-analysis">
+        H2H 5/6 under-60 but avg 52.8 &mdash; highest in the round. Last 4: [52, 56, 58, 68]. <span class="flag">Multiple flags:</span> last H2H 68, both teams returning Origin stars (Roosters: DCE + Walker; Sharks: multiple reps). Origin-fuelled boost typical. Roosters 49.7 pts avg (64% U60); Sharks 54.9 pts avg (73% U60). No structural edge. PASS.
+      </div>
+    </div>
+  </div>
+
   <div class="section-head">Top 4 Model Picks</div>
 
-  <div class="pick-card p1">
-    <div class="pick-header">
-      <span class="pick-num">PICK 1</span>
-      <span class="pick-matchup">Tigers vs Titans</span>
-      <span class="pick-direction under">UNDER +6</span>
+  <div class="picks-section">
+    <div class="pick-card p1">
+      <div class="pick-header">
+        <span class="pick-num">PICK 1</span>
+        <span class="pick-game">Knights v Dragons</span>
+        <span class="pick-verdict">UNDER &minus;8.3</span>
+        <span class="pick-record">Season 14/15 &middot; 93%</span>
+      </div>
+      <div class="pick-lines">Adj line: <strong>52.2</strong> &middot; Exp: <strong>40.2</strong> &middot; Market: <strong>48.5</strong></div>
+      <ul class="pick-bullets">
+        <li>Perfect 5/5 H2H &mdash; most reliable matchup in the comp for unders. Avg 40.2 is 8.3 below market.</li>
+        <li>Both teams consistently low-scoring. Knights 75% U60, Dragons 83% U60 on season.</li>
+        <li>Adj line of 52.2 gives a 12-pt buffer above model exp. Strong structural under.</li>
+      </ul>
     </div>
-    <div class="pick-stats">
-      <span class="pick-stat">Adj line: <strong>56.5</strong></span>
-      <span class="pick-stat">Exp: <strong>47.95</strong></span>
-      <span class="pick-stat">Market: <strong>50.5</strong></span>
-    </div>
-    <span class="pick-record">Season 13/14 Â· 93%</span>
-    <ul class="pick-dots">
-      <li>Lowest exp combined in the round. 2.55 below market â strongest structural under signal available.</li>
-      <li>Titans 10-2 Under on season. Market consistently overestimates this matchup.</li>
-      <li>Tigers coming off 64-0 demolition. Both teams bottom-tier PF (Tigers 22.9, Titans 18.3). Not a PA-inflation artefact â genuine low output both ends.</li>
-    </ul>
-  </div>
 
-  <div class="pick-card p2">
-    <div class="pick-header">
-      <span class="pick-num">PICK 2</span>
-      <span class="pick-matchup">Rabbitohs vs Broncos</span>
-      <span class="pick-direction over">OVER â12</span>
+    <div class="pick-card p2">
+      <div class="pick-header">
+        <span class="pick-num">PICK 2</span>
+        <span class="pick-game">Storm v Raiders</span>
+        <span class="pick-verdict">UNDER (await line)</span>
+        <span class="pick-record">Season 15/15 &middot; 100%</span>
+      </div>
+      <div class="pick-lines">Adj line: <strong>52.0</strong> &middot; Exp: <strong>40.0</strong> &middot; Market: <strong>TBC</strong></div>
+      <ul class="pick-bullets">
+        <li>H2H 6/6 perfect, avg 40.0 &mdash; this fixture has never gone over 60. Strongest record in the round.</li>
+        <li>Raiders non-functional offensively in R14&ndash;15. Storm AAMI Park unders consistent.</li>
+        <li>Bet any line above 44. Adj line 52.0 gives 12-pt buffer on historical avg. Confirm line before match.</li>
+      </ul>
     </div>
-    <div class="pick-stats">
-      <span class="pick-stat">Adj line: <strong>37.5</strong></span>
-      <span class="pick-stat">Exp: <strong>50.05</strong></span>
-      <span class="pick-stat">Market: <strong>49.5</strong></span>
-    </div>
-    <span class="pick-record">Season 14/14 Â· 100%</span>
-    <ul class="pick-dots">
-      <li>Never missed in 14 rounds. The â12 threshold is deliberately conservative.</li>
-      <li>Market moved to 49.5; model exp (50.05) now sits above line. Game expected to hover around 50 pts. Adj line of 37.5 gives enormous buffer.</li>
-      <li>Both teams would need to combine for almost nothing to miss this pick.</li>
-    </ul>
-  </div>
 
-  <div class="pick-card p3">
-    <div class="pick-header">
-      <span class="pick-num">PICK 3</span>
-      <span class="pick-matchup">Dolphins vs Roosters</span>
-      <span class="pick-direction under">UNDER +12</span>
+    <div class="pick-card p3">
+      <div class="pick-header">
+        <span class="pick-num">PICK 3</span>
+        <span class="pick-game">Titans v Panthers</span>
+        <span class="pick-verdict">UNDER &minus;10.0</span>
+        <span class="pick-record">Season 13/15 &middot; 87%</span>
+      </div>
+      <div class="pick-lines">Adj line: <strong>52.5</strong> &middot; Exp: <strong>40.5</strong> &middot; Market: <strong>50.5</strong></div>
+      <ul class="pick-bullets">
+        <li>H2H 4/4, avg 40.5. Largest model-to-market gap with a confirmed line this round (10 pts).</li>
+        <li>Panthers 8% over-60 (lowest in comp) &mdash; despite 64&ndash;0 R14 being a statistical outlier.</li>
+        <li>Adj line 52.5 gives comfortable 12-pt buffer. Market pricing in Panthers blowout that H2H doesn&apos;t support.</li>
+      </ul>
     </div>
-    <div class="pick-stats">
-      <span class="pick-stat">Adj line: <strong>62.5</strong></span>
-      <span class="pick-stat">Exp: <strong>48.15</strong></span>
-      <span class="pick-stat">Market: <strong>50.5</strong></span>
-    </div>
-    <span class="pick-record">Season 12/14 Â· 86%</span>
-    <ul class="pick-dots">
-      <li>2nd lowest exp combined. 2.35 below market. The +12 buffer reflects wider variance at this ranking position.</li>
-      <li>Both teams in elite defensive form: Dolphins 13.6, Roosters 14.4 pts conceded/game (last 5).</li>
-      <li>Avg game total dropped to 44 pts over last 3 rounds. Market at 50.5 is slow to adjust. Dolphins Under 8-4 on season.</li>
-    </ul>
-  </div>
 
-  <div class="pick-card p4">
-    <div class="pick-header">
-      <span class="pick-num">PICK 4</span>
-      <span class="pick-matchup">Warriors vs Sharks</span>
-      <span class="pick-direction pass">PASS</span>
-    </div>
-    <div class="pick-stats">
-      <span class="pick-stat">Adj line: <strong>42.5</strong></span>
-      <span class="pick-stat">Exp: <strong>51.35</strong></span>
-      <span class="pick-stat">Market: <strong>48.5</strong></span>
-    </div>
-    <span class="pick-record">Season 10/14 Â· 71%</span>
-    <ul class="pick-dots">
-      <li>Highest exp combined in round. Model projects 2.85 above market. Pick 4 is most miss-prone (4 misses) â PA-inflation is the structural culprit.</li>
-      <li><strong>Flag:</strong> Warriors missing 7 Origin players. Season PF (30.7) built full-strength â not representative today.</li>
-      <li>Sharks PA (24.5) elevated relative to PF (29.7) â mild PA-inflation effect on top. Two reasons the signal doesn't hold. Not a bet this round.</li>
-    </ul>
-  </div>
-
-  <!-- EXPECTED COMBINED -->
-  <!-- SEASON RECORD -->
-  <div class="record-bar">
-    <div class="record-item">
-      <span class="record-label">Pick 1 â Under +6</span>
-      <span class="record-val">13/14</span>
-      <span class="record-pct">93%</span>
-    </div>
-    <div class="record-item">
-      <span class="record-label">Pick 2 â Over â12</span>
-      <span class="record-val">14/14</span>
-      <span class="record-pct">100%</span>
-    </div>
-    <div class="record-item">
-      <span class="record-label">Pick 3 â Under +12</span>
-      <span class="record-val">12/14</span>
-      <span class="record-pct">86%</span>
-    </div>
-    <div class="record-item">
-      <span class="record-label">Pick 4 â Over â6</span>
-      <span class="record-val">10/14</span>
-      <span class="record-pct">71%</span>
+    <div class="pick-card p4">
+      <div class="pick-header">
+        <span class="pick-num">PICK 4</span>
+        <span class="pick-game">Bulldogs v Sea Eagles</span>
+        <span class="pick-verdict">LEAN UNDER &minus;3.3</span>
+        <span class="pick-record">Season 10/14 &middot; 71%</span>
+      </div>
+      <div class="pick-lines">Adj line: <strong>57.2</strong> &middot; Exp: <strong>45.2</strong> &middot; Market: <strong>48.5</strong></div>
+      <ul class="pick-bullets">
+        <li>H2H 5/6 (83%), avg 45.2 vs market 48.5. Gap is smaller &mdash; weakest edge of the four picks.</li>
+        <li>Bulldogs ice-cold in attack: last 3 games [40, 24, 29]. Hard to see them suddenly going big.</li>
+        <li><span class="flag" style="font-weight:600;">Wildcard:</span> Trbojevic return could transform Sea Eagles attack. Monitor bench/minutes before betting.</li>
+      </ul>
     </div>
   </div>
 
   <div class="section-head">Expected Combined Scores</div>
-  <table class="exp-table">
-    <tr>
-      <td class="rank">1</td>
-      <td class="matchup">Tigers vs Titans</td>
-      <td class="exp-val">47.95</td>
-      <td class="market-val">mkt 50.5</td>
-      <td class="signal"><span class="signal-pill signal-under">Under â2.55</span></td>
-    </tr>
-    <tr>
-      <td class="rank">2</td>
-      <td class="matchup">Dolphins vs Roosters</td>
-      <td class="exp-val">48.15</td>
-      <td class="market-val">mkt 50.5</td>
-      <td class="signal"><span class="signal-pill signal-under">Under â2.35</span></td>
-    </tr>
-    <tr>
-      <td class="rank">3</td>
-      <td class="matchup">Eels vs Raiders</td>
-      <td class="exp-val">49.50</td>
-      <td class="market-val">mkt 49.5</td>
-      <td class="signal"><span class="signal-pill signal-neutral">Neutral</span></td>
-    </tr>
-    <tr>
-      <td class="rank">4</td>
-      <td class="matchup">Rabbitohs vs Broncos</td>
-      <td class="exp-val">50.05</td>
-      <td class="market-val">mkt 49.5</td>
-      <td class="signal"><span class="signal-pill signal-over">Over â0.55</span></td>
-    </tr>
-    <tr>
-      <td class="rank">5</td>
-      <td class="matchup">Warriors vs Sharks</td>
-      <td class="exp-val">51.35</td>
-      <td class="market-val">mkt 48.5</td>
-      <td class="signal"><span class="signal-pill signal-pass">Pass â flag</span></td>
-    </tr>
-  </table>
-  <p style="font-family:'Space Mono',monospace;font-size:10px;color:var(--wasteland);margin-top:6px;">
-    Formula: (Home PF + Home PA + Away PF + Away PA) / 2 Â· Source: aussportstipping.com
-  </p>
 
-  <!-- PARLAY -->
+  <table class="scores-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Match</th>
+        <th>Model Exp</th>
+        <th>Market</th>
+        <th>Signal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Knights v Dragons</td>
+        <td>40.2</td>
+        <td>mkt 48.5</td>
+        <td class="under-cell">Under &minus;8.3</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Tigers v Dolphins</td>
+        <td>43.2</td>
+        <td>no line</td>
+        <td class="watch-cell">Watch</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Titans v Panthers</td>
+        <td>40.5</td>
+        <td>mkt 50.5</td>
+        <td class="under-cell">Under &minus;10.0</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Bulldogs v Sea Eagles</td>
+        <td>45.2</td>
+        <td>mkt 48.5</td>
+        <td class="under-cell">Lean Under &minus;3.3</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Warriors v Cowboys</td>
+        <td>47.5</td>
+        <td>mkt 49.5</td>
+        <td class="watch-cell">Watch &mdash; rising</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Storm v Raiders</td>
+        <td>40.0</td>
+        <td>TBC</td>
+        <td class="under-cell">Strong lean under</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Roosters v Sharks</td>
+        <td>52.8</td>
+        <td>no line</td>
+        <td class="pass-cell">Pass</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-family:'Space Mono',monospace;font-size:9px;color:var(--wasteland);margin-bottom:28px;">Model exp = H2H avg (primary signal) adjusted for 2026 form context &middot; Form source: aussportstipping.com R13 fallback</p>
+
   <div class="section-head">Recommended Parlay</div>
+
   <div class="parlay-box">
-    <span class="parlay-label">3-Leg Under Parlay Â· R15 Â· Alternative Total Lines</span>
-    <div class="parlay-title">3-Leg Under Parlay</div>
-    <div class="parlay-legs">
-      <div class="parlay-leg">
-        <span class="leg-badge">LEG 1</span>
-        <span class="leg-text">Tigers vs Titans â Under 56.5 (alt total)</span>
-      </div>
-      <div class="parlay-leg">
-        <span class="leg-badge">LEG 2</span>
-        <span class="leg-text">Dolphins vs Roosters â Under 62.5 (alt total)</span>
-      </div>
-      <div class="parlay-leg">
-        <span class="leg-badge">LEG 3</span>
-        <span class="leg-text">Eels vs Raiders â Under 61.5 (alt total)</span>
-      </div>
+    <h3>3-Leg Under Parlay &middot; R16 &middot; Alternative Total Lines</h3>
+    <div class="parlay-sub">Threshold = model exp + 12 &middot; All confirmed-line games only</div>
+    <div class="parlay-leg">
+      <span class="parlay-leg-num">LEG 1</span>
+      <span class="parlay-leg-text">Knights v Dragons &mdash; Under alt total</span>
+      <span class="parlay-leg-line">Under 52.2</span>
     </div>
-    <div class="parlay-payout">
-      <div class="payout-pill">Threshold = exp + 12</div>
-      <div class="payout-pill">Check bookie for current alt total odds</div>
+    <div class="parlay-leg">
+      <span class="parlay-leg-num">LEG 2</span>
+      <span class="parlay-leg-text">Titans v Panthers &mdash; Under alt total</span>
+      <span class="parlay-leg-line">Under 52.5</span>
     </div>
+    <div class="parlay-leg">
+      <span class="parlay-leg-num">LEG 3</span>
+      <span class="parlay-leg-text">Bulldogs v Sea Eagles &mdash; Under alt total</span>
+      <span class="parlay-leg-line">Under 57.2</span>
+    </div>
+    <div class="parlay-note">Check bookie for current alt total availability and odds &middot; Verify team sheets before placing</div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <p>Analysis only Â· Not financial advice Â· Gamble responsibly â 1800 858 858</p>
-    <p style="margin-top:4px;">PF/PA source: aussportstipping.com Â· Lines: bets.com.au, statsinsider.com.au Â· Generated Thu 11 Jun 2026 Â· <a href="history.html" style="color:var(--wasteland);text-decoration:none;">record &amp; history</a> · <a href="tryscorers.html" style="color:var(--wasteland);text-decoration:none;">try scorer picks</a></p>
-  </footer>
+  <div class="section-head">Season Track Record</div>
+  <div class="track-record">
+    <span class="track-pill">Pick 1 &mdash; Under +6 &middot; <strong>14/15 &middot; 93%</strong></span>
+    <span class="track-pill">Pick 2 &mdash; Over &minus;12 &middot; <strong>15/15 &middot; 100%</strong></span>
+    <span class="track-pill">Pick 3 &mdash; Under +12 &middot; <strong>13/15 &middot; 87%</strong></span>
+    <span class="track-pill">Pick 4 &mdash; Over &minus;6 &middot; <strong>10/14 &middot; 71%</strong></span>
+  </div>
 
+  <div class="disclaimer-bar">
+    &#9888;&#65039; Always verify team sheets before betting &mdash; late Origin or injury changes can void matchup edges.<br>
+    Estimated odds are a guide only. Verify current lines on Sportsbet / Bet365 before placing bets.<br>
+    Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
+  </div>
+
+  <footer class="site-footer">
+    <p>NRL Totals Model &middot; 2026 Season &middot; Generated Wed 17 Jun 2026</p>
+    <p style="margin-top:4px;">H2H source: NRL historical data &middot; Form: aussportstipping.com (R13 fallback) &middot; Lines: Bet365 &middot; <a href="history.html">record &amp; history</a> &middot; <a href="tryscorers.html">try scorer picks</a></p>
+  </footer>
 </div>
 </body>
 </html>

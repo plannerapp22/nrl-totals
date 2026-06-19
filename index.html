@@ -5,113 +5,120 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NRL Totals Model — Round 16, 2026</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap');
   :root {
-    --cream:#F1E7CE; --ink:#211C14; --blue:#6FB6C9; --cherry:#DC4636;
-    --butter:#F2C14E; --teal:#1F9E91; --coral:#F2795B; --rust:#9C5230; --waste:#8C8A6A;
+    /* NRL palette */
+    --cream:#F3F4F6; --ink:#0D1117; --blue:#2563EB; --cherry:#DC2626;
+    --butter:#F59E0B; --teal:#15803D; --coral:#EA580C; --rust:#92400E; --waste:#9CA3AF;
+    /* Traffic light — verdict confidence */
+    --tl-strong:#166534; --tl-bet:#15803D; --tl-lean:#B45309; --tl-watch:#6B7280;
+    /* NRL brand */
+    --nrl-red:#CC1717; --nrl-dark:#0D1117; --border:#E5E7EB;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--cream);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:16px;line-height:1.6}
-  .site-header{background:var(--ink);border-bottom:4px solid var(--butter)}
+  body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
+  .site-header{background:var(--nrl-dark);border-bottom:4px solid var(--nrl-red)}
   .header-inner{max-width:960px;margin:0 auto;padding:28px 24px 20px;display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
-  .header-logo{font-family:'Bungee',sans-serif;font-size:32px;color:var(--butter);letter-spacing:1px;text-transform:uppercase;line-height:1}
+  .header-logo{font-family:'Oswald',sans-serif;font-size:32px;color:var(--butter);letter-spacing:0px;font-weight:700;text-transform:uppercase;line-height:1}
   .header-logo span{color:var(--cream)}
-  .header-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;line-height:1.8;padding-bottom:2px}
+  .header-meta{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;line-height:1.8;padding-bottom:2px}
   .header-meta strong{color:var(--blue)}
-  .model-badge{margin-left:auto;font-family:'Space Mono',monospace;font-size:11px;color:var(--ink);background:var(--butter);padding:4px 10px;border-radius:2px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
+  .model-badge{margin-left:auto;font-family:'Roboto Mono',monospace;font-size:11px;color:white;background:var(--nrl-red);padding:4px 10px;border-radius:2px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
   .container{max-width:960px;margin:0 auto;padding:0 24px 80px}
-  .section-head{font-family:'Bungee',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--waste);padding:36px 0 12px;border-bottom:1px solid rgba(33,28,20,0.15);margin-bottom:0}
-  .method-box{background:var(--ink);color:var(--cream);border-radius:4px;margin:24px 0;overflow:hidden}
+  .section-head{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--tl-watch);padding:36px 0 12px;border-bottom:1px solid rgba(33,28,20,0.15);margin-bottom:0}
+  .method-box{background:var(--nrl-dark);color:var(--cream);border-radius:4px;margin:24px 0;overflow:hidden}
   .method-summary{padding:18px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
   .method-summary:hover{background:rgba(255,255,255,0.05)}
-  .method-title{font-family:'Bungee',sans-serif;font-size:14px;letter-spacing:1px;color:var(--butter);text-transform:uppercase}
+  .method-title{font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;color:var(--butter);text-transform:uppercase}
   .method-subtitle{font-size:13px;color:var(--waste);margin-top:2px}
-  .method-toggle{font-family:'Space Mono',monospace;font-size:12px;color:var(--blue);white-space:nowrap;flex-shrink:0}
+  .method-toggle{font-family:'Roboto Mono',monospace;font-size:12px;color:var(--blue);white-space:nowrap;flex-shrink:0}
   .method-body{display:none;padding:0 20px 20px;border-top:1px solid rgba(255,255,255,0.1)}
   .method-body.open{display:block}
-  .method-body h4{font-family:'Bungee',sans-serif;font-size:11px;letter-spacing:1.5px;color:var(--butter);text-transform:uppercase;margin:16px 0 6px}
+  .method-body h4{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:1.5px;color:var(--butter);text-transform:uppercase;margin:16px 0 6px}
   .method-body p,.method-body li{font-size:13px;color:rgba(241,231,206,0.85);line-height:1.65}
   .method-body ul{padding-left:16px;margin-top:4px}
   .verdict-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}
-  .verdict-table th{text-align:left;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--waste);padding:6px 10px;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .verdict-table th{text-align:left;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--waste);padding:6px 10px;border-bottom:1px solid rgba(255,255,255,0.1)}
   .verdict-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.06);color:rgba(241,231,206,0.85);vertical-align:top}
-  .verdict-table td:first-child{font-family:'Space Mono',monospace;font-size:11px;white-space:nowrap;color:var(--cream)}
-  .v-strong{color:var(--cherry)!important} .v-bet{color:var(--butter)!important}
-  .v-lean{color:var(--blue)!important} .v-watch{color:var(--waste)!important}
-  .disclaimer{background:rgba(33,28,20,0.06);border-left:3px solid var(--butter);padding:12px 16px;font-size:13px;margin:16px 0 8px;border-radius:0 4px 4px 0}
+  .verdict-table td:first-child{font-family:'Roboto Mono',monospace;font-size:11px;white-space:nowrap;color:var(--cream)}
+  .v-strong{color:var(--tl-strong)!important} .v-bet{color:var(--tl-bet)!important}
+  .v-lean{color:var(--tl-lean)!important} .v-watch{color:var(--tl-watch)!important}
+  .disclaimer{background:rgba(33,28,20,0.06);border-left:3px solid var(--nrl-red);padding:12px 16px;font-size:13px;margin:16px 0 8px;border-radius:0 4px 4px 0}
   .game-card{background:white;border-radius:6px;margin:20px 0;box-shadow:0 2px 8px rgba(33,28,20,0.08);overflow:hidden}
-  .card-header{padding:16px 20px 14px;background:var(--ink);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .card-matchup{font-family:'Bungee',sans-serif;font-size:18px;color:var(--cream);text-transform:uppercase;letter-spacing:0.5px;line-height:1.2}
+  .card-header{padding:16px 20px 14px;background:var(--nrl-dark);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .card-matchup{font-family:'Oswald',sans-serif;font-size:18px;color:var(--cream);text-transform:uppercase;letter-spacing:0.5px;line-height:1.2}
   .card-v{color:var(--butter);font-size:14px}
-  .card-meta{font-family:'Space Mono',monospace;font-size:11px;color:var(--waste);margin-top:4px}
+  .card-meta{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--waste);margin-top:4px}
   .card-line{text-align:right;flex-shrink:0}
-  .card-line-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--waste);text-transform:uppercase;letter-spacing:1px}
-  .card-line-value{font-family:'Bungee',sans-serif;font-size:26px;color:var(--butter);line-height:1}
-  .card-verdict-bar{display:flex;align-items:stretch;border-bottom:1px solid rgba(33,28,20,0.08)}
-  .verdict-pill{padding:10px 18px;font-family:'Bungee',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:8px;flex-shrink:0}
-  .verdict-pill .conf{font-family:'Space Mono',monospace;font-size:12px;opacity:0.8;font-weight:normal}
-  .v-strong-bar{background:var(--cherry);color:white}
-  .v-bet-bar{background:var(--butter);color:var(--ink)}
-  .v-lean-bar{background:var(--blue);color:white}
-  .v-watch-bar{background:rgba(140,138,106,0.2);color:var(--waste)}
-  .model-signal{padding:10px 16px;font-size:12px;color:var(--waste);font-family:'Space Mono',monospace;display:flex;align-items:center;gap:6px}
+  .card-line-label{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--waste);text-transform:uppercase;letter-spacing:1px}
+  .card-line-value{font-family:'Oswald',sans-serif;font-size:26px;color:var(--butter);line-height:1}
+  .card-verdict-bar{display:flex;align-items:stretch;border-bottom:1px solid var(--border)}
+  .verdict-pill{padding:10px 18px;font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:8px;flex-shrink:0}
+  .verdict-pill .conf{font-family:'Roboto Mono',monospace;font-size:12px;opacity:0.8;font-weight:normal}
+  /* Traffic light verdict bars */
+  .v-strong-bar{background:var(--tl-strong);color:white}
+  .v-bet-bar{background:var(--tl-bet);color:white}
+  .v-lean-bar{background:var(--tl-lean);color:white}
+  .v-lean-over-bar{background:var(--blue);color:white}
+  .v-watch-bar{background:rgba(107,114,128,0.12);color:var(--tl-watch);border:1px solid rgba(107,114,128,0.25)}
+  .model-signal{padding:10px 16px;font-size:12px;color:var(--waste);font-family:'Roboto Mono',monospace;display:flex;align-items:center;gap:6px}
   .signal-under{color:var(--cherry)} .signal-over{color:var(--teal)} .signal-none{color:var(--waste)}
   .card-body{padding:18px 20px}
   .card-body p{font-size:14px;line-height:1.65;color:var(--ink);margin-bottom:10px}
   .card-body p:last-child{margin-bottom:0}
   .note-box{background:rgba(33,28,20,0.04);border-radius:4px;padding:12px 14px;font-size:13px;color:rgba(33,28,20,0.7);margin-top:14px}
-  .note-box strong{font-family:'Space Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:4px;color:var(--waste)}
-  .card-data-toggle{width:100%;background:none;border:none;border-top:1px solid rgba(33,28,20,0.08);padding:10px 20px;text-align:left;cursor:pointer;font-family:'Space Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between}
+  .note-box strong{font-family:'Roboto Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:4px;color:var(--waste)}
+  .card-data-toggle{width:100%;background:none;border:none;border-top:1px solid rgba(33,28,20,0.08);padding:10px 20px;text-align:left;cursor:pointer;font-family:'Roboto Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between}
   .card-data-toggle:hover{background:rgba(33,28,20,0.03)}
   .card-data{display:none;padding:0 20px 16px;border-top:1px solid rgba(33,28,20,0.05)}
   .card-data.open{display:block}
   .data-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
   .data-block{background:rgba(33,28,20,0.03);border-radius:4px;padding:10px 12px}
-  .data-block-label{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste);margin-bottom:4px}
-  .data-block-value{font-size:22px;font-family:'Bungee',sans-serif;color:var(--ink);line-height:1}
+  .data-block-label{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste);margin-bottom:4px}
+  .data-block-value{font-size:22px;font-family:'Oswald',sans-serif;color:var(--ink);line-height:1}
   .data-block-sub{font-size:11px;color:var(--waste);margin-top:2px}
   .h2h-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
-  .h2h-table th{text-align:left;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste);padding:6px 8px;border-bottom:1px solid rgba(33,28,20,0.1)}
+  .h2h-table th{text-align:left;font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste);padding:6px 8px;border-bottom:1px solid rgba(33,28,20,0.1)}
   .h2h-table td{padding:7px 8px;border-bottom:1px solid rgba(33,28,20,0.06);color:var(--ink)}
   .h2h-table tr:last-child td{border-bottom:none}
-  .under-chip{display:inline-block;background:rgba(220,70,54,0.12);color:var(--cherry);font-family:'Space Mono',monospace;font-size:10px;padding:2px 6px;border-radius:2px}
-  .over-chip{display:inline-block;background:rgba(31,158,145,0.12);color:var(--teal);font-family:'Space Mono',monospace;font-size:10px;padding:2px 6px;border-radius:2px}
+  .under-chip{display:inline-block;background:rgba(220,70,54,0.12);color:var(--cherry);font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 6px;border-radius:2px}
+  .over-chip{display:inline-block;background:rgba(31,158,145,0.12);color:var(--teal);font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 6px;border-radius:2px}
 
   /* MULTI */
-  .multi-section{background:var(--ink);border-radius:6px;margin:28px 0;overflow:hidden}
+  .multi-section{background:var(--nrl-dark);border-radius:6px;margin:28px 0;overflow:hidden}
   .multi-header{padding:20px 24px 16px;border-bottom:1px solid rgba(255,255,255,0.1)}
-  .multi-title{font-family:'Bungee',sans-serif;font-size:20px;color:var(--butter);text-transform:uppercase;letter-spacing:1px}
+  .multi-title{font-family:'Oswald',sans-serif;font-size:20px;color:var(--butter);text-transform:uppercase;letter-spacing:1px}
   .multi-subtitle{font-size:13px;color:var(--waste);margin-top:4px;line-height:1.5}
   .multi-body{padding:20px 24px}
-  .multi-single{background:rgba(220,70,54,0.15);border:1px solid rgba(220,70,54,0.3);border-radius:4px;padding:16px 18px;margin-bottom:16px}
-  .multi-single-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--cherry);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
-  .multi-single-pick{font-family:'Bungee',sans-serif;font-size:18px;color:var(--cream);text-transform:uppercase}
+  .multi-single{background:rgba(22,101,52,0.12);border:1px solid rgba(22,101,52,0.3);border-radius:4px;padding:16px 18px;margin-bottom:16px}
+  .multi-single-label{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--tl-strong);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+  .multi-single-pick{font-family:'Oswald',sans-serif;font-size:18px;color:var(--cream);text-transform:uppercase}
   .multi-single-detail{font-size:13px;color:rgba(241,231,206,0.7);margin-top:4px;line-height:1.5}
-  .multi-conf{display:inline-block;background:var(--cherry);color:white;font-family:'Space Mono',monospace;font-size:12px;padding:3px 8px;border-radius:2px;margin-top:6px}
-  .multi-legs-label{font-family:'Bungee',sans-serif;font-size:12px;letter-spacing:2px;color:var(--butter);text-transform:uppercase;margin:20px 0 10px}
-  .multi-leg{background:rgba(31,158,145,0.15);border:1px solid rgba(31,158,145,0.3);border-radius:4px;padding:14px 18px;margin-bottom:10px}
-  .multi-leg-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--teal);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
-  .multi-leg-pick{font-family:'Bungee',sans-serif;font-size:16px;color:var(--cream);text-transform:uppercase}
+  .multi-conf{display:inline-block;background:var(--tl-strong);color:white;font-family:'Roboto Mono',monospace;font-size:12px;padding:3px 8px;border-radius:2px;margin-top:6px}
+  .multi-legs-label{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;color:var(--butter);text-transform:uppercase;margin:20px 0 10px}
+  .multi-leg{background:rgba(21,128,61,0.12);border:1px solid rgba(21,128,61,0.3);border-radius:4px;padding:14px 18px;margin-bottom:10px}
+  .multi-leg-label{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--tl-bet);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
+  .multi-leg-pick{font-family:'Oswald',sans-serif;font-size:16px;color:var(--cream);text-transform:uppercase}
   .multi-leg-detail{font-size:13px;color:rgba(241,231,206,0.7);margin-top:4px;line-height:1.5}
-  .multi-leg-conf{display:inline-block;background:var(--teal);color:white;font-family:'Space Mono',monospace;font-size:11px;padding:2px 7px;border-radius:2px;margin-top:5px}
+  .multi-leg-conf{display:inline-block;background:var(--tl-bet);color:white;font-family:'Roboto Mono',monospace;font-size:11px;padding:2px 7px;border-radius:2px;margin-top:5px}
   .multi-leg-weak{background:rgba(242,193,78,0.12);border:1px solid rgba(242,193,78,0.25)}
   .multi-leg-weak .multi-leg-label{color:var(--butter)}
   .multi-leg-weak .multi-leg-conf{background:var(--butter);color:var(--ink)}
   .multi-odds-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 0}
   .multi-odds-block{background:rgba(255,255,255,0.06);border-radius:4px;padding:12px;text-align:center}
-  .multi-odds-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-  .multi-odds-value{font-family:'Bungee',sans-serif;font-size:22px;color:var(--butter)}
+  .multi-odds-label{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+  .multi-odds-value{font-family:'Oswald',sans-serif;font-size:22px;color:var(--butter)}
   .multi-odds-sub{font-size:11px;color:var(--waste);margin-top:2px}
   .multi-caveat{background:rgba(255,255,255,0.06);border-radius:4px;padding:12px 16px;font-size:12px;color:rgba(241,231,206,0.6);margin-top:16px;line-height:1.6}
   .season-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(33,28,20,0.06)}
-  .season-table th{background:var(--ink);color:var(--waste);font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;text-align:right}
+  .season-table th{background:var(--nrl-dark);color:var(--waste);font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;text-align:right}
   .season-table th:first-child{text-align:left}
   .season-table td{padding:8px 12px;text-align:right;border-bottom:1px solid rgba(33,28,20,0.06);color:var(--ink)}
   .season-table td:first-child{text-align:left;font-weight:500}
   .season-table tr:last-child td{border-bottom:none}
-  .top3{color:var(--teal);font-weight:600} .low3{color:var(--cherry)}
-  .site-footer{background:var(--ink);color:var(--waste);padding:24px;font-family:'Space Mono',monospace;font-size:11px;text-align:center;border-top:3px solid var(--butter);line-height:2}
-  .site-footer a{color:var(--blue);text-decoration:none}
+  .top3{color:var(--tl-bet);font-weight:600} .low3{color:var(--cherry)}
+  .site-footer{background:var(--nrl-dark);color:var(--waste);padding:24px;font-family:'Roboto Mono',monospace;font-size:11px;text-align:center;border-top:3px solid var(--nrl-red);line-height:2}
+  .site-footer a{color:var(--butter);text-decoration:none}
   @media(max-width:600px){.data-grid{grid-template-columns:1fr}.card-header{flex-direction:column}.card-line{text-align:left}.multi-odds-row{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -145,10 +152,10 @@
     <h4>Confidence and Verdicts</h4>
     <table class="verdict-table">
       <tr><th>Verdict</th><th>Confidence</th><th>Meaning</th></tr>
-      <tr><td class="v-strong">STRONG BET</td><td>75%+</td><td>Multiple strong signals aligned. Highest conviction.</td></tr>
-      <tr><td class="v-bet">BET</td><td>65–74%</td><td>Clear directional signal with supporting evidence.</td></tr>
-      <tr><td class="v-lean">LEAN</td><td>55–64%</td><td>Moderate signal. One direction, not without risk.</td></tr>
-      <tr><td class="v-watch">WATCH</td><td>45–54%</td><td>No confident direction or signals conflict.</td></tr>
+      <tr><td style="color:var(--tl-strong);font-weight:600">STRONG BET</td><td>75%+</td><td>Multiple strong signals aligned. Highest conviction.</td></tr>
+      <tr><td style="color:var(--tl-bet);font-weight:600">BET</td><td>65–74%</td><td>Clear directional signal with supporting evidence.</td></tr>
+      <tr><td style="color:var(--tl-lean);font-weight:600">LEAN</td><td>55–64%</td><td>Moderate signal. One direction, not without risk.</td></tr>
+      <tr><td style="color:var(--tl-watch);font-weight:600">WATCH</td><td>45–54%</td><td>No confident direction or signals conflict.</td></tr>
     </table>
     <h4>Multi rules</h4>
     <p>Multi legs are auto-selected at 80%+ confidence. The adjusted line is set at the point where 85–90%+ of historical H2H results land on the correct side. The 4-leg adjusted line multi is built from the four games with the clearest directional signal — each leg moves the line to a point where the historical hit rate is near certain. LEAN picks are never included in multis.</p>
@@ -351,7 +358,7 @@
     <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">49.5</div></div>
   </div>
   <div class="card-verdict-bar">
-    <div class="verdict-pill v-lean-bar" style="background:var(--teal)">LEAN OVER <span class="conf">58%</span></div>
+    <div class="verdict-pill v-lean-over-bar">LEAN OVER <span class="conf">58%</span></div>
     <div class="model-signal">
       <span class="signal-over">↑</span>
       Model expected: 48.0 &nbsp;|&nbsp; H2H avg gap vs line: +2.9 (over bias) &nbsp;|&nbsp; Last 2 meetings both over 49.5
@@ -443,7 +450,7 @@
     <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">50.5</div></div>
   </div>
   <div class="card-verdict-bar">
-    <div class="verdict-pill v-lean-bar" style="background:var(--teal)">LEAN OVER <span class="conf">63%</span></div>
+    <div class="verdict-pill v-lean-over-bar">LEAN OVER <span class="conf">63%</span></div>
     <div class="model-signal">
       <span class="signal-over">↑</span>
       Model expected: 50.0 &nbsp;|&nbsp; 2025–26 regular season: 3 of 3 H2H over actual lines &nbsp;|&nbsp; Avg combined 54.3 vs line 50.5
@@ -486,7 +493,7 @@
   </div>
   <div class="multi-body">
 
-    <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Best single bet this round</div>
+    <div style="font-family:'Roboto Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Best single bet this round</div>
 
     <div class="multi-single">
       <div class="multi-single-label">Strong Bet · 80% confidence</div>
@@ -558,30 +565,30 @@
 
 
     <div style="margin-top:28px;border-top:1px solid rgba(255,255,255,0.1);padding-top:24px">
-      <div class="multi-legs-label" style="color:var(--cherry);margin-top:0">Hyperconservative Multi — 3 to 4 Legs (90%+ Each Leg)</div>
+      <div class="multi-legs-label" style="color:var(--tl-strong);margin-top:0">Hyperconservative Multi — 3 to 4 Legs (90%+ Each Leg)</div>
       <div style="font-size:13px;color:rgba(241,231,206,0.65);margin-bottom:16px;line-height:1.6;">
         Each leg uses an adjusted line where 90%+ of all available H2H data would have hit. Number of usable legs varies each round — this round has 3 strong legs and 1 borderline 4th. Legs 5 and 6 would require adjusted lines so far from the standard that bookmaker odds become negligible (e.g. Under 61 or Under 67). When those conditions exist, the round only supports 3–4 hyperconservative legs. Odds per leg are lower ($1.05–$1.35) but confidence is near-maximum. Best used as a stake-protection play — smaller outlay, near-certain hit rate.
       </div>
 
-      <div class="multi-leg" style="border-color:rgba(220,70,54,0.5);background:rgba(220,70,54,0.1)">
-        <div class="multi-leg-label" style="color:var(--cherry)">Leg 1 · 100% hit rate (7/7)</div>
+      <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
+        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 1 · 100% hit rate (7/7)</div>
         <div class="multi-leg-pick">Storm v Raiders — Under 51</div>
         <div class="multi-leg-detail">Adjusted line: 51. Standard line: 50.5. Every one of the last seven H2H combined scores sits below 51 (maximum was 50 in 2023). The adjusted line adds only 0.5 to the standard — which means low odds (est. $1.05–$1.10 on alternate markets). But it is the most historically bulletproof leg available this round. Average combined: 41.1. The chance of a seventh-straight bust needs seven things to go wrong simultaneously.</div>
-        <div class="multi-leg-conf" style="background:var(--cherry)">7/7 H2H · 100%</div>
+        <div class="multi-leg-conf" style="background:var(--tl-strong)">7/7 H2H · 100%</div>
       </div>
 
-      <div class="multi-leg" style="border-color:rgba(220,70,54,0.5);background:rgba(220,70,54,0.1)">
-        <div class="multi-leg-label" style="color:var(--cherry)">Leg 2 · 100% hit rate (4/4)</div>
+      <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
+        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 2 · 100% hit rate (4/4)</div>
         <div class="multi-leg-pick">Tigers v Dolphins — Under 49</div>
         <div class="multi-leg-detail">Adjusted line: 49. Standard line: 51.5. All four H2H results sit under 49 (closest: 48). The standard line is 2.5 points above the adjusted — which produces more useful odds than Leg 1 (est. $1.30–$1.45). Average combined is 43.2, giving roughly 5.8 points of margin on average. Four from four is a small sample, but the pattern is consistent and the gap between actual results and the adjusted line is not close.</div>
-        <div class="multi-leg-conf" style="background:var(--cherry)">4/4 H2H · 100%</div>
+        <div class="multi-leg-conf" style="background:var(--tl-strong)">4/4 H2H · 100%</div>
       </div>
 
-      <div class="multi-leg" style="border-color:rgba(220,70,54,0.5);background:rgba(220,70,54,0.1)">
-        <div class="multi-leg-label" style="color:var(--cherry)">Leg 3 · 100% hit rate (4/4 reg season)</div>
+      <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
+        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 3 · 100% hit rate (4/4 reg season)</div>
         <div class="multi-leg-pick">Roosters v Sharks — Over 48</div>
         <div class="multi-leg-detail">Adjusted line: 48. Standard line: 50.5 (moving down by 2.5 for an over bet). All four regular-season H2H meetings in 2024–26 went over 48: 68, 58, 56, 49. The closest (49) clears by one point. The 2025 finals game (30 combined) is the only miss — excluded here as finals context produces structurally different scoring. Odds on Over 48 when standard line is 50.5 est. $1.15–$1.25. Check bookmaker availability for over at a lower line.</div>
-        <div class="multi-leg-conf" style="background:var(--cherry)">4/4 regular season H2H · 100%</div>
+        <div class="multi-leg-conf" style="background:var(--tl-strong)">4/4 regular season H2H · 100%</div>
       </div>
 
       <div class="multi-leg multi-leg-weak" style="background:rgba(220,70,54,0.07);border-color:rgba(242,193,78,0.3)">
@@ -594,30 +601,30 @@
       <div class="multi-odds-row" style="margin-top:16px">
         <div class="multi-odds-block">
           <div class="multi-odds-label">3-Leg / 4-Leg Odds</div>
-          <div class="multi-odds-value" style="color:var(--cherry)">~$1.60 / ~$1.75</div>
+          <div class="multi-odds-value" style="color:var(--tl-strong)">~$1.60 / ~$1.75</div>
           <div class="multi-odds-sub">3 legs est. $1.08·$1.38·$1.20 · 4th adds ~$1.10</div>
         </div>
         <div class="multi-odds-block">
           <div class="multi-odds-label">Confidence Each Leg</div>
-          <div class="multi-odds-value" style="color:var(--cherry)">~100%</div>
+          <div class="multi-odds-value" style="color:var(--tl-strong)">~100%</div>
           <div class="multi-odds-sub">Legs 1–3 cleanest · Leg 4 small sample</div>
         </div>
         <div class="multi-odds-block">
           <div class="multi-odds-label">All 3 / All 4 Hitting</div>
-          <div class="multi-odds-value" style="color:var(--cherry)">~85–95% / ~75–85%</div>
+          <div class="multi-odds-value" style="color:var(--tl-strong)">~85–95% / ~75–85%</div>
           <div class="multi-odds-sub">Compounded, small samples</div>
         </div>
       </div>
 
       <div class="multi-caveat" style="margin-top:12px">
-        <strong style="font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--cherry);">Hyperconservative caveat</strong><br>
+        <strong style="font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--cherry);">Hyperconservative caveat</strong><br>
         100% hit rate from 4–7 games is not a statistical certainty — it's a strong pattern in a small sample. The purpose of this multi is to maximise hit probability at the cost of returns. Combined odds (~$1.60 for 3 legs) mean you'd need to stake significantly to generate meaningful profit. Best treated as low-variance, near-certainty coverage rather than a value play. Verify all adjusted line prices with your bookmaker before placing.
       </div>
     </div>
 
 
     <div class="multi-caveat">
-      <strong style="font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--butter);">Before placing</strong><br>
+      <strong style="font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--butter);">Before placing</strong><br>
       Adjusted (alternate) totals markets are not available at all bookmakers. Prices listed are estimates — actual prices vary by platform and may not match. The H2H sample sizes here are small (4–7 games), not 50-game certainties. Check team lists Thursday/Friday — absences to key players can shift expectations. The model does not guarantee outcomes. Never bet more than you're comfortable losing.
     </div>
 
@@ -630,62 +637,62 @@
   <table style="width:100%;border-collapse:collapse;font-size:14px">
     <thead>
       <tr style="background:var(--ink)">
-        <th style="text-align:left;padding:10px 14px;font-family:Space Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Game</th>
-        <th style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Line</th>
-        <th style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Model</th>
-        <th style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">H2H Avg</th>
-        <th style="text-align:left;padding:10px 14px;font-family:Space Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Verdict</th>
+        <th style="text-align:left;padding:10px 14px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Game</th>
+        <th style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Line</th>
+        <th style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Model</th>
+        <th style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">H2H Avg</th>
+        <th style="text-align:left;padding:10px 14px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Verdict</th>
       </tr>
     </thead>
     <tbody>
       <tr style="border-bottom:1px solid rgba(33,28,20,0.06)">
         <td style="padding:10px 14px;font-weight:500">Knights v Dragons</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px">48.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">50.8</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">42.3</td>
-        <td style="padding:10px 14px;color:var(--blue);font-family:Space Mono,monospace;font-size:12px">LEAN UNDER (58%)</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">48.5</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">50.8</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">42.3</td>
+        <td style="padding:10px 14px;color:var(--tl-lean);font-family:Roboto Mono,monospace;font-size:12px">LEAN UNDER (58%)</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(33,28,20,0.06);background:rgba(242,193,78,0.05)">
         <td style="padding:10px 14px;font-weight:500">Tigers v Dolphins</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px">51.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">51.2</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">43.2</td>
-        <td style="padding:10px 14px;color:var(--butter);font-family:Space Mono,monospace;font-size:12px;font-weight:600">BET UNDER (70%)</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">51.5</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">51.2</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">43.2</td>
+        <td style="padding:10px 14px;color:var(--tl-bet);font-family:Roboto Mono,monospace;font-size:12px;font-weight:600">BET UNDER (70%)</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(33,28,20,0.06)">
         <td style="padding:10px 14px;font-weight:500">Titans v Panthers</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px">50.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">45.7</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">40.6</td>
-        <td style="padding:10px 14px;color:var(--blue);font-family:Space Mono,monospace;font-size:12px">LEAN UNDER (58%)</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">50.5</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">45.7</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">40.6</td>
+        <td style="padding:10px 14px;color:var(--tl-lean);font-family:Roboto Mono,monospace;font-size:12px">LEAN UNDER (58%)</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(33,28,20,0.06)">
         <td style="padding:10px 14px;font-weight:500">Bulldogs v Sea Eagles</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px">48.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">45.3</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">45.3</td>
-        <td style="padding:10px 14px;color:var(--blue);font-family:Space Mono,monospace;font-size:12px">LEAN UNDER (60%)</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">48.5</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">45.3</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">45.3</td>
+        <td style="padding:10px 14px;color:var(--tl-lean);font-family:Roboto Mono,monospace;font-size:12px">LEAN UNDER (60%)</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(33,28,20,0.06)">
         <td style="padding:10px 14px;font-weight:500">Warriors v Cowboys</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px">49.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">48.0</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">48.9</td>
-        <td style="padding:10px 14px;color:var(--teal);font-family:Space Mono,monospace;font-size:12px">LEAN OVER (58%)</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">49.5</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">48.0</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">48.9</td>
+        <td style="padding:10px 14px;color:var(--blue);font-family:Roboto Mono,monospace;font-size:12px">LEAN OVER (58%)</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(33,28,20,0.06);background:rgba(220,70,54,0.05)">
         <td style="padding:10px 14px;font-weight:500">Storm v Raiders</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px">50.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">47.1</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">41.1</td>
-        <td style="padding:10px 14px;color:var(--cherry);font-family:Space Mono,monospace;font-size:12px;font-weight:700">STRONG BET UNDER (80%)</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">50.5</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">47.1</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">41.1</td>
+        <td style="padding:10px 14px;color:var(--tl-strong);font-family:Roboto Mono,monospace;font-size:12px;font-weight:700">STRONG BET UNDER (80%)</td>
       </tr>
       <tr>
         <td style="padding:10px 14px;font-weight:500">Roosters v Sharks</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px">50.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">50.0</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Space Mono,monospace;font-size:12px;color:var(--waste)">54.3*</td>
-        <td style="padding:10px 14px;color:var(--teal);font-family:Space Mono,monospace;font-size:12px">LEAN OVER (63%)</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">50.5</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">50.0</td>
+        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">54.3*</td>
+        <td style="padding:10px 14px;color:var(--blue);font-family:Roboto Mono,monospace;font-size:12px">LEAN OVER (63%)</td>
       </tr>
     </tbody>
   </table>

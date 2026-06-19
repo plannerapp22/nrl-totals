@@ -1,0 +1,8 @@
+{
+  "_meta": {
+    "description": "Pick track record from v2.0 (Round 17 onwards). Previous picks under v1.0 not included — methodology changed.",
+    "model_version": "2.0",
+    "from_round": 17
+  },
+  "picks": []
+}

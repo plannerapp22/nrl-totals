@@ -1,0 +1,9 @@
+{
+  "_meta": {
+    "description": "H2H records for 2025-26 measured against actual market line. Updated after each round.",
+    "source": "ausSportsBetting.com",
+    "last_updated": "2026-06-19",
+    "weighting": { "2026": 1.0, "2025": 0.6 }
+  },
+  "matchups": {}
+}

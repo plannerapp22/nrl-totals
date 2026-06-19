@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "description": "Venue scoring tendencies. Review once at season start. Update only if a new pattern emerges mid-season.",
+    "last_reviewed": "2026-06-19"
+  },
+  "venues": {
+    "accor_stadium":          { "notes": "", "scoring_tendency": "neutral" },
+    "allianz_stadium":        { "notes": "", "scoring_tendency": "neutral" },
+    "aami_park":              { "notes": "", "scoring_tendency": "neutral" },
+    "mcdonald_jones_stadium": { "notes": "", "scoring_tendency": "neutral" },
+    "cbus_super_stadium":     { "notes": "", "scoring_tendency": "neutral" },
+    "campbelltown_sports":    { "notes": "", "scoring_tendency": "neutral" },
+    "one_nz_stadium":         { "notes": "", "scoring_tendency": "neutral" },
+    "4pines_park":            { "notes": "", "scoring_tendency": "neutral" },
+    "suncorp_stadium":        { "notes": "", "scoring_tendency": "neutral" },
+    "commbank_stadium":       { "notes": "", "scoring_tendency": "neutral" },
+    "leichhardt_oval":        { "notes": "", "scoring_tendency": "neutral" },
+    "bluebets_stadium":       { "notes": "", "scoring_tendency": "neutral" }
+  }
+}

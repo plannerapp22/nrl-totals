@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "description": "2026 season averages per team. Updated incrementally after each round — add last round result, do not recalculate from scratch.",
+    "last_updated": "2026-06-19",
+    "round": 16
+  },
+  "teams": {
+    "broncos":         { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "raiders":         { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "bulldogs":        { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "sharks":          { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "titans":          { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "sea_eagles":      { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "storm":           { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "knights":         { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "cowboys":         { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "eels":            { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "panthers":        { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "rabbitos":        { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "dragons":         { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "roosters":        { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "warriors":        { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "tigers":          { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } },
+    "dolphins":        { "avg_scored": 0, "avg_conceded": 0, "games": 0, "over_count": 0, "under_count": 0, "home": { "avg_scored": 0, "avg_conceded": 0, "games": 0 }, "away": { "avg_scored": 0, "avg_conceded": 0, "games": 0 } }
+  }
+}

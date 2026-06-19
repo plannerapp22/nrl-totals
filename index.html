@@ -110,6 +110,23 @@
   .multi-odds-value{font-family:'Oswald',sans-serif;font-size:22px;color:var(--butter)}
   .multi-odds-sub{font-size:11px;color:var(--waste);margin-top:2px}
   .multi-caveat{background:rgba(255,255,255,0.06);border-radius:4px;padding:12px 16px;font-size:12px;color:rgba(241,231,206,0.6);margin-top:16px;line-height:1.6}
+  /* CONFIDENCE CURVES */
+  .curve-table{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:12px}
+  .curve-table th{font-family:'Roboto Mono',monospace;font-size:9px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;padding:5px 8px;border-bottom:1px solid rgba(255,255,255,0.1);text-align:right;white-space:nowrap}
+  .curve-table th:first-child{text-align:left}
+  .curve-table td{padding:4px 8px;font-family:'Roboto Mono',monospace;font-size:12px;color:rgba(241,231,206,0.7);text-align:right;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .curve-table td:first-child{text-align:left;color:var(--waste);font-size:11px}
+  .curve-pick{background:rgba(21,128,61,0.18);border-left:2px solid var(--tl-bet)}
+  .curve-pick td{color:rgba(241,231,206,0.95)!important}
+  .curve-100{color:var(--tl-strong)!important;font-weight:700}
+  .curve-90{color:var(--tl-bet)!important;font-weight:600}
+  .curve-85{color:var(--butter)!important}
+  .curve-muted{color:rgba(241,231,206,0.35)!important}
+  .curve-note{font-size:11px;color:rgba(241,231,206,0.45);margin-top:4px;font-style:italic}
+  .multi-leg-tag{display:inline-block;font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;margin-left:6px;vertical-align:middle}
+  .tag-100{background:var(--tl-strong);color:white}
+  .tag-85{background:var(--tl-bet);color:white}
+  .tag-flat{background:rgba(107,114,128,0.3);color:var(--waste)}
   .season-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(33,28,20,0.06)}
   .season-table th{background:var(--nrl-dark);color:var(--waste);font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;text-align:right}
   .season-table th:first-child{text-align:left}
@@ -488,8 +505,8 @@
 <!-- ════════════════════════════════════════════════════ -->
 <div class="multi-section">
   <div class="multi-header">
-    <div class="multi-title">Multi Recommendations</div>
-    <div class="multi-subtitle">Best single: Storm v Raiders. Adjusted line multi: 3 legs at high confidence. Optional 4th leg with lower conviction noted separately.</div>
+    <div class="multi-title">Multi Recommendations — Round 16</div>
+    <div class="multi-subtitle">Each leg shows the full confidence curve across NRL scoring increments. Pick the adjusted line your bookmaker prices — the table shows what confidence you're buying at each step.</div>
   </div>
   <div class="multi-body">
 
@@ -504,110 +521,208 @@
 
     <div class="multi-legs-label">Adjusted Line Multi — 3 to 5 Legs (~85%+ per leg)</div>
 
-    <div style="font-size:13px;color:rgba(241,231,206,0.65);margin-bottom:14px;line-height:1.6;">
-      Each leg uses an adjusted (alternate) line set with enough buffer to hit at 85%+ historically. For UNDER bets, the adjusted line moves UP above the standard — giving more room for the total to land under. For OVER bets, the adjusted line moves DOWN below the standard. Both directions increase confidence and lower odds per leg. Number of legs varies each round — this round has 5 qualifying legs. Start with the first 3 for the best odds-to-confidence ratio. Verify with your bookmaker before placing — alternate totals markets are not available everywhere.
+    <div style="font-size:13px;color:rgba(241,231,206,0.65);margin-bottom:16px;line-height:1.6;">
+      Each leg shows a confidence curve across NRL scoring increments — how often the H2H results would have cleared the adjusted line at each buffer. For UNDER bets the line moves UP (more room). For OVER bets the line moves DOWN (lower threshold). The highlighted row is the recommended pick: best balance of confidence and usable odds. Verify all alternate lines with your bookmaker before placing.
     </div>
 
+    <!-- LEG 1 -->
     <div class="multi-leg">
-      <div class="multi-leg-label">Leg 1 · Adjusted Under</div>
-      <div class="multi-leg-pick">Storm v Raiders — Under 53</div>
-      <div class="multi-leg-detail">Adjusted UP from 50.5 to 53 (2.5 points above standard). For an under bet, moving the line above the standard gives more room — the total needs to come in under 53, not under 50.5. All 7 recent H2H results sit below 53 (maximum was 50, well clear). The extra buffer is what creates confidence. Expect approx $1.15–$1.20 on alternate markets.</div>
-      <div class="multi-leg-conf">7/7 H2H · 100% · Est. $1.15–$1.20</div>
+      <div class="multi-leg-label">Leg 1 · Adjusted Under <span class="multi-leg-tag tag-100">Flat 100%</span></div>
+      <div class="multi-leg-pick">Storm v Raiders</div>
+      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 50.5. H2H maximum was 50 — the curve is flat at 100% from the standard line upward. Pick whichever adjusted line your bookmaker prices well. Under 52–54 is the sweet spot for usable odds.</div>
+      <table class="curve-table">
+        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+        <tbody>
+          <tr><td>+0 (standard)</td><td>50.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.85–$2.00</td></tr>
+          <tr><td>+2 / conversion</td><td>52.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.40–$1.55</td></tr>
+          <tr class="curve-pick"><td>+4 / try ← pick</td><td>54.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.18–$1.28</td></tr>
+          <tr><td>+6 / converted try</td><td>56.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
+          <tr><td>+8 / try + conv</td><td>58.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.04–$1.08</td></tr>
+          <tr><td>+12 / 2 conv tries</td><td>62.5</td><td>7/7</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
+        </tbody>
+      </table>
+      <div class="curve-note">Flat curve — any line above 50.5 is 100% on the available sample (n=7). Pick the line your bookmaker prices at $1.15–$1.25.</div>
     </div>
 
+    <!-- LEG 2 -->
     <div class="multi-leg">
-      <div class="multi-leg-label">Leg 2 · Adjusted Under</div>
-      <div class="multi-leg-pick">Tigers v Dolphins — Under 54</div>
-      <div class="multi-leg-detail">Adjusted UP from 51.5 to 54 (2.5 points above standard). All 4 recent H2H results sit below 54: 48, 47, 42, 36. Moving the line above standard gives more room — roughly 10 points of buffer on the H2H average (43.2 vs line 54). Expect approx $1.15–$1.25 on alternate markets.</div>
-      <div class="multi-leg-conf">4/4 H2H · 100% · Est. $1.15–$1.25</div>
+      <div class="multi-leg-label">Leg 2 · Adjusted Under <span class="multi-leg-tag tag-100">Flat 100%</span></div>
+      <div class="multi-leg-pick">Tigers v Dolphins</div>
+      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 51.5. All 4 H2H results sit below the standard — curve is flat at 100% from +0. Average combined 43.2, giving roughly 8–10 points of margin at most adjusted lines. Small sample (n=4).</div>
+      <table class="curve-table">
+        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+        <tbody>
+          <tr><td>+0 (standard)</td><td>51.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.90–$2.10</td></tr>
+          <tr><td>+2 / conversion</td><td>53.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.50–$1.65</td></tr>
+          <tr class="curve-pick"><td>+4 / try ← pick</td><td>55.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.18–$1.28</td></tr>
+          <tr><td>+6 / converted try</td><td>57.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
+          <tr><td>+8 / try + conv</td><td>59.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.04–$1.08</td></tr>
+          <tr><td>+12 / 2 conv tries</td><td>63.5</td><td>4/4</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
+        </tbody>
+      </table>
+      <div class="curve-note">Flat curve from n=4. Small sample — the pattern is clear but not statistically deep. Pick $1.15–$1.25 range.</div>
     </div>
 
+    <!-- LEG 3 -->
     <div class="multi-leg">
-      <div class="multi-leg-label">Leg 3 · Adjusted Over</div>
-      <div class="multi-leg-pick">Roosters v Sharks — Over 46.5</div>
-      <div class="multi-leg-detail">Adjusted from 50.5 up to 46.5 (moving the line down by 4 for an over bet). All four regular-season H2H results in 2025–26 went over 46.5: 58, 49, 56, 68. 4 of 4 (100%). The 2025 finals game (30 combined) is excluded — finals context differs structurally and shouldn't be used as a pattern signal for regular-season betting. Expect approx $1.10–$1.20 on alternate markets. Check availability.</div>
-      <div class="multi-leg-conf">~100% (4/4 regular season H2H)</div>
+      <div class="multi-leg-label">Leg 3 · Adjusted Over <span class="multi-leg-tag tag-85">100% at -2</span></div>
+      <div class="multi-leg-pick">Roosters v Sharks</div>
+      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 50.5. At the standard, 3/4 hit (49 narrowly misses). Move line down by 2 (to 48.5) and it's 4/4. The 2025 finals game (30 combined) is excluded — finals context is structurally different and not a valid pattern signal. H2H results used: 49, 56, 58, 68.</div>
+      <table class="curve-table">
+        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+        <tbody>
+          <tr><td>-0 (standard)</td><td>50.5</td><td>3/4</td><td class="curve-85">75%</td><td>$1.60–$1.80</td></tr>
+          <tr class="curve-pick"><td>-2 / conversion ← pick</td><td>48.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.40–$1.55</td></tr>
+          <tr><td>-4 / try</td><td>46.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.20–$1.35</td></tr>
+          <tr><td>-6 / converted try</td><td>44.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.10–$1.18</td></tr>
+          <tr><td>-8 / try + conv</td><td>42.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.05–$1.10</td></tr>
+          <tr><td>-12 / 2 conv tries</td><td>38.5</td><td>4/4</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
+        </tbody>
+      </table>
+      <div class="curve-note">Over 48.5 is the best value point — 100% on 4 regular-season meetings at reasonable odds. The extra buffer to -4 only adds $0.10–$0.20 per leg for the same hit rate.</div>
     </div>
 
     <div class="multi-odds-row">
       <div class="multi-odds-block">
-        <div class="multi-odds-label">3-Leg / 5-Leg Odds</div>
-        <div class="multi-odds-value">~$1.65 / ~$1.95</div>
-        <div class="multi-odds-sub">3 legs at ~$1.18 avg · 5 legs add lower-odds legs</div>
+        <div class="multi-odds-label">3-Leg Est. Odds</div>
+        <div class="multi-odds-value">~$1.70–$2.10</div>
+        <div class="multi-odds-sub">Varies by lines you pick · $1.23 avg at sweet spot</div>
       </div>
       <div class="multi-odds-block">
         <div class="multi-odds-label">Confidence Each Leg</div>
         <div class="multi-odds-value">85–100%</div>
-        <div class="multi-odds-sub">Legs 1–3 highest value · 4–5 conservative</div>
+        <div class="multi-odds-sub">Legs 1–2 flat 100% · Leg 3 100% at -2</div>
       </div>
       <div class="multi-odds-block">
-        <div class="multi-odds-label">All 3 / All 5 Hitting</div>
-        <div class="multi-odds-value">~72–85% / ~55–70%</div>
+        <div class="multi-odds-label">All 3 Hitting</div>
+        <div class="multi-odds-value">~72–85%</div>
         <div class="multi-odds-sub">Compounded confidence est.</div>
       </div>
     </div>
 
-    <div class="multi-legs-label" style="margin-top:20px">Legs 4–5 — Extending the Multi (85%+ threshold, lower odds)</div>
+    <div class="multi-legs-label" style="margin-top:20px">Legs 4–5 — Extending the Multi (85%+ threshold at wider buffer)</div>
 
+    <!-- LEG 4 -->
     <div class="multi-leg multi-leg-weak">
-      <div class="multi-leg-label">Leg 4 · 86% (6/7 H2H) · Adjusted +6.5 from standard</div>
-      <div class="multi-leg-pick">Knights v Dragons — Under 55</div>
-      <div class="multi-leg-detail">Adjusted UP from 48.5 to 55 (6.5 points above standard). For an under bet, the higher line gives more room — 6 of the last 7 H2H results sit below 55 (only the 2022 combined 60 misses). The generous buffer is why odds are conservative (est. $1.10–$1.15) rather than value. Average combined 42.3 means roughly 12 points of margin at this adjusted line. Check availability of Under 55 on alternate market.</div>
-      <div class="multi-leg-conf">~86% · 6/7 H2H · Est. $1.10–$1.15</div>
+      <div class="multi-leg-label">Leg 4 · Adjusted Under <span class="multi-leg-tag tag-85">86% at +6</span></div>
+      <div class="multi-leg-pick">Knights v Dragons</div>
+      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 48.5. The curve climbs gradually — hits 86% at +6, reaches 100% at +12. H2H results: 26, 35, 37, 40, 44, 54, 60. Two outliers (54, 60) drive the pattern — the average (42.3) sits well below line. Directional conflict: form model (50.8) leans over, H2H drives this under call.</div>
+      <table class="curve-table">
+        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+        <tbody>
+          <tr><td>+0 (standard)</td><td>48.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.50–$1.65</td></tr>
+          <tr><td>+2 / conversion</td><td>50.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.35–$1.50</td></tr>
+          <tr><td>+4 / try</td><td>52.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.25–$1.35</td></tr>
+          <tr class="curve-pick"><td>+6 / converted try ← 85% threshold</td><td>54.5</td><td>6/7</td><td class="curve-90">86%</td><td>$1.10–$1.18</td></tr>
+          <tr><td>+8 / try + conv</td><td>56.5</td><td>6/7</td><td class="curve-90">86%</td><td>$1.06–$1.12</td></tr>
+          <tr><td>+12 / 2 conv tries</td><td>60.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.03–$1.06</td></tr>
+        </tbody>
+      </table>
+      <div class="curve-note">Need a full converted try of buffer to clear 85%. The 100% mark requires +12 — odds at that point become negligible. Best pick: Under 54.5 at 86%.</div>
     </div>
 
+    <!-- LEG 5 -->
     <div class="multi-leg multi-leg-weak">
-      <div class="multi-leg-label">Leg 5 · 86% (6/7 H2H) · Adjusted +8.5 from standard</div>
-      <div class="multi-leg-pick">Bulldogs v Sea Eagles — Under 57</div>
-      <div class="multi-leg-detail">Adjusted line: 57. Standard line: 48.5. Six of the last seven H2H results sit below 57 — only the 2023 combined 66 misses. At 8.5 points above the standard line, odds will be very low (est. $1.05–$1.08). This leg adds minimal return but a genuine 86% hit rate if you want maximum legs. Average combined 45.3. Treat this as insurance, not value. No further legs are available this round at 85%+ — remaining matchups either don’t qualify or require adjusted lines so far from standard that odds become negligible.</div>
-      <div class="multi-leg-conf">~86% · 6/7 H2H · Est. $1.05–$1.08</div>
+      <div class="multi-leg-label">Leg 5 · Adjusted Under <span class="multi-leg-tag tag-85">86% at +8</span></div>
+      <div class="multi-leg-pick">Bulldogs v Sea Eagles</div>
+      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 48.5. Needs 8 points of buffer to reach 86%. H2H average 45.3 — the outlier (approx 66) is the only result keeping this below 100% at reasonable buffers. Never reaches 100% inside +12.</div>
+      <table class="curve-table">
+        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+        <tbody>
+          <tr><td>+0 (standard)</td><td>48.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.50–$1.65</td></tr>
+          <tr><td>+2 / conversion</td><td>50.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.35–$1.50</td></tr>
+          <tr><td>+4 / try</td><td>52.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.25–$1.35</td></tr>
+          <tr><td>+6 / converted try</td><td>54.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.15–$1.22</td></tr>
+          <tr class="curve-pick"><td>+8 / try + conv ← 85% threshold</td><td>56.5</td><td>6/7</td><td class="curve-90">86%</td><td>$1.06–$1.12</td></tr>
+          <tr><td>+12 / 2 conv tries</td><td>60.5</td><td>6/7</td><td class="curve-90">86%</td><td class="curve-muted">$1.03–$1.05</td></tr>
+          <tr><td>+18 / 3 conv tries</td><td>66.5</td><td>7/7</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
+        </tbody>
+      </table>
+      <div class="curve-note">Needs two converted tries of buffer to reach 86%. Odds at Under 56.5 are low (~$1.08). Treat as insurance only — minimal return, genuine 86% pattern.</div>
     </div>
 
 
     <div style="margin-top:28px;border-top:1px solid rgba(255,255,255,0.1);padding-top:24px">
       <div class="multi-legs-label" style="color:var(--tl-strong);margin-top:0">Hyperconservative Multi — 3 to 4 Legs (90%+ Each Leg)</div>
       <div style="font-size:13px;color:rgba(241,231,206,0.65);margin-bottom:16px;line-height:1.6;">
-        Each leg uses an adjusted line where 90%+ of all available H2H data would have hit. Number of usable legs varies each round — this round has 3 strong legs and 1 borderline 4th. Legs 5 and 6 would require adjusted lines so far from the standard that bookmaker odds become negligible (e.g. Under 61 or Under 67). When those conditions exist, the round only supports 3–4 hyperconservative legs. Odds per leg are lower ($1.05–$1.35) but confidence is near-maximum. Best used as a stake-protection play — smaller outlay, near-certain hit rate.
+        Legs use adjusted lines where 90%+ of H2H data would have hit. Confidence is near-maximum; odds per leg are lower. Best used as a stake-protection play — smaller outlay, near-certainty hit rate. Confidence curves below show full range so you can match to whatever your bookmaker prices.
       </div>
 
+      <!-- HYPER LEG 1 -->
       <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
-        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 1 · 100% hit rate (7/7)</div>
-        <div class="multi-leg-pick">Storm v Raiders — Under 51</div>
-        <div class="multi-leg-detail">Adjusted line: 51. Standard line: 50.5. Every one of the last seven H2H combined scores sits below 51 (maximum was 50 in 2023). The adjusted line adds only 0.5 to the standard — which means low odds (est. $1.05–$1.10 on alternate markets). But it is the most historically bulletproof leg available this round. Average combined: 41.1. The chance of a seventh-straight bust needs seven things to go wrong simultaneously.</div>
-        <div class="multi-leg-conf" style="background:var(--tl-strong)">7/7 H2H · 100%</div>
+        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 1 · Storm v Raiders — Adjusted Under <span class="multi-leg-tag tag-100">100% from standard</span></div>
+        <div class="multi-leg-pick">Pick any line above 50.5</div>
+        <div class="multi-leg-detail" style="margin-bottom:8px">Every H2H result clears the standard line. Recommended: Under 51–52 for 100% at usable odds. Under 51.5 is the safest hyperconservative pick — just above standard, maximum historical certainty.</div>
+        <table class="curve-table">
+          <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+          <tbody>
+            <tr class="curve-pick"><td>+0.5 ← hyper pick</td><td>51.0</td><td>7/7</td><td class="curve-100">100%</td><td>$1.55–$1.70</td></tr>
+            <tr><td>+2 / conversion</td><td>52.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.40–$1.55</td></tr>
+            <tr><td>+6 / converted try</td><td>56.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
+            <tr><td>+12 / 2 conv tries</td><td>62.5</td><td>7/7</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
+          </tbody>
+        </table>
       </div>
 
+      <!-- HYPER LEG 2 -->
       <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
-        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 2 · 100% hit rate (4/4)</div>
-        <div class="multi-leg-pick">Tigers v Dolphins — Under 53</div>
-        <div class="multi-leg-detail">Adjusted UP from 51.5 to 53 (1.5 points above standard). All four H2H results sit below 53: 48, 47, 42, 36. Moving the under line above the standard gives the bet more room — a conservative under play, not a speculative one. Average combined 43.2, giving roughly 10 points of margin at this line. Odds at 1.5 pts above standard: est. $1.15–$1.20.</div>
-        <div class="multi-leg-conf" style="background:var(--tl-strong)">4/4 H2H · 100%</div>
+        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 2 · Tigers v Dolphins — Adjusted Under <span class="multi-leg-tag tag-100">100% from standard</span></div>
+        <div class="multi-leg-pick">Pick any line above 51.5</div>
+        <div class="multi-leg-detail" style="margin-bottom:8px">Flat curve from n=4. Average combined 43.2. Any adjusted line is 100%. Under 53 balances odds and confidence — 1.5 points above standard.</div>
+        <table class="curve-table">
+          <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+          <tbody>
+            <tr class="curve-pick"><td>+1.5 ← hyper pick</td><td>53.0</td><td>4/4</td><td class="curve-100">100%</td><td>$1.55–$1.70</td></tr>
+            <tr><td>+4 / try</td><td>55.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.18–$1.28</td></tr>
+            <tr><td>+6 / converted try</td><td>57.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
+          </tbody>
+        </table>
       </div>
 
+      <!-- HYPER LEG 3 -->
       <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
-        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 3 · 100% hit rate (4/4 reg season)</div>
-        <div class="multi-leg-pick">Roosters v Sharks — Over 48</div>
-        <div class="multi-leg-detail">Adjusted line: 48. Standard line: 50.5 (moving down by 2.5 for an over bet). All four regular-season H2H meetings in 2024–26 went over 48: 68, 58, 56, 49. The closest (49) clears by one point. The 2025 finals game (30 combined) is the only miss — excluded here as finals context produces structurally different scoring. Odds on Over 48 when standard line is 50.5 est. $1.15–$1.25. Check bookmaker availability for over at a lower line.</div>
-        <div class="multi-leg-conf" style="background:var(--tl-strong)">4/4 regular season H2H · 100%</div>
+        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 3 · Roosters v Sharks — Adjusted Over <span class="multi-leg-tag tag-100">100% at -2</span></div>
+        <div class="multi-leg-pick">Over 48.5 (line down 2 from standard)</div>
+        <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 50.5. Move down 2 points to reach 100% on 4 regular-season H2H games. The 2025 finals game (30 combined) is excluded. Recommended: Over 48.5.</div>
+        <table class="curve-table">
+          <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+          <tbody>
+            <tr><td>-0 (standard)</td><td>50.5</td><td>3/4</td><td class="curve-85">75%</td><td>$1.60–$1.80</td></tr>
+            <tr class="curve-pick"><td>-2 / conversion ← hyper pick</td><td>48.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.40–$1.55</td></tr>
+            <tr><td>-4 / try</td><td>46.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.18–$1.30</td></tr>
+            <tr><td>-8 / try + conv</td><td>42.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.05–$1.10</td></tr>
+          </tbody>
+        </table>
       </div>
 
+      <!-- HYPER LEG 4 (optional) -->
       <div class="multi-leg multi-leg-weak" style="background:rgba(220,70,54,0.07);border-color:rgba(242,193,78,0.3)">
-        <div class="multi-leg-label" style="color:var(--butter)">Optional Leg 4 · Caveat applies</div>
-        <div class="multi-leg-pick">Titans v Panthers — Under 57</div>
-        <div class="multi-leg-detail">Adjusted line: 57. Standard line: 50.5. All four available H2H results sit under 57 (highest: 56 in 2025 R22 — misses by 1 point). Mathematically 4/4 = 100%, but the small sample is bimodal: two games came in at 22 and 30 (low-scoring grind), two at 54 and 56 (open, high-scoring). A fifth game like those could easily hit 57+. Use as a 4th leg only if comfortable with the pattern uncertainty. Odds est. $1.08–$1.12.</div>
-        <div class="multi-leg-conf">4/4 · 100% · small sample — use with caution</div>
+        <div class="multi-leg-label" style="color:var(--butter)">Optional Leg 4 · Titans v Panthers — Adjusted Under <span class="multi-leg-tag tag-flat">Bimodal — caveat</span></div>
+        <div class="multi-leg-pick">Under 56.5 (line up 6 from standard)</div>
+        <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 50.5. H2H: 22, 30, 54, 56 (n=4). The curve reaches 100% at +6 — but note the bimodal pattern: two games in the 20s–30s, two in the 54–56 range. A future game in the 57–62 range is plausible. Use as a 4th leg only if comfortable with the sample structure.</div>
+        <table class="curve-table">
+          <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
+          <tbody>
+            <tr><td>+0 (standard)</td><td>50.5</td><td>2/4</td><td class="curve-muted">50%</td><td>$1.85–$2.00</td></tr>
+            <tr><td>+4 / try</td><td>54.5</td><td>3/4</td><td class="curve-85">75%</td><td>$1.20–$1.35</td></tr>
+            <tr class="curve-pick"><td>+6 / converted try ← pick</td><td>56.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
+            <tr><td>+8 / try + conv</td><td>58.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.04–$1.08</td></tr>
+            <tr><td>+12 / 2 conv tries</td><td>62.5</td><td>4/4</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
+          </tbody>
+        </table>
+        <div class="curve-note">Bimodal H2H — two low-scoring clusters, two high. The 100% at +6 is sitting right at the top of the high-scoring cluster. A fifth game in the 57–65 range busts this. Treat as an optional, risk-acknowledged 4th leg only.</div>
       </div>
 
       <div class="multi-odds-row" style="margin-top:16px">
         <div class="multi-odds-block">
           <div class="multi-odds-label">3-Leg / 4-Leg Odds</div>
-          <div class="multi-odds-value" style="color:var(--tl-strong)">~$1.60 / ~$1.75</div>
-          <div class="multi-odds-sub">3 legs est. $1.08·$1.38·$1.20 · 4th adds ~$1.10</div>
+          <div class="multi-odds-value" style="color:var(--tl-strong)">~$1.55–$2.00</div>
+          <div class="multi-odds-sub">Depends on lines chosen · ~$1.55 at tightest, ~$2.00 with room</div>
         </div>
         <div class="multi-odds-block">
           <div class="multi-odds-label">Confidence Each Leg</div>
           <div class="multi-odds-value" style="color:var(--tl-strong)">~100%</div>
-          <div class="multi-odds-sub">Legs 1–3 cleanest · Leg 4 small sample</div>
+          <div class="multi-odds-sub">Legs 1–3 clean · Leg 4 bimodal caveat</div>
         </div>
         <div class="multi-odds-block">
           <div class="multi-odds-label">All 3 / All 4 Hitting</div>
@@ -618,14 +733,13 @@
 
       <div class="multi-caveat" style="margin-top:12px">
         <strong style="font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--cherry);">Hyperconservative caveat</strong><br>
-        100% hit rate from 4–7 games is not a statistical certainty — it's a strong pattern in a small sample. The purpose of this multi is to maximise hit probability at the cost of returns. Combined odds (~$1.60 for 3 legs) mean you'd need to stake significantly to generate meaningful profit. Best treated as low-variance, near-certainty coverage rather than a value play. Verify all adjusted line prices with your bookmaker before placing.
+        100% hit rate from 4–7 games is not a statistical certainty — it is a strong pattern in a small sample. The purpose of this multi is to maximise hit probability at the cost of returns. Verify all adjusted line prices with your bookmaker before placing.
       </div>
     </div>
 
-
     <div class="multi-caveat">
       <strong style="font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--butter);">Before placing</strong><br>
-      Adjusted (alternate) totals markets are not available at all bookmakers. Prices listed are estimates — actual prices vary by platform and may not match. The H2H sample sizes here are small (4–7 games), not 50-game certainties. Check team lists Thursday/Friday — absences to key players can shift expectations. The model does not guarantee outcomes. Never bet more than you're comfortable losing.
+      Adjusted (alternate) totals markets are not available at all bookmakers. Prices listed are estimates — actual prices vary by platform and may not match. H2H samples are small (4–7 games), not 50-game certainties. Check team lists Thursday/Friday — absences to key halves, fullback, or starters can shift the model. The confidence curve shows historical hit rates, not guaranteed future outcomes. Never bet more than you're comfortable losing.
     </div>
 
   </div>

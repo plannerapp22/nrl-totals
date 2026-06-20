@@ -1,6 +1,6 @@
 {
   "round": 16,
-  "generated_at": "2026-06-20T04:47:51.103170Z",
+  "generated_at": "2026-06-20T05:50:08.293422Z",
   "xlsx_source": "nrl (1).xlsx",
   "games": [
     {
@@ -15,17 +15,30 @@
         "knights": {
           "scored_avg": 20.9,
           "conceded_avg": 26.3,
+          "home_scored_avg": 19.6,
+          "home_conceded_avg": 27.6,
+          "away_scored_avg": 22.1,
+          "away_conceded_avg": 25.1,
           "gp": 13,
-          "gp_prev": 24
+          "gp_prev": 24,
+          "home_gp": 6,
+          "away_gp": 7
         },
         "dragons": {
           "scored_avg": 17.6,
           "conceded_avg": 29.3,
+          "home_scored_avg": 18.1,
+          "home_conceded_avg": 29.9,
+          "away_scored_avg": 17.2,
+          "away_conceded_avg": 28.8,
           "gp": 13,
-          "gp_prev": 24
+          "gp_prev": 24,
+          "home_gp": 6,
+          "away_gp": 7
         }
       },
-      "model_expected": 47.1,
+      "model_expected": 46.6,
+      "venue_split_used": true,
       "h2h": [
         {
           "date": "2022-04-17",
@@ -224,13 +237,13 @@
       "verdict": {
         "direction": "UNDER",
         "tier": "LEAN",
-        "confidence_pct": 55,
-        "form_gap": -1.4,
+        "confidence_pct": 62,
+        "form_gap": -1.9,
         "h2h_gap": -8.3,
         "signal_conflict": false,
-        "score": 2,
+        "score": 3,
         "score_breakdown": {
-          "sf": 0,
+          "sf": 1,
           "sh": 2,
           "sr": 0,
           "cp": 0
@@ -257,17 +270,30 @@
         "tigers": {
           "scored_avg": 21.8,
           "conceded_avg": 27.3,
+          "home_scored_avg": 24.0,
+          "home_conceded_avg": 25.3,
+          "away_scored_avg": 19.1,
+          "away_conceded_avg": 29.8,
           "gp": 13,
-          "gp_prev": 24
+          "gp_prev": 24,
+          "home_gp": 8,
+          "away_gp": 5
         },
         "dolphins": {
           "scored_avg": 29.6,
           "conceded_avg": 22.6,
+          "home_scored_avg": 31.3,
+          "home_conceded_avg": 24.1,
+          "away_scored_avg": 27.8,
+          "away_conceded_avg": 21.1,
           "gp": 13,
-          "gp_prev": 24
+          "gp_prev": 24,
+          "home_gp": 7,
+          "away_gp": 6
         }
       },
-      "model_expected": 50.6,
+      "model_expected": 49.1,
+      "venue_split_used": true,
       "h2h": [
         {
           "date": "2023-08-19",
@@ -456,14 +482,14 @@
       ],
       "verdict": {
         "direction": "UNDER",
-        "tier": "LEAN",
-        "confidence_pct": 62,
-        "form_gap": -0.9,
+        "tier": "BET",
+        "confidence_pct": 70,
+        "form_gap": -2.4,
         "h2h_gap": -8.3,
         "signal_conflict": false,
-        "score": 3,
+        "score": 4,
         "score_breakdown": {
-          "sf": 0,
+          "sf": 1,
           "sh": 2,
           "sr": 1,
           "cp": 0
@@ -490,17 +516,30 @@
         "titans": {
           "scored_avg": 20.4,
           "conceded_avg": 28.1,
+          "home_scored_avg": 18.8,
+          "home_conceded_avg": 26.0,
+          "away_scored_avg": 21.6,
+          "away_conceded_avg": 29.6,
           "gp": 13,
-          "gp_prev": 24
+          "gp_prev": 24,
+          "home_gp": 4,
+          "away_gp": 9
         },
         "panthers": {
           "scored_avg": 28.5,
           "conceded_avg": 16.3,
+          "home_scored_avg": 25.8,
+          "home_conceded_avg": 15.3,
+          "away_scored_avg": 30.7,
+          "away_conceded_avg": 17.1,
           "gp": 13,
-          "gp_prev": 27
+          "gp_prev": 27,
+          "home_gp": 6,
+          "away_gp": 7
         }
       },
-      "model_expected": 46.7,
+      "model_expected": 46.3,
+      "venue_split_used": true,
       "h2h": [
         {
           "date": "2022-04-29",
@@ -691,7 +730,7 @@
         "direction": "UNDER",
         "tier": "BET",
         "confidence_pct": 70,
-        "form_gap": -3.8,
+        "form_gap": -4.2,
         "h2h_gap": -10.0,
         "signal_conflict": false,
         "score": 4,
@@ -723,17 +762,30 @@
         "bulldogs": {
           "scored_avg": 20.3,
           "conceded_avg": 21.7,
+          "home_scored_avg": 22.8,
+          "home_conceded_avg": 18.3,
+          "away_scored_avg": 17.9,
+          "away_conceded_avg": 24.9,
           "gp": 13,
-          "gp_prev": 26
+          "gp_prev": 26,
+          "home_gp": 6,
+          "away_gp": 7
         },
         "sea eagles": {
           "scored_avg": 25.5,
           "conceded_avg": 20.8,
+          "home_scored_avg": 26.2,
+          "home_conceded_avg": 20.2,
+          "away_scored_avg": 24.8,
+          "away_conceded_avg": 21.5,
           "gp": 13,
-          "gp_prev": 24
+          "gp_prev": 24,
+          "home_gp": 7,
+          "away_gp": 6
         }
       },
-      "model_expected": 44.1,
+      "model_expected": 43.7,
+      "venue_split_used": true,
       "h2h": [
         {
           "date": "2022-03-27",
@@ -949,14 +1001,14 @@
       ],
       "verdict": {
         "direction": "UNDER",
-        "tier": "LEAN",
-        "confidence_pct": 62,
-        "form_gap": -4.4,
+        "tier": "BET",
+        "confidence_pct": 70,
+        "form_gap": -4.8,
         "h2h_gap": -3.2,
         "signal_conflict": false,
-        "score": 3,
+        "score": 4,
         "score_breakdown": {
-          "sf": 2,
+          "sf": 3,
           "sh": 1,
           "sr": 0,
           "cp": 0
@@ -983,17 +1035,30 @@
         "warriors": {
           "scored_avg": 24.7,
           "conceded_avg": 19.1,
+          "home_scored_avg": 23.9,
+          "home_conceded_avg": 17.6,
+          "away_scored_avg": 25.6,
+          "away_conceded_avg": 20.9,
           "gp": 13,
-          "gp_prev": 25
+          "gp_prev": 25,
+          "home_gp": 7,
+          "away_gp": 6
         },
         "cowboys": {
           "scored_avg": 23.4,
           "conceded_avg": 27.0,
+          "home_scored_avg": 25.5,
+          "home_conceded_avg": 28.1,
+          "away_scored_avg": 21.3,
+          "away_conceded_avg": 25.9,
           "gp": 14,
-          "gp_prev": 24
+          "gp_prev": 24,
+          "home_gp": 7,
+          "away_gp": 7
         }
       },
-      "model_expected": 47.1,
+      "model_expected": 44.3,
+      "venue_split_used": true,
       "h2h": [
         {
           "date": "2022-04-08",
@@ -1200,21 +1265,27 @@
       ],
       "verdict": {
         "direction": "UNDER",
-        "tier": "WATCH",
-        "confidence_pct": 50,
-        "form_gap": -2.4,
+        "tier": "LEAN",
+        "confidence_pct": 62,
+        "form_gap": -5.2,
         "h2h_gap": -2.0,
         "signal_conflict": false,
-        "score": 1,
+        "score": 3,
         "score_breakdown": {
-          "sf": 1,
+          "sf": 3,
           "sh": 0,
           "sr": 0,
           "cp": 0
         }
       },
-      "multi_qualifies": false,
-      "multi_first_buffer": null
+      "multi_qualifies": true,
+      "multi_first_buffer": {
+        "buffer": 8,
+        "adj_line": 57.5,
+        "hits": 6,
+        "n": 6,
+        "pct": 1.0
+      }
     },
     {
       "home": "Melbourne Storm",
@@ -1228,17 +1299,30 @@
         "storm": {
           "scored_avg": 26.2,
           "conceded_avg": 21.8,
+          "home_scored_avg": 27.8,
+          "home_conceded_avg": 19.0,
+          "away_scored_avg": 24.4,
+          "away_conceded_avg": 24.9,
           "gp": 14,
-          "gp_prev": 27
+          "gp_prev": 27,
+          "home_gp": 7,
+          "away_gp": 7
         },
         "raiders": {
           "scored_avg": 22.9,
           "conceded_avg": 23.7,
+          "home_scored_avg": 24.6,
+          "home_conceded_avg": 22.1,
+          "away_scored_avg": 21.0,
+          "away_conceded_avg": 25.5,
           "gp": 14,
-          "gp_prev": 26
+          "gp_prev": 26,
+          "home_gp": 7,
+          "away_gp": 7
         }
       },
-      "model_expected": 47.3,
+      "model_expected": 46.6,
+      "venue_split_used": true,
       "h2h": [
         {
           "date": "2022-04-09",
@@ -1456,7 +1540,7 @@
         "direction": "UNDER",
         "tier": "STRONG BET",
         "confidence_pct": 80,
-        "form_gap": -3.2,
+        "form_gap": -3.9,
         "h2h_gap": -9.4,
         "signal_conflict": false,
         "score": 6,
@@ -1488,17 +1572,30 @@
         "roosters": {
           "scored_avg": 26.1,
           "conceded_avg": 22.2,
+          "home_scored_avg": 27.2,
+          "home_conceded_avg": 23.8,
+          "away_scored_avg": 25.2,
+          "away_conceded_avg": 20.9,
           "gp": 13,
-          "gp_prev": 25
+          "gp_prev": 25,
+          "home_gp": 6,
+          "away_gp": 7
         },
         "sharks": {
           "scored_avg": 26.2,
           "conceded_avg": 21.3,
+          "home_scored_avg": 30.6,
+          "home_conceded_avg": 19.6,
+          "away_scored_avg": 21.0,
+          "away_conceded_avg": 23.4,
           "gp": 13,
-          "gp_prev": 27
+          "gp_prev": 27,
+          "home_gp": 8,
+          "away_gp": 5
         }
       },
-      "model_expected": 47.9,
+      "model_expected": 47.7,
+      "venue_split_used": true,
       "h2h": [
         {
           "date": "2022-05-28",
@@ -1725,7 +1822,7 @@
         "direction": "UNDER",
         "tier": "LEAN",
         "confidence_pct": 55,
-        "form_gap": -2.6,
+        "form_gap": -2.8,
         "h2h_gap": -4.0,
         "signal_conflict": false,
         "score": 2,

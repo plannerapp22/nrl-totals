@@ -69,42 +69,67 @@ def load_spreadsheet(path):
     return df
 
 
-# ── Form model ─────────────────────────────────────────────────────────────────
+# ── Form model — venue-split ───────────────────────────────────────────────────
+# Uses home stats for home team and away stats for away team in model_expected.
+# Falls back to flat average if a venue split has < MIN_VENUE_GP games.
+MIN_VENUE_GP = 3
+
 def compute_form(df, team, current_year=2026, weight_prev=0.6):
-    def season_stats(year):
-        mask = (df["Year"] == year) & (
-            (df["home_n"] == team) | (df["away_n"] == team)
-        )
-        scored, conceded = [], []
-        for _, r in df[mask].iterrows():
-            if r["home_n"] == team:
-                scored.append(r["Home Score"]); conceded.append(r["Away Score"])
-            else:
-                scored.append(r["Away Score"]); conceded.append(r["Home Score"])
-        return scored, conceded
+    """
+    Returns flat and venue-split weighted averages.
+    Weighting: current year full weight, prior year × weight_prev.
+    Venue split used in model when home_gp / away_gp >= MIN_VENUE_GP.
+    """
+    def season_venue_stats(year):
+        home_mask = (df["Year"] == year) & (df["home_n"] == team)
+        away_mask = (df["Year"] == year) & (df["away_n"] == team)
+        return {
+            "home_scored":    df[home_mask]["Home Score"].dropna().tolist(),
+            "home_conceded":  df[home_mask]["Away Score"].dropna().tolist(),
+            "away_scored":    df[away_mask]["Away Score"].dropna().tolist(),
+            "away_conceded":  df[away_mask]["Home Score"].dropna().tolist(),
+        }
 
-    sc_curr, cn_curr = season_stats(current_year)
-    sc_prev, cn_prev = season_stats(current_year - 1)
+    curr = season_venue_stats(current_year)
+    prev = season_venue_stats(current_year - 1)
 
-    if sc_curr:
-        w_curr = len(sc_curr)
-        w_prev = len(sc_prev) * weight_prev
-        total_w = w_curr + w_prev
-        if sc_prev:
-            scored_avg   = (np.mean(sc_curr)*w_curr + np.mean(sc_prev)*w_prev) / total_w
-            conceded_avg = (np.mean(cn_curr)*w_curr + np.mean(cn_prev)*w_prev) / total_w
-        else:
-            scored_avg = np.mean(sc_curr); conceded_avg = np.mean(cn_curr)
-    elif sc_prev:
-        scored_avg = np.mean(sc_prev); conceded_avg = np.mean(cn_prev)
-    else:
-        scored_avg = conceded_avg = 0.0
+    def wavg(curr_vals, prev_vals):
+        """Weighted average: curr full, prev × weight_prev."""
+        if not curr_vals and not prev_vals:
+            return 0.0
+        if not curr_vals:
+            return float(np.mean(prev_vals))
+        if not prev_vals:
+            return float(np.mean(curr_vals))
+        wc = len(curr_vals)
+        wp = len(prev_vals) * weight_prev
+        return (np.mean(curr_vals) * wc + np.mean(prev_vals) * wp) / (wc + wp)
+
+    # Flat averages (all games regardless of venue)
+    all_sc_c = curr["home_scored"]   + curr["away_scored"]
+    all_cn_c = curr["home_conceded"] + curr["away_conceded"]
+    all_sc_p = prev["home_scored"]   + prev["away_scored"]
+    all_cn_p = prev["home_conceded"] + prev["away_conceded"]
+    scored_avg   = wavg(all_sc_c, all_sc_p)
+    conceded_avg = wavg(all_cn_c, all_cn_p)
+
+    # Venue-split averages
+    home_scored_avg   = wavg(curr["home_scored"],   prev["home_scored"])
+    home_conceded_avg = wavg(curr["home_conceded"], prev["home_conceded"])
+    away_scored_avg   = wavg(curr["away_scored"],   prev["away_scored"])
+    away_conceded_avg = wavg(curr["away_conceded"], prev["away_conceded"])
 
     return {
-        "scored_avg":   round(float(scored_avg), 1),
-        "conceded_avg": round(float(conceded_avg), 1),
-        "gp":      len(sc_curr),
-        "gp_prev": len(sc_prev),
+        "scored_avg":         round(float(scored_avg),         1),
+        "conceded_avg":       round(float(conceded_avg),       1),
+        "home_scored_avg":    round(float(home_scored_avg),    1),
+        "home_conceded_avg":  round(float(home_conceded_avg),  1),
+        "away_scored_avg":    round(float(away_scored_avg),    1),
+        "away_conceded_avg":  round(float(away_conceded_avg),  1),
+        "gp":        len(all_sc_c),
+        "gp_prev":   len(all_sc_p),
+        "home_gp":   len(curr["home_scored"]),
+        "away_gp":   len(curr["away_scored"]),
     }
 
 
@@ -228,8 +253,17 @@ def compute_round(xlsx_path, round_num, matchups, output_dir="data"):
 
         form1 = compute_form(df, t1)
         form2 = compute_form(df, t2)
-        model = round((form1["scored_avg"] + form2["conceded_avg"] +
-                       form2["scored_avg"] + form1["conceded_avg"]) / 2, 1)
+
+        # Venue-split model: home team's home stats vs away team's away stats.
+        # Falls back to flat average if venue split is thin (< MIN_VENUE_GP games).
+        use_home1 = form1["home_gp"] >= MIN_VENUE_GP
+        use_away2 = form2["away_gp"] >= MIN_VENUE_GP
+        home_scored   = form1["home_scored_avg"]   if use_home1 else form1["scored_avg"]
+        home_conceded = form1["home_conceded_avg"] if use_home1 else form1["conceded_avg"]
+        away_scored   = form2["away_scored_avg"]   if use_away2 else form2["scored_avg"]
+        away_conceded = form2["away_conceded_avg"] if use_away2 else form2["conceded_avg"]
+        model = round((home_scored + away_conceded + away_scored + home_conceded) / 2, 1)
+        venue_split_used = use_home1 or use_away2
 
         h2h = compute_h2h(df, t1, t2)
         n = len(h2h)
@@ -261,6 +295,7 @@ def compute_round(xlsx_path, round_num, matchups, output_dir="data"):
             "line": line,
             "form": {t1: form1, t2: form2},
             "model_expected": model,
+            "venue_split_used": venue_split_used,
             "h2h": h2h, "h2h_n": n, "h2h_avg": h2h_avg,
             "h2h_under_std": h2h_under_std, "h2h_over_std": h2h_over_std,
             "curve_under": curve_under, "curve_over": curve_over,
@@ -270,11 +305,13 @@ def compute_round(xlsx_path, round_num, matchups, output_dir="data"):
         }
         games_output.append(game)
 
+        vsplit_note = f" (venue-split: home {form1['home_scored_avg']}/{form1['home_conceded_avg']}, away {form2['away_scored_avg']}/{form2['away_conceded_avg']})" if venue_split_used else " (flat avg — thin venue data)"
         print(f"    Form: {t1} {form1['scored_avg']}/{form1['conceded_avg']} | "
               f"{t2} {form2['scored_avg']}/{form2['conceded_avg']}")
-        print(f"    Model: {model}  H2H: n={n} avg={h2h_avg}  under_std={h2h_under_std}/{n}")
+        print(f"    Model: {model}{vsplit_note}")
+        print(f"    H2H: n={n} avg={h2h_avg}  under_std={h2h_under_std}/{n}")
         print(f"    Verdict: {verdict['tier']} {verdict['direction']} "
-              f"{verdict['confidence_pct']}%  gap={verdict['form_gap']}")
+              f"{verdict['confidence_pct']}%  score={verdict['score']}  gap={verdict['form_gap']}")
         if multi_buffer:
             print(f"    Multi: +{multi_buffer['buffer']} → adj {multi_buffer['adj_line']} "
                   f"({multi_buffer['hits']}/{multi_buffer['n']} = {multi_buffer['pct']:.0%})")

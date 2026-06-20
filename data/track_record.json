@@ -1,8 +1,17 @@
 {
   "_meta": {
-    "description": "Pick track record from v2.0 (Round 17 onwards). Previous picks under v1.0 not included — methodology changed.",
-    "model_version": "2.0",
-    "from_round": 17
+    "description": "Pick track record from v3.0 (Round 16 onward). SE-anchored formula. Previous v1.0/v2.0 picks excluded — methodology changed significantly.",
+    "model_version": "3.0",
+    "from_round": 16,
+    "formula": "SE-anchored scoring: sf(0-3) + sh(0-3) + sr(0-1) - cp(conflict penalty). SIGMA=13.5 from 953 games 2022-2026.",
+    "tiers": {
+      "STRONG BET": "score 6-7, confidence 80%",
+      "BET": "score 4-5, confidence 70%",
+      "LEAN (62%)": "score 3, confidence 62%",
+      "LEAN (55%)": "score 2, confidence 55%",
+      "WATCH": "score 0-1, confidence 50%"
+    }
   },
-  "picks": []
+  "picks": [],
+  "summary": {}
 }

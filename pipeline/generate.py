@@ -133,6 +133,9 @@ def render_game_card(g):
       <strong>Model gap: {v['form_gap']:+.1f} &nbsp;·&nbsp; H2H gap: {v['h2h_gap']:+.1f}</strong><br>
       {multi_note}
     </div>
+    <div class="line-freshness-note">
+      ⚠ Model built on line <strong>{line}</strong>. Verify current market line before placing.
+    </div>
   </div>
   <button class="card-data-toggle" onclick="toggleData(this)"><span>Show data</span><span>↓</span></button>
   <div class="card-data">

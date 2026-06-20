@@ -1,0 +1,1706 @@
+{
+  "round": 16,
+  "generated_at": "2026-06-20T02:02:19.148946Z",
+  "xlsx_source": "nrl (1).xlsx",
+  "games": [
+    {
+      "home": "Newcastle Knights",
+      "away": "St George Dragons",
+      "home_n": "knights",
+      "away_n": "dragons",
+      "venue": "McDonald Jones Stadium",
+      "kickoff": "2026-06-20 20:00",
+      "line": 48.5,
+      "form": {
+        "knights": {
+          "scored_avg": 20.9,
+          "conceded_avg": 26.3,
+          "gp": 13,
+          "gp_prev": 24
+        },
+        "dragons": {
+          "scored_avg": 17.6,
+          "conceded_avg": 29.3,
+          "gp": 13,
+          "gp_prev": 24
+        }
+      },
+      "model_expected": 47.1,
+      "h2h": [
+        {
+          "date": "2022-04-17",
+          "home_team": "St George Dragons",
+          "away_team": "Newcastle Knights",
+          "home_score": 21,
+          "away_score": 16,
+          "combined": 37,
+          "book_line": 39.5
+        },
+        {
+          "date": "2023-09-02",
+          "home_team": "St George Dragons",
+          "away_team": "Newcastle Knights",
+          "home_score": 12,
+          "away_score": 32,
+          "combined": 44,
+          "book_line": 47.5
+        },
+        {
+          "date": "2024-04-05",
+          "home_team": "Newcastle Knights",
+          "away_team": "St George Dragons",
+          "home_score": 30,
+          "away_score": 10,
+          "combined": 40,
+          "book_line": 36.5
+        },
+        {
+          "date": "2025-05-30",
+          "home_team": "St George Dragons",
+          "away_team": "Newcastle Knights",
+          "home_score": 20,
+          "away_score": 6,
+          "combined": 26,
+          "book_line": 44.5
+        },
+        {
+          "date": "2026-05-09",
+          "home_team": "St George Dragons",
+          "away_team": "Newcastle Knights",
+          "home_score": 10,
+          "away_score": 44,
+          "combined": 54,
+          "book_line": 52.5
+        }
+      ],
+      "h2h_n": 5,
+      "h2h_avg": 40.2,
+      "h2h_under_std": 4,
+      "h2h_over_std": 1,
+      "curve_under": [
+        {
+          "buffer": 0,
+          "adj_line": 48.5,
+          "hits": 4,
+          "n": 5,
+          "pct": 0.8
+        },
+        {
+          "buffer": 2,
+          "adj_line": 50.5,
+          "hits": 4,
+          "n": 5,
+          "pct": 0.8
+        },
+        {
+          "buffer": 4,
+          "adj_line": 52.5,
+          "hits": 4,
+          "n": 5,
+          "pct": 0.8
+        },
+        {
+          "buffer": 6,
+          "adj_line": 54.5,
+          "hits": 5,
+          "n": 5,
+          "pct": 1.0
+        },
+        {
+          "buffer": 8,
+          "adj_line": 56.5,
+          "hits": 5,
+          "n": 5,
+          "pct": 1.0
+        },
+        {
+          "buffer": 10,
+          "adj_line": 58.5,
+          "hits": 5,
+          "n": 5,
+          "pct": 1.0
+        },
+        {
+          "buffer": 12,
+          "adj_line": 60.5,
+          "hits": 5,
+          "n": 5,
+          "pct": 1.0
+        },
+        {
+          "buffer": 14,
+          "adj_line": 62.5,
+          "hits": 5,
+          "n": 5,
+          "pct": 1.0
+        },
+        {
+          "buffer": 18,
+          "adj_line": 66.5,
+          "hits": 5,
+          "n": 5,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 72.5,
+          "hits": 5,
+          "n": 5,
+          "pct": 1.0
+        }
+      ],
+      "curve_over": [
+        {
+          "buffer": 0,
+          "adj_line": 48.5,
+          "hits": 1,
+          "n": 5,
+          "pct": 0.2
+        },
+        {
+          "buffer": 2,
+          "adj_line": 46.5,
+          "hits": 1,
+          "n": 5,
+          "pct": 0.2
+        },
+        {
+          "buffer": 4,
+          "adj_line": 44.5,
+          "hits": 1,
+          "n": 5,
+          "pct": 0.2
+        },
+        {
+          "buffer": 6,
+          "adj_line": 42.5,
+          "hits": 2,
+          "n": 5,
+          "pct": 0.4
+        },
+        {
+          "buffer": 8,
+          "adj_line": 40.5,
+          "hits": 2,
+          "n": 5,
+          "pct": 0.4
+        },
+        {
+          "buffer": 10,
+          "adj_line": 38.5,
+          "hits": 3,
+          "n": 5,
+          "pct": 0.6
+        },
+        {
+          "buffer": 12,
+          "adj_line": 36.5,
+          "hits": 4,
+          "n": 5,
+          "pct": 0.8
+        },
+        {
+          "buffer": 14,
+          "adj_line": 34.5,
+          "hits": 4,
+          "n": 5,
+          "pct": 0.8
+        },
+        {
+          "buffer": 18,
+          "adj_line": 30.5,
+          "hits": 4,
+          "n": 5,
+          "pct": 0.8
+        },
+        {
+          "buffer": 24,
+          "adj_line": 24.5,
+          "hits": 5,
+          "n": 5,
+          "pct": 1.0
+        }
+      ],
+      "verdict": {
+        "direction": "UNDER",
+        "tier": "LEAN",
+        "confidence_pct": 55,
+        "form_gap": -1.4,
+        "h2h_gap": -8.3,
+        "signal_conflict": false
+      },
+      "multi_qualifies": true,
+      "multi_first_buffer": {
+        "buffer": 6,
+        "adj_line": 54.5,
+        "hits": 5,
+        "n": 5,
+        "pct": 1.0
+      }
+    },
+    {
+      "home": "Wests Tigers",
+      "away": "Dolphins",
+      "home_n": "tigers",
+      "away_n": "dolphins",
+      "venue": "CommBank Stadium",
+      "kickoff": "2026-06-21 15:00",
+      "line": 51.5,
+      "form": {
+        "tigers": {
+          "scored_avg": 21.8,
+          "conceded_avg": 27.3,
+          "gp": 13,
+          "gp_prev": 24
+        },
+        "dolphins": {
+          "scored_avg": 29.6,
+          "conceded_avg": 22.6,
+          "gp": 13,
+          "gp_prev": 24
+        }
+      },
+      "model_expected": 50.6,
+      "h2h": [
+        {
+          "date": "2023-08-19",
+          "home_team": "Wests Tigers",
+          "away_team": "Dolphins",
+          "home_score": 24,
+          "away_score": 23,
+          "combined": 47,
+          "book_line": 47.5
+        },
+        {
+          "date": "2024-04-06",
+          "home_team": "Dolphins",
+          "away_team": "Wests Tigers",
+          "home_score": 26,
+          "away_score": 16,
+          "combined": 42,
+          "book_line": 42.5
+        },
+        {
+          "date": "2024-05-19",
+          "home_team": "Wests Tigers",
+          "away_team": "Dolphins",
+          "home_score": 12,
+          "away_score": 24,
+          "combined": 36,
+          "book_line": 46.5
+        },
+        {
+          "date": "2025-03-22",
+          "home_team": "Dolphins",
+          "away_team": "Wests Tigers",
+          "home_score": 18,
+          "away_score": 30,
+          "combined": 48,
+          "book_line": 47.5
+        }
+      ],
+      "h2h_n": 4,
+      "h2h_avg": 43.2,
+      "h2h_under_std": 4,
+      "h2h_over_std": 0,
+      "curve_under": [
+        {
+          "buffer": 0,
+          "adj_line": 51.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 2,
+          "adj_line": 53.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 4,
+          "adj_line": 55.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 6,
+          "adj_line": 57.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 8,
+          "adj_line": 59.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 10,
+          "adj_line": 61.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 12,
+          "adj_line": 63.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 14,
+          "adj_line": 65.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 18,
+          "adj_line": 69.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 75.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        }
+      ],
+      "curve_over": [
+        {
+          "buffer": 0,
+          "adj_line": 51.5,
+          "hits": 0,
+          "n": 4,
+          "pct": 0.0
+        },
+        {
+          "buffer": 2,
+          "adj_line": 49.5,
+          "hits": 0,
+          "n": 4,
+          "pct": 0.0
+        },
+        {
+          "buffer": 4,
+          "adj_line": 47.5,
+          "hits": 1,
+          "n": 4,
+          "pct": 0.25
+        },
+        {
+          "buffer": 6,
+          "adj_line": 45.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 8,
+          "adj_line": 43.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 10,
+          "adj_line": 41.5,
+          "hits": 3,
+          "n": 4,
+          "pct": 0.75
+        },
+        {
+          "buffer": 12,
+          "adj_line": 39.5,
+          "hits": 3,
+          "n": 4,
+          "pct": 0.75
+        },
+        {
+          "buffer": 14,
+          "adj_line": 37.5,
+          "hits": 3,
+          "n": 4,
+          "pct": 0.75
+        },
+        {
+          "buffer": 18,
+          "adj_line": 33.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 27.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        }
+      ],
+      "verdict": {
+        "direction": "UNDER",
+        "tier": "LEAN",
+        "confidence_pct": 55,
+        "form_gap": -0.9,
+        "h2h_gap": -8.3,
+        "signal_conflict": false
+      },
+      "multi_qualifies": true,
+      "multi_first_buffer": {
+        "buffer": 0,
+        "adj_line": 51.5,
+        "hits": 4,
+        "n": 4,
+        "pct": 1.0
+      }
+    },
+    {
+      "home": "Gold Coast Titans",
+      "away": "Penrith Panthers",
+      "home_n": "titans",
+      "away_n": "panthers",
+      "venue": "Cbus Super Stadium",
+      "kickoff": "2026-06-21 17:30",
+      "line": 50.5,
+      "form": {
+        "titans": {
+          "scored_avg": 20.4,
+          "conceded_avg": 28.1,
+          "gp": 13,
+          "gp_prev": 24
+        },
+        "panthers": {
+          "scored_avg": 28.5,
+          "conceded_avg": 16.3,
+          "gp": 13,
+          "gp_prev": 27
+        }
+      },
+      "model_expected": 46.7,
+      "h2h": [
+        {
+          "date": "2022-04-29",
+          "home_team": "Gold Coast Titans",
+          "away_team": "Penrith Panthers",
+          "home_score": 4,
+          "away_score": 18,
+          "combined": 22,
+          "book_line": 43.5
+        },
+        {
+          "date": "2023-08-19",
+          "home_team": "Gold Coast Titans",
+          "away_team": "Penrith Panthers",
+          "home_score": 14,
+          "away_score": 40,
+          "combined": 54,
+          "book_line": 43.5
+        },
+        {
+          "date": "2024-09-07",
+          "home_team": "Penrith Panthers",
+          "away_team": "Gold Coast Titans",
+          "home_score": 18,
+          "away_score": 12,
+          "combined": 30,
+          "book_line": 53.5
+        },
+        {
+          "date": "2025-08-02",
+          "home_team": "Gold Coast Titans",
+          "away_team": "Penrith Panthers",
+          "home_score": 26,
+          "away_score": 30,
+          "combined": 56,
+          "book_line": 47.5
+        }
+      ],
+      "h2h_n": 4,
+      "h2h_avg": 40.5,
+      "h2h_under_std": 2,
+      "h2h_over_std": 2,
+      "curve_under": [
+        {
+          "buffer": 0,
+          "adj_line": 50.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 2,
+          "adj_line": 52.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 4,
+          "adj_line": 54.5,
+          "hits": 3,
+          "n": 4,
+          "pct": 0.75
+        },
+        {
+          "buffer": 6,
+          "adj_line": 56.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 8,
+          "adj_line": 58.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 10,
+          "adj_line": 60.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 12,
+          "adj_line": 62.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 14,
+          "adj_line": 64.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 18,
+          "adj_line": 68.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 74.5,
+          "hits": 4,
+          "n": 4,
+          "pct": 1.0
+        }
+      ],
+      "curve_over": [
+        {
+          "buffer": 0,
+          "adj_line": 50.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 2,
+          "adj_line": 48.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 4,
+          "adj_line": 46.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 6,
+          "adj_line": 44.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 8,
+          "adj_line": 42.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 10,
+          "adj_line": 40.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 12,
+          "adj_line": 38.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 14,
+          "adj_line": 36.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 18,
+          "adj_line": 32.5,
+          "hits": 2,
+          "n": 4,
+          "pct": 0.5
+        },
+        {
+          "buffer": 24,
+          "adj_line": 26.5,
+          "hits": 3,
+          "n": 4,
+          "pct": 0.75
+        }
+      ],
+      "verdict": {
+        "direction": "UNDER",
+        "tier": "BET",
+        "confidence_pct": 70,
+        "form_gap": -3.8,
+        "h2h_gap": -10.0,
+        "signal_conflict": false
+      },
+      "multi_qualifies": true,
+      "multi_first_buffer": {
+        "buffer": 6,
+        "adj_line": 56.5,
+        "hits": 4,
+        "n": 4,
+        "pct": 1.0
+      }
+    },
+    {
+      "home": "Canterbury Bulldogs",
+      "away": "Manly Sea Eagles",
+      "home_n": "bulldogs",
+      "away_n": "sea eagles",
+      "venue": "Accor Stadium",
+      "kickoff": "2026-06-22 14:00",
+      "line": 48.5,
+      "form": {
+        "bulldogs": {
+          "scored_avg": 20.3,
+          "conceded_avg": 21.7,
+          "gp": 13,
+          "gp_prev": 26
+        },
+        "sea eagles": {
+          "scored_avg": 25.5,
+          "conceded_avg": 20.8,
+          "gp": 13,
+          "gp_prev": 24
+        }
+      },
+      "model_expected": 44.1,
+      "h2h": [
+        {
+          "date": "2022-03-27",
+          "home_team": "Manly Sea Eagles",
+          "away_team": "Canterbury Bulldogs",
+          "home_score": 13,
+          "away_score": 12,
+          "combined": 25,
+          "book_line": 38.5
+        },
+        {
+          "date": "2022-09-02",
+          "home_team": "Canterbury Bulldogs",
+          "away_team": "Manly Sea Eagles",
+          "home_score": 21,
+          "away_score": 20,
+          "combined": 41,
+          "book_line": 53.5
+        },
+        {
+          "date": "2023-03-04",
+          "home_team": "Manly Sea Eagles",
+          "away_team": "Canterbury Bulldogs",
+          "home_score": 31,
+          "away_score": 6,
+          "combined": 37,
+          "book_line": 43.5
+        },
+        {
+          "date": "2023-08-27",
+          "home_team": "Canterbury Bulldogs",
+          "away_team": "Manly Sea Eagles",
+          "home_score": 24,
+          "away_score": 42,
+          "combined": 66,
+          "book_line": 47.5
+        },
+        {
+          "date": "2024-08-30",
+          "home_team": "Canterbury Bulldogs",
+          "away_team": "Manly Sea Eagles",
+          "home_score": 22,
+          "away_score": 34,
+          "combined": 56,
+          "book_line": 46.5
+        },
+        {
+          "date": "2024-09-15",
+          "home_team": "Canterbury Bulldogs",
+          "away_team": "Manly Sea Eagles",
+          "home_score": 22,
+          "away_score": 24,
+          "combined": 46,
+          "book_line": 44.5
+        },
+        {
+          "date": "2025-07-27",
+          "home_team": "Canterbury Bulldogs",
+          "away_team": "Manly Sea Eagles",
+          "home_score": 42,
+          "away_score": 4,
+          "combined": 46,
+          "book_line": 43.5
+        }
+      ],
+      "h2h_n": 7,
+      "h2h_avg": 45.3,
+      "h2h_under_std": 5,
+      "h2h_over_std": 2,
+      "curve_under": [
+        {
+          "buffer": 0,
+          "adj_line": 48.5,
+          "hits": 5,
+          "n": 7,
+          "pct": 0.7143
+        },
+        {
+          "buffer": 2,
+          "adj_line": 50.5,
+          "hits": 5,
+          "n": 7,
+          "pct": 0.7143
+        },
+        {
+          "buffer": 4,
+          "adj_line": 52.5,
+          "hits": 5,
+          "n": 7,
+          "pct": 0.7143
+        },
+        {
+          "buffer": 6,
+          "adj_line": 54.5,
+          "hits": 5,
+          "n": 7,
+          "pct": 0.7143
+        },
+        {
+          "buffer": 8,
+          "adj_line": 56.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        },
+        {
+          "buffer": 10,
+          "adj_line": 58.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        },
+        {
+          "buffer": 12,
+          "adj_line": 60.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        },
+        {
+          "buffer": 14,
+          "adj_line": 62.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        },
+        {
+          "buffer": 18,
+          "adj_line": 66.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 72.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        }
+      ],
+      "curve_over": [
+        {
+          "buffer": 0,
+          "adj_line": 48.5,
+          "hits": 2,
+          "n": 7,
+          "pct": 0.2857
+        },
+        {
+          "buffer": 2,
+          "adj_line": 46.5,
+          "hits": 2,
+          "n": 7,
+          "pct": 0.2857
+        },
+        {
+          "buffer": 4,
+          "adj_line": 44.5,
+          "hits": 4,
+          "n": 7,
+          "pct": 0.5714
+        },
+        {
+          "buffer": 6,
+          "adj_line": 42.5,
+          "hits": 4,
+          "n": 7,
+          "pct": 0.5714
+        },
+        {
+          "buffer": 8,
+          "adj_line": 40.5,
+          "hits": 5,
+          "n": 7,
+          "pct": 0.7143
+        },
+        {
+          "buffer": 10,
+          "adj_line": 38.5,
+          "hits": 5,
+          "n": 7,
+          "pct": 0.7143
+        },
+        {
+          "buffer": 12,
+          "adj_line": 36.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        },
+        {
+          "buffer": 14,
+          "adj_line": 34.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        },
+        {
+          "buffer": 18,
+          "adj_line": 30.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        },
+        {
+          "buffer": 24,
+          "adj_line": 24.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        }
+      ],
+      "verdict": {
+        "direction": "UNDER",
+        "tier": "BET",
+        "confidence_pct": 70,
+        "form_gap": -4.4,
+        "h2h_gap": -3.2,
+        "signal_conflict": false
+      },
+      "multi_qualifies": true,
+      "multi_first_buffer": {
+        "buffer": 8,
+        "adj_line": 56.5,
+        "hits": 6,
+        "n": 7,
+        "pct": 0.8571
+      }
+    },
+    {
+      "home": "New Zealand Warriors",
+      "away": "North Queensland Cowboys",
+      "home_n": "warriors",
+      "away_n": "cowboys",
+      "venue": "Go Media Stadium",
+      "kickoff": "2026-06-22 16:05",
+      "line": 49.5,
+      "form": {
+        "warriors": {
+          "scored_avg": 24.7,
+          "conceded_avg": 19.1,
+          "gp": 13,
+          "gp_prev": 25
+        },
+        "cowboys": {
+          "scored_avg": 23.4,
+          "conceded_avg": 27.0,
+          "gp": 14,
+          "gp_prev": 24
+        }
+      },
+      "model_expected": 47.1,
+      "h2h": [
+        {
+          "date": "2022-04-08",
+          "home_team": "New Zealand Warriors",
+          "away_team": "North QLD Cowboys",
+          "home_score": 25,
+          "away_score": 24,
+          "combined": 49,
+          "book_line": 38.5
+        },
+        {
+          "date": "2022-08-19",
+          "home_team": "North QLD Cowboys",
+          "away_team": "New Zealand Warriors",
+          "home_score": 48,
+          "away_score": 4,
+          "combined": 52,
+          "book_line": 52.5
+        },
+        {
+          "date": "2023-03-18",
+          "home_team": "North QLD Cowboys",
+          "away_team": "New Zealand Warriors",
+          "home_score": 12,
+          "away_score": 26,
+          "combined": 38,
+          "book_line": 43.5
+        },
+        {
+          "date": "2023-04-15",
+          "home_team": "New Zealand Warriors",
+          "away_team": "North QLD Cowboys",
+          "home_score": 22,
+          "away_score": 14,
+          "combined": 36,
+          "book_line": 42.5
+        },
+        {
+          "date": "2024-06-08",
+          "home_team": "North QLD Cowboys",
+          "away_team": "New Zealand Warriors",
+          "home_score": 12,
+          "away_score": 42,
+          "combined": 54,
+          "book_line": 49.5
+        },
+        {
+          "date": "2025-05-03",
+          "home_team": "New Zealand Warriors",
+          "away_team": "North QLD Cowboys",
+          "home_score": 30,
+          "away_score": 26,
+          "combined": 56,
+          "book_line": 44.5
+        }
+      ],
+      "h2h_n": 6,
+      "h2h_avg": 47.5,
+      "h2h_under_std": 3,
+      "h2h_over_std": 3,
+      "curve_under": [
+        {
+          "buffer": 0,
+          "adj_line": 49.5,
+          "hits": 3,
+          "n": 6,
+          "pct": 0.5
+        },
+        {
+          "buffer": 2,
+          "adj_line": 51.5,
+          "hits": 3,
+          "n": 6,
+          "pct": 0.5
+        },
+        {
+          "buffer": 4,
+          "adj_line": 53.5,
+          "hits": 4,
+          "n": 6,
+          "pct": 0.6667
+        },
+        {
+          "buffer": 6,
+          "adj_line": 55.5,
+          "hits": 5,
+          "n": 6,
+          "pct": 0.8333
+        },
+        {
+          "buffer": 8,
+          "adj_line": 57.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        },
+        {
+          "buffer": 10,
+          "adj_line": 59.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        },
+        {
+          "buffer": 12,
+          "adj_line": 61.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        },
+        {
+          "buffer": 14,
+          "adj_line": 63.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        },
+        {
+          "buffer": 18,
+          "adj_line": 67.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 73.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        }
+      ],
+      "curve_over": [
+        {
+          "buffer": 0,
+          "adj_line": 49.5,
+          "hits": 3,
+          "n": 6,
+          "pct": 0.5
+        },
+        {
+          "buffer": 2,
+          "adj_line": 47.5,
+          "hits": 4,
+          "n": 6,
+          "pct": 0.6667
+        },
+        {
+          "buffer": 4,
+          "adj_line": 45.5,
+          "hits": 4,
+          "n": 6,
+          "pct": 0.6667
+        },
+        {
+          "buffer": 6,
+          "adj_line": 43.5,
+          "hits": 4,
+          "n": 6,
+          "pct": 0.6667
+        },
+        {
+          "buffer": 8,
+          "adj_line": 41.5,
+          "hits": 4,
+          "n": 6,
+          "pct": 0.6667
+        },
+        {
+          "buffer": 10,
+          "adj_line": 39.5,
+          "hits": 4,
+          "n": 6,
+          "pct": 0.6667
+        },
+        {
+          "buffer": 12,
+          "adj_line": 37.5,
+          "hits": 5,
+          "n": 6,
+          "pct": 0.8333
+        },
+        {
+          "buffer": 14,
+          "adj_line": 35.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        },
+        {
+          "buffer": 18,
+          "adj_line": 31.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 25.5,
+          "hits": 6,
+          "n": 6,
+          "pct": 1.0
+        }
+      ],
+      "verdict": {
+        "direction": "UNDER",
+        "tier": "LEAN",
+        "confidence_pct": 60,
+        "form_gap": -2.4,
+        "h2h_gap": -2.0,
+        "signal_conflict": false
+      },
+      "multi_qualifies": true,
+      "multi_first_buffer": {
+        "buffer": 8,
+        "adj_line": 57.5,
+        "hits": 6,
+        "n": 6,
+        "pct": 1.0
+      }
+    },
+    {
+      "home": "Melbourne Storm",
+      "away": "Canberra Raiders",
+      "home_n": "storm",
+      "away_n": "raiders",
+      "venue": "AAMI Park",
+      "kickoff": "2026-06-23 18:00",
+      "line": 50.5,
+      "form": {
+        "storm": {
+          "scored_avg": 26.2,
+          "conceded_avg": 21.8,
+          "gp": 14,
+          "gp_prev": 27
+        },
+        "raiders": {
+          "scored_avg": 22.9,
+          "conceded_avg": 23.7,
+          "gp": 14,
+          "gp_prev": 26
+        }
+      },
+      "model_expected": 47.3,
+      "h2h": [
+        {
+          "date": "2022-04-09",
+          "home_team": "Canberra Raiders",
+          "away_team": "Melbourne Storm",
+          "home_score": 16,
+          "away_score": 30,
+          "combined": 46,
+          "book_line": 42.5
+        },
+        {
+          "date": "2022-07-17",
+          "home_team": "Melbourne Storm",
+          "away_team": "Canberra Raiders",
+          "home_score": 16,
+          "away_score": 20,
+          "combined": 36,
+          "book_line": 42.5
+        },
+        {
+          "date": "2022-09-10",
+          "home_team": "Melbourne Storm",
+          "away_team": "Canberra Raiders",
+          "home_score": 20,
+          "away_score": 28,
+          "combined": 48,
+          "book_line": 42.5
+        },
+        {
+          "date": "2023-08-13",
+          "home_team": "Melbourne Storm",
+          "away_team": "Canberra Raiders",
+          "home_score": 48,
+          "away_score": 2,
+          "combined": 50,
+          "book_line": 43.5
+        },
+        {
+          "date": "2024-06-29",
+          "home_team": "Melbourne Storm",
+          "away_team": "Canberra Raiders",
+          "home_score": 16,
+          "away_score": 6,
+          "combined": 22,
+          "book_line": 50.5
+        },
+        {
+          "date": "2025-05-04",
+          "home_team": "Melbourne Storm",
+          "away_team": "Canberra Raiders",
+          "home_score": 18,
+          "away_score": 20,
+          "combined": 38,
+          "book_line": 48.5
+        },
+        {
+          "date": "2026-04-17",
+          "home_team": "Canberra Raiders",
+          "away_team": "Melbourne Storm",
+          "home_score": 26,
+          "away_score": 22,
+          "combined": 48,
+          "book_line": 48.5
+        }
+      ],
+      "h2h_n": 7,
+      "h2h_avg": 41.1,
+      "h2h_under_std": 7,
+      "h2h_over_std": 0,
+      "curve_under": [
+        {
+          "buffer": 0,
+          "adj_line": 50.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 2,
+          "adj_line": 52.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 4,
+          "adj_line": 54.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 6,
+          "adj_line": 56.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 8,
+          "adj_line": 58.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 10,
+          "adj_line": 60.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 12,
+          "adj_line": 62.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 14,
+          "adj_line": 64.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 18,
+          "adj_line": 68.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 74.5,
+          "hits": 7,
+          "n": 7,
+          "pct": 1.0
+        }
+      ],
+      "curve_over": [
+        {
+          "buffer": 0,
+          "adj_line": 50.5,
+          "hits": 0,
+          "n": 7,
+          "pct": 0.0
+        },
+        {
+          "buffer": 2,
+          "adj_line": 48.5,
+          "hits": 1,
+          "n": 7,
+          "pct": 0.1429
+        },
+        {
+          "buffer": 4,
+          "adj_line": 46.5,
+          "hits": 3,
+          "n": 7,
+          "pct": 0.4286
+        },
+        {
+          "buffer": 6,
+          "adj_line": 44.5,
+          "hits": 4,
+          "n": 7,
+          "pct": 0.5714
+        },
+        {
+          "buffer": 8,
+          "adj_line": 42.5,
+          "hits": 4,
+          "n": 7,
+          "pct": 0.5714
+        },
+        {
+          "buffer": 10,
+          "adj_line": 40.5,
+          "hits": 4,
+          "n": 7,
+          "pct": 0.5714
+        },
+        {
+          "buffer": 12,
+          "adj_line": 38.5,
+          "hits": 4,
+          "n": 7,
+          "pct": 0.5714
+        },
+        {
+          "buffer": 14,
+          "adj_line": 36.5,
+          "hits": 5,
+          "n": 7,
+          "pct": 0.7143
+        },
+        {
+          "buffer": 18,
+          "adj_line": 32.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        },
+        {
+          "buffer": 24,
+          "adj_line": 26.5,
+          "hits": 6,
+          "n": 7,
+          "pct": 0.8571
+        }
+      ],
+      "verdict": {
+        "direction": "UNDER",
+        "tier": "BET",
+        "confidence_pct": 70,
+        "form_gap": -3.2,
+        "h2h_gap": -9.4,
+        "signal_conflict": false
+      },
+      "multi_qualifies": true,
+      "multi_first_buffer": {
+        "buffer": 0,
+        "adj_line": 50.5,
+        "hits": 7,
+        "n": 7,
+        "pct": 1.0
+      }
+    },
+    {
+      "home": "Sydney Roosters",
+      "away": "Cronulla Sharks",
+      "home_n": "roosters",
+      "away_n": "sharks",
+      "venue": "Allianz Stadium",
+      "kickoff": "2026-06-23 20:00",
+      "line": 50.5,
+      "form": {
+        "roosters": {
+          "scored_avg": 26.1,
+          "conceded_avg": 22.2,
+          "gp": 13,
+          "gp_prev": 25
+        },
+        "sharks": {
+          "scored_avg": 26.2,
+          "conceded_avg": 21.3,
+          "gp": 13,
+          "gp_prev": 27
+        }
+      },
+      "model_expected": 47.9,
+      "h2h": [
+        {
+          "date": "2022-05-28",
+          "home_team": "Cronulla Sharks",
+          "away_team": "Sydney Roosters",
+          "home_score": 16,
+          "away_score": 36,
+          "combined": 52,
+          "book_line": 41.5
+        },
+        {
+          "date": "2023-04-14",
+          "home_team": "Cronulla Sharks",
+          "away_team": "Sydney Roosters",
+          "home_score": 22,
+          "away_score": 12,
+          "combined": 34,
+          "book_line": 43.5
+        },
+        {
+          "date": "2023-09-09",
+          "home_team": "Cronulla Sharks",
+          "away_team": "Sydney Roosters",
+          "home_score": 12,
+          "away_score": 13,
+          "combined": 25,
+          "book_line": 40.5
+        },
+        {
+          "date": "2024-05-18",
+          "home_team": "Cronulla Sharks",
+          "away_team": "Sydney Roosters",
+          "home_score": 38,
+          "away_score": 30,
+          "combined": 68,
+          "book_line": 42.5
+        },
+        {
+          "date": "2025-05-24",
+          "home_team": "Sydney Roosters",
+          "away_team": "Cronulla Sharks",
+          "home_score": 42,
+          "away_score": 16,
+          "combined": 58,
+          "book_line": 44.5
+        },
+        {
+          "date": "2025-07-18",
+          "home_team": "Cronulla Sharks",
+          "away_team": "Sydney Roosters",
+          "home_score": 31,
+          "away_score": 18,
+          "combined": 49,
+          "book_line": 46.5
+        },
+        {
+          "date": "2025-09-13",
+          "home_team": "Cronulla Sharks",
+          "away_team": "Sydney Roosters",
+          "home_score": 20,
+          "away_score": 10,
+          "combined": 30,
+          "book_line": 46.5
+        },
+        {
+          "date": "2026-04-11",
+          "home_team": "Cronulla Sharks",
+          "away_team": "Sydney Roosters",
+          "home_score": 22,
+          "away_score": 34,
+          "combined": 56,
+          "book_line": 51.5
+        }
+      ],
+      "h2h_n": 8,
+      "h2h_avg": 46.5,
+      "h2h_under_std": 4,
+      "h2h_over_std": 4,
+      "curve_under": [
+        {
+          "buffer": 0,
+          "adj_line": 50.5,
+          "hits": 4,
+          "n": 8,
+          "pct": 0.5
+        },
+        {
+          "buffer": 2,
+          "adj_line": 52.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 4,
+          "adj_line": 54.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 6,
+          "adj_line": 56.5,
+          "hits": 6,
+          "n": 8,
+          "pct": 0.75
+        },
+        {
+          "buffer": 8,
+          "adj_line": 58.5,
+          "hits": 7,
+          "n": 8,
+          "pct": 0.875
+        },
+        {
+          "buffer": 10,
+          "adj_line": 60.5,
+          "hits": 7,
+          "n": 8,
+          "pct": 0.875
+        },
+        {
+          "buffer": 12,
+          "adj_line": 62.5,
+          "hits": 7,
+          "n": 8,
+          "pct": 0.875
+        },
+        {
+          "buffer": 14,
+          "adj_line": 64.5,
+          "hits": 7,
+          "n": 8,
+          "pct": 0.875
+        },
+        {
+          "buffer": 18,
+          "adj_line": 68.5,
+          "hits": 8,
+          "n": 8,
+          "pct": 1.0
+        },
+        {
+          "buffer": 24,
+          "adj_line": 74.5,
+          "hits": 8,
+          "n": 8,
+          "pct": 1.0
+        }
+      ],
+      "curve_over": [
+        {
+          "buffer": 0,
+          "adj_line": 50.5,
+          "hits": 4,
+          "n": 8,
+          "pct": 0.5
+        },
+        {
+          "buffer": 2,
+          "adj_line": 48.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 4,
+          "adj_line": 46.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 6,
+          "adj_line": 44.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 8,
+          "adj_line": 42.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 10,
+          "adj_line": 40.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 12,
+          "adj_line": 38.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 14,
+          "adj_line": 36.5,
+          "hits": 5,
+          "n": 8,
+          "pct": 0.625
+        },
+        {
+          "buffer": 18,
+          "adj_line": 32.5,
+          "hits": 6,
+          "n": 8,
+          "pct": 0.75
+        },
+        {
+          "buffer": 24,
+          "adj_line": 26.5,
+          "hits": 7,
+          "n": 8,
+          "pct": 0.875
+        }
+      ],
+      "verdict": {
+        "direction": "UNDER",
+        "tier": "LEAN",
+        "confidence_pct": 60,
+        "form_gap": -2.6,
+        "h2h_gap": -4.0,
+        "signal_conflict": false
+      },
+      "multi_qualifies": true,
+      "multi_first_buffer": {
+        "buffer": 8,
+        "adj_line": 58.5,
+        "hits": 7,
+        "n": 8,
+        "pct": 0.875
+      }
+    }
+  ]
+}

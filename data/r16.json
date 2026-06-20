@@ -1,6 +1,6 @@
 {
   "round": 16,
-  "generated_at": "2026-06-20T02:02:19.148946Z",
+  "generated_at": "2026-06-20T04:47:51.103170Z",
   "xlsx_source": "nrl (1).xlsx",
   "games": [
     {
@@ -227,7 +227,14 @@
         "confidence_pct": 55,
         "form_gap": -1.4,
         "h2h_gap": -8.3,
-        "signal_conflict": false
+        "signal_conflict": false,
+        "score": 2,
+        "score_breakdown": {
+          "sf": 0,
+          "sh": 2,
+          "sr": 0,
+          "cp": 0
+        }
       },
       "multi_qualifies": true,
       "multi_first_buffer": {
@@ -450,10 +457,17 @@
       "verdict": {
         "direction": "UNDER",
         "tier": "LEAN",
-        "confidence_pct": 55,
+        "confidence_pct": 62,
         "form_gap": -0.9,
         "h2h_gap": -8.3,
-        "signal_conflict": false
+        "signal_conflict": false,
+        "score": 3,
+        "score_breakdown": {
+          "sf": 0,
+          "sh": 2,
+          "sr": 1,
+          "cp": 0
+        }
       },
       "multi_qualifies": true,
       "multi_first_buffer": {
@@ -679,7 +693,14 @@
         "confidence_pct": 70,
         "form_gap": -3.8,
         "h2h_gap": -10.0,
-        "signal_conflict": false
+        "signal_conflict": false,
+        "score": 4,
+        "score_breakdown": {
+          "sf": 2,
+          "sh": 2,
+          "sr": 0,
+          "cp": 0
+        }
       },
       "multi_qualifies": true,
       "multi_first_buffer": {
@@ -928,19 +949,26 @@
       ],
       "verdict": {
         "direction": "UNDER",
-        "tier": "BET",
-        "confidence_pct": 70,
+        "tier": "LEAN",
+        "confidence_pct": 62,
         "form_gap": -4.4,
         "h2h_gap": -3.2,
-        "signal_conflict": false
+        "signal_conflict": false,
+        "score": 3,
+        "score_breakdown": {
+          "sf": 2,
+          "sh": 1,
+          "sr": 0,
+          "cp": 0
+        }
       },
       "multi_qualifies": true,
       "multi_first_buffer": {
-        "buffer": 8,
-        "adj_line": 56.5,
-        "hits": 6,
+        "buffer": 18,
+        "adj_line": 66.5,
+        "hits": 7,
         "n": 7,
-        "pct": 0.8571
+        "pct": 1.0
       }
     },
     {
@@ -1172,20 +1200,21 @@
       ],
       "verdict": {
         "direction": "UNDER",
-        "tier": "LEAN",
-        "confidence_pct": 60,
+        "tier": "WATCH",
+        "confidence_pct": 50,
         "form_gap": -2.4,
         "h2h_gap": -2.0,
-        "signal_conflict": false
+        "signal_conflict": false,
+        "score": 1,
+        "score_breakdown": {
+          "sf": 1,
+          "sh": 0,
+          "sr": 0,
+          "cp": 0
+        }
       },
-      "multi_qualifies": true,
-      "multi_first_buffer": {
-        "buffer": 8,
-        "adj_line": 57.5,
-        "hits": 6,
-        "n": 6,
-        "pct": 1.0
-      }
+      "multi_qualifies": false,
+      "multi_first_buffer": null
     },
     {
       "home": "Melbourne Storm",
@@ -1425,11 +1454,18 @@
       ],
       "verdict": {
         "direction": "UNDER",
-        "tier": "BET",
-        "confidence_pct": 70,
+        "tier": "STRONG BET",
+        "confidence_pct": 80,
         "form_gap": -3.2,
         "h2h_gap": -9.4,
-        "signal_conflict": false
+        "signal_conflict": false,
+        "score": 6,
+        "score_breakdown": {
+          "sf": 2,
+          "sh": 3,
+          "sr": 1,
+          "cp": 0
+        }
       },
       "multi_qualifies": true,
       "multi_first_buffer": {
@@ -1688,10 +1724,17 @@
       "verdict": {
         "direction": "UNDER",
         "tier": "LEAN",
-        "confidence_pct": 60,
+        "confidence_pct": 55,
         "form_gap": -2.6,
         "h2h_gap": -4.0,
-        "signal_conflict": false
+        "signal_conflict": false,
+        "score": 2,
+        "score_breakdown": {
+          "sf": 1,
+          "sh": 1,
+          "sr": 0,
+          "cp": 0
+        }
       },
       "multi_qualifies": true,
       "multi_first_buffer": {

@@ -205,7 +205,7 @@ def render_multi_section(games):
       <div class="multi-leg-pick">{g['home']} v {g['away']}</div>
       <div class="multi-leg-detail" style="margin-bottom:8px">
         Standard line {g['line']}. H2H avg {g['h2h_avg']} (n={g['h2h_n']}). 
-        Model {g['model_expected']}. First 85%+ at +{rec_buf} (adj {mb['adj_line'] if mb else 'N/A'}).
+        Model {g['model_expected']}. First ≥80% (Laplace) at +{rec_buf} (adj {mb['adj_line'] if mb else 'N/A'}).
         {'<strong>Signal conflict — H2H-driven leg.</strong>' if g['verdict'].get('signal_conflict') else ''}
       </div>
 {curve_html}
@@ -222,7 +222,7 @@ def render_multi_section(games):
     <div class="multi-leg multi-leg-weak" style="border-color:rgba(220,38,38,0.25);background:rgba(220,38,38,0.05)">
       <div class="multi-leg-label" style="color:var(--cherry)">{g['home']} v {g['away']} — Does not qualify ({max_pct:.0%} max at practical buffer)</div>
       <div class="multi-leg-pick" style="color:rgba(241,231,206,0.6)">
-        {g['h2h_under_std']}/{g['h2h_n']} UNDER / {g['h2h_over_std']}/{g['h2h_n']} OVER at standard line {g['line']}. Neither direction clears 85%.
+        {g['h2h_under_std']}/{g['h2h_n']} UNDER / {g['h2h_over_std']}/{g['h2h_n']} OVER at standard line {g['line']}. Neither direction clears 80% (Laplace-smoothed).
       </div>
     </div>
 """
@@ -235,7 +235,7 @@ def render_multi_section(games):
   </div>
   <div class="multi-body">
 
-    <div class="multi-legs-label">Adjusted Line Multi — {len(qualifying)} qualifying legs (≥85% per leg)</div>
+    <div class="multi-legs-label">Adjusted Line Multi — {len(qualifying)} qualifying legs (Laplace-smoothed ≥80% per leg)</div>
     <div style="font-size:13px;color:rgba(241,231,206,0.65);margin-bottom:16px;line-height:1.6;">
       UNDER: line moves UP (more room). OVER: line moves DOWN (lower threshold). Highlighted row = recommended pick.
     </div>

@@ -146,40 +146,71 @@ def confidence_curve(h2h_games, standard_line, direction):
     return curve
 
 
-# ── Verdict derivation ─────────────────────────────────────────────────────────
-def derive_verdict(model_expected, line, h2h_avg, h2h_hit_rate_under, n):
-    form_gap = model_expected - line
-    h2h_gap  = h2h_avg - line
-    form_under    = form_gap < 0
-    h2h_avg_under = h2h_gap < 0
-    h2h_rate_under = h2h_hit_rate_under > 0.5
-    under_votes = sum([form_under, h2h_avg_under, h2h_rate_under])
-    direction = "UNDER" if under_votes >= 2 else "OVER"
+# ── Verdict derivation v3 — SE-anchored scoring ────────────────────────────────
+# σ = 13.5 pts  (NRL combined score std dev, 953 games 2022–2026)
+# Form SE fixed at σ/√21 ≈ 2.94 pts (effective n≈21 from current season + 0.6×prev)
+# H2H SE scales with actual n:  σ/√n
+# Hit rate capped at score 1 (r=0.50 with H2H avg — not independent)
+# Laplace α=1 smoothing on hit rate: (hits+1)/(n+2)
+# Conflict penalty −1 between the two independent signals (form & H2H avg)
+#
+# Scoring:  sf 0–3 | sh 0–3 | sr 0–1 | cp 0–(−1)   max = 7
+# Tiers:    6-7 STRONG BET 80% | 4-5 BET 70% | 3 LEAN 62% | 2 LEAN 55% | 0-1 WATCH 50%
 
-    abs_form = abs(form_gap)
-    abs_h2h  = abs(h2h_gap)
-    if abs_form >= 4.0 and abs_h2h >= 6.0:
-        tier, conf = "STRONG BET", 80
-    elif abs_form >= 3.0 or (abs_form >= 1.5 and abs_h2h >= 5.0):
-        tier, conf = "BET", 70
-    elif abs_form >= 1.0 or abs_h2h >= 2.0:
-        tier, conf = "LEAN", 60 if abs_form >= 2.0 else 55
+SIGMA   = 13.5
+SE_FORM = SIGMA / np.sqrt(21)   # ≈ 2.94 pts
+
+def derive_verdict(model_expected, line, h2h_avg, h2h_under_std, n):
+    fg = model_expected - line
+    hg = h2h_avg - line
+    form_under = fg < 0
+    h2h_under  = hg < 0
+    rate_under = (h2h_under_std / n > 0.5) if n else True
+    direction  = "UNDER" if sum([form_under, h2h_under, rate_under]) >= 2 else "OVER"
+
+    # Form score — thresholds at 0.5, 1.0, 1.5 × SE_FORM (≈ 1.5, 2.9, 4.4 pts)
+    af = abs(fg)
+    if   af >= 1.5 * SE_FORM: sf = 3
+    elif af >= 1.0 * SE_FORM: sf = 2
+    elif af >= 0.5 * SE_FORM: sf = 1
+    else:                      sf = 0
+
+    # H2H avg score — SE scales with n
+    if n:
+        se_h2h = SIGMA / np.sqrt(n)
+        ah = abs(hg)
+        if   ah >= 1.5 * se_h2h: sh = 3
+        elif ah >= 1.0 * se_h2h: sh = 2
+        elif ah >= 0.5 * se_h2h: sh = 1
+        else:                     sh = 0
     else:
-        tier, conf = "WATCH", 50
+        sh = 0
 
-    if n <= 4 and tier == "STRONG BET":
-        tier, conf = "BET", 70
-    if form_under != h2h_avg_under:
-        conf = max(conf - 5, 50)
-        if tier == "STRONG BET": tier = "BET"
+    # Hit rate — Laplace-smoothed α=1, capped at score 1
+    hits = h2h_under_std if direction == "UNDER" else (n - h2h_under_std)
+    smoothed = (hits + 1) / (n + 2) if n else 0.5
+    sr = 1 if smoothed >= 0.80 else 0
+
+    # Conflict penalty between the two independent signals only
+    cp = 1 if form_under != h2h_under else 0
+
+    total = sf + sh + sr - cp
+
+    if   total >= 6: tier, conf = "STRONG BET", 80
+    elif total >= 4: tier, conf = "BET", 70
+    elif total == 3: tier, conf = "LEAN", 62
+    elif total == 2: tier, conf = "LEAN", 55
+    else:            tier, conf = "WATCH", 50
 
     return {
-        "direction": direction,
-        "tier": tier,
-        "confidence_pct": conf,
-        "form_gap": round(form_gap, 1),
-        "h2h_gap":  round(h2h_gap, 1),
-        "signal_conflict": form_under != h2h_avg_under,
+        "direction":       direction,
+        "tier":            tier,
+        "confidence_pct":  conf,
+        "form_gap":        round(fg, 1),
+        "h2h_gap":         round(hg, 1),
+        "signal_conflict": form_under != h2h_under,
+        "score":           total,
+        "score_breakdown": {"sf": sf, "sh": sh, "sr": sr, "cp": cp},
     }
 
 
@@ -207,8 +238,7 @@ def compute_round(xlsx_path, round_num, matchups, output_dir="data"):
         h2h_under_std = sum(1 for x in totals if x < line)
         h2h_over_std  = sum(1 for x in totals if x > line)
 
-        verdict = derive_verdict(model, line, h2h_avg,
-                                 h2h_under_std/n if n else 0.5, n)
+        verdict = derive_verdict(model, line, h2h_avg, h2h_under_std, n)
         if m.get("direction_override"):
             verdict["direction"] = m["direction_override"]
             verdict["direction_overridden"] = True
@@ -217,10 +247,12 @@ def compute_round(xlsx_path, round_num, matchups, output_dir="data"):
         curve_over  = confidence_curve(h2h, line, "OVER")
 
         primary_curve = curve_under if verdict["direction"] == "UNDER" else curve_over
-        # First buffer >=85%, excluding +24 (negligible odds)
+        # First buffer where Laplace-smoothed rate ≥ 80%, excluding +24
+        # Minimum verdict tier: LEAN (WATCH excluded from multis)
         multi_buffer = next(
-            (c for c in primary_curve if c["pct"] >= 0.85 and c["buffer"] <= 18), None
-        )
+            (c for c in primary_curve
+             if (c["hits"] + 1) / (c["n"] + 2) >= 0.80 and c["buffer"] <= 18), None
+        ) if verdict["tier"] != "WATCH" else None
 
         game = {
             "home": m["home"], "away": m["away"],

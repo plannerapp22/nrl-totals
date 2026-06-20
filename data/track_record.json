@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Pick track record from v3.0 (Round 16 onward). SE-anchored formula. Previous v1.0/v2.0 picks excluded — methodology changed significantly.",
+    "description": "Pick track record from v3.0 (Round 16 onward). SE-anchored formula. Previous v1.0/v2.0 picks excluded \u2014 methodology changed significantly.",
     "model_version": "3.0",
     "from_round": 16,
     "formula": "SE-anchored scoring: sf(0-3) + sh(0-3) + sr(0-1) - cp(conflict penalty). SIGMA=13.5 from 953 games 2022-2026.",
@@ -12,6 +12,30 @@
       "WATCH": "score 0-1, confidence 50%"
     }
   },
-  "picks": [],
+  "picks": [
+    {
+      "round": 16,
+      "date_logged": "2026-06-20",
+      "kickoff": "2026-06-20 20:00",
+      "home": "Newcastle Knights",
+      "away": "St George Dragons",
+      "line": 48.5,
+      "model_expected": 46.6,
+      "direction": "UNDER",
+      "tier": "LEAN",
+      "confidence_pct": 62,
+      "score": 3,
+      "score_breakdown": {
+        "sf": 1,
+        "sh": 2,
+        "sr": 0,
+        "cp": 0
+      },
+      "actual_combined": null,
+      "hit": true,
+      "margin_vs_line": null,
+      "notes": "Confirmed HIT by Ben. Exact score not provided."
+    }
+  ],
   "summary": {}
 }

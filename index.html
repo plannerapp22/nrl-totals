@@ -56,13 +56,12 @@ body{background:var(--cream);color:var(--ink);font-family:'Space Grotesk',sans-s
 .rs-item{font-size:13px;color:var(--cream);padding:4px 0;border-bottom:1px solid rgba(241,231,206,0.1)}
 .rs-item:last-child{border-bottom:none}
 .rs-item strong{color:var(--butter)}
-.nav-row{text-align:center;margin-top:24px}
+.nav-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px}
 .nav-link{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;color:var(--ink);border:2px solid var(--ink);padding:8px 20px;text-transform:uppercase;background:var(--cream)}
 .nav-link:hover{background:var(--ink);color:var(--cream)}
 </style>
 </head>
 <body>
-
 <div class="masthead">
   <div class="round-label">NRL &bull; Round 17 &bull; 25&ndash;28 Jun 2026</div>
   <h1>Scoring <span>Report</span></h1>
@@ -74,217 +73,32 @@ body{background:var(--cream);color:var(--ink);font-family:'Space Grotesk',sans-s
     <span class="flag flag-note">PointsBet odds: ESPN 23 Jun</span>
   </div>
 </div>
-
 <div class="summary-bar">
-  <div class="summary-cell bet">
-    <div class="summary-label">&#9646; Bet Under</div>
-    <div class="summary-teams">Cowboys v Panthers<br>Raiders v Dragons<br>Knights v Tigers</div>
-  </div>
-  <div class="summary-cell lean">
-    <div class="summary-label">&#8594; Lean Under</div>
-    <div class="summary-teams">Broncos v Roosters<br>Dolphins v Warriors<br>Sea Eagles v Storm<br>Titans v Bulldogs</div>
-  </div>
-  <div class="summary-cell watch">
-    <div class="summary-label">&#128065; Watch</div>
-    <div class="summary-teams" style="color:var(--cream)">Eels v Rabbitohs</div>
-  </div>
+  <div class="summary-cell bet"><div class="summary-label">&#9646; Bet Under</div><div class="summary-teams">Cowboys v Panthers<br>Raiders v Dragons<br>Knights v Tigers</div></div>
+  <div class="summary-cell lean"><div class="summary-label">&#8594; Lean Under</div><div class="summary-teams">Broncos v Roosters<br>Dolphins v Warriors<br>Sea Eagles v Storm<br>Titans v Bulldogs</div></div>
+  <div class="summary-cell watch"><div class="summary-label">&#128065; Watch</div><div class="summary-teams" style="color:var(--cream)">Eels v Rabbitohs</div></div>
 </div>
-
 <div class="games">
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-teams">Eels v Rabbitohs</div>
-        <div class="card-meta">Thu 25 Jun &bull; 7:50pm &bull; CommBank Stadium</div>
-      </div>
-      <div class="tier-badge tier-WATCH">&#128065; WATCH</div>
-    </div>
-    <div class="card-body">
-      <div class="signals">
-        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">5/6 Under 60</div><div class="sig-sub">Avg 45.3pts &bull; last 4: 42, 48, 52, 68</div></div>
-        <div class="signal"><div class="sig-label">Eels 2026 Form</div><div class="sig-val">55.3 avg</div><div class="sig-sub">67% U60 &bull; last 3: 50, 72, 56</div></div>
-        <div class="signal"><div class="sig-label">Rabbitohs 2026</div><div class="sig-val">53.6 avg</div><div class="sig-sub">73% U60 &bull; last 3: 36, 44, 70</div></div>
-        <div class="signal"><div class="sig-label">Key News</div><div class="sig-val">Mitchell OUT</div><div class="sig-sub">4 wks calf &bull; #11 ZeroTackle scorer</div></div>
-      </div>
-      <div class="verdict WATCH">H2H supports under (5/6, avg 45.3) but both teams cracked 70+ recently. Mitchell OUT reduces Souths firepower. Combined 2026 avg ~54.4 sits higher than H2H suggests. <strong>Slight under lean only if line posts above 50.</strong>
-        <div class="exp-line">Model expectation: ~48pts &bull; PointsBet: Rabbitohs -6.5</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-teams">Titans v Bulldogs</div>
-        <div class="card-meta">Fri 26 Jun &bull; 6:00pm &bull; Cbus Super Stadium</div>
-      </div>
-      <div class="tier-badge tier-SOLID">&#128993; SOLID</div>
-    </div>
-    <div class="card-body">
-      <div class="signals">
-        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">3/6 Under 60</div><div class="sig-sub">Avg 52.7pts &bull; last 4: 56, 62, 64, 64</div></div>
-        <div class="signal"><div class="sig-label">Titans 2026 Form</div><div class="sig-val">42.9 avg</div><div class="sig-sub">82% U60 &bull; last 3: 46, 32, 60</div></div>
-        <div class="signal"><div class="sig-label">Bulldogs 2026</div><div class="sig-val">44.8 avg</div><div class="sig-sub">100% U60 &bull; last 3: 40, 24, 29</div></div>
-        <div class="signal"><div class="sig-label">Over-60 Freq</div><div class="sig-val">18% combined</div><div class="sig-sub">Titans 23% &bull; Bulldogs 13%</div></div>
-      </div>
-      <div class="verdict SOLID">2026 form overwhelms H2H noise. <strong>Bulldogs haven't cracked 60 all season (100% U60).</strong> Signal conflict noted but this season's data is dominant. SOLID lean under.
-        <div class="exp-line">Model expectation: ~44pts</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-teams">Broncos v Roosters</div>
-        <div class="card-meta">Fri 26 Jun &bull; 8:00pm &bull; Suncorp Stadium</div>
-      </div>
-      <div class="tier-badge tier-SOLID">&#128993; SOLID</div>
-    </div>
-    <div class="card-body">
-      <div class="signals">
-        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/8 Under 60</div><div class="sig-sub">Avg 49.0pts &bull; last 4: 44, 50, 58, 62</div></div>
-        <div class="signal"><div class="sig-label">Broncos 2026</div><div class="sig-val">47.1 avg</div><div class="sig-sub">75% U60 &bull; last 3: 32, 72, 26</div></div>
-        <div class="signal"><div class="sig-label">Roosters 2026</div><div class="sig-val">49.7 avg</div><div class="sig-sub">64% U60 &bull; conceding 22.7/game</div></div>
-        <div class="signal"><div class="sig-label">Key News</div><div class="sig-val">Reynolds OUT</div><div class="sig-sub">Mam OUT (shoulder) &bull; Walsh/Staggs/Haas back</div></div>
-      </div>
-      <div class="verdict SOLID"><strong>Without Reynolds/Mam at halves, Broncos attack limited despite Origin returns.</strong> Roosters' defensive numbers are elite. H2H 6/8 SOLID. SOLID lean under.
-        <div class="exp-line">Model expectation: ~48pts &bull; PointsBet: Roosters -5.5</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-teams">Dolphins v Warriors</div>
-        <div class="card-meta">Sat 27 Jun &bull; 3:00pm &bull; Suncorp Stadium</div>
-      </div>
-      <div class="tier-badge tier-SOLID">&#128993; SOLID</div>
-    </div>
-    <div class="card-body">
-      <div class="signals">
-        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/7 Under 60</div><div class="sig-sub">Avg 42.3pts &bull; last 4: 38, 38, 44, 44</div></div>
-        <div class="signal"><div class="sig-label">Dolphins 2026</div><div class="sig-val">48.1 avg</div><div class="sig-sub">82% U60 &bull; last 3: 48, 32, 70</div></div>
-        <div class="signal"><div class="sig-label">Warriors 2026</div><div class="sig-val">48.5 avg</div><div class="sig-sub">92% U60 &bull; conceding 17.8/game</div></div>
-        <div class="signal"><div class="sig-label">Over-60 Risk</div><div class="sig-val">Dolphins 27%</div><div class="sig-sub">Highest in NRL &bull; Warriors 9% (lowest)</div></div>
-      </div>
-      <div class="verdict SOLID">H2H 6/7 is technically HIGH but Dolphins 27% over-60 frequency drops this to SOLID. <strong>Warriors suppress high-scoring matchups better than anyone.</strong> Warriors D is the anchor.
-        <div class="exp-line">Model expectation: ~45pts &bull; PointsBet: Dolphins -5.5</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-teams">Cowboys v Panthers</div>
-        <div class="card-meta">Sat 27 Jun &bull; 5:30pm &bull; QLD Country Bank Stadium</div>
-      </div>
-      <div class="tier-badge tier-HIGH">&#128994; HIGH</div>
-    </div>
-    <div class="card-body">
-      <div class="signals">
-        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">7/8 Under 60</div><div class="sig-sub">Avg 42.8pts &bull; last 4: 46, 46, 50, 56</div></div>
-        <div class="signal"><div class="sig-label">Cowboys 2026</div><div class="sig-val">49.6 avg</div><div class="sig-sub">69% U60 &bull; last 3: 46, 60, 46</div></div>
-        <div class="signal"><div class="sig-label">Panthers 2026</div><div class="sig-val">44.4 avg</div><div class="sig-sub">83% U60 &bull; last 3: 44, 32, 26</div></div>
-        <div class="signal"><div class="sig-label">Panthers Over-60</div><div class="sig-val">8% frequency</div><div class="sig-sub">2nd lowest NRL &bull; Cleary/Yeo/To'o back</div></div>
-      </div>
-      <div class="verdict HIGH"><strong>All signals align.</strong> Panthers are the gold standard for under-60 matchups (8% over-60, 83% U60 in 2026). Cleary returns boosting quality but Penrith wins are controlled, not blowouts. H2H 7/8, avg 42.8. <strong>TOP PICK OF THE ROUND.</strong>
-        <div class="exp-line">Model expectation: ~43pts &bull; PointsBet: Panthers -11.5</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-teams">Sea Eagles v Storm</div>
-        <div class="card-meta">Sat 27 Jun &bull; 7:35pm &bull; 4 Pines Park</div>
-      </div>
-      <div class="tier-badge tier-SOLID">&#128993; SOLID</div>
-    </div>
-    <div class="card-body">
-      <div class="signals">
-        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">5/7 Under 60</div><div class="sig-sub">Avg 44.3pts &bull; last 4: 36, 46, 66, 72</div></div>
-        <div class="signal"><div class="sig-label">Sea Eagles 2026</div><div class="sig-val">47.9 avg</div><div class="sig-sub">83% U60 &bull; last 3: 49, 52, 57</div></div>
-        <div class="signal"><div class="sig-label">Storm 2026</div><div class="sig-val">48.6 avg</div><div class="sig-sub">77% U60 &bull; last 3: 32, 66, 56</div></div>
-        <div class="signal"><div class="sig-label">Key Injury</div><div class="sig-val">Hughes OUT</div><div class="sig-sub">Hamstring &bull; 18 try assists (joint NRL lead)</div></div>
-      </div>
-      <div class="verdict SOLID"><strong>Hughes OUT is the decisive variable</strong> &mdash; Storm's creative output drops. Sea Eagles last 3: [49, 52, 57] &mdash; textbook under consistency. H2H 5/7 SOLID. SOLID lean under, materially strengthened by Hughes injury.
-        <div class="exp-line">Model expectation: ~45pts</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-teams">Raiders v Dragons</div>
-        <div class="card-meta">Sun 28 Jun &bull; 2:00pm &bull; GIO Stadium</div>
-      </div>
-      <div class="tier-badge tier-HIGH">&#128994; HIGH</div>
-    </div>
-    <div class="card-body">
-      <div class="signals">
-        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/7 Under 60</div><div class="sig-sub">Avg 42.3pts &bull; last 4: 46, 50, 52, 62</div></div>
-        <div class="signal"><div class="sig-label">Raiders 2026</div><div class="sig-val">47.5 avg</div><div class="sig-sub">92% U60 &bull; last 3: 24, 46, 57</div></div>
-        <div class="signal"><div class="sig-label">Dragons 2026</div><div class="sig-val">47.1 avg</div><div class="sig-sub">83% U60 &bull; scoring 14.3pts/game</div></div>
-        <div class="signal"><div class="sig-label">Raiders U60</div><div class="sig-val">92% in 2026</div><div class="sig-sub">Most consistent under team this season</div></div>
-      </div>
-      <div class="verdict HIGH">H2H 6/7 (86%, avg 42.3) + Raiders most consistent under team (92% U60). <strong>Dragons avg 14.3pts scored &mdash; bottom offensive output in NRL.</strong> Dragons' 66 was an outlier. HIGH confidence.
-        <div class="exp-line">Model expectation: ~43pts &bull; PointsBet: Raiders -10.5</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-teams">Knights v Wests Tigers</div>
-        <div class="card-meta">Sun 28 Jun &bull; 4:05pm &bull; McDonald Jones Stadium</div>
-      </div>
-      <div class="tier-badge tier-HIGH">&#128994; HIGH</div>
-    </div>
-    <div class="card-body">
-      <div class="signals">
-        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">8/9 Under 60</div><div class="sig-sub">Avg 36.0pts &bull; last 4: 34, 52, 52, 64</div></div>
-        <div class="signal"><div class="sig-label">Knights 2026</div><div class="sig-val">53.8 avg</div><div class="sig-sub">75% U60 &bull; last 3: 50, 52, 46</div></div>
-        <div class="signal"><div class="sig-label">Tigers 2026</div><div class="sig-val">50.9 avg</div><div class="sig-sub">55% U60 &bull; last 3: 46, 36, 60</div></div>
-        <div class="signal"><div class="sig-label">H2H Avg</div><div class="sig-val">36.0 pts</div><div class="sig-sub">Lowest of any matchup in dataset</div></div>
-      </div>
-      <div class="verdict HIGH"><strong>8/9 under 60, avg 36 pts &mdash; extraordinary H2H record.</strong> Lowest average of any matchup in the entire historical dataset. Tigers running hotter in 2026 but combined model expectation ~52 sits comfortably under 60. HIGH on H2H dominance.
-        <div class="exp-line">Model expectation: ~48pts</div>
-      </div>
-    </div>
-  </div>
-
+  <div class="card"><div class="card-header"><div><div class="card-teams">Eels v Rabbitohs</div><div class="card-meta">Thu 25 Jun &bull; 7:50pm &bull; CommBank Stadium</div></div><div class="tier-badge tier-WATCH">&#128065; WATCH</div></div><div class="card-body"><div class="signals"><div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">5/6 Under 60</div><div class="sig-sub">Avg 45.3pts &bull; last 4: 42, 48, 52, 68</div></div><div class="signal"><div class="sig-label">Eels 2026 Form</div><div class="sig-val">55.3 avg</div><div class="sig-sub">67% U60 &bull; last 3: 50, 72, 56</div></div><div class="signal"><div class="sig-label">Rabbitohs 2026</div><div class="sig-val">53.6 avg</div><div class="sig-sub">73% U60 &bull; last 3: 36, 44, 70</div></div><div class="signal"><div class="sig-label">Key News</div><div class="sig-val">Mitchell OUT</div><div class="sig-sub">4 wks calf &bull; #11 ZeroTackle scorer</div></div></div><div class="verdict WATCH">H2H supports under (5/6, avg 45.3) but both teams cracked 70+ recently. Mitchell OUT reduces Souths firepower. <strong>Slight under lean only if line posts above 50.</strong><div class="exp-line">Model expectation: ~48pts &bull; PointsBet: Rabbitohs -6.5</div></div></div></div>
+  <div class="card"><div class="card-header"><div><div class="card-teams">Titans v Bulldogs</div><div class="card-meta">Fri 26 Jun &bull; 6:00pm &bull; Cbus Super Stadium</div></div><div class="tier-badge tier-SOLID">&#128993; SOLID</div></div><div class="card-body"><div class="signals"><div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">3/6 Under 60</div><div class="sig-sub">Avg 52.7pts &bull; last 4: 56, 62, 64, 64</div></div><div class="signal"><div class="sig-label">Titans 2026 Form</div><div class="sig-val">42.9 avg</div><div class="sig-sub">82% U60 &bull; last 3: 46, 32, 60</div></div><div class="signal"><div class="sig-label">Bulldogs 2026</div><div class="sig-val">44.8 avg</div><div class="sig-sub">100% U60 &bull; last 3: 40, 24, 29</div></div><div class="signal"><div class="sig-label">Over-60 Freq</div><div class="sig-val">18% combined</div><div class="sig-sub">Titans 23% &bull; Bulldogs 13%</div></div></div><div class="verdict SOLID">2026 form overwhelms H2H noise. <strong>Bulldogs 100% U60 all season.</strong> SOLID lean under.<div class="exp-line">Model expectation: ~44pts</div></div></div></div>
+  <div class="card"><div class="card-header"><div><div class="card-teams">Broncos v Roosters</div><div class="card-meta">Fri 26 Jun &bull; 8:00pm &bull; Suncorp Stadium</div></div><div class="tier-badge tier-SOLID">&#128993; SOLID</div></div><div class="card-body"><div class="signals"><div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/8 Under 60</div><div class="sig-sub">Avg 49.0pts &bull; last 4: 44, 50, 58, 62</div></div><div class="signal"><div class="sig-label">Broncos 2026</div><div class="sig-val">47.1 avg</div><div class="sig-sub">75% U60 &bull; last 3: 32, 72, 26</div></div><div class="signal"><div class="sig-label">Roosters 2026</div><div class="sig-val">49.7 avg</div><div class="sig-sub">64% U60 &bull; conceding 22.7/game</div></div><div class="signal"><div class="sig-label">Key News</div><div class="sig-val">Reynolds OUT</div><div class="sig-sub">Mam OUT &bull; Walsh/Staggs/Haas back</div></div></div><div class="verdict SOLID"><strong>No Broncos halves, Roosters elite D.</strong> SOLID lean under.<div class="exp-line">Model expectation: ~48pts &bull; PointsBet: Roosters -5.5</div></div></div></div>
+  <div class="card"><div class="card-header"><div><div class="card-teams">Dolphins v Warriors</div><div class="card-meta">Sat 27 Jun &bull; 3:00pm &bull; Suncorp Stadium</div></div><div class="tier-badge tier-SOLID">&#128993; SOLID</div></div><div class="card-body"><div class="signals"><div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/7 Under 60</div><div class="sig-sub">Avg 42.3pts &bull; last 4: 38, 38, 44, 44</div></div><div class="signal"><div class="sig-label">Dolphins 2026</div><div class="sig-val">48.1 avg</div><div class="sig-sub">82% U60 &bull; last 3: 48, 32, 70</div></div><div class="signal"><div class="sig-label">Warriors 2026</div><div class="sig-val">48.5 avg</div><div class="sig-sub">92% U60 &bull; conceding 17.8/game</div></div><div class="signal"><div class="sig-label">Over-60 Risk</div><div class="sig-val">Dolphins 27%</div><div class="sig-sub">Highest in NRL &bull; Warriors 9% (lowest)</div></div></div><div class="verdict SOLID"><strong>Warriors suppress high-scoring matchups better than anyone.</strong> SOLID lean under.<div class="exp-line">Model expectation: ~45pts &bull; PointsBet: Dolphins -5.5</div></div></div></div>
+  <div class="card"><div class="card-header"><div><div class="card-teams">Cowboys v Panthers</div><div class="card-meta">Sat 27 Jun &bull; 5:30pm &bull; QLD Country Bank Stadium</div></div><div class="tier-badge tier-HIGH">&#128994; HIGH</div></div><div class="card-body"><div class="signals"><div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">7/8 Under 60</div><div class="sig-sub">Avg 42.8pts &bull; last 4: 46, 46, 50, 56</div></div><div class="signal"><div class="sig-label">Cowboys 2026</div><div class="sig-val">49.6 avg</div><div class="sig-sub">69% U60 &bull; last 3: 46, 60, 46</div></div><div class="signal"><div class="sig-label">Panthers 2026</div><div class="sig-val">44.4 avg</div><div class="sig-sub">83% U60 &bull; last 3: 44, 32, 26</div></div><div class="signal"><div class="sig-label">Panthers Over-60</div><div class="sig-val">8% frequency</div><div class="sig-sub">2nd lowest NRL &bull; Cleary/Yeo/To'o back</div></div></div><div class="verdict HIGH"><strong>All signals align. TOP PICK.</strong> Panthers gold standard. Cleary returns &mdash; controlled wins, not blowouts. H2H 7/8, avg 42.8.<div class="exp-line">Model expectation: ~43pts &bull; PointsBet: Panthers -11.5</div></div></div></div>
+  <div class="card"><div class="card-header"><div><div class="card-teams">Sea Eagles v Storm</div><div class="card-meta">Sat 27 Jun &bull; 7:35pm &bull; 4 Pines Park</div></div><div class="tier-badge tier-SOLID">&#128993; SOLID</div></div><div class="card-body"><div class="signals"><div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">5/7 Under 60</div><div class="sig-sub">Avg 44.3pts &bull; last 4: 36, 46, 66, 72</div></div><div class="signal"><div class="sig-label">Sea Eagles 2026</div><div class="sig-val">47.9 avg</div><div class="sig-sub">83% U60 &bull; last 3: 49, 52, 57</div></div><div class="signal"><div class="sig-label">Storm 2026</div><div class="sig-val">48.6 avg</div><div class="sig-sub">77% U60 &bull; last 3: 32, 66, 56</div></div><div class="signal"><div class="sig-label">Key Injury</div><div class="sig-val">Hughes OUT</div><div class="sig-sub">Hamstring &bull; 18 try assists (joint NRL lead)</div></div></div><div class="verdict SOLID"><strong>Hughes OUT is decisive.</strong> Sea Eagles last 3 textbook consistent. SOLID lean under.<div class="exp-line">Model expectation: ~45pts</div></div></div></div>
+  <div class="card"><div class="card-header"><div><div class="card-teams">Raiders v Dragons</div><div class="card-meta">Sun 28 Jun &bull; 2:00pm &bull; GIO Stadium</div></div><div class="tier-badge tier-HIGH">&#128994; HIGH</div></div><div class="card-body"><div class="signals"><div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/7 Under 60</div><div class="sig-sub">Avg 42.3pts &bull; last 4: 46, 50, 52, 62</div></div><div class="signal"><div class="sig-label">Raiders 2026</div><div class="sig-val">47.5 avg</div><div class="sig-sub">92% U60 &bull; last 3: 24, 46, 57</div></div><div class="signal"><div class="sig-label">Dragons 2026</div><div class="sig-val">47.1 avg</div><div class="sig-sub">83% U60 &bull; scoring 14.3pts/game</div></div><div class="signal"><div class="sig-label">Raiders U60</div><div class="sig-val">92% in 2026</div><div class="sig-sub">Most consistent under team this season</div></div></div><div class="verdict HIGH">H2H 6/7 + Raiders 92% U60. <strong>Dragons avg 14.3pts scored &mdash; bottom NRL.</strong> HIGH confidence.<div class="exp-line">Model expectation: ~43pts &bull; PointsBet: Raiders -10.5</div></div></div></div>
+  <div class="card"><div class="card-header"><div><div class="card-teams">Knights v Wests Tigers</div><div class="card-meta">Sun 28 Jun &bull; 4:05pm &bull; McDonald Jones Stadium</div></div><div class="tier-badge tier-HIGH">&#128994; HIGH</div></div><div class="card-body"><div class="signals"><div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">8/9 Under 60</div><div class="sig-sub">Avg 36.0pts &bull; last 4: 34, 52, 52, 64</div></div><div class="signal"><div class="sig-label">Knights 2026</div><div class="sig-val">53.8 avg</div><div class="sig-sub">75% U60 &bull; last 3: 50, 52, 46</div></div><div class="signal"><div class="sig-label">Tigers 2026</div><div class="sig-val">50.9 avg</div><div class="sig-sub">55% U60 &bull; last 3: 46, 36, 60</div></div><div class="signal"><div class="sig-label">H2H Avg</div><div class="sig-val">36.0 pts</div><div class="sig-sub">Lowest of any matchup in dataset</div></div></div><div class="verdict HIGH"><strong>8/9 under 60, avg 36 pts &mdash; lowest average of any matchup in dataset.</strong> HIGH on H2H dominance.<div class="exp-line">Model expectation: ~48pts</div></div></div></div>
 </div>
 
 <div class="round-summary">
   <div class="rs-title">Round Summary</div>
-  <div class="rs-section">
-    <div class="rs-section-label">&#128994; Bet Under</div>
-    <div class="rs-item"><strong>Cowboys v Panthers</strong> &mdash; 88% H2H, Panthers 8% over-60, all signals align</div>
-    <div class="rs-item"><strong>Raiders v Dragons</strong> &mdash; 86% H2H, Raiders 92% U60, Dragons bottom offensive output</div>
-    <div class="rs-item"><strong>Knights v Tigers</strong> &mdash; 89% H2H, avg 36.0pts &mdash; strongest record in dataset</div>
-  </div>
-  <div class="rs-section">
-    <div class="rs-section-label">&#128993; Lean Under</div>
-    <div class="rs-item"><strong>Broncos v Roosters</strong> &mdash; 75% H2H, Roosters elite D, no Broncos halves</div>
-    <div class="rs-item"><strong>Dolphins v Warriors</strong> &mdash; 86% H2H offset by Dolphins volatility; Warriors D dominant</div>
-    <div class="rs-item"><strong>Sea Eagles v Storm</strong> &mdash; Hughes OUT materially strengthens the case</div>
-    <div class="rs-item"><strong>Titans v Bulldogs</strong> &mdash; 2026 form dominant over H2H split</div>
-  </div>
-  <div class="rs-section">
-    <div class="rs-section-label">&#128065; Watch</div>
-    <div class="rs-item"><strong>Eels v Rabbitohs</strong> &mdash; H2H supports but both teams volatile; Mitchell OUT helps</div>
-  </div>
+  <div class="rs-section"><div class="rs-section-label">&#128994; Bet Under</div><div class="rs-item"><strong>Cowboys v Panthers</strong> &mdash; 88% H2H, Panthers 8% over-60</div><div class="rs-item"><strong>Raiders v Dragons</strong> &mdash; 86% H2H, Raiders 92% U60, Dragons 14.3pts avg</div><div class="rs-item"><strong>Knights v Tigers</strong> &mdash; 89% H2H, avg 36.0pts (dataset low)</div></div>
+  <div class="rs-section"><div class="rs-section-label">&#128993; Lean Under</div><div class="rs-item"><strong>Broncos v Roosters</strong> &mdash; no Broncos halves, Roosters elite D</div><div class="rs-item"><strong>Dolphins v Warriors</strong> &mdash; Warriors D dominant; Dolphins volatility noted</div><div class="rs-item"><strong>Sea Eagles v Storm</strong> &mdash; Hughes OUT strengthens case materially</div><div class="rs-item"><strong>Titans v Bulldogs</strong> &mdash; 2026 form dominant (Bulldogs 100% U60)</div></div>
+  <div class="rs-section"><div class="rs-section-label">&#128065; Watch</div><div class="rs-item"><strong>Eels v Rabbitohs</strong> &mdash; both teams volatile; Mitchell OUT helps</div></div>
 </div>
 
 <div class="nav-row">
-  <a href="tryscorers.html" class="nav-link">Try Scorer Picks &#8594;</a>
+  <a href="tryscorers.html" class="nav-link">Try Scorers &#8594;</a>
+  <a href="history.html" class="nav-link">Results &#8594;</a>
 </div>
 
 </body>

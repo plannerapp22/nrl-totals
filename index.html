@@ -3,855 +3,289 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NRL Totals Model — Round 16, 2026</title>
+<title>NRL Scoring Report R17</title>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap');
-  :root {
-    /* NRL palette */
-    --cream:#F3F4F6; --ink:#0D1117; --blue:#2563EB; --cherry:#DC2626;
-    --butter:#F59E0B; --teal:#15803D; --coral:#EA580C; --rust:#92400E; --waste:#9CA3AF;
-    /* Traffic light — verdict confidence */
-    --tl-strong:#166534; --tl-bet:#15803D; --tl-lean:#B45309; --tl-watch:#6B7280;
-    /* NRL brand */
-    --nrl-red:#CC1717; --nrl-dark:#0D1117; --border:#E5E7EB;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
-  .site-header{background:var(--nrl-dark);border-bottom:4px solid var(--nrl-red)}
-  .header-inner{max-width:960px;margin:0 auto;padding:28px 24px 20px;display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
-  .header-logo{font-family:'Oswald',sans-serif;font-size:32px;color:var(--butter);letter-spacing:0px;font-weight:700;text-transform:uppercase;line-height:1}
-  .header-logo span{color:var(--cream)}
-  .header-meta{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;line-height:1.8;padding-bottom:2px}
-  .header-meta strong{color:var(--blue)}
-  .model-badge{margin-left:auto;font-family:'Roboto Mono',monospace;font-size:11px;color:white;background:var(--nrl-red);padding:4px 10px;border-radius:2px;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
-  .container{max-width:960px;margin:0 auto;padding:0 24px 80px}
-  .section-head{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--tl-watch);padding:36px 0 12px;border-bottom:1px solid rgba(33,28,20,0.15);margin-bottom:0}
-  .method-box{background:var(--nrl-dark);color:var(--cream);border-radius:4px;margin:24px 0;overflow:hidden}
-  .method-summary{padding:18px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .method-summary:hover{background:rgba(255,255,255,0.05)}
-  .method-title{font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;color:var(--butter);text-transform:uppercase}
-  .method-subtitle{font-size:13px;color:var(--waste);margin-top:2px}
-  .method-toggle{font-family:'Roboto Mono',monospace;font-size:12px;color:var(--blue);white-space:nowrap;flex-shrink:0}
-  .method-body{display:none;padding:0 20px 20px;border-top:1px solid rgba(255,255,255,0.1)}
-  .method-body.open{display:block}
-  .method-body h4{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:1.5px;color:var(--butter);text-transform:uppercase;margin:16px 0 6px}
-  .method-body p,.method-body li{font-size:13px;color:rgba(241,231,206,0.85);line-height:1.65}
-  .method-body ul{padding-left:16px;margin-top:4px}
-  .verdict-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}
-  .verdict-table th{text-align:left;font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--waste);padding:6px 10px;border-bottom:1px solid rgba(255,255,255,0.1)}
-  .verdict-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.06);color:rgba(241,231,206,0.85);vertical-align:top}
-  .verdict-table td:first-child{font-family:'Roboto Mono',monospace;font-size:11px;white-space:nowrap;color:var(--cream)}
-  .v-strong{color:var(--tl-strong)!important} .v-bet{color:var(--tl-bet)!important}
-  .v-lean{color:var(--tl-lean)!important} .v-watch{color:var(--tl-watch)!important}
-  .disclaimer{background:rgba(33,28,20,0.06);border-left:3px solid var(--nrl-red);padding:12px 16px;font-size:13px;margin:16px 0 8px;border-radius:0 4px 4px 0}
-  .game-card{background:white;border-radius:6px;margin:20px 0;box-shadow:0 2px 8px rgba(33,28,20,0.08);overflow:hidden}
-  .card-header{padding:16px 20px 14px;background:var(--nrl-dark);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .card-matchup{font-family:'Oswald',sans-serif;font-size:18px;color:var(--cream);text-transform:uppercase;letter-spacing:0.5px;line-height:1.2}
-  .card-v{color:var(--butter);font-size:14px}
-  .card-meta{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--waste);margin-top:4px}
-  .card-line{text-align:right;flex-shrink:0}
-  .card-line-label{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--waste);text-transform:uppercase;letter-spacing:1px}
-  .card-line-value{font-family:'Oswald',sans-serif;font-size:26px;color:var(--butter);line-height:1}
-  .card-verdict-bar{display:flex;align-items:stretch;border-bottom:1px solid var(--border)}
-  .verdict-pill{padding:10px 18px;font-family:'Oswald',sans-serif;font-size:14px;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:8px;flex-shrink:0}
-  .verdict-pill .conf{font-family:'Roboto Mono',monospace;font-size:12px;opacity:0.8;font-weight:normal}
-  /* Traffic light verdict bars */
-  .v-strong-bar{background:var(--tl-strong);color:white}
-  .v-bet-bar{background:var(--tl-bet);color:white}
-  .v-lean-bar{background:var(--tl-lean);color:white}
-  .v-lean-over-bar{background:var(--blue);color:white}
-  .v-watch-bar{background:rgba(107,114,128,0.12);color:var(--tl-watch);border:1px solid rgba(107,114,128,0.25)}
-  .model-signal{padding:10px 16px;font-size:12px;color:var(--waste);font-family:'Roboto Mono',monospace;display:flex;align-items:center;gap:6px}
-  .signal-under{color:var(--cherry)} .signal-over{color:var(--teal)} .signal-none{color:var(--waste)}
-  .card-body{padding:18px 20px}
-  .card-body p{font-size:14px;line-height:1.65;color:var(--ink);margin-bottom:10px}
-  .card-body p:last-child{margin-bottom:0}
-  .note-box{background:rgba(33,28,20,0.04);border-radius:4px;padding:12px 14px;font-size:13px;color:rgba(33,28,20,0.7);margin-top:14px}
-  .note-box strong{font-family:'Roboto Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:4px;color:var(--waste)}
-  .card-data-toggle{width:100%;background:none;border:none;border-top:1px solid rgba(33,28,20,0.08);padding:10px 20px;text-align:left;cursor:pointer;font-family:'Roboto Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between}
-  .card-data-toggle:hover{background:rgba(33,28,20,0.03)}
-  .card-data{display:none;padding:0 20px 16px;border-top:1px solid rgba(33,28,20,0.05)}
-  .card-data.open{display:block}
-  .data-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-  .data-block{background:rgba(33,28,20,0.03);border-radius:4px;padding:10px 12px}
-  .data-block-label{font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste);margin-bottom:4px}
-  .data-block-value{font-size:22px;font-family:'Oswald',sans-serif;color:var(--ink);line-height:1}
-  .data-block-sub{font-size:11px;color:var(--waste);margin-top:2px}
-  .h2h-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
-  .h2h-table th{text-align:left;font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste);padding:6px 8px;border-bottom:1px solid rgba(33,28,20,0.1)}
-  .h2h-table td{padding:7px 8px;border-bottom:1px solid rgba(33,28,20,0.06);color:var(--ink)}
-  .h2h-table tr:last-child td{border-bottom:none}
-  .under-chip{display:inline-block;background:rgba(220,70,54,0.12);color:var(--cherry);font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 6px;border-radius:2px}
-  .over-chip{display:inline-block;background:rgba(31,158,145,0.12);color:var(--teal);font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 6px;border-radius:2px}
-
-  /* MULTI */
-  .multi-section{background:var(--nrl-dark);border-radius:6px;margin:28px 0;overflow:hidden}
-  .multi-header{padding:20px 24px 16px;border-bottom:1px solid rgba(255,255,255,0.1)}
-  .multi-title{font-family:'Oswald',sans-serif;font-size:20px;color:var(--butter);text-transform:uppercase;letter-spacing:1px}
-  .multi-subtitle{font-size:13px;color:var(--waste);margin-top:4px;line-height:1.5}
-  .multi-body{padding:20px 24px}
-  .multi-single{background:rgba(22,101,52,0.12);border:1px solid rgba(22,101,52,0.3);border-radius:4px;padding:16px 18px;margin-bottom:16px}
-  .multi-single-label{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--tl-strong);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
-  .multi-single-pick{font-family:'Oswald',sans-serif;font-size:18px;color:var(--cream);text-transform:uppercase}
-  .multi-single-detail{font-size:13px;color:rgba(241,231,206,0.7);margin-top:4px;line-height:1.5}
-  .multi-conf{display:inline-block;background:var(--tl-strong);color:white;font-family:'Roboto Mono',monospace;font-size:12px;padding:3px 8px;border-radius:2px;margin-top:6px}
-  .multi-legs-label{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;color:var(--butter);text-transform:uppercase;margin:20px 0 10px}
-  .multi-leg{background:rgba(21,128,61,0.12);border:1px solid rgba(21,128,61,0.3);border-radius:4px;padding:14px 18px;margin-bottom:10px}
-  .multi-leg-label{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--tl-bet);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px}
-  .multi-leg-pick{font-family:'Oswald',sans-serif;font-size:16px;color:var(--cream);text-transform:uppercase}
-  .multi-leg-detail{font-size:13px;color:rgba(241,231,206,0.7);margin-top:4px;line-height:1.5}
-  .multi-leg-conf{display:inline-block;background:var(--tl-bet);color:white;font-family:'Roboto Mono',monospace;font-size:11px;padding:2px 7px;border-radius:2px;margin-top:5px}
-  .multi-leg-weak{background:rgba(242,193,78,0.12);border:1px solid rgba(242,193,78,0.25)}
-  .multi-leg-weak .multi-leg-label{color:var(--butter)}
-  .multi-leg-weak .multi-leg-conf{background:var(--butter);color:var(--ink)}
-  .multi-odds-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 0}
-  .multi-odds-block{background:rgba(255,255,255,0.06);border-radius:4px;padding:12px;text-align:center}
-  .multi-odds-label{font-family:'Roboto Mono',monospace;font-size:10px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-  .multi-odds-value{font-family:'Oswald',sans-serif;font-size:22px;color:var(--butter)}
-  .multi-odds-sub{font-size:11px;color:var(--waste);margin-top:2px}
-  .multi-caveat{background:rgba(255,255,255,0.06);border-radius:4px;padding:12px 16px;font-size:12px;color:rgba(241,231,206,0.6);margin-top:16px;line-height:1.6}
-  /* CONFIDENCE CURVES */
-  .curve-table{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:12px}
-  .curve-table th{font-family:'Roboto Mono',monospace;font-size:9px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;padding:5px 8px;border-bottom:1px solid rgba(255,255,255,0.1);text-align:right;white-space:nowrap}
-  .curve-table th:first-child{text-align:left}
-  .curve-table td{padding:4px 8px;font-family:'Roboto Mono',monospace;font-size:12px;color:rgba(241,231,206,0.7);text-align:right;border-bottom:1px solid rgba(255,255,255,0.04)}
-  .curve-table td:first-child{text-align:left;color:var(--waste);font-size:11px}
-  .curve-pick{background:rgba(21,128,61,0.18);border-left:2px solid var(--tl-bet)}
-  .curve-pick td{color:rgba(241,231,206,0.95)!important}
-  .curve-100{color:var(--tl-strong)!important;font-weight:700}
-  .curve-90{color:var(--tl-bet)!important;font-weight:600}
-  .curve-85{color:var(--butter)!important}
-  .curve-muted{color:rgba(241,231,206,0.35)!important}
-  .curve-note{font-size:11px;color:rgba(241,231,206,0.45);margin-top:4px;font-style:italic}
-  .multi-leg-tag{display:inline-block;font-family:'Roboto Mono',monospace;font-size:10px;padding:2px 7px;border-radius:2px;margin-left:6px;vertical-align:middle}
-  .tag-100{background:var(--tl-strong);color:white}
-  .tag-85{background:var(--tl-bet);color:white}
-  .tag-flat{background:rgba(107,114,128,0.3);color:var(--waste)}
-  .season-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px;background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(33,28,20,0.06)}
-  .season-table th{background:var(--nrl-dark);color:var(--waste);font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:10px 12px;text-align:right}
-  .season-table th:first-child{text-align:left}
-  .season-table td{padding:8px 12px;text-align:right;border-bottom:1px solid rgba(33,28,20,0.06);color:var(--ink)}
-  .season-table td:first-child{text-align:left;font-weight:500}
-  .season-table tr:last-child td{border-bottom:none}
-  .top3{color:var(--tl-bet);font-weight:600} .low3{color:var(--cherry)}
-  .site-footer{background:var(--nrl-dark);color:var(--waste);padding:24px;font-family:'Roboto Mono',monospace;font-size:11px;text-align:center;border-top:3px solid var(--nrl-red);line-height:2}
-  .site-footer a{color:var(--butter);text-decoration:none}
-  @media(max-width:600px){.data-grid{grid-template-columns:1fr}.card-header{flex-direction:column}.card-line{text-align:left}.multi-odds-row{grid-template-columns:1fr 1fr}}
+:root{--cream:#F1E7CE;--ink:#211C14;--blue:#6FB6C9;--cherry:#DC4636;--butter:#F2C14E;--teal:#1F9E91;--coral:#F2795B;--rust:#9C5230;--wasteland:#8C8A6A}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:'Space Grotesk',sans-serif;padding:24px;min-height:100vh}
+.masthead{text-align:center;margin-bottom:32px;padding:24px;border:3px solid var(--ink);background:var(--ink)}
+.masthead::after{display:block;content:'';border:2px solid var(--butter);margin:8px auto 0;width:calc(100% - 16px)}
+.round-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--butter);text-transform:uppercase;margin-bottom:6px}
+.masthead h1{font-family:'Bungee',display;font-size:clamp(24px,5vw,44px);color:var(--cream);letter-spacing:2px;text-transform:uppercase}
+.masthead h1 span{color:var(--cherry)}
+.data-flags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:14px}
+.flag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 10px;border:1px solid;text-transform:uppercase}
+.flag-warn{border-color:var(--coral);color:var(--coral)}
+.flag-ok{border-color:var(--teal);color:var(--teal)}
+.flag-note{border-color:var(--wasteland);color:var(--wasteland)}
+.summary-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.summary-cell{border:2px solid var(--ink);padding:14px;text-align:center}
+.summary-cell.bet{background:var(--teal);border-color:var(--teal)}
+.summary-cell.lean{background:var(--butter);border-color:var(--ink)}
+.summary-cell.watch{background:var(--wasteland);border-color:var(--wasteland)}
+.summary-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;color:var(--ink)}
+.summary-cell.bet .summary-label{color:var(--cream)}
+.summary-teams{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;line-height:1.5}
+.summary-cell.bet .summary-teams{color:var(--cream)}
+.games{display:grid;gap:16px}
+.card{border:2px solid var(--ink);background:#fff8ec;overflow:hidden}
+.card-header{background:var(--ink);padding:12px 16px;display:grid;grid-template-columns:1fr auto;align-items:start;gap:12px}
+.card-teams{font-family:'Bungee',display;font-size:16px;color:var(--cream);text-transform:uppercase;letter-spacing:1px}
+.card-meta{font-family:'Space Mono',monospace;font-size:9px;color:var(--wasteland);margin-top:4px;letter-spacing:1px}
+.tier-badge{font-family:'Bungee',display;font-size:11px;letter-spacing:1px;padding:4px 10px;text-transform:uppercase;white-space:nowrap;align-self:start}
+.tier-HIGH{background:var(--teal);color:var(--cream)}
+.tier-SOLID{background:var(--butter);color:var(--ink)}
+.tier-WATCH{background:var(--coral);color:var(--cream)}
+.card-body{padding:14px 16px;display:grid;gap:10px}
+.signals{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.signal{background:var(--cream);border:1px solid rgba(33,28,20,0.15);padding:8px 10px}
+.sig-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--wasteland);margin-bottom:3px}
+.sig-val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--ink)}
+.sig-sub{font-size:11px;font-weight:400;color:var(--wasteland);margin-top:1px}
+.verdict{background:var(--ink);color:var(--cream);padding:10px 12px;font-size:13px;line-height:1.5;border-left:4px solid var(--cherry)}
+.verdict strong{color:var(--butter)}
+.verdict.HIGH{border-color:var(--teal)}
+.verdict.SOLID{border-color:var(--butter)}
+.verdict.WATCH{border-color:var(--coral)}
+.exp-line{font-family:'Space Mono',monospace;font-size:10px;color:rgba(241,231,206,0.6);margin-top:6px}
+.round-summary{margin:24px 0;padding:20px;border:3px solid var(--cherry);background:var(--ink)}
+.rs-title{font-family:'Bungee',display;font-size:20px;color:var(--butter);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.rs-section{margin-bottom:12px}
+.rs-section-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--wasteland);margin-bottom:6px}
+.rs-item{font-size:13px;color:var(--cream);padding:4px 0;border-bottom:1px solid rgba(241,231,206,0.1)}
+.rs-item:last-child{border-bottom:none}
+.rs-item strong{color:var(--butter)}
+.nav-row{text-align:center;margin-top:24px}
+.nav-link{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;color:var(--ink);border:2px solid var(--ink);padding:8px 20px;text-transform:uppercase;background:var(--cream)}
+.nav-link:hover{background:var(--ink);color:var(--cream)}
 </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="header-inner">
-    <div>
-      <div class="header-logo">NRL <span>Totals</span> Model</div>
-      <div class="header-meta"><strong>Round 16 · 2026</strong> &nbsp;|&nbsp; 20–23 June 2026</div>
-    </div>
-    <div class="model-badge">Model v2.0 · Generated Fri 20 Jun 2026</div>
-  </div>
-</header>
 
-<div class="container">
-
-<p class="section-head">How This Works</p>
-<div class="method-box">
-  <div class="method-summary" onclick="toggleMethod()">
-    <div>
-      <div class="method-title">Methodology v2.0</div>
-      <div class="method-subtitle">2025–26 data only · Current form primary · Contextual signal weighting · ausportsbetting.com historical lines</div>
-    </div>
-    <div class="method-toggle" id="method-toggle-text">Show details ↓</div>
-  </div>
-  <div class="method-body" id="method-body">
-    <h4>Signal Hierarchy</h4>
-    <p><strong>Primary — 2026 season form.</strong> Current team averages (scored, conceded) through Round 15 give a baseline expected combined. Calculated as (A avg scored + B avg conceded + B avg scored + A avg conceded) ÷ 2.</p>
-    <p><strong>Secondary — H2H record vs actual bookmaker line (2025–26).</strong> How these teams have performed against the bookmaker's line at the time. Tracked as over/under rate and the average gap between actual combined and actual line. This round uses ausportsbetting.com historical data with real closing lines.</p>
-    <p><strong>Tertiary — Line level vs H2H average combined.</strong> If the current line is significantly above (or below) the 3–5 year H2H average combined, that gap is a signal.</p>
-    <h4>Confidence and Verdicts</h4>
-    <table class="verdict-table">
-      <tr><th>Verdict</th><th>Confidence</th><th>Meaning</th></tr>
-      <tr><td style="color:var(--tl-strong);font-weight:600">STRONG BET</td><td>75%+</td><td>Multiple strong signals aligned. Highest conviction.</td></tr>
-      <tr><td style="color:var(--tl-bet);font-weight:600">BET</td><td>65–74%</td><td>Clear directional signal with supporting evidence.</td></tr>
-      <tr><td style="color:var(--tl-lean);font-weight:600">LEAN</td><td>55–64%</td><td>Moderate signal. One direction, not without risk.</td></tr>
-      <tr><td style="color:var(--tl-watch);font-weight:600">WATCH</td><td>45–54%</td><td>No confident direction or signals conflict.</td></tr>
-    </table>
-    <h4>Multi rules</h4>
-    <p>Multi legs are auto-selected at 80%+ confidence. The adjusted line is set at the point where 85–90%+ of historical H2H results land on the correct side. The 4-leg adjusted line multi is built from the four games with the clearest directional signal — each leg moves the line to a point where the historical hit rate is near certain. LEAN picks are never included in multis.</p>
+<div class="masthead">
+  <div class="round-label">NRL &bull; Round 17 &bull; 25&ndash;28 Jun 2026</div>
+  <h1>Scoring <span>Report</span></h1>
+  <div class="data-flags">
+    <span class="flag flag-warn">Form: R13 Fallback (stale)</span>
+    <span class="flag flag-warn">SB Lines: unavailable</span>
+    <span class="flag flag-ok">H2H: 2022&ndash;2026</span>
+    <span class="flag flag-ok">Teams: Verified NRL.com</span>
+    <span class="flag flag-note">PointsBet odds: ESPN 23 Jun</span>
   </div>
 </div>
 
-<div class="disclaimer">
-  Check team lists Thursday/Friday before placing. Significant absences to first-choice halves, fullback, or starters can shift the model's expectation. Never put more on a multi than you're comfortable losing. Verify all adjusted lines and prices with your bookmaker — alternate totals market availability varies.
-</div>
-
-<p class="section-head">Round 16 — All Games</p>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- GAME 1: KNIGHTS v DRAGONS -->
-<!-- ════════════════════════════════════════════════════ -->
-<div class="game-card">
-  <div class="card-header">
-    <div>
-      <div class="card-matchup">Newcastle Knights <span class="card-v">v</span> St George Illawarra Dragons</div>
-      <div class="card-meta">Fri 20 Jun, 8:00pm AEST &nbsp;·&nbsp; McDonald Jones Stadium, Newcastle</div>
-    </div>
-    <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">48.5</div></div>
+<div class="summary-bar">
+  <div class="summary-cell bet">
+    <div class="summary-label">&#9646; Bet Under</div>
+    <div class="summary-teams">Cowboys v Panthers<br>Raiders v Dragons<br>Knights v Tigers</div>
   </div>
-  <div class="card-verdict-bar">
-    <div class="verdict-pill v-lean-bar">LEAN UNDER <span class="conf">58%</span></div>
-    <div class="model-signal">
-      <span class="signal-under">↓</span>
-      Model expected: 50.8 &nbsp;|&nbsp; H2H avg combined: 42.3 &nbsp;|&nbsp; 5 of 7 recent H2H under R16 line of 48.5
-    </div>
+  <div class="summary-cell lean">
+    <div class="summary-label">&#8594; Lean Under</div>
+    <div class="summary-teams">Broncos v Roosters<br>Dolphins v Warriors<br>Sea Eagles v Storm<br>Titans v Bulldogs</div>
   </div>
-  <div class="card-body">
-    <p>The form model gives a slight over lean (50.8 vs line 48.5), but the full H2H picture tells a different story. Looking at the last seven meetings with real bookmaker lines, the average combined score is 42.3 — 6.2 points below the current line. Five of those seven results would have gone under 48.5.</p>
-    <p>The Dragons are the lowest-scoring team in 2026 (14.2 avg) with the leakiest defence (32.8 avg conceded). The Knights are prolific (28.5 avg scored), but when the two have met recently, the total has often sat well below what anyone expected. The exception is the most recent meeting — 2026 R10 saw the Knights blow the Dragons out 44–10 for a combined 54. That's the freshest data point and it went over.</p>
-    <p>The pull in two directions: H2H history says under, most recent game says over. LEAN UNDER is the call based on the broader pattern, with lower conviction than normal due to the R10 blowout.</p>
-    <div class="note-box">
-      <strong>Why LEAN, not BET</strong>
-      5/7 H2H results under 48.5, avg combined 42.3. But the most recent game (54 combined) went the other way. The pattern supports under; the recency cuts against it.
-    </div>
-  </div>
-  <button class="card-data-toggle" onclick="toggleData(this)"><span>Show data</span><span>↓</span></button>
-  <div class="card-data">
-    <div class="data-grid">
-      <div class="data-block"><div class="data-block-label">Newcastle Knights — 2026</div><div class="data-block-value">28.5</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 26.0 conceded &nbsp;·&nbsp; 13 GP</div></div>
-      <div class="data-block"><div class="data-block-label">St George Dragons — 2026</div><div class="data-block-value">14.2</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 32.8 conceded &nbsp;·&nbsp; 13 GP</div></div>
-    </div>
-    <table class="h2h-table">
-      <tr><th>Date</th><th>Result</th><th>Combined</th><th>Line</th><th>vs Line</th></tr>
-      <tr><td>2026 R10</td><td>Knights 44–10 Dragons</td><td>54</td><td>52.5</td><td><span class="over-chip">OVER +1.5</span></td></tr>
-      <tr><td>2025 R13</td><td>Dragons 20–6 Knights</td><td>26</td><td>44.5</td><td><span class="under-chip">UNDER –18.5</span></td></tr>
-      <tr><td>2024</td><td>Knights 30–10 Dragons</td><td>40</td><td>36.5</td><td><span class="over-chip">OVER +3.5</span></td></tr>
-      <tr><td>2023</td><td>Dragons 12–32 Knights</td><td>44</td><td>47.5</td><td><span class="under-chip">UNDER –3.5</span></td></tr>
-      <tr><td>2022</td><td>Dragons 21–16 Knights</td><td>37</td><td>39.5</td><td><span class="under-chip">UNDER –2.5</span></td></tr>
-    </table>
-    <p style="font-size:12px;color:var(--waste);margin-top:8px;">Last 7 H2H: 4 unders, 3 overs vs actual lines. Avg combined 42.3. 5 of 7 would go UNDER R16 line of 48.5. Source: ausportsbetting.com</p>
+  <div class="summary-cell watch">
+    <div class="summary-label">&#128065; Watch</div>
+    <div class="summary-teams" style="color:var(--cream)">Eels v Rabbitohs</div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════════════ -->
-<!-- GAME 2: TIGERS v DOLPHINS -->
-<!-- ════════════════════════════════════════════════════ -->
-<div class="game-card">
-  <div class="card-header">
-    <div>
-      <div class="card-matchup">Wests Tigers <span class="card-v">v</span> Dolphins</div>
-      <div class="card-meta">Sat 21 Jun, 3:00pm AEST &nbsp;·&nbsp; CommBank Stadium, Parramatta</div>
-    </div>
-    <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">51.5</div></div>
-  </div>
-  <div class="card-verdict-bar">
-    <div class="verdict-pill v-bet-bar">BET UNDER <span class="conf">70%</span></div>
-    <div class="model-signal">
-      <span class="signal-under">↓</span>
-      Model expected: 51.2 &nbsp;|&nbsp; H2H avg combined: 43.2 &nbsp;|&nbsp; All 4 recent H2H under 51.5 &nbsp;|&nbsp; Line 8.3 pts above H2H avg
-    </div>
-  </div>
-  <div class="card-body">
-    <p>This is the line that looks most out of step with H2H history. The last four meetings between these sides produced a combined average of 43.2 points. The R16 line is 51.5. That's a gap of 8.3 points — the largest discrepancy between line and H2H average of any game this round.</p>
-    <p>All four recent H2H results would have gone under 51.5: 48, 47, 42, and 36. None of those games came close to the 51.5 mark. The form model also comes in at 51.2 (right at the line), but the H2H data says these teams historically play much lower-scoring games than the current market suggests.</p>
-    <p>The one recent game that went over the actual line at the time (48 combined vs line 47.5 in 2025) was only over by 0.5 points — and it still goes under today's 51.5 line. The H2H record here is consistent: these teams score in the 40s, not the 50s.</p>
-    <div class="note-box">
-      <strong>Why BET</strong>
-      4/4 recent H2H results go UNDER 51.5. Average combined 43.2. The line is 8.3 points above the H2H average — a significant elevation with no clear form justification. Two aligned signals. BET UNDER 51.5.
-    </div>
-  </div>
-  <button class="card-data-toggle" onclick="toggleData(this)"><span>Show data</span><span>↓</span></button>
-  <div class="card-data">
-    <div class="data-grid">
-      <div class="data-block"><div class="data-block-label">Wests Tigers — 2026</div><div class="data-block-value">23.9</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 29.3 conceded &nbsp;·&nbsp; 13 GP</div></div>
-      <div class="data-block"><div class="data-block-label">Dolphins — 2026</div><div class="data-block-value">29.1</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 20.2 conceded &nbsp;·&nbsp; 13 GP</div></div>
-    </div>
-    <table class="h2h-table">
-      <tr><th>Date</th><th>Result</th><th>Combined</th><th>Line</th><th>vs Line</th><th>vs 51.5</th></tr>
-      <tr><td>2025 R3</td><td>Tigers 30–18 Dolphins</td><td>48</td><td>47.5</td><td><span class="over-chip">OVER +0.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2024</td><td>Dolphins 26–16 Tigers</td><td>42</td><td>42.5</td><td><span class="under-chip">UNDER –0.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2024</td><td>Tigers 12–24 Dolphins</td><td>36</td><td>46.5</td><td><span class="under-chip">UNDER –10.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2023</td><td>Tigers 24–23 Dolphins</td><td>47</td><td>47.5</td><td><span class="under-chip">UNDER –0.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-    </table>
-    <p style="font-size:12px;color:var(--waste);margin-top:8px;">All 4 recent H2H results under 51.5. Avg combined 43.2 vs line 51.5 — gap of 8.3 points. Source: ausportsbetting.com</p>
-  </div>
-</div>
+<div class="games">
 
-<!-- ════════════════════════════════════════════════════ -->
-<!-- GAME 3: TITANS v PANTHERS -->
-<!-- ════════════════════════════════════════════════════ -->
-<div class="game-card">
-  <div class="card-header">
-    <div>
-      <div class="card-matchup">Gold Coast Titans <span class="card-v">v</span> Penrith Panthers</div>
-      <div class="card-meta">Sat 21 Jun, 5:30pm AEST &nbsp;·&nbsp; Cbus Super Stadium, Gold Coast</div>
-    </div>
-    <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">50.5</div></div>
-  </div>
-  <div class="card-verdict-bar">
-    <div class="verdict-pill v-lean-bar">LEAN UNDER <span class="conf">58%</span></div>
-    <div class="model-signal">
-      <span class="signal-under">↓</span>
-      Model expected: 45.7 &nbsp;|&nbsp; H2H avg combined: 40.6 &nbsp;·&nbsp; High variance matchup — 22 to 60 in recent history
-    </div>
-  </div>
-  <div class="card-body">
-    <p>The form model has this at 45.7 — 4.8 points below the line. That's the biggest form gap of any game this round. The Panthers' defence (12.6 avg conceded — best in the competition) should suppress the Titans significantly, and the H2H average combined is 40.6 from the last seven meetings.</p>
-    <p>But this matchup has extreme variance. Recent combined scores: 56, 30, 54, 22. That's a 34-point range in four games. When these two meet, it's either a low-scoring grind or someone runs riot. The 2025 R22 result (56 combined) directly contradicts the model's under signal.</p>
-    <p>LEAN UNDER based on model conviction and H2H average, not BET, because the variance here is too wide to place high confidence on either direction.</p>
-    <div class="note-box">
-      <strong>Why LEAN only</strong>
-      Form strongly suggests under (model 4.8 below line). H2H average also under (40.6 vs 50.5). But this matchup produces extreme variance — 22 to 60 in recent games. LEAN reflects directional conviction with appropriate uncertainty.
-    </div>
-  </div>
-  <button class="card-data-toggle" onclick="toggleData(this)"><span>Show data</span><span>↓</span></button>
-  <div class="card-data">
-    <div class="data-grid">
-      <div class="data-block"><div class="data-block-label">Gold Coast Titans — 2026</div><div class="data-block-value">19.1</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 26.1 conceded &nbsp;·&nbsp; 13 GP</div></div>
-      <div class="data-block"><div class="data-block-label">Penrith Panthers — 2026</div><div class="data-block-value">33.6</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 12.6 conceded &nbsp;·&nbsp; 13 GP</div></div>
-    </div>
-    <table class="h2h-table">
-      <tr><th>Date</th><th>Result</th><th>Combined</th><th>Line</th><th>vs Line</th></tr>
-      <tr><td>2025 R22</td><td>Titans 26–30 Panthers</td><td>56</td><td>47.5</td><td><span class="over-chip">OVER +8.5</span></td></tr>
-      <tr><td>2024 Finals</td><td>Panthers 18–12 Titans</td><td>30</td><td>53.5</td><td><span class="under-chip">UNDER –23.5</span></td></tr>
-      <tr><td>2023</td><td>Titans 14–40 Panthers</td><td>54</td><td>43.5</td><td><span class="over-chip">OVER +10.5</span></td></tr>
-      <tr><td>2022</td><td>Titans 4–18 Panthers</td><td>22</td><td>43.5</td><td><span class="under-chip">UNDER –21.5</span></td></tr>
-    </table>
-    <p style="font-size:12px;color:var(--waste);margin-top:8px;">Last 4 H2H: 2 unders, 2 overs vs actual lines. Average combined 40.6 — high variance. Source: ausportsbetting.com</p>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- GAME 4: BULLDOGS v SEA EAGLES -->
-<!-- ════════════════════════════════════════════════════ -->
-<div class="game-card">
-  <div class="card-header">
-    <div>
-      <div class="card-matchup">Canterbury Bulldogs <span class="card-v">v</span> Manly Sea Eagles</div>
-      <div class="card-meta">Sun 22 Jun, 2:00pm AEST &nbsp;·&nbsp; Accor Stadium, Sydney</div>
-    </div>
-    <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">48.5</div></div>
-  </div>
-  <div class="card-verdict-bar">
-    <div class="verdict-pill v-lean-bar">LEAN UNDER <span class="conf">60%</span></div>
-    <div class="model-signal">
-      <span class="signal-under">↓</span>
-      Model expected: 45.3 &nbsp;|&nbsp; H2H avg combined: 45.3 &nbsp;|&nbsp; 5 of 7 recent H2H under current line (but 4/7 over actual lines at the time)
-    </div>
-  </div>
-  <div class="card-body">
-    <p>The form model and H2H average combined land at the same number: 45.3. Both sit 3.2 points below the current line of 48.5. That alignment is meaningful.</p>
-    <p>But the H2H record vs actual bookmaker lines at the time is mixed — 4 overs, 3 unders. When lines were set in the 38.5–47.5 range (as they were in most recent H2H games), this matchup was often over. Now the line has moved to 48.5, which is 1–5 points above where it's been set historically. At that elevated level, the model and H2H average both suggest under.</p>
-    <p>The Bulldogs are one of the lower-scoring teams in 2026 (17.9 avg). The Sea Eagles have the second-best defence in the competition (19.2 avg conceded). When combined scores have averaged 45.3, a 48.5 line gives the under play some room.</p>
-    <div class="note-box">
-      <strong>Why LEAN, not BET</strong>
-      The H2H vs actual lines is 4/7 OVER (the line has historically been set lower than 48.5, and the results went over those lower lines). The under signal here comes from form model + H2H average vs current line, not from H2H vs historical lines. Lower conviction than Tigers v Dolphins. LEAN UNDER 48.5.
-    </div>
-  </div>
-  <button class="card-data-toggle" onclick="toggleData(this)"><span>Show data</span><span>↓</span></button>
-  <div class="card-data">
-    <div class="data-grid">
-      <div class="data-block"><div class="data-block-label">Canterbury Bulldogs — 2026</div><div class="data-block-value">17.9</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 25.4 conceded &nbsp;·&nbsp; 13 GP</div></div>
-      <div class="data-block"><div class="data-block-label">Manly Sea Eagles — 2026</div><div class="data-block-value">28.2</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 19.2 conceded &nbsp;·&nbsp; 13 GP</div></div>
-    </div>
-    <table class="h2h-table">
-      <tr><th>Date</th><th>Result</th><th>Combined</th><th>Line</th><th>vs Line</th><th>vs 48.5</th></tr>
-      <tr><td>2025 R21</td><td>Bulldogs 42–4 Sea Eagles</td><td>46</td><td>43.5</td><td><span class="over-chip">OVER +2.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2024</td><td>Bulldogs 22–24 Sea Eagles</td><td>46</td><td>44.5</td><td><span class="over-chip">OVER +1.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2024</td><td>Bulldogs 22–34 Sea Eagles</td><td>56</td><td>46.5</td><td><span class="over-chip">OVER +9.5</span></td><td><span class="over-chip">OVER</span></td></tr>
-      <tr><td>2023</td><td>Sea Eagles 42–24 Bulldogs</td><td>66</td><td>47.5</td><td><span class="over-chip">OVER +18.5</span></td><td><span class="over-chip">OVER</span></td></tr>
-      <tr><td>2023</td><td>Sea Eagles 31–6 Bulldogs</td><td>37</td><td>43.5</td><td><span class="under-chip">UNDER –6.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-    </table>
-    <p style="font-size:12px;color:var(--waste);margin-top:8px;">H2H vs actual lines: 4/7 OVER (lines were historically set lower). 5/7 under current R16 line of 48.5. Avg combined 45.3. Source: ausportsbetting.com</p>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- GAME 5: WARRIORS v COWBOYS -->
-<!-- ════════════════════════════════════════════════════ -->
-<div class="game-card">
-  <div class="card-header">
-    <div>
-      <div class="card-matchup">New Zealand Warriors <span class="card-v">v</span> North Queensland Cowboys</div>
-      <div class="card-meta">Sun 22 Jun, 4:05pm AEST &nbsp;·&nbsp; Go Media Stadium, Auckland</div>
-    </div>
-    <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">49.5</div></div>
-  </div>
-  <div class="card-verdict-bar">
-    <div class="verdict-pill v-lean-over-bar">LEAN OVER <span class="conf">58%</span></div>
-    <div class="model-signal">
-      <span class="signal-over">↑</span>
-      Model expected: 48.0 &nbsp;|&nbsp; H2H avg gap vs line: +2.9 (over bias) &nbsp;|&nbsp; Last 2 meetings both over 49.5
-    </div>
-  </div>
-  <div class="card-body">
-    <p>The form model gives a mild under lean (48.0 vs line 49.5), but the H2H picture points the other way. Across the last seven meetings with available lines, this matchup has produced an average over of +2.9 — meaning results tended to come in above the line.</p>
-    <p>More importantly, the two most recent meetings — 2025 (Warriors 30–26 Cowboys, combined 56, line 44.5: over by 11.5) and 2024 (Warriors 42–12 Cowboys, combined 54, line 49.5: over by 4.5) — both went well over. These are the most relevant data points under a 2025–26 window.</p>
-    <p>The Warriors' defensive strength (17.2 avg conceded) provides a counter-argument for under. But when these two teams have met recently, both have come out swinging. The H2H recent trend beats the season-average form signal here.</p>
-    <div class="note-box">
-      <strong>Why LEAN OVER, not WATCH</strong>
-      H2H avg gap vs line: +2.9 (over bias). Last 2 meetings both convincingly over. The form model conflict keeps this at LEAN rather than BET.
-    </div>
-  </div>
-  <button class="card-data-toggle" onclick="toggleData(this)"><span>Show data</span><span>↓</span></button>
-  <div class="card-data">
-    <div class="data-grid">
-      <div class="data-block"><div class="data-block-label">Warriors — 2026</div><div class="data-block-value">28.9</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 17.2 conceded &nbsp;·&nbsp; 13 GP</div></div>
-      <div class="data-block"><div class="data-block-label">Cowboys — 2026</div><div class="data-block-value">24.5</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 25.4 conceded &nbsp;·&nbsp; 14 GP</div></div>
-    </div>
-    <table class="h2h-table">
-      <tr><th>Date</th><th>Result</th><th>Combined</th><th>Line</th><th>vs Line</th></tr>
-      <tr><td>2025</td><td>Warriors 30–26 Cowboys</td><td>56</td><td>44.5</td><td><span class="over-chip">OVER +11.5</span></td></tr>
-      <tr><td>2024</td><td>Warriors 42–12 Cowboys</td><td>54</td><td>49.5</td><td><span class="over-chip">OVER +4.5</span></td></tr>
-      <tr><td>2023</td><td>Warriors 22–14 Cowboys</td><td>36</td><td>42.5</td><td><span class="under-chip">UNDER –6.5</span></td></tr>
-      <tr><td>2023</td><td>Cowboys 12–26 Warriors</td><td>38</td><td>43.5</td><td><span class="under-chip">UNDER –5.5</span></td></tr>
-      <tr><td>2022</td><td>Cowboys 48–4 Warriors</td><td>52</td><td>52.5</td><td><span class="under-chip">UNDER –0.5</span></td></tr>
-    </table>
-    <p style="font-size:12px;color:var(--waste);margin-top:8px;">Last 7 H2H: 4 overs, 3 unders vs actual lines. Avg gap +2.9 (over bias). Most recent 2: both over by 4.5–11.5. Source: ausportsbetting.com</p>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- GAME 6: STORM v RAIDERS -->
-<!-- ════════════════════════════════════════════════════ -->
-<div class="game-card">
-  <div class="card-header">
-    <div>
-      <div class="card-matchup">Melbourne Storm <span class="card-v">v</span> Canberra Raiders</div>
-      <div class="card-meta">Mon 23 Jun, 6:00pm AEST &nbsp;·&nbsp; AAMI Park, Melbourne</div>
-    </div>
-    <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">50.5</div></div>
-  </div>
-  <div class="card-verdict-bar">
-    <div class="verdict-pill v-strong-bar">STRONG BET UNDER <span class="conf">80%</span></div>
-    <div class="model-signal">
-      <span class="signal-under">↓</span>
-      Model expected: 47.1 &nbsp;|&nbsp; ALL 7 recent H2H under R16 line of 50.5 &nbsp;|&nbsp; Avg combined 41.1 &nbsp;|&nbsp; Raiders lowest combined team in comp
-    </div>
-  </div>
-  <div class="card-body">
-    <p>Every piece of evidence points the same direction. The last seven meetings between Storm and Raiders — all seven — would have gone under 50.5. That's not a recent trend. That's a consistent pattern across different line levels and different team compositions.</p>
-    <p>The Raiders are the lowest combined-scoring team in 2026. Their season average across all games is 44.5 points combined. The Raiders play low-scoring football whoever they're up against. Put them against a disciplined Storm defence (24.9 avg conceded) and the total suppression is structural.</p>
-    <p>The model expected is 47.1 — 3.4 points below the line. The H2H average combined is 41.1 — 9.4 points below the line. The line of 50.5 looks elevated relative to everything the data says about this matchup. This is the highest conviction pick of the round.</p>
-    <div class="note-box">
-      <strong>Why STRONG BET, confidence upgraded to 80%</strong>
-      7 of 7 recent H2H under 50.5 (avg 41.1). Form model 3.4 below line. Raiders the lowest combined team in the competition. Three independent signals aligned. This is as clear a signal as the model produces.
-    </div>
-  </div>
-  <button class="card-data-toggle" onclick="toggleData(this)"><span>Show data</span><span>↓</span></button>
-  <div class="card-data">
-    <div class="data-grid">
-      <div class="data-block"><div class="data-block-label">Melbourne Storm — 2026</div><div class="data-block-value">24.7</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 24.9 conceded &nbsp;·&nbsp; 14 GP</div></div>
-      <div class="data-block"><div class="data-block-label">Canberra Raiders — 2026</div><div class="data-block-value">18.6</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 25.9 conceded &nbsp;·&nbsp; 14 GP &nbsp;·&nbsp; Lowest combined avg (44.5)</div></div>
-    </div>
-    <table class="h2h-table">
-      <tr><th>Date</th><th>Result</th><th>Combined</th><th>Line</th><th>vs Line</th><th>vs 50.5</th></tr>
-      <tr><td>2026 R7</td><td>Raiders 26–22 Storm</td><td>48</td><td>48.5</td><td><span class="under-chip">UNDER –0.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2025</td><td>Storm 18–20 Raiders (GF)</td><td>38</td><td>48.5</td><td><span class="under-chip">UNDER –10.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2024</td><td>Storm 16–6 Raiders</td><td>22</td><td>50.5</td><td><span class="under-chip">UNDER –28.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2023</td><td>Storm 48–2 Raiders</td><td>50</td><td>43.5</td><td><span class="over-chip">OVER +6.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2022</td><td>Storm 20–28 Raiders</td><td>48</td><td>42.5</td><td><span class="over-chip">OVER +5.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2022</td><td>Storm 16–20 Raiders</td><td>36</td><td>42.5</td><td><span class="under-chip">UNDER –6.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-      <tr><td>2022</td><td>Raiders 16–30 Storm</td><td>46</td><td>42.5</td><td><span class="over-chip">OVER +3.5</span></td><td><span class="under-chip">UNDER</span></td></tr>
-    </table>
-    <p style="font-size:12px;color:var(--waste);margin-top:8px;">All 7 recent H2H under R16 line of 50.5 (avg 41.1). 4 unders, 3 overs vs actual lines at the time — but line of 50.5 is above any recent result in this matchup bar one (50 in 2023). Source: ausportsbetting.com</p>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- GAME 7: ROOSTERS v SHARKS -->
-<!-- ════════════════════════════════════════════════════ -->
-<div class="game-card">
-  <div class="card-header">
-    <div>
-      <div class="card-matchup">Sydney Roosters <span class="card-v">v</span> Cronulla Sharks</div>
-      <div class="card-meta">Mon 23 Jun, 8:00pm AEST &nbsp;·&nbsp; Allianz Stadium, Sydney</div>
-    </div>
-    <div class="card-line"><div class="card-line-label">O/U Line</div><div class="card-line-value">50.5</div></div>
-  </div>
-  <div class="card-verdict-bar">
-    <div class="verdict-pill v-lean-over-bar">LEAN OVER <span class="conf">63%</span></div>
-    <div class="model-signal">
-      <span class="signal-over">↑</span>
-      Model expected: 50.0 &nbsp;|&nbsp; 2025–26 regular season: 3 of 3 H2H over actual lines &nbsp;|&nbsp; Avg combined 54.3 vs line 50.5
-    </div>
-  </div>
-  <div class="card-body">
-    <p>The form model sits right at the line (50.0 vs 50.5), giving no directional edge on its own. The over signal here comes entirely from H2H.</p>
-    <p>The three regular-season meetings in 2025–26 averaged 54.3 combined: 58, 49, and 56. Each went over the actual bookmaker's line at the time. The 2026 R6 game (56 combined, line 51.5) is the most recent and most relevant — it went over by 4.5 points.</p>
-    <p>The one major counter is the 2025 finals game between these sides: 30 combined. But finals football plays differently — more defensive, lower scoring, higher stakes. Excluding that outlier, the regular-season trend in this matchup is consistently over.</p>
-    <div class="note-box">
-      <strong>Why LEAN OVER</strong>
-      Regular-season H2H: 3 of 3 over actual lines in 2025–26. Avg combined 54.3 — 3.8 above R16 line. The finals game (30 combined) is the reason this stays LEAN rather than BET. It's a real datapoint even if context differs.
-    </div>
-  </div>
-  <button class="card-data-toggle" onclick="toggleData(this)"><span>Show data</span><span>↓</span></button>
-  <div class="card-data">
-    <div class="data-grid">
-      <div class="data-block"><div class="data-block-label">Sydney Roosters — 2026</div><div class="data-block-value">25.6</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 22.9 conceded &nbsp;·&nbsp; 13 GP</div></div>
-      <div class="data-block"><div class="data-block-label">Cronulla Sharks — 2026</div><div class="data-block-value">28.2</div><div class="data-block-sub">Avg scored &nbsp;·&nbsp; 23.2 conceded &nbsp;·&nbsp; 13 GP</div></div>
-    </div>
-    <table class="h2h-table">
-      <tr><th>Date</th><th>Result</th><th>Combined</th><th>Line</th><th>vs Line</th></tr>
-      <tr><td>2026 R6</td><td>Roosters 34–22 Sharks</td><td>56</td><td>51.5</td><td><span class="over-chip">OVER +4.5</span></td></tr>
-      <tr><td>2025 R20</td><td>Sharks 31–18 Roosters</td><td>49</td><td>46.5</td><td><span class="over-chip">OVER +2.5</span></td></tr>
-      <tr><td>2025 R12</td><td>Roosters 42–16 Sharks</td><td>58</td><td>44.5</td><td><span class="over-chip">OVER +13.5</span></td></tr>
-      <tr><td>2025 Finals</td><td>Sharks 20–10 Roosters</td><td>30</td><td>46.5</td><td><span class="under-chip">UNDER –16.5</span></td></tr>
-      <tr><td>2024</td><td>Sharks 38–30 Roosters</td><td>68</td><td>42.5</td><td><span class="over-chip">OVER +25.5</span></td></tr>
-    </table>
-    <p style="font-size:12px;color:var(--waste);margin-top:8px;">Regular season 2025–26: 3 of 3 OVER actual lines (avg combined 54.3). Finals game excluded from trend — different context. Source: ausportsbetting.com</p>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════ -->
-<!-- MULTI SECTION -->
-<!-- ════════════════════════════════════════════════════ -->
-<div class="multi-section">
-  <div class="multi-header">
-    <div class="multi-title">Multi Recommendations — Round 16</div>
-    <div class="multi-subtitle">Each leg shows the full confidence curve across NRL scoring increments. Pick the adjusted line your bookmaker prices — the table shows what confidence you're buying at each step.</div>
-  </div>
-  <div class="multi-body">
-
-    <div style="font-family:'Roboto Mono',monospace;font-size:11px;color:var(--waste);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Best single bet this round</div>
-
-    <div class="multi-single">
-      <div class="multi-single-label">Strong Bet · 80% confidence</div>
-      <div class="multi-single-pick">Storm v Raiders — Under 50.5</div>
-      <div class="multi-single-detail">7 of 7 recent H2H results under 50.5. Average combined 41.1. Form model 47.1. Raiders the lowest combined team in the competition. Every signal aligned. Standard line, standard odds — no adjustment needed for high confidence.</div>
-      <div class="multi-conf">80% confidence · Standard line</div>
-    </div>
-
-    <div class="multi-legs-label">Adjusted Line Multi — 3 to 5 Legs (~85%+ per leg)</div>
-
-    <div style="font-size:13px;color:rgba(241,231,206,0.65);margin-bottom:16px;line-height:1.6;">
-      Each leg shows a confidence curve across NRL scoring increments — how often the H2H results would have cleared the adjusted line at each buffer. For UNDER bets the line moves UP (more room). For OVER bets the line moves DOWN (lower threshold). The highlighted row is the recommended pick: best balance of confidence and usable odds. Verify all alternate lines with your bookmaker before placing.
-    </div>
-
-    <!-- LEG 1 -->
-    <div class="multi-leg">
-      <div class="multi-leg-label">Leg 1 · Adjusted Under <span class="multi-leg-tag tag-100">Flat 100%</span></div>
-      <div class="multi-leg-pick">Storm v Raiders</div>
-      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 50.5. H2H maximum was 50 — the curve is flat at 100% from the standard line upward. Pick whichever adjusted line your bookmaker prices well. Under 52–54 is the sweet spot for usable odds.</div>
-      <table class="curve-table">
-        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-        <tbody>
-          <tr><td>+0 (standard)</td><td>50.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.85–$2.00</td></tr>
-          <tr><td>+2 / conversion</td><td>52.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.40–$1.55</td></tr>
-          <tr class="curve-pick"><td>+4 / try ← pick</td><td>54.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.18–$1.28</td></tr>
-          <tr><td>+6 / converted try</td><td>56.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
-          <tr><td>+8 / try + conv</td><td>58.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.04–$1.08</td></tr>
-          <tr><td>+12 / 2 conv tries</td><td>62.5</td><td>7/7</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
-        </tbody>
-      </table>
-      <div class="curve-note">Flat curve — any line above 50.5 is 100% on the available sample (n=7). Pick the line your bookmaker prices at $1.15–$1.25.</div>
-    </div>
-
-    <!-- LEG 2 -->
-    <div class="multi-leg">
-      <div class="multi-leg-label">Leg 2 · Adjusted Under <span class="multi-leg-tag tag-100">Flat 100%</span></div>
-      <div class="multi-leg-pick">Tigers v Dolphins</div>
-      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 51.5. All 4 H2H results sit below the standard — curve is flat at 100% from +0. Average combined 43.2, giving roughly 8–10 points of margin at most adjusted lines. Small sample (n=4).</div>
-      <table class="curve-table">
-        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-        <tbody>
-          <tr><td>+0 (standard)</td><td>51.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.90–$2.10</td></tr>
-          <tr><td>+2 / conversion</td><td>53.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.50–$1.65</td></tr>
-          <tr class="curve-pick"><td>+4 / try ← pick</td><td>55.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.18–$1.28</td></tr>
-          <tr><td>+6 / converted try</td><td>57.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
-          <tr><td>+8 / try + conv</td><td>59.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.04–$1.08</td></tr>
-          <tr><td>+12 / 2 conv tries</td><td>63.5</td><td>4/4</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
-        </tbody>
-      </table>
-      <div class="curve-note">Flat curve from n=4. Small sample — the pattern is clear but not statistically deep. Pick $1.15–$1.25 range.</div>
-    </div>
-
-    <!-- LEG 3 -->
-    <div class="multi-leg">
-      <div class="multi-leg-label">Leg 3 · Adjusted Over <span class="multi-leg-tag tag-85">100% at -2</span></div>
-      <div class="multi-leg-pick">Roosters v Sharks</div>
-      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 50.5. At the standard, 3/4 hit (49 narrowly misses). Move line down by 2 (to 48.5) and it's 4/4. The 2025 finals game (30 combined) is excluded — finals context is structurally different and not a valid pattern signal. H2H results used: 49, 56, 58, 68.</div>
-      <table class="curve-table">
-        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-        <tbody>
-          <tr><td>-0 (standard)</td><td>50.5</td><td>3/4</td><td class="curve-85">75%</td><td>$1.60–$1.80</td></tr>
-          <tr class="curve-pick"><td>-2 / conversion ← pick</td><td>48.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.40–$1.55</td></tr>
-          <tr><td>-4 / try</td><td>46.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.20–$1.35</td></tr>
-          <tr><td>-6 / converted try</td><td>44.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.10–$1.18</td></tr>
-          <tr><td>-8 / try + conv</td><td>42.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.05–$1.10</td></tr>
-          <tr><td>-12 / 2 conv tries</td><td>38.5</td><td>4/4</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
-        </tbody>
-      </table>
-      <div class="curve-note">Over 48.5 is the best value point — 100% on 4 regular-season meetings at reasonable odds. The extra buffer to -4 only adds $0.10–$0.20 per leg for the same hit rate.</div>
-    </div>
-
-    <div class="multi-odds-row">
-      <div class="multi-odds-block">
-        <div class="multi-odds-label">3-Leg Est. Odds</div>
-        <div class="multi-odds-value">~$1.70–$2.10</div>
-        <div class="multi-odds-sub">Varies by lines you pick · $1.23 avg at sweet spot</div>
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-teams">Eels v Rabbitohs</div>
+        <div class="card-meta">Thu 25 Jun &bull; 7:50pm &bull; CommBank Stadium</div>
       </div>
-      <div class="multi-odds-block">
-        <div class="multi-odds-label">Confidence Each Leg</div>
-        <div class="multi-odds-value">85–100%</div>
-        <div class="multi-odds-sub">Legs 1–2 flat 100% · Leg 3 100% at -2</div>
+      <div class="tier-badge tier-WATCH">&#128065; WATCH</div>
+    </div>
+    <div class="card-body">
+      <div class="signals">
+        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">5/6 Under 60</div><div class="sig-sub">Avg 45.3pts &bull; last 4: 42, 48, 52, 68</div></div>
+        <div class="signal"><div class="sig-label">Eels 2026 Form</div><div class="sig-val">55.3 avg</div><div class="sig-sub">67% U60 &bull; last 3: 50, 72, 56</div></div>
+        <div class="signal"><div class="sig-label">Rabbitohs 2026</div><div class="sig-val">53.6 avg</div><div class="sig-sub">73% U60 &bull; last 3: 36, 44, 70</div></div>
+        <div class="signal"><div class="sig-label">Key News</div><div class="sig-val">Mitchell OUT</div><div class="sig-sub">4 wks calf &bull; #11 ZeroTackle scorer</div></div>
       </div>
-      <div class="multi-odds-block">
-        <div class="multi-odds-label">All 3 Hitting</div>
-        <div class="multi-odds-value">~72–85%</div>
-        <div class="multi-odds-sub">Compounded confidence est.</div>
+      <div class="verdict WATCH">H2H supports under (5/6, avg 45.3) but both teams cracked 70+ recently. Mitchell OUT reduces Souths firepower. Combined 2026 avg ~54.4 sits higher than H2H suggests. <strong>Slight under lean only if line posts above 50.</strong>
+        <div class="exp-line">Model expectation: ~48pts &bull; PointsBet: Rabbitohs -6.5</div>
       </div>
     </div>
+  </div>
 
-    <div class="multi-legs-label" style="margin-top:20px">Legs 4–5 — Extending the Multi (85%+ threshold at wider buffer)</div>
-
-    <!-- LEG 4 -->
-    <div class="multi-leg multi-leg-weak">
-      <div class="multi-leg-label">Leg 4 · Adjusted Under <span class="multi-leg-tag tag-85">86% at +6</span></div>
-      <div class="multi-leg-pick">Knights v Dragons</div>
-      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 48.5. The curve climbs gradually — hits 86% at +6, reaches 100% at +12. H2H results: 26, 35, 37, 40, 44, 54, 60. Two outliers (54, 60) drive the pattern — the average (42.3) sits well below line. Directional conflict: form model (50.8) leans over, H2H drives this under call.</div>
-      <table class="curve-table">
-        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-        <tbody>
-          <tr><td>+0 (standard)</td><td>48.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.50–$1.65</td></tr>
-          <tr><td>+2 / conversion</td><td>50.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.35–$1.50</td></tr>
-          <tr><td>+4 / try</td><td>52.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.25–$1.35</td></tr>
-          <tr class="curve-pick"><td>+6 / converted try ← 85% threshold</td><td>54.5</td><td>6/7</td><td class="curve-90">86%</td><td>$1.10–$1.18</td></tr>
-          <tr><td>+8 / try + conv</td><td>56.5</td><td>6/7</td><td class="curve-90">86%</td><td>$1.06–$1.12</td></tr>
-          <tr><td>+12 / 2 conv tries</td><td>60.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.03–$1.06</td></tr>
-        </tbody>
-      </table>
-      <div class="curve-note">Need a full converted try of buffer to clear 85%. The 100% mark requires +12 — odds at that point become negligible. Best pick: Under 54.5 at 86%.</div>
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-teams">Titans v Bulldogs</div>
+        <div class="card-meta">Fri 26 Jun &bull; 6:00pm &bull; Cbus Super Stadium</div>
+      </div>
+      <div class="tier-badge tier-SOLID">&#128993; SOLID</div>
     </div>
-
-    <!-- LEG 5 -->
-    <div class="multi-leg multi-leg-weak">
-      <div class="multi-leg-label">Leg 5 · Adjusted Under <span class="multi-leg-tag tag-85">86% at +8</span></div>
-      <div class="multi-leg-pick">Bulldogs v Sea Eagles</div>
-      <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 48.5. Needs 8 points of buffer to reach 86%. H2H average 45.3 — the outlier (approx 66) is the only result keeping this below 100% at reasonable buffers. Never reaches 100% inside +12.</div>
-      <table class="curve-table">
-        <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-        <tbody>
-          <tr><td>+0 (standard)</td><td>48.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.50–$1.65</td></tr>
-          <tr><td>+2 / conversion</td><td>50.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.35–$1.50</td></tr>
-          <tr><td>+4 / try</td><td>52.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.25–$1.35</td></tr>
-          <tr><td>+6 / converted try</td><td>54.5</td><td>5/7</td><td class="curve-85">71%</td><td>$1.15–$1.22</td></tr>
-          <tr class="curve-pick"><td>+8 / try + conv ← 85% threshold</td><td>56.5</td><td>6/7</td><td class="curve-90">86%</td><td>$1.06–$1.12</td></tr>
-          <tr><td>+12 / 2 conv tries</td><td>60.5</td><td>6/7</td><td class="curve-90">86%</td><td class="curve-muted">$1.03–$1.05</td></tr>
-          <tr><td>+18 / 3 conv tries</td><td>66.5</td><td>7/7</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
-        </tbody>
-      </table>
-      <div class="curve-note">Needs two converted tries of buffer to reach 86%. Odds at Under 56.5 are low (~$1.08). Treat as insurance only — minimal return, genuine 86% pattern.</div>
-    </div>
-
-
-    <div style="margin-top:28px;border-top:1px solid rgba(255,255,255,0.1);padding-top:24px">
-      <div class="multi-legs-label" style="color:var(--tl-strong);margin-top:0">Hyperconservative Multi — 3 to 4 Legs (90%+ Each Leg)</div>
-      <div style="font-size:13px;color:rgba(241,231,206,0.65);margin-bottom:16px;line-height:1.6;">
-        Legs use adjusted lines where 90%+ of H2H data would have hit. Confidence is near-maximum; odds per leg are lower. Best used as a stake-protection play — smaller outlay, near-certainty hit rate. Confidence curves below show full range so you can match to whatever your bookmaker prices.
+    <div class="card-body">
+      <div class="signals">
+        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">3/6 Under 60</div><div class="sig-sub">Avg 52.7pts &bull; last 4: 56, 62, 64, 64</div></div>
+        <div class="signal"><div class="sig-label">Titans 2026 Form</div><div class="sig-val">42.9 avg</div><div class="sig-sub">82% U60 &bull; last 3: 46, 32, 60</div></div>
+        <div class="signal"><div class="sig-label">Bulldogs 2026</div><div class="sig-val">44.8 avg</div><div class="sig-sub">100% U60 &bull; last 3: 40, 24, 29</div></div>
+        <div class="signal"><div class="sig-label">Over-60 Freq</div><div class="sig-val">18% combined</div><div class="sig-sub">Titans 23% &bull; Bulldogs 13%</div></div>
       </div>
-
-      <!-- HYPER LEG 1 -->
-      <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
-        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 1 · Storm v Raiders — Adjusted Under <span class="multi-leg-tag tag-100">100% from standard</span></div>
-        <div class="multi-leg-pick">Pick any line above 50.5</div>
-        <div class="multi-leg-detail" style="margin-bottom:8px">Every H2H result clears the standard line. Recommended: Under 51–52 for 100% at usable odds. Under 51.5 is the safest hyperconservative pick — just above standard, maximum historical certainty.</div>
-        <table class="curve-table">
-          <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-          <tbody>
-            <tr class="curve-pick"><td>+0.5 ← hyper pick</td><td>51.0</td><td>7/7</td><td class="curve-100">100%</td><td>$1.55–$1.70</td></tr>
-            <tr><td>+2 / conversion</td><td>52.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.40–$1.55</td></tr>
-            <tr><td>+6 / converted try</td><td>56.5</td><td>7/7</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
-            <tr><td>+12 / 2 conv tries</td><td>62.5</td><td>7/7</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- HYPER LEG 2 -->
-      <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
-        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 2 · Tigers v Dolphins — Adjusted Under <span class="multi-leg-tag tag-100">100% from standard</span></div>
-        <div class="multi-leg-pick">Pick any line above 51.5</div>
-        <div class="multi-leg-detail" style="margin-bottom:8px">Flat curve from n=4. Average combined 43.2. Any adjusted line is 100%. Under 53 balances odds and confidence — 1.5 points above standard.</div>
-        <table class="curve-table">
-          <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-          <tbody>
-            <tr class="curve-pick"><td>+1.5 ← hyper pick</td><td>53.0</td><td>4/4</td><td class="curve-100">100%</td><td>$1.55–$1.70</td></tr>
-            <tr><td>+4 / try</td><td>55.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.18–$1.28</td></tr>
-            <tr><td>+6 / converted try</td><td>57.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- HYPER LEG 3 -->
-      <div class="multi-leg" style="border-color:rgba(22,101,52,0.4);background:rgba(22,101,52,0.08)">
-        <div class="multi-leg-label" style="color:var(--tl-strong)">Leg 3 · Roosters v Sharks — Adjusted Over <span class="multi-leg-tag tag-100">100% at -2</span></div>
-        <div class="multi-leg-pick">Over 48.5 (line down 2 from standard)</div>
-        <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 50.5. Move down 2 points to reach 100% on 4 regular-season H2H games. The 2025 finals game (30 combined) is excluded. Recommended: Over 48.5.</div>
-        <table class="curve-table">
-          <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-          <tbody>
-            <tr><td>-0 (standard)</td><td>50.5</td><td>3/4</td><td class="curve-85">75%</td><td>$1.60–$1.80</td></tr>
-            <tr class="curve-pick"><td>-2 / conversion ← hyper pick</td><td>48.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.40–$1.55</td></tr>
-            <tr><td>-4 / try</td><td>46.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.18–$1.30</td></tr>
-            <tr><td>-8 / try + conv</td><td>42.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.05–$1.10</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- HYPER LEG 4 (optional) -->
-      <div class="multi-leg multi-leg-weak" style="background:rgba(220,70,54,0.07);border-color:rgba(242,193,78,0.3)">
-        <div class="multi-leg-label" style="color:var(--butter)">Optional Leg 4 · Titans v Panthers — Adjusted Under <span class="multi-leg-tag tag-flat">Bimodal — caveat</span></div>
-        <div class="multi-leg-pick">Under 56.5 (line up 6 from standard)</div>
-        <div class="multi-leg-detail" style="margin-bottom:8px">Standard line 50.5. H2H: 22, 30, 54, 56 (n=4). The curve reaches 100% at +6 — but note the bimodal pattern: two games in the 20s–30s, two in the 54–56 range. A future game in the 57–62 range is plausible. Use as a 4th leg only if comfortable with the sample structure.</div>
-        <table class="curve-table">
-          <thead><tr><th>Buffer</th><th>Adj Line</th><th>H2H</th><th>Conf</th><th>Est Odds</th></tr></thead>
-          <tbody>
-            <tr><td>+0 (standard)</td><td>50.5</td><td>2/4</td><td class="curve-muted">50%</td><td>$1.85–$2.00</td></tr>
-            <tr><td>+4 / try</td><td>54.5</td><td>3/4</td><td class="curve-85">75%</td><td>$1.20–$1.35</td></tr>
-            <tr class="curve-pick"><td>+6 / converted try ← pick</td><td>56.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.08–$1.15</td></tr>
-            <tr><td>+8 / try + conv</td><td>58.5</td><td>4/4</td><td class="curve-100">100%</td><td>$1.04–$1.08</td></tr>
-            <tr><td>+12 / 2 conv tries</td><td>62.5</td><td>4/4</td><td class="curve-100">100%</td><td class="curve-muted">Negligible</td></tr>
-          </tbody>
-        </table>
-        <div class="curve-note">Bimodal H2H — two low-scoring clusters, two high. The 100% at +6 is sitting right at the top of the high-scoring cluster. A fifth game in the 57–65 range busts this. Treat as an optional, risk-acknowledged 4th leg only.</div>
-      </div>
-
-      <div class="multi-odds-row" style="margin-top:16px">
-        <div class="multi-odds-block">
-          <div class="multi-odds-label">3-Leg / 4-Leg Odds</div>
-          <div class="multi-odds-value" style="color:var(--tl-strong)">~$1.55–$2.00</div>
-          <div class="multi-odds-sub">Depends on lines chosen · ~$1.55 at tightest, ~$2.00 with room</div>
-        </div>
-        <div class="multi-odds-block">
-          <div class="multi-odds-label">Confidence Each Leg</div>
-          <div class="multi-odds-value" style="color:var(--tl-strong)">~100%</div>
-          <div class="multi-odds-sub">Legs 1–3 clean · Leg 4 bimodal caveat</div>
-        </div>
-        <div class="multi-odds-block">
-          <div class="multi-odds-label">All 3 / All 4 Hitting</div>
-          <div class="multi-odds-value" style="color:var(--tl-strong)">~85–95% / ~75–85%</div>
-          <div class="multi-odds-sub">Compounded, small samples</div>
-        </div>
-      </div>
-
-      <div class="multi-caveat" style="margin-top:12px">
-        <strong style="font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--cherry);">Hyperconservative caveat</strong><br>
-        100% hit rate from 4–7 games is not a statistical certainty — it is a strong pattern in a small sample. The purpose of this multi is to maximise hit probability at the cost of returns. Verify all adjusted line prices with your bookmaker before placing.
+      <div class="verdict SOLID">2026 form overwhelms H2H noise. <strong>Bulldogs haven't cracked 60 all season (100% U60).</strong> Signal conflict noted but this season's data is dominant. SOLID lean under.
+        <div class="exp-line">Model expectation: ~44pts</div>
       </div>
     </div>
+  </div>
 
-    <div class="multi-caveat">
-      <strong style="font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--butter);">Before placing</strong><br>
-      Adjusted (alternate) totals markets are not available at all bookmakers. Prices listed are estimates — actual prices vary by platform and may not match. H2H samples are small (4–7 games), not 50-game certainties. Check team lists Thursday/Friday — absences to key halves, fullback, or starters can shift the model. The confidence curve shows historical hit rates, not guaranteed future outcomes. Never bet more than you're comfortable losing.
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-teams">Broncos v Roosters</div>
+        <div class="card-meta">Fri 26 Jun &bull; 8:00pm &bull; Suncorp Stadium</div>
+      </div>
+      <div class="tier-badge tier-SOLID">&#128993; SOLID</div>
     </div>
+    <div class="card-body">
+      <div class="signals">
+        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/8 Under 60</div><div class="sig-sub">Avg 49.0pts &bull; last 4: 44, 50, 58, 62</div></div>
+        <div class="signal"><div class="sig-label">Broncos 2026</div><div class="sig-val">47.1 avg</div><div class="sig-sub">75% U60 &bull; last 3: 32, 72, 26</div></div>
+        <div class="signal"><div class="sig-label">Roosters 2026</div><div class="sig-val">49.7 avg</div><div class="sig-sub">64% U60 &bull; conceding 22.7/game</div></div>
+        <div class="signal"><div class="sig-label">Key News</div><div class="sig-val">Reynolds OUT</div><div class="sig-sub">Mam OUT (shoulder) &bull; Walsh/Staggs/Haas back</div></div>
+      </div>
+      <div class="verdict SOLID"><strong>Without Reynolds/Mam at halves, Broncos attack limited despite Origin returns.</strong> Roosters' defensive numbers are elite. H2H 6/8 SOLID. SOLID lean under.
+        <div class="exp-line">Model expectation: ~48pts &bull; PointsBet: Roosters -5.5</div>
+      </div>
+    </div>
+  </div>
 
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-teams">Dolphins v Warriors</div>
+        <div class="card-meta">Sat 27 Jun &bull; 3:00pm &bull; Suncorp Stadium</div>
+      </div>
+      <div class="tier-badge tier-SOLID">&#128993; SOLID</div>
+    </div>
+    <div class="card-body">
+      <div class="signals">
+        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/7 Under 60</div><div class="sig-sub">Avg 42.3pts &bull; last 4: 38, 38, 44, 44</div></div>
+        <div class="signal"><div class="sig-label">Dolphins 2026</div><div class="sig-val">48.1 avg</div><div class="sig-sub">82% U60 &bull; last 3: 48, 32, 70</div></div>
+        <div class="signal"><div class="sig-label">Warriors 2026</div><div class="sig-val">48.5 avg</div><div class="sig-sub">92% U60 &bull; conceding 17.8/game</div></div>
+        <div class="signal"><div class="sig-label">Over-60 Risk</div><div class="sig-val">Dolphins 27%</div><div class="sig-sub">Highest in NRL &bull; Warriors 9% (lowest)</div></div>
+      </div>
+      <div class="verdict SOLID">H2H 6/7 is technically HIGH but Dolphins 27% over-60 frequency drops this to SOLID. <strong>Warriors suppress high-scoring matchups better than anyone.</strong> Warriors D is the anchor.
+        <div class="exp-line">Model expectation: ~45pts &bull; PointsBet: Dolphins -5.5</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-teams">Cowboys v Panthers</div>
+        <div class="card-meta">Sat 27 Jun &bull; 5:30pm &bull; QLD Country Bank Stadium</div>
+      </div>
+      <div class="tier-badge tier-HIGH">&#128994; HIGH</div>
+    </div>
+    <div class="card-body">
+      <div class="signals">
+        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">7/8 Under 60</div><div class="sig-sub">Avg 42.8pts &bull; last 4: 46, 46, 50, 56</div></div>
+        <div class="signal"><div class="sig-label">Cowboys 2026</div><div class="sig-val">49.6 avg</div><div class="sig-sub">69% U60 &bull; last 3: 46, 60, 46</div></div>
+        <div class="signal"><div class="sig-label">Panthers 2026</div><div class="sig-val">44.4 avg</div><div class="sig-sub">83% U60 &bull; last 3: 44, 32, 26</div></div>
+        <div class="signal"><div class="sig-label">Panthers Over-60</div><div class="sig-val">8% frequency</div><div class="sig-sub">2nd lowest NRL &bull; Cleary/Yeo/To'o back</div></div>
+      </div>
+      <div class="verdict HIGH"><strong>All signals align.</strong> Panthers are the gold standard for under-60 matchups (8% over-60, 83% U60 in 2026). Cleary returns boosting quality but Penrith wins are controlled, not blowouts. H2H 7/8, avg 42.8. <strong>TOP PICK OF THE ROUND.</strong>
+        <div class="exp-line">Model expectation: ~43pts &bull; PointsBet: Panthers -11.5</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-teams">Sea Eagles v Storm</div>
+        <div class="card-meta">Sat 27 Jun &bull; 7:35pm &bull; 4 Pines Park</div>
+      </div>
+      <div class="tier-badge tier-SOLID">&#128993; SOLID</div>
+    </div>
+    <div class="card-body">
+      <div class="signals">
+        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">5/7 Under 60</div><div class="sig-sub">Avg 44.3pts &bull; last 4: 36, 46, 66, 72</div></div>
+        <div class="signal"><div class="sig-label">Sea Eagles 2026</div><div class="sig-val">47.9 avg</div><div class="sig-sub">83% U60 &bull; last 3: 49, 52, 57</div></div>
+        <div class="signal"><div class="sig-label">Storm 2026</div><div class="sig-val">48.6 avg</div><div class="sig-sub">77% U60 &bull; last 3: 32, 66, 56</div></div>
+        <div class="signal"><div class="sig-label">Key Injury</div><div class="sig-val">Hughes OUT</div><div class="sig-sub">Hamstring &bull; 18 try assists (joint NRL lead)</div></div>
+      </div>
+      <div class="verdict SOLID"><strong>Hughes OUT is the decisive variable</strong> &mdash; Storm's creative output drops. Sea Eagles last 3: [49, 52, 57] &mdash; textbook under consistency. H2H 5/7 SOLID. SOLID lean under, materially strengthened by Hughes injury.
+        <div class="exp-line">Model expectation: ~45pts</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-teams">Raiders v Dragons</div>
+        <div class="card-meta">Sun 28 Jun &bull; 2:00pm &bull; GIO Stadium</div>
+      </div>
+      <div class="tier-badge tier-HIGH">&#128994; HIGH</div>
+    </div>
+    <div class="card-body">
+      <div class="signals">
+        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">6/7 Under 60</div><div class="sig-sub">Avg 42.3pts &bull; last 4: 46, 50, 52, 62</div></div>
+        <div class="signal"><div class="sig-label">Raiders 2026</div><div class="sig-val">47.5 avg</div><div class="sig-sub">92% U60 &bull; last 3: 24, 46, 57</div></div>
+        <div class="signal"><div class="sig-label">Dragons 2026</div><div class="sig-val">47.1 avg</div><div class="sig-sub">83% U60 &bull; scoring 14.3pts/game</div></div>
+        <div class="signal"><div class="sig-label">Raiders U60</div><div class="sig-val">92% in 2026</div><div class="sig-sub">Most consistent under team this season</div></div>
+      </div>
+      <div class="verdict HIGH">H2H 6/7 (86%, avg 42.3) + Raiders most consistent under team (92% U60). <strong>Dragons avg 14.3pts scored &mdash; bottom offensive output in NRL.</strong> Dragons' 66 was an outlier. HIGH confidence.
+        <div class="exp-line">Model expectation: ~43pts &bull; PointsBet: Raiders -10.5</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-teams">Knights v Wests Tigers</div>
+        <div class="card-meta">Sun 28 Jun &bull; 4:05pm &bull; McDonald Jones Stadium</div>
+      </div>
+      <div class="tier-badge tier-HIGH">&#128994; HIGH</div>
+    </div>
+    <div class="card-body">
+      <div class="signals">
+        <div class="signal"><div class="sig-label">H2H Since 2022</div><div class="sig-val">8/9 Under 60</div><div class="sig-sub">Avg 36.0pts &bull; last 4: 34, 52, 52, 64</div></div>
+        <div class="signal"><div class="sig-label">Knights 2026</div><div class="sig-val">53.8 avg</div><div class="sig-sub">75% U60 &bull; last 3: 50, 52, 46</div></div>
+        <div class="signal"><div class="sig-label">Tigers 2026</div><div class="sig-val">50.9 avg</div><div class="sig-sub">55% U60 &bull; last 3: 46, 36, 60</div></div>
+        <div class="signal"><div class="sig-label">H2H Avg</div><div class="sig-val">36.0 pts</div><div class="sig-sub">Lowest of any matchup in dataset</div></div>
+      </div>
+      <div class="verdict HIGH"><strong>8/9 under 60, avg 36 pts &mdash; extraordinary H2H record.</strong> Lowest average of any matchup in the entire historical dataset. Tigers running hotter in 2026 but combined model expectation ~52 sits comfortably under 60. HIGH on H2H dominance.
+        <div class="exp-line">Model expectation: ~48pts</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="round-summary">
+  <div class="rs-title">Round Summary</div>
+  <div class="rs-section">
+    <div class="rs-section-label">&#128994; Bet Under</div>
+    <div class="rs-item"><strong>Cowboys v Panthers</strong> &mdash; 88% H2H, Panthers 8% over-60, all signals align</div>
+    <div class="rs-item"><strong>Raiders v Dragons</strong> &mdash; 86% H2H, Raiders 92% U60, Dragons bottom offensive output</div>
+    <div class="rs-item"><strong>Knights v Tigers</strong> &mdash; 89% H2H, avg 36.0pts &mdash; strongest record in dataset</div>
+  </div>
+  <div class="rs-section">
+    <div class="rs-section-label">&#128993; Lean Under</div>
+    <div class="rs-item"><strong>Broncos v Roosters</strong> &mdash; 75% H2H, Roosters elite D, no Broncos halves</div>
+    <div class="rs-item"><strong>Dolphins v Warriors</strong> &mdash; 86% H2H offset by Dolphins volatility; Warriors D dominant</div>
+    <div class="rs-item"><strong>Sea Eagles v Storm</strong> &mdash; Hughes OUT materially strengthens the case</div>
+    <div class="rs-item"><strong>Titans v Bulldogs</strong> &mdash; 2026 form dominant over H2H split</div>
+  </div>
+  <div class="rs-section">
+    <div class="rs-section-label">&#128065; Watch</div>
+    <div class="rs-item"><strong>Eels v Rabbitohs</strong> &mdash; H2H supports but both teams volatile; Mitchell OUT helps</div>
   </div>
 </div>
 
-<!-- ROUND SUMMARY TABLE -->
-<p class="section-head">Round 16 Summary</p>
-<div style="background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(33,28,20,0.06);margin-top:16px">
-  <table style="width:100%;border-collapse:collapse;font-size:14px">
-    <thead>
-      <tr style="background:var(--ink)">
-        <th style="text-align:left;padding:10px 14px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Game</th>
-        <th style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Line</th>
-        <th style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Model</th>
-        <th style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">H2H Avg</th>
-        <th style="text-align:left;padding:10px 14px;font-family:Roboto Mono,monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--waste)">Verdict</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="border-bottom:1px solid rgba(33,28,20,0.06)">
-        <td style="padding:10px 14px;font-weight:500">Knights v Dragons</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">48.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">50.8</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">42.3</td>
-        <td style="padding:10px 14px;color:var(--tl-lean);font-family:Roboto Mono,monospace;font-size:12px">LEAN UNDER (58%)</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(33,28,20,0.06);background:rgba(242,193,78,0.05)">
-        <td style="padding:10px 14px;font-weight:500">Tigers v Dolphins</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">51.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">51.2</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">43.2</td>
-        <td style="padding:10px 14px;color:var(--tl-bet);font-family:Roboto Mono,monospace;font-size:12px;font-weight:600">BET UNDER (70%)</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(33,28,20,0.06)">
-        <td style="padding:10px 14px;font-weight:500">Titans v Panthers</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">50.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">45.7</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">40.6</td>
-        <td style="padding:10px 14px;color:var(--tl-lean);font-family:Roboto Mono,monospace;font-size:12px">LEAN UNDER (58%)</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(33,28,20,0.06)">
-        <td style="padding:10px 14px;font-weight:500">Bulldogs v Sea Eagles</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">48.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">45.3</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">45.3</td>
-        <td style="padding:10px 14px;color:var(--tl-lean);font-family:Roboto Mono,monospace;font-size:12px">LEAN UNDER (60%)</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(33,28,20,0.06)">
-        <td style="padding:10px 14px;font-weight:500">Warriors v Cowboys</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">49.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">48.0</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">48.9</td>
-        <td style="padding:10px 14px;color:var(--blue);font-family:Roboto Mono,monospace;font-size:12px">LEAN OVER (58%)</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(33,28,20,0.06);background:rgba(220,70,54,0.05)">
-        <td style="padding:10px 14px;font-weight:500">Storm v Raiders</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">50.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">47.1</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">41.1</td>
-        <td style="padding:10px 14px;color:var(--tl-strong);font-family:Roboto Mono,monospace;font-size:12px;font-weight:700">STRONG BET UNDER (80%)</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 14px;font-weight:500">Roosters v Sharks</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px">50.5</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">50.0</td>
-        <td style="text-align:center;padding:10px 8px;font-family:Roboto Mono,monospace;font-size:12px;color:var(--waste)">54.3*</td>
-        <td style="padding:10px 14px;color:var(--blue);font-family:Roboto Mono,monospace;font-size:12px">LEAN OVER (63%)</td>
-      </tr>
-    </tbody>
-  </table>
-  <p style="font-size:11px;color:var(--waste);padding:8px 14px;">*Roosters v Sharks H2H avg excludes 2025 finals game. Source: ausportsbetting.com</p>
+<div class="nav-row">
+  <a href="tryscorers.html" class="nav-link">Try Scorer Picks &#8594;</a>
 </div>
 
-<!-- SEASON TABLE -->
-<p class="section-head">2026 Season Averages — All Teams (Through Round 15)</p>
-<table class="season-table">
-  <thead>
-    <tr><th style="text-align:left">Team</th><th>GP</th><th>Avg Scored</th><th>Avg Conceded</th><th>Avg Combined</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Penrith Panthers</td><td>13</td><td class="top3">33.6</td><td class="top3">12.6</td><td>46.2</td></tr>
-    <tr><td>South Sydney Rabbitohs</td><td>13</td><td class="top3">29.7</td><td>23.1</td><td>52.8</td></tr>
-    <tr><td>Dolphins</td><td>13</td><td class="top3">29.1</td><td>20.2</td><td>49.3</td></tr>
-    <tr><td>New Zealand Warriors</td><td>13</td><td>28.9</td><td class="top3">17.2</td><td>46.1</td></tr>
-    <tr><td>Newcastle Knights</td><td>13</td><td>28.5</td><td>26.0</td><td>54.5</td></tr>
-    <tr><td>Manly Sea Eagles</td><td>13</td><td>28.2</td><td class="top3">19.2</td><td>47.4</td></tr>
-    <tr><td>Cronulla Sharks</td><td>13</td><td>28.2</td><td>23.2</td><td>51.4</td></tr>
-    <tr><td>Sydney Roosters</td><td>13</td><td>25.6</td><td>22.9</td><td>48.5</td></tr>
-    <tr><td>North Queensland Cowboys</td><td>14</td><td>24.5</td><td>25.4</td><td>49.9</td></tr>
-    <tr><td>Melbourne Storm</td><td>14</td><td>24.7</td><td>24.9</td><td>49.6</td></tr>
-    <tr><td>Wests Tigers</td><td>13</td><td>23.9</td><td>29.3</td><td>53.2</td></tr>
-    <tr><td>Parramatta Eels</td><td>14</td><td>20.3</td><td>30.9</td><td>51.2</td></tr>
-    <tr><td>Brisbane Broncos</td><td>14</td><td>20.1</td><td>27.8</td><td>47.9</td></tr>
-    <tr><td>Gold Coast Titans</td><td>13</td><td>19.1</td><td>26.1</td><td>45.2</td></tr>
-    <tr><td>Canberra Raiders</td><td>14</td><td>18.6</td><td>25.9</td><td>44.5</td></tr>
-    <tr><td>Canterbury Bulldogs</td><td>13</td><td>17.9</td><td>25.4</td><td>43.3</td></tr>
-    <tr><td class="low3">St George Illawarra Dragons</td><td>13</td><td class="low3">14.2</td><td class="low3">32.8</td><td>47.0</td></tr>
-  </tbody>
-</table>
-<p style="font-size:12px;color:var(--waste);margin-top:8px">Teal = top 3 in category. Red = bottom. H2H lines data: ausportsbetting.com. Season averages: ESPN NRL through R15 2026.</p>
-
-</div>
-
-<footer class="site-footer">
-  NRL Totals Model &nbsp;·&nbsp; Round 16, 2026 &nbsp;·&nbsp; Model v2.0 &nbsp;·&nbsp; Data: ausportsbetting.com + ESPN NRL<br>
-  Not financial advice. Verify lines and team lists before betting.<br>
-  <a href="https://github.com/plannerapp22/nrl-totals">github.com/plannerapp22/nrl-totals</a>
-</footer>
-
-<script>
-function toggleMethod(){const b=document.getElementById('method-body'),t=document.getElementById('method-toggle-text');if(b.classList.contains('open')){b.classList.remove('open');t.textContent='Show details ↓'}else{b.classList.add('open');t.textContent='Hide details ↑'}}
-function toggleData(btn){const d=btn.nextElementSibling,s=btn.querySelector('span:first-child'),a=btn.querySelector('span:last-child');if(d.classList.contains('open')){d.classList.remove('open');s.textContent='Show data';a.textContent='↓'}else{d.classList.add('open');s.textContent='Hide data';a.textContent='↑'}}
-</script>
 </body>
 </html>

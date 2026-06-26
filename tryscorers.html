@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NRL Totals — Try Scorer Picks &middot; Round 17</title>
+<title>NRL Try Scorer Picks — Round 17</title>
 <style>
-:root{--bg:#fafafa;--surface:#ffffff;--border:#e4e4e7;--text:#18181b;--text-muted:#6b7280;--text-subtle:#9ca3af;--green:#15803d;--green-bg:#f0fdf4;--blue:#1d4ed8;--blue-bg:#eff6ff;--amber:#b45309;--amber-bg:#fef9c3;--coral:#c2410c;--coral-bg:#fff7ed;--radius:8px;}
+:root{--bg:#fafafa;--surface:#ffffff;--border:#e4e4e7;--text:#18181b;--text-muted:#6b7280;--text-subtle:#9ca3af;--green:#15803d;--green-bg:#f0fdf4;--amber:#b45309;--amber-bg:#fef9c3;--orange:#c2410c;--orange-bg:#fff7ed;--blue:#1d4ed8;--blue-bg:#eff6ff;--red:#b91c1c;--red-bg:#fff1f2;--radius:8px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;}
 .container{max-width:760px;margin:0 auto;padding:32px 20px 80px;}
@@ -16,6 +16,8 @@ nav{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
 nav a{font-size:13px;color:var(--text-muted);text-decoration:none;padding:4px 12px;border:1px solid var(--border);border-radius:4px;}
 nav a:hover{color:var(--text);border-color:var(--text-muted);}
 h2{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin:32px 0 14px;}
+
+/* Best 3 box */
 .best-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:32px;}
 .best-row{display:flex;align-items:baseline;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;}
 .best-row:last-child{border-bottom:none;}
@@ -23,29 +25,43 @@ h2{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em
 .best-name{font-size:15px;font-weight:700;}
 .best-detail{font-size:12px;color:var(--text-muted);flex:1;}
 .best-odds{font-size:13px;font-weight:600;color:var(--blue);white-space:nowrap;}
+
+/* Odds guide */
+.odds-guide{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
+.odds-pill{font-size:12px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-muted);background:var(--surface);}
+
+/* Game blocks */
 .game-block{margin-bottom:36px;}
 .game-title{font-size:17px;font-weight:600;margin-bottom:2px;}
 .game-meta{font-size:12px;color:var(--text-muted);margin-bottom:14px;}
+
+/* Pick cards */
 .pick-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;}
 .pick-card.pa{border-left-color:var(--blue);}
 .pick-card.pb{border-left-color:var(--amber);}
-.pick-card.pc{border-left-color:var(--coral);}
+.pick-card.pc{border-left-color:var(--orange);}
 .pick-card.spec{border-left-color:var(--green);background:var(--green-bg);}
+
 .pick-header{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
 .pick-num{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);}
 .pick-name{font-size:15px;font-weight:700;}
 .pick-pos{font-size:11px;font-weight:600;background:#f4f4f5;color:var(--text-muted);padding:2px 8px;border-radius:3px;}
 .pick-odds{margin-left:auto;font-size:13px;font-weight:600;color:var(--blue);white-space:nowrap;}
+
 .pick-signals{display:flex;flex-direction:column;gap:4px;margin-bottom:8px;}
 .sig{font-size:13px;color:var(--text-muted);padding-left:16px;position:relative;}
 .sig::before{position:absolute;left:0;font-size:11px;top:2px;color:var(--text-subtle);}
 .sig.form::before{content:'&#8594;';}
-.sig.pos::before{content:'&#9678;';}
+.sig.pos::before{content:'&#9670;';}
 .sig.h2h::before{content:'&#8617;';}
 .pick-note{font-size:11px;color:var(--text-subtle);}
+
 .spec-label{display:inline-block;font-size:11px;font-weight:600;background:var(--green);color:#fff;padding:2px 8px;border-radius:3px;margin-bottom:8px;}
-.odds-guide{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
-.odds-pill{font-size:12px;padding:4px 12px;border:1px solid var(--border);border-radius:20px;color:var(--text-muted);background:var(--surface);}
+
+.game-flag{font-size:12px;padding:4px 10px;border-radius:4px;margin-bottom:12px;display:inline-block;}
+.game-flag-warn{background:var(--red-bg);color:var(--red);border:1px solid #fca5a5;}
+.game-flag-under{background:#dbeafe;color:#1d4ed8;border:1px solid #93c5fd;}
+
 .disclaimer{font-size:12px;color:var(--text-subtle);margin-top:32px;padding-top:20px;border-top:1px solid var(--border);line-height:1.8;}
 footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);}
 footer a{color:var(--text-muted);}
@@ -54,278 +70,356 @@ footer a{color:var(--text-muted);}
 </head>
 <body>
 <div class="container">
-  <header>
-    <h1>Try Scorer Picks &middot; Round 17</h1>
-    <div class="meta">8 games &middot; 24 picks &middot; ZeroTackle form &middot; All teams verified &middot; 25&ndash;28 Jun 2026</div>
-    <nav>
-      <a href="index.html">&larr; Scoring report</a>
-      <a href="history.html">Record &amp; history &rarr;</a>
-    </nav>
-  </header>
 
-  <h2>Best 3 this round</h2>
-  <div class="best-box">
-    <div class="best-row">
-      <span class="best-num">1</span>
-      <span class="best-name">Thomas Jenkins</span>
-      <span class="best-detail">Panthers WG &middot; #1 ZeroTackle &middot; 20 tries in 14 games &middot; Cleary returning</span>
-      <span class="best-odds">&#128293; $1.80&ndash;$2.50</span>
+<header>
+  <h1>Try Scorer Picks &middot; Round 17</h1>
+  <div class="meta">7 games &middot; 18 picks &middot; NRL.com stats + ZeroTackle form &middot; All teams verified &middot; 26&ndash;28 Jun 2026</div>
+  <nav>
+    <a href="index.html">&larr; Scoring report</a>
+    <a href="history.html">Record &amp; history &rarr;</a>
+  </nav>
+</header>
+
+<h2>Best 3 this round</h2>
+<div class="best-box">
+  <div class="best-row">
+    <span class="best-num">1</span>
+    <span class="best-name">Thomas Jenkins</span>
+    <span class="best-detail">Panthers WG &middot; #1 NRL scorer &middot; 20 tries in 14 GP &middot; Cleary returning (18 assists)</span>
+    <span class="best-odds">&#128293; $1.80&ndash;$2.50</span>
+  </div>
+  <div class="best-row">
+    <span class="best-num">2</span>
+    <span class="best-name">Greg Marzhew</span>
+    <span class="best-detail">Knights WG &middot; #3 NRL scorer &middot; 15 tries, 17 linebreaks &middot; Home at McDonald Jones</span>
+    <span class="best-odds">&#10003; $2.50&ndash;$3.50</span>
+  </div>
+  <div class="best-row">
+    <span class="best-num">3</span>
+    <span class="best-name">Dallin Watene-Zelezniak</span>
+    <span class="best-detail">Warriors WG &middot; #4 NRL scorer &middot; 15 tries, 4 intercepts &middot; Warriors 2nd on ladder</span>
+    <span class="best-odds">&#10003; $2.50&ndash;$3.50</span>
+  </div>
+</div>
+
+<h2>Estimated odds guide</h2>
+<div class="odds-guide">
+  <span class="odds-pill">&#128293; $1.80&ndash;$2.50 &middot; favourite</span>
+  <span class="odds-pill">&#10003; $2.50&ndash;$3.50 &middot; solid case</span>
+  <span class="odds-pill">&#127919; $3.50&ndash;$5.00 &middot; value pick</span>
+  <span class="odds-pill">&#128142; $5.00&ndash;$8.00 &middot; speculative (0.7u)</span>
+</div>
+
+<h2>Picks by game</h2>
+
+<!-- GAME 1: Titans vs Bulldogs -->
+<div class="game-block">
+  <div class="game-title">Gold Coast Titans v Canterbury-Bankstown Bulldogs</div>
+  <div class="game-meta">Fri 26 Jun &middot; 6:00pm &middot; Cbus Super Stadium, Gold Coast</div>
+
+  <div class="pick-card pa">
+    <div class="pick-header">
+      <span class="pick-num">Pick 1</span>
+      <span class="pick-name">Phillip Sami</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#127919; $3.50&ndash;$5.00</span>
     </div>
-    <div class="best-row">
-      <span class="best-num">2</span>
-      <span class="best-name">Alex Johnston</span>
-      <span class="best-detail">Rabbitohs WG &middot; #2 ZeroTackle &middot; 19 tries in 12 games &middot; 1.58/game</span>
-      <span class="best-odds">&#128293; $1.80&ndash;$2.50</span>
+    <div class="pick-signals">
+      <div class="sig form">#2 NRL post contact metres (1,097) &middot; 314 runs from wing</div>
+      <div class="sig pos">Consistent ball-runner; Bulldogs defence leaks to edges (missed tackles top 5 in NRL)</div>
     </div>
-    <div class="best-row">
-      <span class="best-num">3</span>
-      <span class="best-name">Will Warbrick</span>
-      <span class="best-detail">Storm WG &middot; #6 ZeroTackle &middot; 14 tries in 15 games &middot; Hughes OUT</span>
-      <span class="best-odds">&#128293; $1.80&ndash;$2.50</span>
-    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <h2>Estimated odds guide</h2>
-  <div class="odds-guide">
-    <span class="odds-pill">&#128293; $1.80&ndash;$2.50 &middot; favourite</span>
-    <span class="odds-pill">&#10003; $2.50&ndash;$3.50 &middot; solid case</span>
-    <span class="odds-pill">&#127919; $3.50&ndash;$5.00 &middot; value pick</span>
-    <span class="odds-pill">&#128142; $5.00&ndash;$8.00 &middot; speculative</span>
+  <div class="pick-card pb">
+    <div class="pick-header">
+      <span class="pick-num">Pick 2</span>
+      <span class="pick-name">Jacob Kiraz</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#127919; $3.50&ndash;$5.00</span>
+    </div>
+    <div class="pick-signals">
+      <div class="sig form">#2 NRL offloads (40) &middot; high-volume runner creating own chances</div>
+      <div class="sig pos">Lachlan Galvin (14 linebreak assists) targets edges; Kiraz benefits on last-tackle</div>
+    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
+  </div>
+</div>
+
+<!-- GAME 2: Broncos vs Roosters -->
+<div class="game-block">
+  <div class="game-title">Brisbane Broncos v Sydney Roosters</div>
+  <div class="game-meta">Fri 26 Jun &middot; 8:00pm &middot; Suncorp Stadium, Brisbane</div>
+
+  <div class="pick-card pa">
+    <div class="pick-header">
+      <span class="pick-num">Pick 1</span>
+      <span class="pick-name">James Tedesco</span>
+      <span class="pick-pos">Fullback</span>
+      <span class="pick-odds">&#10003; $2.50&ndash;$3.50</span>
+    </div>
+    <div class="pick-signals">
+      <div class="sig form">2,770 run metres &middot; 7 half breaks &middot; consistently involved at the line</div>
+      <div class="sig pos">Sam Walker (117 pts, 48 goals) targets Tedesco in short-side raids</div>
+    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <h2>Round 17 picks</h2>
-
-  <div class="game-block">
-    <div class="game-title">Parramatta Eels v South Sydney Rabbitohs</div>
-    <div class="game-meta">Thu 25 Jun &middot; 7:50pm &middot; CommBank Stadium</div>
-    <div class="pick-card pa">
-      <div class="pick-header"><span class="pick-num">Pick 1</span><span class="pick-name">Alex Johnston</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128293; $1.80&ndash;$2.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">1.58/game &middot; #2 ZeroTackle &middot; 19 tries in 12 games</div>
-      </div>
-      <div class="pick-note">All-time NRL try scorer &mdash; prolific in all fixtures &middot; CONFIRMED &#10003;</div>
+  <div class="pick-card pb">
+    <div class="pick-header">
+      <span class="pick-num">Pick 2</span>
+      <span class="pick-name">Reece Walsh</span>
+      <span class="pick-pos">Fullback</span>
+      <span class="pick-odds">&#10003; $2.50&ndash;$3.50</span>
     </div>
-    <div class="pick-card pb">
-      <div class="pick-header"><span class="pick-num">Pick 2</span><span class="pick-name">Josh Addo-Carr</span><span class="pick-pos">Wing</span><span class="pick-odds">&#127919; $3.50&ndash;$5.00</span></div>
-      <div class="pick-signals">
-        <div class="sig form">Elite winger &middot; outside ZeroTackle top 25</div>
-      </div>
-      <div class="pick-note">CommBank home advantage &middot; single signal only &middot; CONFIRMED &#10003;</div>
+    <div class="pick-signals">
+      <div class="sig form">Elite attacking fullback &middot; Origin returnee boost</div>
+      <div class="sig pos">Ben Hunt at HB (Reynolds OUT) still targets Walsh in short raids; Broncos at home</div>
     </div>
-    <div class="pick-card pc">
-      <div class="pick-header"><span class="pick-num">Pick 3</span><span class="pick-name">Edward Kosi</span><span class="pick-pos">Wing</span><span class="pick-odds">&#127919; $3.50&ndash;$5.00</span></div>
-      <div class="pick-signals">
-        <div class="sig form">Mitchell OUT redirects ball through Kosi edge</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
-    </div>
+    <div class="pick-note">CONFIRMED &#10003; &middot; Adam Reynolds OUT &mdash; do not pick Reynolds</div>
   </div>
 
-  <div class="game-block">
-    <div class="game-title">Gold Coast Titans v Canterbury Bulldogs</div>
-    <div class="game-meta">Fri 26 Jun &middot; 6:00pm &middot; Cbus Super Stadium</div>
-    <div class="pick-card pa">
-      <div class="pick-header"><span class="pick-num">Pick 1</span><span class="pick-name">Phillip Sami</span><span class="pick-pos">Wing</span><span class="pick-odds">&#10003; $2.50&ndash;$3.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">0.57/game &middot; #22 ZeroTackle &middot; 8 tries in 14 GP</div>
-      </div>
-      <div class="pick-note">Leads Titans in 2026; consistent across 14 games &middot; CONFIRMED &#10003;</div>
+  <div class="pick-card spec">
+    <span class="spec-label">VALUE PLAY &mdash; speculative</span>
+    <div class="pick-header">
+      <span class="pick-name">Kotoni Staggs</span>
+      <span class="pick-pos">Centre</span>
+      <span class="pick-odds">&#128142; $5.00&ndash;$8.00</span>
     </div>
-    <div class="pick-card pb">
-      <div class="pick-header"><span class="pick-num">Pick 2</span><span class="pick-name">Jaylan De Groot</span><span class="pick-pos">Wing</span><span class="pick-odds">&#127919; $3.50&ndash;$5.00</span></div>
-      <div class="pick-signals">
-        <div class="sig form">Fresh starter post-Taumoepeau injury &middot; outside ZT top 25</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-signals">
+      <div class="sig form">Origin returnee &middot; powerful centre with strong finishing ability</div>
+      <div class="sig pos">Broncos home advantage; Hunt-Duffy combination can still create centre chances</div>
     </div>
-    <div class="pick-card pc">
-      <div class="pick-header"><span class="pick-num">Pick 3</span><span class="pick-name">Jacob Kiraz</span><span class="pick-pos">Wing</span><span class="pick-odds">&#127919; $3.50&ndash;$5.00</span></div>
-      <div class="pick-signals">
-        <div class="sig form">40 offloads in 2026 (2nd NRL) &mdash; high line involvement</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-note">0.7 unit &middot; speculative &middot; CONFIRMED &#10003;</div>
+  </div>
+</div>
+
+<!-- GAME 3: Dolphins vs Warriors -->
+<div class="game-block">
+  <div class="game-title">Dolphins v New Zealand Warriors</div>
+  <div class="game-meta">Sat 27 Jun &middot; 3:00pm &middot; Suncorp Stadium, Brisbane</div>
+
+  <div class="pick-card pa">
+    <div class="pick-header">
+      <span class="pick-num">Pick 1</span>
+      <span class="pick-name">Dallin Watene-Zelezniak</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#10003; $2.50&ndash;$3.50</span>
     </div>
+    <div class="pick-signals">
+      <div class="sig form">#4 NRL scorer &middot; 15 tries in 14 GP &middot; 4 intercepts (NRL leader)</div>
+      <div class="sig pos">Warriors 2nd on ladder (10-4) &middot; Te Maire Martin feeding right edge</div>
+    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <div class="game-block">
-    <div class="game-title">Brisbane Broncos v Sydney Roosters</div>
-    <div class="game-meta">Fri 26 Jun &middot; 8:00pm &middot; Suncorp Stadium</div>
-    <div class="pick-card pa">
-      <div class="pick-header"><span class="pick-num">Pick 1</span><span class="pick-name">Mark Nawaqanitawase</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128293; $1.80&ndash;$2.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">1.20/game &middot; #8 ZeroTackle &middot; 12 tries in 10 GP</div>
-        <div class="sig pos">Walker targets left edge; Roosters -5.5 favourites</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+  <div class="pick-card pb">
+    <div class="pick-header">
+      <span class="pick-num">Pick 2</span>
+      <span class="pick-name">Jamayne Isaako</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#127919; $3.50&ndash;$5.00</span>
     </div>
-    <div class="pick-card pb">
-      <div class="pick-header"><span class="pick-num">Pick 2</span><span class="pick-name">Billy Smith</span><span class="pick-pos">Wing</span><span class="pick-odds">&#10003; $2.50&ndash;$3.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">Roosters attack produces multiple tries &middot; moved to wing</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-signals">
+      <div class="sig form">#1 NRL points scorer (180 pts) &middot; est. 12 tries this season</div>
+      <div class="sig pos">Isaiya Katoa (20 linebreak involvements) targets Isaako&rsquo;s edge</div>
     </div>
-    <div class="pick-card pc">
-      <div class="pick-header"><span class="pick-num">Pick 3</span><span class="pick-name">Josiah Karapani</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128142; $5.00&ndash;$8.00</span></div>
-      <div class="pick-signals">
-        <div class="sig form">Origin returns improve Broncos attack; home coverage</div>
-      </div>
-      <div class="pick-note">Speculative &middot; CONFIRMED &#10003;</div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
+  </div>
+</div>
+
+<!-- GAME 4: Cowboys vs Panthers -->
+<div class="game-block">
+  <div class="game-title">North Queensland Cowboys v Penrith Panthers</div>
+  <div class="game-meta">Sat 27 Jun &middot; 5:30pm &middot; QLD Country Bank Stadium, Townsville</div>
+
+  <div class="pick-card pa">
+    <div class="pick-header">
+      <span class="pick-num">Pick 1</span>
+      <span class="pick-name">Thomas Jenkins</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#128293; $1.80&ndash;$2.50</span>
     </div>
+    <div class="pick-signals">
+      <div class="sig form">1.43/game &middot; #1 NRL scorer &middot; 20 tries in 14 GP &middot; 22 linebreaks</div>
+      <div class="sig pos">Nathan Cleary returning (18 try assists, joint NRL leader) &middot; Cowboys edge D regularly exposed</div>
+    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <div class="game-block">
-    <div class="game-title">Dolphins v New Zealand Warriors</div>
-    <div class="game-meta">Sat 27 Jun &middot; 3:00pm &middot; Suncorp Stadium</div>
-    <div class="pick-card pa">
-      <div class="pick-header"><span class="pick-num">Pick 1</span><span class="pick-name">Dallin Watene-Zelezniak</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128293; $1.80&ndash;$2.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">1.07/game &middot; #4 ZeroTackle &middot; 15 tries in 14 GP</div>
-        <div class="sig pos">Warriors attack outside; 4 intercepts (leads NRL)</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+  <div class="pick-card pb">
+    <div class="pick-header">
+      <span class="pick-num">Pick 2</span>
+      <span class="pick-name">Brian To&rsquo;o</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#10003; $2.50&ndash;$3.50</span>
     </div>
-    <div class="pick-card pb">
-      <div class="pick-header"><span class="pick-num">Pick 2</span><span class="pick-name">Jamayne Isaako</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128293; $1.80&nesp;$2.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">0.86/game &middot; #10 ZeroTackle &middot; 12 tries in 14 GP</div>
-        <div class="sig pos">Leads NRL: 180 pts &amp; 66 goals; embedded in all Dolphins attack</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-signals">
+      <div class="sig form">Prolific try scorer &middot; Origin returnee &middot; consistent finisher on left edge</div>
+      <div class="sig pos">Cleary targets both edges equally &middot; To&rsquo;o&rsquo;s direct running game creates own chances</div>
     </div>
-    <div class="pick-card pc">
-      <div class="pick-header"><span class="pick-num">Pick 3</span><span class="pick-name">Charnze Nicoll-Klokstad</span><span class="pick-pos">Wing</span><span class="pick-odds">&#10003; $2.50&ndash;$3.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">1.00/game &middot; #25 ZeroTackle &middot; 7 tries in 7 GP</div>
-        <div class="sig pos">Warriors left edge; post-injury return form</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
-    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <div class="game-block">
-    <div class="game-title">North Queensland Cowboys v Penrith Panthers</div>
-    <div class="game-meta">Sat 27 Jun &middot; 5:30pm &middot; QLD Country Bank Stadium</div>
-    <div class="pick-card pa">
-      <div class="pick-header"><span class="pick-num">Pick 1</span><span class="pick-name">Thomas Jenkins</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128293; $1.80&ndash;$2.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">1.43/game &middot; #1 ZeroTackle &middot; 20 tries in 14 GP</div>
-        <div class="sig pos">Cleary returning (18 try assists); Cowboys edge D leaky</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+  <div class="pick-card spec">
+    <span class="spec-label">VALUE PLAY &mdash; speculative</span>
+    <div class="pick-header">
+      <span class="pick-name">Izack Tago</span>
+      <span class="pick-pos">Centre</span>
+      <span class="pick-odds">&#128142; $5.00&ndash;$8.00</span>
     </div>
-    <div class="pick-card pb">
-      <div class="pick-header"><span class="pick-num">Pick 2</span><span class="pick-name">Murray Taulagi</span><span class="pick-pos">Wing</span><span class="pick-odds">&#10003; $2.50&ndash;$3.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">1.00/game &middot; #12 ZeroTackle &middot; 10 tries in 10 GP</div>
-        <div class="sig pos">Cowboys best try threat; Drinkwater targets left edge</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-signals">
+      <div class="sig form">Quality centre with strong finishing record alongside Jenkins</div>
+      <div class="sig pos">Cleary-to-inside-centre is a bread-and-butter Panthers play near the line</div>
     </div>
-    <div class="pick-card pc">
-      <div class="pick-header"><span class="pick-num">Pick 3</span><span class="pick-name">Brian To'o</span><span class="pick-pos">Wing</span><span class="pick-odds">&#10003; $2.50&ndash;$3.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">0.75/game &middot; #15 ZeroTackle &middot; 9 tries in 12 GP</div>
-        <div class="sig pos">Origin rest over; Cleary rotates both edges</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-note">0.7 unit &middot; speculative &middot; CONFIRMED &#10003;</div>
+  </div>
+</div>
+
+<!-- GAME 5: Sea Eagles vs Storm -->
+<div class="game-block">
+  <div class="game-title">Manly Sea Eagles v Melbourne Storm</div>
+  <div class="game-meta">Sat 27 Jun &middot; 7:30pm &middot; 4 Pines Park, Brookvale</div>
+  <div class="game-flag game-flag-warn">&#9888; Jahrome Hughes OUT (hamstring) &mdash; do not pick Hughes. Storm attack significantly weakened.</div>
+
+  <div class="pick-card pa">
+    <div class="pick-header">
+      <span class="pick-num">Pick 1</span>
+      <span class="pick-name">Tom Trbojevic</span>
+      <span class="pick-pos">Fullback</span>
+      <span class="pick-odds">&#10003; $2.50&ndash;$3.50</span>
     </div>
+    <div class="pick-signals">
+      <div class="sig form">Elite attacking fullback &middot; Origin returnee at home stronghold</div>
+      <div class="sig pos">Storm missing Hughes (18 try assists) &mdash; Wishart (backup HB) less threatening &middot; Manly home D pattern favours Trb to finish raids</div>
+    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <div class="game-block">
-    <div class="game-title">Manly Sea Eagles v Melbourne Storm</div>
-    <div class="game-meta">Sat 27 Jun &middot; 7:35pm &middot; 4 Pines Park</div>
-    <div class="pick-card pa">
-      <div class="pick-header"><span class="pick-num">Pick 1</span><span class="pick-name">Will Warbrick</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128293; $1.80&ndash;$2.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">0.93/game &middot; #6 ZeroTackle &middot; 14 tries in 15 GP</div>
-        <div class="sig pos">Hughes OUT &mdash; Storm lean on edges; 29 errors (leads NRL)</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+  <div class="pick-card pb">
+    <div class="pick-header">
+      <span class="pick-num">Pick 2</span>
+      <span class="pick-name">Jason Saab</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#127919; $3.50&ndash;$5.00</span>
     </div>
-    <div class="pick-card pb">
-      <div class="pick-header"><span class="pick-num">Pick 2</span m">Lehi Hopoate</span><span class="pick-pos">Wing</span><span class="pick-odds">&#10003; $2.50&ndash;$3.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">0.92/game &middot; #9 ZeroTackle &middot; 12 tries in 13 GP</div>
-        <div class="sig pos">Sea Eagles best outside back; Luke Brooks primary target</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-signals">
+      <div class="sig form">Consistent wing scorer &middot; reliable finisher in home games at Brookvale</div>
+      <div class="sig pos">Brooks-Fogarty combination targets Saab&rsquo;s edge; Olakau&rsquo;atu creates on that side</div>
     </div>
-    <div class="pick-card pc">
-      <div class="pick-header"><span class="pick-num">Pick 3</span><span class="pick-name">Sualauvi Faalogo</span><span class="pick-pos">Fullback</span><span class="pick-odds">&#10003; $2.50&ndash;$3.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">0.87/game &middot; #7 ZeroTackle &middot; 13 tries in 15 GP</div>
-        <div class="sig pos">Hughes OUT lifts Faalogo running load; 19 linebreaks (2nd NRL)</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
-    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <div class="game-block">
-    <div class="game-title">Canberra Raiders v St George Illawarra Dragons</div>
-    <div class="game-meta">Sun 28 Jun &middot; 2:00pm &middot; GIO Stadium</div>
-    <div class="pick-card pa">
-      <div class="pick-header"><span class="pick-num">Pick 1</span><span class="pick-name">Kaeo Weekes</span><span class="pick-pos">Fullback</span><span class="pick-odds">&#10003; $2.50&ndash;$3.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">0.53/game &middot; #23 ZeroTackle &middot; 8 tries in 15 GP</div>
-        <div class="sig pos">86 tackle breaks (2nd NRL); Raiders primary spark</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+  <div class="pick-card spec">
+    <span class="spec-label">VALUE PLAY &mdash; speculative</span>
+    <div class="pick-header">
+      <span class="pick-name">Sua Fa&rsquo;alogo</span>
+      <span class="pick-pos">Fullback</span>
+      <span class="pick-odds">&#128142; $5.00&ndash;$8.00</span>
     </div>
-    <div class="pick-card pb">
-      <div class="pick-header"><span class="pick-num">Pick 2</span><span class="pick-name">Xavier Savage</span><span class="pick-pos">Wing</span><span class="pick-odds">&#127919; $3.50&ndash;$5.00</span></div>
-      <div class="pick-signals">
-        <div class="sig form">10 half-breaks (2nd NRL); Raiders best try threat after Weekes</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-signals">
+      <div class="sig form">3,000 run metres (2nd NRL) &middot; 19 linebreaks &middot; constantly in motion from FB</div>
+      <div class="sig pos">Storm attack weakened without Hughes but Fa&rsquo;alogo remains a breakout threat &middot; note SOLID UNDER lean for this game &mdash; limited tries expected</div>
     </div>
-    <div class="pick-card spec">
-      <span class="spec-label">VALUE PLAY &mdash; speculative</span>
-      <div class="pick-header"><span class="pick-name">Tyrell Sloan</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128142; $5.00&ndash;$8.00</span></div>
-      <div class="pick-signals">
-        <div class="sig form">Dragons most dangerous back &middot; team avg 14.3pts/game (bottom NRL)</div>
-      </div>
-      <div class="pick-note">0.5 unit &middot; speculative &middot; CONFIRMED &#10003;</div>
+    <div class="pick-note">0.7 unit &middot; speculative &middot; CONFIRMED &#10003; &middot; Verify team sheet — Wishart starts at HB</div>
+  </div>
+</div>
+
+<!-- GAME 6: Raiders vs Dragons -->
+<div class="game-block">
+  <div class="game-title">Canberra Raiders v St George Illawarra Dragons</div>
+  <div class="game-meta">Sun 28 Jun &middot; 2:00pm &middot; GIO Stadium, Canberra</div>
+  <div class="game-flag game-flag-under">&#9660; HIGH UNDER lean this game (gap +17.7pts) &mdash; lower total expected; back Raiders outside backs for the tries that do come</div>
+
+  <div class="pick-card pa">
+    <div class="pick-header">
+      <span class="pick-num">Pick 1</span>
+      <span class="pick-name">Savelio Tamale</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#127919; $3.50&ndash;$5.00</span>
     </div>
+    <div class="pick-signals">
+      <div class="sig form">#2 NRL half breaks (10) &middot; one of the most explosive edge runners in the competition</div>
+      <div class="sig pos">Raiders at home GIO &middot; Sanders and Strange target Tamale&rsquo;s left edge in attacking sets</div>
+    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <div class="game-block">
-    <div class="game-title">Newcastle Knights v Wests Tigers</div>
-    <div class="game-meta">Sun 28 Jun &middot; 4:05pm &middot; McDonald Jones Stadium</div>
-    <div class="pick-card pa">
-      <div class="pick-header"><span class="pick-num">Pick 1</span><span class="pick-name">Greg Marzhew</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128293; $1.80&ndash;$2.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">1.15/game &middot; #3 ZeroTackle &middot; 15 tries in 13 GP</div>
-        <div class="sig pos">Dylan Brown returning; McDonald Jones home advantage</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+  <div class="pick-card pb">
+    <div class="pick-header">
+      <span class="pick-num">Pick 2</span>
+      <span class="pick-name">Kaeo Weekes</span>
+      <span class="pick-pos">Fullback</span>
+      <span class="pick-odds">&#127919; $3.50&ndash;$5.00</span>
     </div>
-    <div class="pick-card pb">
-      <div class="pick-header"><span class="pick-num">Pick 2</span><span class="pick-name">Dominic Young</span><span class="pick-pos">Wing</span><span class="pick-odds">&#128293; $1.80&ndash;$2.50</span></div>
-      <div class="pick-signals">
-        <div class="sig form">1.00/game &middot; #5 ZeroTackle &middot; 14 tries in 14 GP</div>
-        <div class="sig pos">11 half-breaks (most NRL); 20 linebreaks (3rd)</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-signals">
+      <div class="sig form">86 tackle breaks (4th NRL) &middot; 991 kick return metres &middot; dangerous in broken play</div>
+      <div class="sig pos">Raiders sweeping raids via Weekes at the back; Dragons miss 63 tackles &mdash; Valentine Holmes worst in NRL</div>
     </div>
-    <div class="pick-card pc">
-      <div class="pick-header"><span class="pick-num">Pick 3</span><span class="pick-name">Sunia Turuva</span><span class="pick-pos">Wing</span><span class="pick-odds">&#127919; $3.50&ndash;$5.00</span></div>
-      <div class="pick-signals">
-        <div class="sig form">Doueihi returning improves Tigers service</div>
-      </div>
-      <div class="pick-note">CONFIRMED &#10003;</div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
+  </div>
+</div>
+
+<!-- GAME 7: Knights vs Tigers -->
+<div class="game-block">
+  <div class="game-title">Newcastle Knights v Wests Tigers</div>
+  <div class="game-meta">Sun 28 Jun &middot; 4:05pm &middot; McDonald Jones Stadium, Newcastle</div>
+
+  <div class="pick-card pa">
+    <div class="pick-header">
+      <span class="pick-num">Pick 1</span>
+      <span class="pick-name">Greg Marzhew</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#10003; $2.50&ndash;$3.50</span>
     </div>
+    <div class="pick-signals">
+      <div class="sig form">1.07/game &middot; #3 NRL scorer &middot; 15 tries, 17 linebreaks</div>
+      <div class="sig pos">Kalyn Ponga returning at FB (tries + assists) &middot; Knights at home McDonald Jones</div>
+      <div class="sig h2h">Tigers defence leaky &mdash; NRL bottom-half missed tackle count</div>
+    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
 
-  <div class="disclaimer">
-    &#9888;&#65039; Latrell Mitchell OUT (calf) &mdash; do not pick. Always verify team sheets before betting &mdash; late changes void positional edges.<br>
-    Estimated odds are a guide only. Verify current odds on Sportsbet before placing.<br>
-    Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
+  <div class="pick-card pb">
+    <div class="pick-header">
+      <span class="pick-num">Pick 2</span>
+      <span class="pick-name">Dominic Young</span>
+      <span class="pick-pos">Wing</span>
+      <span class="pick-odds">&#10003; $2.50&ndash;$3.50</span>
+    </div>
+    <div class="pick-signals">
+      <div class="sig form">1.00/game &middot; #5 NRL scorer &middot; 14 tries &middot; 11 half breaks (NRL leader) &middot; 20 linebreaks</div>
+      <div class="sig pos">Dylan Brown feeding Young&rsquo;s edge &middot; strong home record at McDonald Jones</div>
+    </div>
+    <div class="pick-note">CONFIRMED &#10003;</div>
   </div>
-  <footer>
-    <p>Try scorer picks generated Wednesdays &middot; Data: zerotackle.com, nrl.com &middot; Round 17, 2026</p>
-    <p><a href="index.html">&larr; Scoring report</a> &middot; <a href="history.html">Record &amp; history &rarr;</a></p>
-  </footer>
+
+  <div class="pick-card spec">
+    <span class="spec-label">VALUE PLAY &mdash; speculative</span>
+    <div class="pick-header">
+      <span class="pick-name">Kalyn Ponga</span>
+      <span class="pick-pos">Fullback</span>
+      <span class="pick-odds">&#128142; $5.00&ndash;$8.00</span>
+    </div>
+    <div class="pick-signals">
+      <div class="sig form">Explosive attacking fullback &middot; returning from injury</div>
+      <div class="sig pos">Returnees often come back with extra sharpness &middot; Knights home &middot; Tigers D exploitable &mdash; Doueihi also returning so Tigers may be rusty in D shape</div>
+    </div>
+    <div class="pick-note">0.7 unit &middot; speculative &middot; CONFIRMED &#10003;</div>
+  </div>
+</div>
+
+<div class="disclaimer">
+  &#9888;&#65039; <strong>Key absences:</strong> Adam Reynolds OUT (Broncos HB) &mdash; do not pick. Jahrome Hughes OUT (Storm HB, hamstring) &mdash; do not pick. Tyson Gamble departed &mdash; do not pick. Always verify final team sheets before betting &mdash; late changes void positional edges.<br><br>
+  Estimated odds are a guide only. Verify current odds on Sportsbet before placing. Unit sizing: 1.0u standard picks, 0.7u speculative. High UNDER lean on Raiders v Dragons &mdash; fewer tries expected; back Raiders picks only.<br><br>
+  Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
+</div>
+
+<footer>
+  <p>Try scorer picks generated Fri 26 Jun &middot; Data: NRL.com stats, zerotackle.com team lists &middot; Round 17, 2026</p>
+  <p><a href="index.html">&larr; Scoring report</a> &middot; <a href="history.html">Record &amp; history &rarr;</a></p>
+</footer>
+
 </div>
 </body>
 </html>

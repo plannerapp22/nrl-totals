@@ -3,222 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NRL Totals — Record &amp; History</title>
+<title>NRL Totals · Season Record &amp; History</title>
 <style>
-:root{--bg:#fafafa;--surface:#ffffff;--border:#e4e4e7;--text:#18181b;--text-muted:#6b7280;--text-subtle:#9ca3af;--green:#15803d;--green-bg:#f0fdf4;--amber:#b45309;--amber-bg:#fef9c3;--orange:#c2410c;--orange-bg:#fff7ed;--blue:#1d4ed8;--blue-bg:#eff6ff;--red:#b91c1c;--red-bg:#fff1f2;--radius:8px;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;}
-.container{max-width:760px;margin:0 auto;padding:32px 20px 80px;}
-header{padding-bottom:24px;border-bottom:2px solid var(--border);margin-bottom:32px;}
-h1{font-size:26px;font-weight:700;letter-spacing:-0.02em;}
-.meta{font-size:13px;color:var(--text-muted);margin-top:4px;}
-nav{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
-nav a{font-size:13px;color:var(--text-muted);text-decoration:none;padding:4px 12px;border:1px solid var(--border);border-radius:4px;}
-nav a:hover{color:var(--text);border-color:var(--text-muted);}
-h2{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin:32px 0 14px;}
-.record-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
-.record-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;}
-.record-pct{font-size:30px;font-weight:700;}
-.record-label{font-size:11px;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:0.05em;}
-.model-note{background:#f8f9ff;border:1px solid #c7d2fe;border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;font-size:13px;color:#3730a3;line-height:1.7;}
-.model-note strong{display:block;margin-bottom:4px;font-size:14px;}
-.summary-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:24px;}
-.summary-row{font-size:14px;padding:3px 0;}
-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:32px;}
-thead th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-subtle);padding:8px 10px;border-bottom:2px solid var(--border);background:var(--bg);}
-tbody td{padding:10px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
-tbody tr:last-child td{border-bottom:none;}
-tbody tr:hover td{background:#fafafa;}
-.lean-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;}
-.lean-under{background:#dbeafe;color:#1d4ed8;}
-.lean-over{background:#fef3c7;color:#92400e;}
-.tier-badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;}
-.tier-high{background:var(--green-bg);color:var(--green);}
-.tier-solid{background:var(--amber-bg);color:var(--amber);}
-.tier-watch{background:var(--orange-bg);color:var(--orange);}
-.result-hit{color:#16a34a;font-weight:700;}
-.result-miss{color:#dc2626;font-weight:700;}
-.result-pending{color:var(--text-muted);font-style:italic;}
-.tryscorer-table tbody td{font-size:12px;}
-.section-note{font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.7;}
-.disclaimer{font-size:12px;color:var(--text-subtle);margin-top:32px;padding-top:20px;border-top:1px solid var(--border);line-height:1.8;}
-footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);}
-footer a{color:var(--text-muted);}
-@media(max-width:520px){.record-grid{grid-template-columns:repeat(2,1fr);}}
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
+  --green: #15803d;   --green-bg: #f0fdf4;
+  --blue: #1d4ed8;    --blue-bg: #eff6ff;
+  --amber: #b45309;   --amber-bg: #fef9c3;
+  --orange: #c2410c;  --orange-bg: #fff7ed;
+  --red: #dc2626;     --red-bg: #fef2f2;
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+.container { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+header { padding-bottom: 24px; border-bottom: 2px solid var(--border); margin-bottom: 32px; }
+h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.meta { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+nav { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; padding: 4px 12px; border: 1px solid var(--border); border-radius: 4px; }
+nav a:hover { color: var(--text); border-color: var(--text-muted); }
+h2 { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 32px 0 14px; }
+.record-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.record-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+.record-pct { font-size: 30px; font-weight: 700; }
+.record-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.round-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; }
+.round-table th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-subtle); padding: 8px 10px; border-bottom: 2px solid var(--border); }
+.round-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.round-table tr:last-child td { border-bottom: none; }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+.badge-high { background: var(--green-bg); color: var(--green); }
+.badge-solid { background: var(--amber-bg); color: var(--amber); }
+.badge-watch { background: var(--orange-bg); color: var(--orange); }
+.badge-hit { background: var(--green-bg); color: var(--green); }
+.badge-miss { background: var(--red-bg); color: var(--red); }
+.badge-pending { background: #f4f4f5; color: var(--text-muted); }
+.empty-state { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; text-align: center; color: var(--text-muted); font-size: 14px; }
+.disclaimer { font-size: 12px; color: var(--text-subtle); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); line-height: 1.8; }
+footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+footer a { color: var(--text-muted); }
+@media (max-width: 520px) { .record-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); } }
 </style>
 </head>
 <body>
 <div class="container">
+
 <header>
-<h1>NRL Totals &middot; Record &amp; History</h1>
-<div class="meta">Gap-based implied total model (v2) &middot; Baseline: Round 17 &middot; Updated 26 Jun 2026</div>
-<nav>
-<a href="index.html">Scoring report &rarr;</a>
-<a href="tryscorers.html">Try scorers &rarr;</a>
-</nav>
+  <h1>Season Record &amp; History</h1>
+  <div class="meta">NRL Totals model &middot; 2026 season &middot; Tracking from Round 18</div>
+  <nav>
+    <a href="index.html">&larr; Scoring report</a>
+    <a href="tryscorers.html">Try scorers &rarr;</a>
+  </nav>
 </header>
 
-<div class="model-note">
-<strong>&#128201; New model live from R17</strong>
-This page tracks results from the gap-based implied total model (v2) only. Previous rounds used a different methodology and are not tracked here. Season record builds from R17 forward. R17 results pending &mdash; games play out 26&ndash;28 Jun 2026.
-</div>
-
-<h2>Season record &mdash; current model (R17+)</h2>
+<h2>Season record</h2>
 <div class="record-grid">
-<div class="record-card">
-<div class="record-pct">&mdash;</div>
-<div class="record-label">Hit rate<br>R17 pending</div>
-</div>
-<div class="record-card">
-<div class="record-pct">3</div>
-<div class="record-label">Tracked leans<br>HIGH + SOLID</div>
-</div>
-<div class="record-card">
-<div class="record-pct">0</div>
-<div class="record-label">OVER leans<br>(WATCH only so far)</div>
-</div>
-</div>
-
-<div class="summary-box">
-<div class="summary-row">&#128994; <strong>UNDER leans tracked:</strong> 3 (1 HIGH, 2 SOLID) &mdash; results pending</div>
-<div class="summary-row">&#128992; <strong>OVER leans tracked:</strong> 0 (1 WATCH &mdash; not tracked)</div>
-<div class="summary-row">&#9940; <strong>PASS / no edge:</strong> 1 (Cowboys v Panthers)</div>
-<div class="summary-row" style="margin-top:8px;font-size:13px;color:var(--text-muted);">Try scorer picks: see R17 try scorers report. Results pending.</div>
+  <div class="record-card">
+    <div class="record-pct">&mdash;</div>
+    <div class="record-label">Scoring leans<br>Tracking from R18</div>
+  </div>
+  <div class="record-card">
+    <div class="record-pct">&mdash;</div>
+    <div class="record-label">Try scorer picks<br>Tracking from R18</div>
+  </div>
+  <div class="record-card">
+    <div class="record-pct">&mdash;</div>
+    <div class="record-label">Multi legs hit<br>Tracking from R18</div>
+  </div>
 </div>
 
-<h2>Round-by-round lean results</h2>
-<p class="section-note">Only HIGH and SOLID tier leans are tracked. WATCH leans noted separately. Results evaluated against the Sportsbet line at time of report.</p>
-
-<table>
-<thead>
-<tr>
-<th>Round</th>
-<th>Game</th>
-<th>Line</th>
-<th>Lean</th>
-<th>Total</th>
-<th>Gap</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>R17</strong></td>
-<td>Raiders v Dragons</td>
-<td>52.5</td>
-<td><span class="lean-badge lean-under">UNDER</span> <span class="tier-badge tier-high">HIGH</span></td>
-<td class="result-pending">pending</td>
-<td>+17.7</td>
-<td class="result-pending">pending</td>
-</tr>
-<tr>
-<td><strong>R17</strong></td>
-<td>Titans v Bulldogs</td>
-<td>45.5</td>
-<td><span class="lean-badge lean-under">UNDER</span> <span class="tier-badge tier-solid">SOLID</span></td>
-<td class="result-pending">pending</td>
-<td>+6.5</td>
-<td class="result-pending">pending</td>
-</tr>
-<tr>
-<td><strong>R17</strong></td>
-<td>Sea Eagles v Storm</td>
-<td>47.5</td>
-<td><span class="lean-badge lean-under">UNDER</span> <span class="tier-badge tier-solid">SOLID</span></td>
-<td class="result-pending">pending</td>
-<td>+6.0</td>
-<td class="result-pending">pending</td>
-</tr>
-</tbody>
+<h2>Round-by-round results</h2>
+<table class="round-table">
+  <thead>
+    <tr>
+      <th>Round</th>
+      <th>Game</th>
+      <th>Lean</th>
+      <th>Line</th>
+      <th>Total</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>R18</strong></td>
+      <td>Panthers v Rabbitohs</td>
+      <td><span class="badge badge-high">HIGH UNDER</span></td>
+      <td>46.5</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Dragons v Tigers</td>
+      <td><span class="badge badge-watch">WATCH</span></td>
+      <td>48.5</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-pending">Not rated</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Broncos v Sharks</td>
+      <td><span class="badge badge-high">HIGH UNDER</span></td>
+      <td>49.5</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Eels v Sea Eagles</td>
+      <td><span class="badge badge-watch">WATCH</span></td>
+      <td>50.5</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-pending">Not rated</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Knights v Dolphins</td>
+      <td><span class="badge badge-high">HIGH UNDER</span></td>
+      <td>50.5</td>
+      <td>&mdash;</td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+  </tbody>
 </table>
 
-<h2>WATCH leans &mdash; R17 (not tracked)</h2>
-<p class="section-note">WATCH leans are noted for model calibration but not counted in the hit rate.</p>
-
-<table>
-<thead>
-<tr>
-<th>Round</th>
-<th>Game</th>
-<th>Line</th>
-<th>Lean</th>
-<th>Total</th>
-<th>Gap</th>
-<th>Outcome</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>R17</strong></td>
-<td>Broncos v Roosters</td>
-<td>48.5</td>
-<td><span class="lean-badge lean-under">UNDER</span> <span class="tier-badge tier-watch">WATCH</span></td>
-<td class="result-pending">pending</td>
-<td>+2.3</td>
-<td class="result-pending">pending</td>
-</tr>
-<tr>
-<td><strong>R17</strong></td>
-<td>Dolphins v Warriory</td>
-<td>50.5</td>
-<td><span class="lean-badge lean-under">UNDER</span> <span class="tier-badge tier-watch">WATCH</span></td>
-<td class="result-pending">pending</td>
-<td>+4.0</td>
-<td class="result-pending">pending</td>
-</tr>
-<tr>
-<td><strong>R17</strong></td>
-<td>Knights v Tigers</td>
-<td>51.5</td>
-<td><span class="lean-badge lean-over">OVER</span> <span class="tier-badge tier-watch">WATCH</span></td>
-<td class="result-pending">pending</td>
-<td>&minus;2.4</td>
-<td class="result-pending">pending</td>
-</tr>
-</tbody>
+<h2>Try scorer log</h2>
+<table class="round-table">
+  <thead>
+    <tr>
+      <th>Round</th>
+      <th>Player</th>
+      <th>Team</th>
+      <th>Tier</th>
+      <th>Scored</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>R18</strong></td>
+      <td>Thomas Jenkins</td>
+      <td>Panthers</td>
+      <td><span class="badge badge-high">BEST</span></td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Greg Marzhew</td>
+      <td>Knights</td>
+      <td><span class="badge badge-high">BEST</span></td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Jamayne Isaako</td>
+      <td>Dolphins</td>
+      <td><span class="badge badge-high">BEST</span></td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Brian To'o</td>
+      <td>Panthers</td>
+      <td><span class="badge badge-solid">SOLID</span></td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Lehi Hopoate</td>
+      <td>Sea Eagles</td>
+      <td><span class="badge badge-solid">SOLID</span></td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Kayal Iro</td>
+      <td>Sharks</td>
+      <td><span class="badge badge-solid">SOLID</span></td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Dominic Young</td>
+      <td>Knights</td>
+      <td><span class="badge badge-solid">SOLID</span></td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Tom Trbojevic</td>
+      <td>Sea Eagles</td>
+      <td><span class="badge badge-solid">SOLID</span></td>
+      <td><span class="badge badge-pending">Pending</span></td>
+    </tr>
+  </tbody>
 </table>
-
-<h2>Try scorer log &mdash; R17</h2>
-<p class="section-note">Picks from the R17 try scorer report. Results pending after games play out 26&ndash;28 Jun 2026.</p>
-
-<table class="tryscorer-table">
-<thead>
-<tr>
-<th>Round</th>
-<th>Player</th>
-<th>Team</th>
-<th>Type</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>R17</strong></td>
-<td colspan="4" style="color:var(--text-muted);font-style:italic;">See try scorers report &mdash; results to be logged after round completes</td>
-</tr>
-</tbody>
-</table>
-
-<h2>Model learning notes &mdash; R17</h2>
-<div class="summary-box">
-<div class="summary-row" style="font-size:13px;color:var(--text-muted);line-height:1.8;">
-<strong style="display:block;margin-bottom:6px;color:var(--text);">Baseline round notes</strong>
-R17 is the first round under the gap-based model v2. Key calibration questions to track:
-Will the Raiders v Dragons HIGH lean (gap +17.7pts &mdash; the largest this round by far) translate to an actual result, or does the anomalously high 52.5 line suggest a data error?
-Sea Eagles v Storm is driven entirely by S4 (Hughes OUT) and S5 (rain) &mdash; good test of whether team sheet modifiers add real predictive value.
-Knights v Tigers is the first OVER lean under the new model &mdash; watch whether the structural OVER tendency (Knights 64% OVER) survives wet conditions.
-H2H data was unavailable this round (RLP client-rendered) &mdash; all games ran on form only. Once H2H is back, compare implied totals with and without it.
-</div>
-</div>
 
 <div class="disclaimer">
-Results tracked against Sportsbet lines at time of report. Hit rate calculated for HIGH + SOLID tiers only. Model baseline: Round 17, 2026.<br>
-Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
+  Season tracking commenced Round 18, 2026. Results updated after each round completes. Scoring leans (HIGH and SOLID tier) are tracked against the Sportsbet line at time of report. WATCH-tier games are listed for reference only and not included in hit rate calculations.<br>
+  Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
 </div>
 <footer>
-<p>NRL Totals Model &middot; Record &amp; History &middot; Gap-based implied total model v2</p>
-<p><a href="index.html">Scoring report &rarr;</a> &middot; <a href="tryscorers.html">Try scorers &rarr;</a></p>
+  <p>NRL Totals Model &middot; 2026 Season &middot; Data: nrl.com, rugbyleagueproject.org, zerotackle.com</p>
+  <p><a href="index.html">&larr; Scoring report</a> &middot; <a href="tryscorers.html">Try scorers &rarr;</a></p>
 </footer>
+
 </div>
 </body>
 </html>

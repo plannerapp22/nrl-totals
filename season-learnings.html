@@ -3,491 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NRL Model — Season Learnings 2026</title>
+<title>NRL Totals — Season Learnings 2026</title>
 <style>
-  :root {
-    --bg: #0d0d0f;
-    --surface: #16171a;
-    --surface2: #1e1f24;
-    --border: #2a2b30;
-    --text: #e8e8ec;
-    --text-muted: #8b8c94;
-    --accent: #3d85f7;
-    --green: #22c55e;
-    --red: #ef4444;
-    --amber: #f59e0b;
-    --purple: #a855f7;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    padding: 24px 16px 60px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  h1 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-  h2 { font-size: 15px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; margin: 32px 0 12px; }
-  h3 { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin: 20px 0 8px; }
-  .subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 28px; }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 12px;
-  }
-  .card-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: .05em;
-    margin-bottom: 10px;
-  }
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
+  --green: #15803d;   --green-bg: #f0fdf4;
+  --blue: #1d4ed8;    --blue-bg: #eff6ff;
+  --amber: #b45309;   --amber-bg: #fef9c3;
+  --red: #b91c1c;     --red-bg: #fef2f2;
+  --orange: #c2410c;  --orange-bg: #fff7ed;
+  --purple: #7c3aed;  --purple-bg: #f5f3ff;
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; }
+.container { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+header { padding-bottom: 24px; border-bottom: 2px solid var(--border); margin-bottom: 32px; }
+h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.meta { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+nav { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; padding: 4px 12px; border: 1px solid var(--border); border-radius: 4px; }
+nav a:hover { color: var(--text); border-color: var(--text-muted); }
+h2 { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 32px 0 14px; }
+h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
 
-  /* Season scoring table */
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; padding: 6px 10px; color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border); }
-  td { padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,.04); }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: rgba(255,255,255,.02); }
-  .avg-high { color: var(--green); font-weight: 600; }
-  .avg-mid { color: var(--amber); font-weight: 600; }
-  .avg-low { color: var(--red); font-weight: 600; }
-  .origin-tag {
-    display: inline-block;
-    font-size: 9px;
-    padding: 1px 5px;
-    border-radius: 3px;
-    background: rgba(168,85,247,.2);
-    color: var(--purple);
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-left: 6px;
-    vertical-align: middle;
-  }
-  .incomplete-tag {
-    display: inline-block;
-    font-size: 9px;
-    padding: 1px 5px;
-    border-radius: 3px;
-    background: rgba(245,158,11,.15);
-    color: var(--amber);
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-left: 6px;
-    vertical-align: middle;
-  }
+/* Stat grid */
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+.stat-val { font-size: 26px; font-weight: 700; }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  /* Stat bar */
-  .bar-wrap { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
-  .bar-label { font-size: 12px; color: var(--text-muted); width: 60px; flex-shrink: 0; }
-  .bar-track { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 3px; }
-  .bar-val { font-size: 12px; font-weight: 600; width: 36px; text-align: right; flex-shrink: 0; }
+/* Trend report narrative */
+.trend-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 14px; }
+.trend-section h3 { color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 14px; }
+.trend-section p { font-size: 14px; color: var(--text); line-height: 1.78; margin-bottom: 14px; }
+.trend-section p:last-child { margin-bottom: 0; }
+.trend-section strong { font-weight: 600; }
+.trend-section .callout { background: var(--bg); border-left: 3px solid var(--border); border-radius: 0 6px 6px 0; padding: 12px 14px; margin: 14px 0; font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+.trend-section .callout strong { color: var(--text); }
 
-  /* Finding cards */
-  .finding {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    border-left: 3px solid var(--accent);
-  }
-  .finding.warn { border-left-color: var(--amber); }
-  .finding.action { border-left-color: var(--green); }
-  .finding.miss { border-left-color: var(--red); }
-  .finding-title { font-weight: 600; font-size: 13px; margin-bottom: 4px; }
-  .finding-body { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+/* Phase grid */
+.phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.phase-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+.phase-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-subtle); margin-bottom: 6px; }
+.phase-val { font-size: 22px; font-weight: 700; }
+.phase-sub { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
 
-  /* 6-again table */
-  .six-again-table td.hi { color: var(--red); font-weight: 600; }
-  .six-again-table td.lo { color: var(--green); }
-  .six-again-table tr.highlight { background: rgba(239,68,68,.06); }
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; padding: 7px 10px; color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+td { padding: 7px 10px; border-bottom: 1px solid #f4f4f5; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f9f9f9; }
+.table-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; }
+.hi { color: var(--red); font-weight: 600; }
+.lo { color: var(--green); font-weight: 600; }
 
-  /* Inline stats row */
-  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
-  .stat-box {
-    background: var(--surface2);
-    border-radius: 8px;
-    padding: 10px 14px;
-    flex: 1;
-    min-width: 100px;
-    text-align: center;
-  }
-  .stat-box .val { font-size: 22px; font-weight: 700; }
-  .stat-box .lbl { font-size: 11px; color: var(--text-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .04em; }
+/* Tags */
+.tag { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; text-transform: uppercase; margin-left: 5px; vertical-align: middle; }
+.tag-origin { background: var(--purple-bg); color: var(--purple); }
+.tag-partial { background: var(--amber-bg); color: var(--amber); }
+.tag-magic { background: var(--blue-bg); color: var(--blue); }
 
-  /* Model update pills */
-  .pill {
-    display: inline-block;
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-weight: 600;
-    margin: 3px 3px 3px 0;
-  }
-  .pill-priority { background: rgba(239,68,68,.2); color: #f87171; }
-  .pill-consider { background: rgba(245,158,11,.15); color: var(--amber); }
-  .pill-future { background: rgba(61,133,247,.15); color: var(--accent); }
+/* Finding cards */
+.finding { border-radius: var(--radius); padding: 16px 18px; margin-bottom: 10px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--border); }
+.finding.action { border-left-color: var(--green); }
+.finding.warn { border-left-color: var(--amber); }
+.finding.miss { border-left-color: var(--red); }
+.finding.info { border-left-color: var(--blue); }
+.finding-title { font-weight: 600; font-size: 14px; margin-bottom: 5px; }
+.finding-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+.pill { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; margin-right: 6px; }
+.pill-priority { background: var(--red-bg); color: var(--red); }
+.pill-consider { background: var(--amber-bg); color: var(--amber); }
+.pill-future { background: var(--blue-bg); color: var(--blue); }
+.pill-confirmed { background: var(--green-bg); color: var(--green); }
 
-  .season-avg-line {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.04);
-    font-size: 13px;
-  }
-  .season-avg-line:last-child { border-bottom: none; }
-  .phase-label { color: var(--text-muted); font-size: 12px; }
+/* Performance grid */
+.perf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
 
-  .note { font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 8px; }
+/* Status */
+.status-done { color: var(--green); font-weight: 600; }
+.status-todo { color: var(--text-subtle); }
 
-  .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+footer a { color: var(--text-muted); }
+.note { font-size: 12px; color: var(--text-subtle); font-style: italic; }
 
-  .updated { color: var(--text-muted); font-size: 11px; text-align: right; margin-top: 32px; }
+@media (max-width: 520px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .phase-grid { grid-template-columns: 1fr; }
+  .perf-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
 <body>
+<div class="container">
+<header>
+  <h1>Season Learnings &middot; 2026</h1>
+  <div class="meta">R1&ndash;R18 complete &middot; 131 games &middot; Internal model reference &middot; Updated 5 July 2026</div>
+  <nav>
+    <a href="index.html">&larr; Scoring report</a>
+    <a href="tryscorers.html">Try scorers &rarr;</a>
+    <a href="history.html">Record &amp; history &rarr;</a>
+  </nav>
+</header>
 
-<h1>NRL Model — Season Learnings</h1>
-<p class="subtitle">2026 Season · Updated R18 · Internal reference document</p>
+<!-- ===== TREND REPORT ===== -->
+<h2>Trend report</h2>
 
-<!-- ═══ SEASON SCORING OVERVIEW ═══ -->
-<h2>Season Scoring — R1 to R18</h2>
-
-<div class="stat-row">
-  <div class="stat-box">
-    <div class="val" style="color:var(--accent)">47.8</div>
-    <div class="lbl">Season avg pts</div>
-  </div>
-  <div class="stat-box">
-    <div class="val" style="color:var(--green)">58.0</div>
-    <div class="lbl">Highest round avg (R6)</div>
-  </div>
-  <div class="stat-box">
-    <div class="val" style="color:var(--red)">38.5</div>
-    <div class="lbl">Lowest round avg (R17)</div>
-  </div>
-  <div class="stat-box">
-    <div class="val">131</div>
-    <div class="lbl">Games tracked</div>
-  </div>
+<div class="trend-section">
+  <h3>The season in three acts</h3>
+  <p>The 2026 NRL season has split cleanly into three distinct scoring phases. <strong>Rounds 1&ndash;8</strong> were the high-water mark: eight full rounds averaging 50.4 points per game, with R6 (58.0pts) and R8 (56.0pts) making OVER leans look straightforward. Teams were fit, summer conditions prevailed across most venues, and market lines hadn't fully caught up to the pace of scoring.</p>
+  <p><strong>Rounds 12&ndash;16</strong> &mdash; the Origin block &mdash; compressed scoring structurally. With 20&ndash;25 players unavailable each round, replacement-grade halves were directing attacks and team chemistry was fractured. The four Origin-disrupted rounds averaged 43.5 points per game across 24 games, a full 7-point drop from early-season pace. R15 coincided with the heaviest Origin withdrawal: just 5 games, averaging 44.2 points. The reduced fixtures in those rounds further skew any round-level analysis.</p>
+  <p><strong>Rounds 17&ndash;18</strong> have continued the decline despite Origin finishing. Winter conditions across southern venues have taken over as the primary suppressor. R17 was the season's lowest-scoring round at 38.5 points per game. Two of R17's eight games produced totals under 35, driven by wet conditions and error rates running well above the seasonal norm. The model's WATCH OVER lean in the Knights v Tigers game (18 total, OVER 51.5 line) was the most instructive miss of the season.</p>
+  <div class="callout"><strong>Structural takeaway:</strong> The market set early-season lines around 48&ndash;52 points. Post-Origin and into winter, the equilibrium has shifted to 40&ndash;46. Any game with a line above 48 in Rounds 19&ndash;25 should be scrutinised hard before an OVER lean is published.</div>
 </div>
 
-<div class="card">
-  <table>
-    <thead>
-      <tr>
-        <th>Round</th>
-        <th>Games</th>
-        <th>Avg pts/game</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>R1</td><td>8</td><td class="avg-high">50.5</td><td></td></tr>
-      <tr><td>R2</td><td>8</td><td class="avg-high">50.5</td><td></td></tr>
-      <tr><td>R3</td><td>8</td><td class="avg-mid">41.3</td><td></td></tr>
-      <tr><td>R4</td><td>8</td><td class="avg-mid">48.1</td><td></td></tr>
-      <tr><td>R5</td><td>8</td><td class="avg-high">50.0</td><td></td></tr>
-      <tr><td>R6</td><td>8</td><td class="avg-high">58.0</td><td>Highest-scoring round of season</td></tr>
-      <tr><td>R7</td><td>8</td><td class="avg-mid">48.5</td><td></td></tr>
-      <tr><td>R8</td><td>8</td><td class="avg-high">56.0</td><td></td></tr>
-      <tr><td>R9</td><td>8</td><td class="avg-high">50.8</td><td></td></tr>
-      <tr><td>R10</td><td>8</td><td class="avg-high">50.6</td><td></td></tr>
-      <tr><td>R11</td><td>8</td><td class="avg-mid">46.0</td><td>Magic Round</td></tr>
-      <tr><td>R12</td><td>5</td><td class="avg-mid">42.8</td><td><span class="origin-tag">Origin 1</span> — reduced fixture</td></tr>
-      <tr><td>R13</td><td>7</td><td class="avg-mid">41.7</td><td><span class="origin-tag">Origin adj.</span></td></tr>
-      <tr><td>R14</td><td>8</td><td class="avg-mid">46.9</td><td>Penrith 68–0 Tigers outlier</td></tr>
-      <tr><td>R15</td><td>5</td><td class="avg-mid">44.2</td><td><span class="origin-tag">Origin 3</span> — reduced fixture</td></tr>
-      <tr><td>R16</td><td>7</td><td class="avg-mid">45.3</td><td></td></tr>
-      <tr><td>R17</td><td>8</td><td class="avg-low">38.5</td><td>Lowest round of season — wet conditions across venues</td></tr>
-      <tr><td>R18</td><td>3*</td><td class="avg-mid">42.7</td><td><span class="incomplete-tag">Partial</span> — round in progress</td></tr>
-    </tbody>
-  </table>
+<div class="trend-section">
+  <h3>What the ruck infringement data tells us</h3>
+  <p>Across all 131 games this season, NRL.com recorded 844 ruck infringements &mdash; the stat that maps directly to 6-again restart calls. The season average is 6.4 per game, but the distribution is the more interesting story.</p>
+  <p><strong>The within-game signal is confirmed.</strong> Games with 10 or more combined ruck infringements consistently produce lower totals. The R17 sample validated this cleanly &mdash; both sub-35pt games had exactly 10 RI each, 70% above the round average. At the individual game level, high RI volume correlates with defensive dominance and slowed play-the-ball tempo, both of which suppress scoring.��p>
+  <p><strong>The across-round signal is much weaker.</strong> R2 had the season's highest RI average (9.1 per game) but was not a low-scoring round &mdash; teams were converting their extra sets. Origin-disrupted rounds averaged 5.5 RI per game versus 6.7 for full-strength rounds, consistent with reduced intensity rather than any change in refereeing.</p>
+  <div class="callout"><strong>Practical implication:</strong> Do not use round-level RI totals from prior weeks as a forward-looking input. Track per-game RI weekly as a calibration data point. When pre-game conditions suggest high RI volume is likely (wet conditions, two defensive teams, high error-rate form), treat it as a supporting signal for an UNDER lean &mdash; not a primary driver.</div>
 </div>
 
-<div class="card" style="margin-top:12px;">
-  <div class="card-title">Scoring phases — season trend</div>
-  <div class="season-avg-line">
-    <span>R1–R8 (early season / pre-Origin)</span>
-    <span><strong style="color:var(--green)">50.4 pts avg</strong> <span class="phase-label">64 games</span></span>
-  </div>
-  <div class="season-avg-line">
-    <span>R9–R11 (mid-season, pre-Origin)</span>
-    <span><strong style="color:var(--green)">49.1 pts avg</strong> <span class="phase-label">24 games</span></span>
-  </div>
-  <div class="season-avg-line">
-    <span>R12–R16 (Origin block)</span>
-    <span><strong style="color:var(--amber)">44.3 pts avg</strong> <span class="phase-label">32 games</span></span>
-  </div>
-  <div class="season-avg-line">
-    <span>R17–R18 (post-Origin / winter)</span>
-    <span><strong style="color:var(--red)">39.7 pts avg</strong> <span class="phase-label">11 games</span></span>
-  </div>
-  <p class="note">Clear seasonal scoring decline across 2026 — model's historical 40–44 pt baseline is relevant for the back half of the season; early-season lines may require upward adjustment.</p>
+<div class="trend-section">
+  <h3>Weather and venue: the unquantified edge</h3>
+  <p>The season's sharpest lessons have come from weather events the model didn't price correctly. R17 across multiple venues produced conditions (wet, 12&ndash;15&deg;C) that amplified error rates and compressed scoring in ways that H2H history alone can't predict. Outdoor southern venues &mdash; McDonald Jones Stadium, GIO Stadium, Accor Stadium, Netstrata Jubilee &mdash; are materially more weather-sensitive than Suncorp, Queensland Country Bank, or Allegiant Stadium.</p>
+  <p>The data to build a proper venue &times; month adjustment table is accumulating from R15 onward. The target is a simple lookup: if venue is [southern outdoor] and month is [June&ndash;August] and forecast includes rain, apply a -4 to -6pt adjustment to the implied total before comparing to the market line. This alone would have prevented the R17 WATCH OVER publication.</p>
 </div>
 
-<hr class="divider">
-
-<!-- ═══ OVER / UNDER DISTRIBUTION ═══ -->
-<h2>OVER / UNDER Distribution</h2>
-
-<div class="card">
-  <div class="card-title">Against a notional 46pt line (season reference)</div>
-  <div class="stat-row" style="margin:0 0 12px;">
-    <div class="stat-box"><div class="val" style="color:var(--green)">~48%</div><div class="lbl">Games OVER 46</div></div>
-    <div class="stat-box"><div class="val" style="color:var(--red)">~52%</div><div class="lbl">Games UNDER 46</div></div>
-    <div class="stat-box"><div class="val">80</div><div class="lbl">Highest single game</div></div>
-    <div class="stat-box"><div class="val">18</div><div class="lbl">Lowest single game</div></div>
-  </div>
-  <p class="note">Markets set lines near the expected total, so OVER/UNDER should be roughly balanced. The model's edge is not in predicting direction — it's in finding games where variance suppresses the total below the line (structural UNDER value) or where two attacking teams push it well above.</p>
+<h2>Scoring overview &middot; R1&ndash;R18</h2>
+<div class="stat-grid">
+  <div class="stat-card"><div class="stat-val">47.8</div><div class="stat-label">Season avg pts</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--green)">58.0</div><div class="stat-label">Highest round avg (R6)</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--red)">38.5</div><div class="stat-label">Lowest round avg (R17)</div></div>
+  <div class="stat-card"><div class="stat-val">131</div><div class="stat-label">Games tracked</div></div>
 </div>
 
-<hr class="divider">
-
-<!-- ═══ RUCK INFRINGEMENTS / 6-AGAIN ═══ -->
-<h2>Ruck Infringements (6-Again Proxy) — Full Season R1–R18</h2>
-
-<p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">NRL.com Team Stats tracks "Ruck Infringements" — the infringement type that triggers a 6-again restart. Data sourced from NRL.com match centre across all 131 games, R1–R18. 844 total ruck infringements recorded.</p>
-
-<div class="stat-row">
-  <div class="stat-box"><div class="val" style="color:var(--accent)">6.4</div><div class="lbl">Season avg RI/game</div></div>
-  <div class="stat-box"><div class="val" style="color:var(--red)">9.1</div><div class="lbl">Highest round avg (R2)</div></div>
-  <div class="stat-box"><div class="val" style="color:var(--green)">3.0</div><div class="lbl">Lowest round avg (R15)</div></div>
-  <div class="stat-box"><div class="val">844</div><div class="lbl">Total RI tracked</div></div>
+<div class="phase-grid">
+  <div class="phase-card"><div class="phase-label">R1&ndash;R8 &middot; Early season</div><div class="phase-val" style="color:var(--green)">50.4 pts avg</div><div class="phase-sub">64 games &middot; Summer/autumn conditions</div></div>
+  <div class="phase-card"><div class="phase-label">R9&ndash;R11 &middot; Pre-Origin</div><div class="phase-val" style="color:var(--green)">49.1 pts avg</div><div class="phase-sub">24 games &middot; Transition period</div></div>
+  <div class="phase-card"><div class="phase-label">R12&ndash;R16 &middot; Origin block</div><div class="phase-val" style="color:var(--amber)">43.5 pts avg</div><div class="phase-sub">32 games &middot; Reduced squads, 4 disrupted rounds</div></div>
+  <div class="phase-card"><div class="phase-label">R17&ndash;R18 &middot; Winter</div><div class="phase-val" style="color:var(--red)">39.7 pts avg</div><div class="phase-sub">13 games &middot; Wet conditions, southern venues</div></div>
 </div>
 
-<div class="card">
-  <table class="six-again-table">
-    <thead>
-      <tr>
-        <th>Round</th>
-        <th>Games</th>
-        <th>Total RI</th>
-        <th>Avg RI/game</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>R1</td><td>8</td><td>47</td><td>5.9</td><td></td></tr>
-      <tr class="highlight"><td>R2</td><td>8</td><td class="hi">73</td><td class="hi">9.1</td><td>Highest-RI round of season</td></tr>
-      <tr><td>R3</td><td>8</td><td>65</td><td>8.1</td><td></td></tr>
-      <tr><td>R4</td><td>8</td><td>54</td><td>6.8</td><td></td></tr>
-      <tr><td>R5</td><td>8</td><td>60</td><td>7.5</td><td></td></tr>
-      <tr><td>R6</td><td>8</td><td>50</td><td>6.3</td><td></td></tr>
-      <tr><td>R7</td><td>8</td><td>49</td><td>6.1</td><td></td></tr>
-      <tr><td>R8</td><td>8</td><td>43</td><td>5.4</td><td></td></tr>
-      <tr><td>R9</td><td>8</td><td>54</td><td>6.8</td><td></td></tr>
-      <tr><td>R10</td><td>8</td><td>52</td><td>6.5</td><td></td></tr>
-      <tr><td>R11</td><td>8</td><td>59</td><td>7.4</td><td>Magic Round</td></tr>
-      <tr><td>R12</td><td>5</td><td>38</td><td>7.6</td><td><span class="origin-tag">Origin 1</span></td></tr>
-      <tr><td>R13</td><td>7</td><td>45</td><td>6.4</td><td><span class="origin-tag">Origin adj.</span></td></tr>
-      <tr><td>R14</td><td>8</td><td>38</td><td>4.8</td><td></td></tr>
-      <tr class="highlight"><td>R15</td><td>5</td><td class="lo">15</td><td class="lo">3.0</td><td><span class="origin-tag">Origin 3</span> — lowest RI round</td></tr>
-      <tr><td>R16</td><td>7</td><td>33</td><td>4.7</td><td><span class="origin-tag">Origin adj.</span></td></tr>
-      <tr><td>R17</td><td>8</td><td>47</td><td>5.9</td><td></td></tr>
-      <tr><td>R18</td><td>5</td><td>22</td><td>4.4</td><td>Partial round</td></tr>
-    </tbody>
-    <tfoot>
-      <tr style="border-top: 1px solid var(--border);">
-        <td style="font-size:11px;"><strong>Season total</strong></td>
-        <td style="font-size:11px;">131</td>
-        <td style="font-size:11px;"><strong>844</strong></td>
-        <td style="font-size:11px;"><strong>6.4/gm</strong></td>
-        <td style="font-size:11px;color:var(--text-muted);">R1–R18 complete</td>
-      </tr>
-    </tfoot>
-  </table>
-  <p class="note">Origin-affected rounds (R12, R13, R15, R16) averaged 5.5 RI/game vs 6.7 RI/game for full 8-game rounds — consistent with reduced game intensity. R15 (3.0/gm) was the season low, coinciding with the heaviest Origin withdrawal. Across rounds, no clear inverse relationship between RI volume and scoring average — R2 (highest RI, 9.1/gm) was not a low-scoring round. Within-game correlation still holds: at the individual game level, ≥10 RI consistently accompanies lower totals.</p>
+<div class="table-card"><table><thead><tr><th>Round</th><th>Games</th><th>Avg pts/game</th><th>Notes</th></tr></thead><tbody><tr><td>R1</td><td>8</td><td>50.5</td><td></td></tr><tr><td>R2</td><td>8</td><td>50.5</td><td></td></tr><tr><td>R3</td><td>8</td><td>41.3</td><td></td></tr><tr><td>R4</td><td>8</td><td>48.1</td><td></td></tr><tr><td>R5</td><td>8</td><td>50.0</td><td></td></tr><tr><td>R6</td><td>8</td><td class="lo">58.0</td><td>Highest-scoring round of season</td></tr><tr><td>R7</td><td>8</td><td>48.5</td><td></td></tr><tr><td>R8</td><td>8</td><td>56.0</td><td></td></tr><tr><td>R9</td><td>8</td><td>50.8</td><td></td></tr><tr><td>R10</td><td>8</td><td>50.6</td><td></td></tr><tr><td>R11</td><td>8</td><td>46.0</td><td>Magic Round<span class="tag tag-magic">Magic</span></td></tr><tr><td>R12</td><td>5</td><td>42.8</td><td><span class="tag tag-origin">Origin 1</span> &middot; Reduced fixture</td></tr><tr><td>R13</td><td>7</td><td>41.7</td><td><span class="tag tag-origin">Origin adj.</span></td></tr><tr><td>R14</td><td>8</td><td>46.9</td><td>Penrith 68&ndash;0 Tigers outlier</td></tr><tr><td>R15</td><td>5</td><td>44.2</td><td><span class="tag tag-origin">Origin 3</span> &middot; Reduced fixture</td></tr><tr><td>R16</td><td>7</td><td>45.3</td><td><span class="tag tag-origin">Origin adj.</span></td></tr><tr><td>R17</td><td>8</td><td class="hi">38.5</td><td>Lowest round &middot; Wet conditions across multiple venues</td></tr><tr><td>R18</td><td>5</td><td class="hi">40.0</td><td><span class="tag tag-origin">Origin 3</span> &middot; <span class="tag tag-partial">Partial</span></td></tr></tbody></table></div>
+
+<h2>Ruck infringements (6-again proxy) &middot; R1&ndash;R18</h2>
+<p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">NRL.com Team Stats &mdash; "Ruck Infringements" maps directly to 6-again restarts. All 131 games sourced from NRL.com match centre. 844 total RI recorded.</p>
+<div class="stat-grid">
+  <div class="stat-card"><div class="stat-val" style="color:var(--blue)">6.4</div><div class="stat-label">Season avg RI/game</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--red)">9.1</div><div class="stat-label">Highest round avg (R2)</div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--green)">3.0</div><div class="stat-label">Lowest round avg (R15)</div></div>
+  <div class="stat-card"><div class="stat-val">844</div><div class="stat-label">Total RI tracked</div></div>
 </div>
 
-<div class="card" style="margin-top:12px;">
-  <div class="card-title">R17 Game Detail — Original Sample <span style="font-size:10px; color:var(--text-muted); font-weight:400; text-transform:none;">(lowest-scoring round · 47 total RI · 5.9/gm)</span></div>
-  <table class="six-again-table">
-    <thead>
-      <tr>
-        <th>Match</th>
-        <th>Total pts</th>
-        <th>Errors</th>
-        <th>Penalties</th>
-        <th>Ruck Infr.</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Eels v Rabbitohs</td><td>44</td><td class="hi">30</td><td>9</td><td class="lo">4</td></tr>
-      <tr><td>Titans v Bulldogs</td><td>42</td><td>20</td><td>5</td><td class="lo">2</td></tr>
-      <tr><td>Broncos v Roosters</td><td>42</td><td>21</td><td class="hi">14</td><td class="lo">4</td></tr>
-      <tr><td>Dolphins v Warriors</td><td style="color:var(--green);font-weight:600">50</td><td>26</td><td class="lo">2</td><td>7</td></tr>
-      <tr><td>Cowboys v Panthers</td><td>38</td><td class="hi">30</td><td>6</td><td>7</td></tr>
-      <tr><td>Sea Eagles v Storm</td><td class="avg-low">34</td><td class="lo">14</td><td>6</td><td class="hi">10</td></tr>
-      <tr><td>Raiders v Dragons</td><td>40</td><td class="hi">32</td><td>6</td><td class="lo">3</td></tr>
-      <tr class="highlight"><td><strong>Knights v Wests Tigers</strong> ★</td><td class="avg-low"><strong>18</strong></td><td class="hi"><strong>28</strong></td><td>7</td><td class="hi"><strong>10</strong></td></tr>
-    </tbody>
-    <tfoot>
-      <tr style="border-top: 1px solid var(--border);">
-        <td style="color:var(--text-muted);font-size:11px;">Round totals</td>
-        <td style="font-size:11px;">308 (38.5 avg)</td>
-        <td style="font-size:11px;">201 (25.1/gm)</td>
-        <td style="font-size:11px;">55 (6.9/gm)</td>
-        <td style="font-size:11px;">47 (5.9/gm)</td>
-      </tr>
-    </tfoot>
-  </table>
-  <p class="note">★ Model's R17 WATCH OVER miss. Both lowest-scoring games (Knights/Tigers 18pts, Sea Eagles/Storm 34pts) had 10 ruck infringements — 70% above the round average. The within-game RI signal holds across the full season: individual games with ≥10 RI are consistently lower-scoring.</p>
+<div class="table-card"><table><thead><tr><th>Round</th><th>Games</th><th>Total RI</th><th>Avg RI/game</th><th>Notes</th></tr></thead><tbody><tr><td>R1</td><td>8</td><td>47</td><td>5.9</td><td></td></tr><tr><td>R2</td><td>8</td><td class="hi">73</td><td class="hi">9.1</td><td>Highest-RI round of season</td></tr><tr><td>R3</td><td>8</td><td>65</td><td>8.1</td><td></td></tr><tr><td>R4</td><td>8</td><td>54</td><td>6.8</td><td></td></tr><tr><td>R5</td><td>8</td><td>60</td><td>7.5</td><td></td></tr><tr><td>R6</td><td>8</td><td>50</td><td>6.3</td><td></td></tr><tr><td>R7</td><td>8</td><td>49</td><td>6.1</td><td></td></tr><tr><td>R8</td><td>8</td><td>43</td><td>5.4</td><td></td></tr><tr><td>R9</td><td>8</td><td>54</td><td>6.8</td><td></td></tr><tr><td>R10</td><td>8</td><td>52</td><td>6.5</td><td></td></tr><tr><td>R11</td><td>8</td><td>59</td><td>7.4</td><td>Magic Round</td></tr><tr><td>R12</td><td>5</td><td>38</td><td>7.6</td><td><span class="tag tag-origin">Origin 1</span></td></tr><tr><td>R13</td><td>7</td><td>45</td><td>6.4</td><td><span class="tag tag-origin">Origin adj.</span></td></tr><tr><td>R14</td><td>8</td><td>38</td><td>4.8</td><td></td></tr><tr><td>R15</td><td>5</td><td class="lo">15</td><td class="lo">3.0</td><td><span class="tag tag-origin">Origin 3</span> &middot; Season low</td></tr><tr><td>R16</td><td>7</td><td>33</td><td>4.7</td><td><span class="tag tag-origin">Origin adj.</span></td></tr><tr><td>R17</td><td>8</td><td>47</td><td>5.9</td><td></td></tr><tr><td>R18</td><td>5</td><td>22</td><td>4.4</td><td><span class="tag tag-partial">Partial</span></td></tr></tbody><tfoot><tr style="border-top:1px solid var(--border);"><td><strong>Season</strong></td><td><strong>131</strong></td><td><strong>844</strong></td><td><strong>6.4</strong></td><td class="note">R1&ndash;R18 complete</td></tr></tfoot></table><p class="note" style="padding:12px 10px;">Origin-affected rounds averaged 5.5 RI/game vs 6.7 RI/game for full-strength rounds. Across-round RI volume does not predict scoring direction &mdash; within-game RI &ge;10 consistently correlates with lower totals.</p></div>
+
+<div class="table-card"><table><thead><tr><th colspan="5" style="background:#f9f9f9;font-size:12px;">R17 Game Detail &middot; Lowest-scoring round (38.5 avg) &middot; 47 total RI &middot; 5.9/gm</th></tr><tr><th>Match</th><th>Total pts</th><th&Errors>/th><th>Penalties</th><th>Ruck Infr.</th></tr></thead><tbody><tr><td>Eels v Rabbitohs</td><td>44</td><td class="hi">30</td><td>9</td><td>4</td></tr><tr><td>Titans v Bulldogs</td><td>42</td><td>20</td><td>5</td><td>2</td></tr><tr><td>Broncos v Roosters</td><td>42</td><td>21</td><td class="hi">14</td><td>4</td></tr><tr><td>Dolphins v Warriory</td><td>50</td><td>26</td><td>2</td><td>7</td></tr><tr><td>Cowboys v Panthers</td><td>38</td><td class="hi">30</td><td>6</td><td>7</td></tr><tr><td>Sea Eagles v Storm</td><td class="hi">34</td><td>14</td><td>6</td><td class="hi">10</td></tr><tr><td>Raiders v Dragons</td><td>40</td><td class="hi">32</td><td>6</td><td>3</td></tr><tr><td><strong>Knights v Wests Tigers</strong> &#9888;&#65039;</td><td class="hi"><strong>18</strong></td><td class="hi"><strong>28</strong></td><td>7</td><td class="hi"><strong>10</strong></td></tr></tbody><tfoot><tr style="border-top:1px solid var(--border);"><td class="note">Round totals</td><td class="note">308 (38.5 avg)</td><td class="note">201 (25.1/gm)</td><td class="note">55 (6.9/gm)</td><td class="note">47 (5.9/gm)</td></tr></tfoot></table><p class="note" style="padding:12px 10px;">&#9888;&#65039; Model's R17 WATCH OVER miss. Knights v Tigers (18pts vs OVER 51.5): 28 combined errors + 10 ruck infringements in wet conditions at McDonald Jones Stadium. Both sub-35pt games had 10 RI each. Confirms: within-game RI &ge;10 is a reliable low-scoring indicator.</p></div>
+
+<h2>Key model findings</h2>
+<div class="finding miss"><div class="finding-title">R17 WATCH OVER miss &middot; Knights v Tigers (18 total vs OVER 51.5)</div><div class="finding-body">28 combined errors in wet conditions at McDonald Jones Stadium. Both lowest-scoring R17 games had 10 ruck infringements each &mdash; 70% above the round average. Error rate was the primary driver, not team quality or form. Confirms: WATCH OVER leans in wet/cold conditions should not be published.</div></div>
+
+<div class="finding warn"><div class="finding-title">WATCH OTER bKans carry disproportionate risk</div><div class="finding-body">Season hit rate excl. WATCH: 75% (6/8). Season hit rate incl. WATCH: 69% (9/13). The model's structural edge sits on the UNDER side &mdash; error rate, weather, and defensive sets all act as natural suppressors. WATCH OVER leans fight against this edge and should be reviewed before publishing.</div></div>
+
+<div class="finding"><div class="finding-title">Season scoring has declined materially since R8</div><div class="finding-body">R1&ndash;R8 average: 50.4pts. R17&ndash;R18 average: 39.7pts. A 10.7pt drop across the season. The model's historical 40&ndash;44pt baseline is more applicable now than early-season. Market lines set during early rounds may lag this adjustment &mdash; lean UNDER in winter rounds where lines remain elevated.</div></div>
+
+<div class="finding"><div class="finding-title">Origin rounds are structurally lower-scoring</div><div class="finding-body">Origin-disrupted rounds (R12, R13, R15, R16) averaged 43.5pts across 24 games vs 48.7pts for non-Origin rounds. Top-line playmakers absent, replacement-grade halves, disrupted team chemistry. Apply a downward adjustment to any game involving Origin-selected teams in Origin weeks. Reduced fixture in those rounds also skews round-level analysis.</div></div>
+
+<h2>Model improvement opportunities</h2>
+<div class="finding action"><div class="finding-title"><span class="pill pill-priority">Priority</span> Suppress WATCH OVER leans in winter conditions</div><div class="finding-body">Rule: if weather forecast includes rain/wet or temperature below 12&deg;C, do not publish WATCH OVER leans. HIGH confidence OVER leans can still publish &mdash; the threshold should be raised for WATCH. The variance suppression from wet conditions consistently outweighs the upward scoring signal.</div></div>
+<div class="finding action"><div class="finding-title"><span class="pill pill-priority">Priority</span> Add season-phase adjustment to baseline total</div><div class="finding-body">The model currently uses a fixed historical baseline (40&ndash;44pts). A rolling 4-week average of actual game totals would make the baseline dynamic. Implement: track last 4 rounds' average as "current baseline" and weight it alongside H2H history. This would have caught the R17 downward trend earlier.</div></div>
+<div class="finding action"><div class="finding-title"><span class="pill pill-consider">Consider</span> Origin round flag</div><div class="finding-body">Add detection logic: if a game involves teams with multiple Origin representatives and the round falls on an Origin match week, apply a -3 to -5pt downward adjustment to the implied total. Track which teams are most affected (QLD-heavy: Broncos, Cowboys, Storm; NSW-heavy: Panthers, Roosters). Do not apply to Origin-adjacent rounds where players have returned.</div></div>
+
+<div class="finding action"><div class="finding-title"><span class="pill pill-confirmed">Confirmed</span> Ruck infringement as within-game signal</div><div class="finding-body">Full-season data (131 games, 844 total RI, 6.4/gm) confirms: games with &ge;10 ruck infringements consistently correlate with lower scoring. Across-round RI volume is noise &mdash; do not use prior-round RI totals as a pre-game input. Track per-game RI as a weekly post-game calibration point. Origin rounds show lower RI (5.5/gm vs 6.7/gm), consistent with reduced intensity.</div></div>
+
+<div class="finding action"><div class="finding-title"><span class="pill pill-consider">Consider</span> Venue &times; winter factor</div><div class="finding-body">Outdoor southern venues (McDonald Jones, GIO, Accor, Netstrata) in wet/cold conditions consistently produce lower totals. Heated or Queensland venues (Suncorp, QCB) are less affected. Build a venue &times; month adjustment table from R15 onward. Target: a simple -4 to -6pt lookup for southern outdoor venues in June&ndash;August with rain forecast.</div></div>
+
+<div class="finding action"><div class="finding-title"><span class="pill pill-future">Future</span> Error rate as pre-game signal</div><div class="finding-body">Post-game errors correlate with lower totals, but can we predict high-error games pre-game? Candidate inputs: recent 4-week error rate per team (NRL.com Team Stats), fatigue indicators (back-to-back away games, post-Origin returns). Medium-term enhancement requiring consistent data collection starting now.</div></div>
+
+<h2>Model performance &middot; R15&ndash;R18</h2>
+<div class="perf-grid">
+  <div class="stat-card"><div class="stat-val" style="color:var(--green)">75%</div><div class="stat-label">Hit rate excl. WATCH<br><span style="font-size:10px;color:var(--text-subtle)">6/8 leans</span></div></div>
+  <div class="stat-card"><div class="stat-val" style="color:var(--amber)">69%</div><div class="stat-label">Hit rate incl. WATCH<br><span style="font-size:10px;color:var(--text-subtle)">9/13 leans</span></div></div>
+  <div class="stat-card"><div class="stat-val">2</div><div class="stat-label">Pending results<br><span style="font-size:10px;color:var(--text-subtle)">R18 incomplete</span></div></div>
 </div>
 
-<hr class="divider">
+<h2>Data collection roadmap</h2>
+<div class="table-card"><table><thead><tr><th>Data point</th><th>Source</th><th>Status</th><th>Use</th></tr></thead><tbody><tr><td>Game totals R1&ndash;R18</td><td>Rugby League Project</td><td class="status-done">&#10003; Complete</td><td>Season baseline calibration</td></tr><tr><td>Ruck infringements R1&ndash;R18</td><td>NRL.com match centre</td><td class="status-done">&#10003; Complete (131 games)</td><td>Full-season correlation analysis</td></tr><tr><td>Weather by venue/round</td><td>BOM / WeatherZone</td><td class="status-todo">&#10005; Not started</td><td>Weather adjustment model</td></tr><tr><td>Origin player absence by team</td><td>NRL.com / media</td><td class="status-todo">&#10005; Not started</td><td>Origin adjustment factor</td></tr><tr><td>Team error rates (rolling 4-week)</td><td>NRL.com Team Stats</td><td class="status-todo">&#10005; Not started</td><td>Pre-game variance predictor</td></tr></tbody></table></div>
 
-<!-- ═══ KEY FINDINGS ═══ -->
-<h2>Key Model Findings</h2>
-
-<div class="finding miss">
-  <div class="finding-title">R17 WATCH OVER miss — Knights v Tigers (18 total vs OVER 51.5)</div>
-  <div class="finding-body">
-    Investigated game: 28 combined errors (14 each vs season avg ~11.7/team) in wet conditions at McDonald Jones Stadium. Ground Conditions: Wet. The error rate was the primary driver — hot team quality or form. Both teams also produced 10 combined ruck infringements. This was a variance event compounded by weather, not a systematic model failure. However it confirms the risk of WATCH OVER leans in winter conditions.
-  </div>
+<footer>
+  <p>NRL Totals Model &middot; Season Learnings 2026 &middot; Internal reference &middot; Data: nrl.com, rugby</p>
+  <p><a href="index.html">&larr; Scoring report</a> &middot; <a href="tryscorers.html">Try scorers</a> &middot; <a href="history.html">Record &amp; history</a></p>
+</footer>
 </div>
-
-<div class="finding warn">
-  <div class="finding-title">WATCH OVER leans carry disproportionate risk</div>
-  <div class="finding-body">
-    Season hit rate excl. WATCH: 75% (6/8). Season hit rate incl. WATCH: 69% (9/13). WATCH OVER leans have underperformed. The model's structural edge sits on the UNDER side — error rate, weather, and defensive sets all act as natural suppressors. WATCH OVER leans fight against this edge and should be reviewed before publishing.
-  </div>
-</div>
-
-<div class="finding">
-  <div class="finding-title">Season scoring has declined materially from R1–R8 peak</div>
-  <div class="finding-body">
-    R1–R8 season average: 50.4pts. R17–R18 average: 39.7pts. A 10.7pt drop across the season. The model's historical baseline of 40–44pts is more applicable to the current period than early-season. Market lines set during early rounds may have lagged this adjustment — an opportunity the model can exploit by leaning toward UNDER in winter rounds where lines remain elevated.
-  </div>
-</div>
-
-<div class="finding">
-  <div class="finding-title">Origin rounds are structurally lower-scoring</div>
-  <div class="finding-body">
-    Rounds affected by State of Origin (R12, R13, R15, R16) averaged 43.5pts across 24 games — vs 48.7pts for non-Origin rounds. Cause: top-line playmakers absent, replacement-grade halves, disrupted team structure and chemistry. Model should apply a downward adjustment to any game involving Origin-selected teams in Origin weeks. Fixture reduction in those rounds (5–7 games vs 8) also skews round-level analysis.
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- ═══ MODEL IMPROVEMENTS ═══ -->
-<h2>Model Improvement Opportunities</h2>
-
-<div class="card">
-  <div class="card-title">Priority actions <span class="pill pill-priority">Priority</span></div>
-
-  <div class="finding action" style="margin-bottom:10px;">
-    <div class="finding-title"><span class="pill pill-priority">Priority</span> Suppress WATCH OVER leans in winter conditions</div>
-    <div class="finding-body">
-      Implement a rule: if weather forecast includes rain/wet or temperature below 12°C, do not publish WATCH OVER leans. The variance suppression from wet conditions consistently outweighs the upward scoring signal. HIGH confidence OVER leans can still publish — the threshold should be raised for WATCH.
-    </div>
-  </div>
-
-  <div class="finding action" style="margin-bottom:10px;">
-    <div class="finding-title"><span class="pill pill-priority">Priority</span> Add season-phase adjustment to baseline total</div>
-    <div class="finding-body">
-      The model currently uses a fixed historical baseline (40–44pts). A rolling 4-week average of actual game totals would make the baseline dynamic. Implement: track last 4 rounds' average as "current baseline" and weight it alongside H2H history. This would have caught the R17 downward trend earlier.
-    </div>
-  </div>
-
-  <div class="finding action" style="margin-bottom:10px;">
-    <div class="finding-title"><span class="pill pill-consider">Consider</span> Origin round flag</div>
-    <div class="finding-body">
-      Add detection logic: if a game involves teams with multiple Origin representatives and the round falls on an Origin match week, apply a -3 to -5pt downward adjustment to the implied total. Track which teams are most affected (QLD-heavy teams like Broncos, Cowboys, Storm; NSW-heavy teams like Panthers, Roosters). Do not apply to Origin-adjacent rounds where players have returned.
-    </div>
-  </div>
-
-  <div class="finding action" style="margin-bottom:10px;">
-    <div class="finding-title"><span class="pill pill-consider">Consider</span> Ruck infringement rate as a within-game signal — confirmed</div>
-    <div class="finding-body">
-      Full-season data (131 games, 844 total RI, 6.4/gm average) confirms: the within-game signal holds. Games with ≥10 ruck infringements consistently correlate with lower scoring — validated across the season. Across-round correlation is weaker (R2 had the most RI at 9.1/gm but was not a low-scoring round). Recommend: track per-game RI as a weekly post-game data point. Do not use round-level RI totals as a pre-game input — the between-round signal is noise. Origin rounds show lower RI (5.5/gm vs 6.7/gm for full rounds), consistent with reduced intensity.
-    </div>
-  </div>
-
-  <div class="finding action" style="margin-bottom:10px;">
-    <div class="finding-title"><span class="pill pill-consider">Consider</span> Venue winter factor</div>
-    <div class="finding-body">
-      Outdoor southern venues (McDonald Jones, GIO, Accor, Netstrata) in wet/cold conditions consistently produce lower totals. Heated/indoor or Queensland venues (Suncorp, QCB) are less affected. Build a venue × month adjustment table once sufficient seasonal data is available. Start tracking from R15 onward.
-    </div>
-  </div>
-
-  <div class="finding action">
-    <div class="finding-title"><span class="pill pill-future">Future</span> Error rate as pre-game signal</div>
-    <div class="finding-body">
-      Post-game errors correlate with lower totals, but can we predict high-error games pre-game? Candidate inputs: recent 4-week error rate per team (from NRL.com Team Stats), plus fatigue indicators (back-to-back away games, post-Origin returns). This is a medium-term model enhancement requiring consistent data collection starting now.
-    </div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- ═══ DATA TO COLLECT ═══ -->
-<h2>Data Collection Roadmap</h2>
-
-<div class="card">
-  <table>
-    <thead>
-      <tr>
-        <th>Data point</th>
-        <th>Source</th>
-        <th>Status</th>
-        <th>Use</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Game totals — R1–R18</td>
-        <td>Rugby League Project</td>
-        <td style="color:var(--green)">✓ Complete</td>
-        <td>Season baseline calibration</td>
-      </tr>
-      <tr>
-        <td>Ruck infringements — all rounds (R1–R18)</td>
-        <td>NRL.com match centre</td>
-        <td style="color:var(--green)">✓ Complete (131 games)</td>
-        <td>Full-season correlation analysis</td>
-      </tr>
-      <tr>
-        <td>Weather by venue/round</td>
-        <td>BOM / WeatherZone</td>
-        <td style="color:var(--red)">✗ Not started</td>
-        <td>Weather adjustment model</td>
-      </tr>
-      <tr>
-        <td>Origin player absence by team</td>
-        <td>NRL.com / media</td>
-        <td style="color:var(--red)">✗ Not started</td>
-        <td>Origin adjustment factor</td>
-      </tr>
-      <tr>
-        <td>Team error rates (rolling 4-week)</td>
-        <td>NRL.com Team Stats</td>
-        <td style="color:var(--red)">✗ Not started</td>
-        <td>Pre-game variance predictor</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<hr class="divider">
-
-<!-- ═══ MODEL PERFORMANCE ═══ -->
-<h2>Model Performance — Season to Date (R15–R18)</h2>
-
-<div class="stat-row">
-  <div class="stat-box"><div class="val" style="color:var(--green)">75%</div><div class="lbl">Hit rate excl. WATCH<br><span style="font-size:10px;color:var(--text-muted)">6/8 leans</span></div></div>
-  <div class="stat-box"><div class="val" style="color:var(--amber)">69%</div><div class="lbl">Hit rate incl. WATCH<br><span style="font-size:10px;color:var(--text-muted)">9/13 leans</span></div></div>
-  <div class="stat-box"><div class="val">2</div><div class="lbl">Results pending<br><span style="font-size:10px;color:var(--text-muted)">R18 incomplete</span></div></div>
-</div>
-
-<p class="note" style="margin-top:12px;">Model tracking commenced R15. Full-season tracking begins R19. Confidence tiers: HIGH &gt; SOLID &gt; WATCH (advisory). WATCH leans excluded from primary hit rate calculation.</p>
-
-<div class="updated">Last updated: 5 July 2026 · R18 complete · Ruck infringement data: all 131 games R1–R18 · Data sources: Rugby League Project, NRL.com</div>
-
 </body>
 </html>

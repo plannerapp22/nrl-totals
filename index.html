@@ -47,6 +47,10 @@ h2 { font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:0
 .record-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px; text-align:center; }
 .record-pct { font-size:30px; font-weight:700; }
 .record-label { font-size:11px; color:var(--text-muted); margin-top:4px; text-transform:uppercase; letter-spacing:0.05em; }
+.shootout-box { background:#fff7ed; border:1px solid #fdba74; border-radius:8px; padding:14px 16px; margin-top:12px; }
+.shootout-label { display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:#c2410c; background:#ffedd5; padding:2px 10px; border-radius:10px; margin-bottom:8px; }
+.shootout-text { font-size:13px; color:#7c2d12; line-height:1.5; }
+.summary-row.shootout { color:#c2410c; font-weight:600; }
 .disclaimer { font-size:12px; color:var(--text-subtle); margin-top:32px; padding-top:20px; border-top:1px solid var(--border); line-height:1.8; }
 footer { margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--text-muted); }
 footer a { color:var(--text-muted); }
@@ -75,15 +79,16 @@ footer a { color:var(--text-muted); }
 
 <h2>Season phase</h2>
 <div class="multi-box">
-<div class="multi-title">Post-Origin rebound &mdash; R20 came in the other way</div>
-<div class="multi-note" style="border-top:none; padding-top:0; margin-top:0;">Round 20 tested the over-module thesis and it didn't hold: actual totals ran 4.3pts <em>below</em> model expectation on average and 5 of 8 games finished under their line, with all 3 rated SOLID unders hitting. The +2pt rebound uplift and tightened tier thresholds (HIGH needs +6.5, SOLID needs +4) stay in force for Round 21 while the review continues &mdash; this round leans the other way again, with five of seven unrated games showing the model's composite above the market line (OVER signal), even though the round's one rated lean is a clean UNDER. Genuinely mixed evidence; still watching, not concluding.</div>
+<div class="multi-title">Post-Origin rebound continues &mdash; plus a methodology fix</div>
+<div class="multi-note" style="border-top:none; padding-top:0; margin-top:0;">The +2pt rebound uplift and tightened tier thresholds (HIGH needs +6.5, SOLID needs +4) stay in force through R24. Separately: we found and fixed a real bias in the tier system. HIGH and SOLID had only ever been awarded to unders since Round 15 &mdash; a genuinely strong OVER signal had nowhere to go and got filed as a generic WATCH note regardless of how clear the data was. Re-checking last round's WATCH-leans-OVER calls against the plain H2H hit rate (not just the recency-weighted average) showed most of them were actually closer to a coin flip than a real lean &mdash; the weighted average was getting pulled around by one or two recent blowouts. From this round on, genuine over-signals get a dedicated <strong>Shootout Risk</strong> flag: a warning that the standard under is unsafe, paired with a suggested alternate-totals Over range well below the line, rather than a straight bet-the-over call. The core model's edge stays in finding safe unders &mdash; this doesn't change that, it just stops burying the real risk cases in noise.</div>
 </div>
 
 <h2>Quick summary</h2>
 <div class="summary-box">
 <div class="summary-row">&#128994; <strong>HIGH:</strong> none this round (rebound-phase thresholds)</div>
 <div class="summary-row">&#128993; <strong>SOLID:</strong> Raiders v Wests Tigers</div>
-<div class="summary-row">&#128992; <strong>WATCH:</strong> Eels v Panthers (leans OVER, tonight) &middot; Knights v Roosters (mixed, small under lean) &middot; Rabbitohs v Storm (leans OVER) &middot; Bulldogs v Warriors (marginal, pick&#39;em) &middot; Cowboys v Broncos (leans OVER) &middot; Dragons v Titans (mixed, leans OVER against market tendency) &middot; Sea Eagles v Sharks (leans OVER)</div>
+<div class="summary-row shootout">&#128293; <strong>SHOOTOUT RISK:</strong> Cowboys v Broncos &mdash; H2H has cleared the line in 67% of meetings since 2022; consider an alternate-totals Over well below 48.5 instead of backing the standard under here</div>
+<div class="summary-row">&#128992; <strong>WATCH:</strong> Eels v Panthers (uncertain, blowout risk, tonight) &middot; Knights v Roosters (mixed, small under lean) &middot; Rabbitohs v Storm (mixed) &middot; Bulldogs v Warriors (even, pick&#39;em) &middot; Dragons v Titans (no clear lean) &middot; Sea Eagles v Sharks (even split, tight sample)</div>
 </div>
 
 <h2>Multi recommendation</h2>
@@ -97,12 +102,12 @@ footer a { color:var(--text-muted); }
 <div class="game-card">
 <div class="game-title">Parramatta Eels v Penrith Panthers</div>
 <div class="game-meta">Thu 23 Jul &middot; 7:50pm AEST &middot; CommBank Stadium, Sydney &middot; TONIGHT</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; data leans OVER</span>
+<span class="tier-badge tier-watch">&#128992; WATCH &mdash; uncertain, blowout risk</span>
 <div class="signals">
 <div class="signal">
 <div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">weighted avg 46.75pts</div>
-<div class="sig-sub">raw 45.1 &middot; sd 13.3 &middot; n=11 &middot; last 4: 70, 28, 42, 68 &middot; 2026: Penrith 48&ndash;20</div>
+<div class="sig-val">8/11 (73%) under 44.5</div>
+<div class="sig-sub">weighted avg 46.75 &middot; raw 45.1 &middot; sd 13.3 &middot; n=11 &middot; last 4: 70, 28, 42, 68 &middot; 2026: Penrith 48&ndash;20</div>
 </div>
 <div class="signal">
 <div class="sig-label">Season form</div>
@@ -120,7 +125,7 @@ footer a { color:var(--text-muted); }
 <div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: &minus;2.8 &middot; Line: 44.5</div>
 </div>
 </div>
-<div class="verdict">This fixture doesn&#39;t do low-scoring when Penrith are involved and favoured this heavily &mdash; the last two meetings alone produced 70 and 68 points, and the weighted H2H sits well above the line. Both teams also run under their own season lines more often than not, which tempers the case, but the H2H and blowout-risk signals point the other way. Alphr&#39;s own model backs Over 44.5 too. WATCH only, advisory, leans OVER &mdash; kicks off tonight.</div>
+<div class="verdict">The plain H2H history actually favours the under here &mdash; 8 of 11 meetings since 2022 landed under 44.5 &mdash; despite the two brutal recent blowouts (70, 68) that drag the recency-weighted average above the line. Both teams also run under their own season totals more often than not. The risk is real (huge favourites, capable of a blowout either direction) but the sample doesn&#39;t clear the bar for a Shootout Risk flag &mdash; most of the history was under. WATCH only, genuinely uncertain &mdash; kicks off tonight.</div>
 </div>
 
 <div class="game-card">
@@ -130,8 +135,8 @@ footer a { color:var(--text-muted); }
 <div class="signals">
 <div class="signal">
 <div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">weighted avg 40.2pts</div>
-<div class="sig-sub">raw 39.7 &middot; sd 16.2 (wide) &middot; n=6 &middot; last 4: 34, 42, 20, 62</div>
+<div class="sig-val">4/6 (67%) under 45.5</div>
+<div class="sig-sub">weighted avg 40.2 &middot; raw 39.7 &middot; sd 16.2 (wide) &middot; n=6 &middot; last 4: 34, 42, 20, 62</div>
 </div>
 <div class="signal">
 <div class="sig-label">Season form</div>
@@ -155,12 +160,12 @@ footer a { color:var(--text-muted); }
 <div class="game-card">
 <div class="game-title">South Sydney Rabbitohs v Melbourne Storm</div>
 <div class="game-meta">Fri 24 Jul &middot; 8:00pm AEST &middot; Accor Stadium, Sydney</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; data leans OVER</span>
+<span class="tier-badge tier-watch">&#128992; WATCH &mdash; mixed signals</span>
 <div class="signals">
 <div class="signal">
 <div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">weighted avg 46.79pts</div>
-<div class="sig-sub">raw 43.8 &middot; sd 14.2 (wide) &middot; n=9 &middot; last 4: 44, 40, 49, 54</div>
+<div class="sig-val">6/9 (67%) under 46.5</div>
+<div class="sig-sub">weighted avg 46.79 &middot; raw 43.8 &middot; sd 14.2 (wide) &middot; n=9 &middot; last 4: 44, 40, 49, 54</div>
 </div>
 <div class="signal">
 <div class="sig-label">Season form</div>
@@ -178,7 +183,7 @@ footer a { color:var(--text-muted); }
 <div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: &minus;1.7 &middot; Line: 46.5</div>
 </div>
 </div>
-<div class="verdict">Souths are the highest-scoring team in the competition this season (52.2 points per game) and Alex Johnston leads the league in tries &mdash; that attacking output is the story here, even with Latrell Mitchell still out. Hughes returning for Melbourne adds attacking polish back to a Storm side that had looked green without him. H2H is wide (sd 14) but sits above the line either way. WATCH only, advisory, leans OVER.</div>
+<div class="verdict">The plain H2H history actually favours the under here (6 of 9 meetings), even though the recency-weighted average sits above the line &mdash; pulled up by a 74-point outlier in 2024 and Souths&#39; status as the competition&#39;s highest scorers this season. Hughes returning adds a bit more uncertainty to Melbourne&#39;s attack. Genuinely mixed, and doesn&#39;t clear the bar for a Shootout Risk flag. WATCH only.</div>
 </div>
 
 <div class="game-card">
@@ -188,8 +193,8 @@ footer a { color:var(--text-muted); }
 <div class="signals">
 <div class="signal">
 <div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">weighted avg 45.77pts</div>
-<div class="sig-sub">raw 46.3 &middot; sd 15.3 (wide) &middot; n=8 &middot; last 4: 72, 28, 34, 47</div>
+<div class="sig-val">6/8 (75%) under 51.5</div>
+<div class="sig-sub">weighted avg 45.77 &middot; raw 46.3 &middot; sd 15.3 (wide) &middot; n=8 &middot; last 4: 72, 28, 34, 47</div>
 </div>
 <div class="signal">
 <div class="sig-label">Season form</div>
@@ -217,8 +222,8 @@ footer a { color:var(--text-muted); }
 <div class="signals">
 <div class="signal">
 <div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">weighted avg 41.33pts</div>
-<div class="sig-sub">raw 41.5 &middot; sd 13.5 &middot; n=6 &middot; last 4: 36, 25, 52, 46</div>
+<div class="sig-val">3/6 (50%) under 43.5</div>
+<div class="sig-sub">weighted avg 41.33 &middot; raw 41.5 &middot; sd 13.5 &middot; n=6 &middot; last 4: 36, 25, 52, 46</div>
 </div>
 <div class="signal">
 <div class="sig-label">Season form</div>
@@ -242,12 +247,12 @@ footer a { color:var(--text-muted); }
 <div class="game-card">
 <div class="game-title">North Queensland Cowboys v Brisbane Broncos</div>
 <div class="game-meta">Sat 25 Jul &middot; 7:35pm AEST &middot; Queensland Country Bank Stadium, Townsville</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; data leans OVER</span>
+<span class="tier-badge tier-watch">&#128992; WATCH &mdash; Shootout Risk flagged below</span>
 <div class="signals">
 <div class="signal">
 <div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">weighted avg 55.43pts</div>
-<div class="sig-sub">raw 54.4 &middot; sd 10.6 (tight) &middot; n=9 &middot; last 4: 60, 42, 68, 66 &middot; every meeting since 2022 has topped 42</div>
+<div class="sig-val">3/9 (33%) under 48.5</div>
+<div class="sig-sub">weighted avg 55.43 &middot; raw 54.4 &middot; sd 10.6 (tight) &middot; n=9 &middot; last 4: 60, 42, 68, 66 &middot; every meeting since 2022 has topped 42</div>
 </div>
 <div class="signal">
 <div class="sig-label">Season form</div>
@@ -265,18 +270,22 @@ footer a { color:var(--text-muted); }
 <div class="sig-sub">Phase +2 &middot; weather &minus;1 (Townsville dry) &middot; Gap vs line: &minus;4.7 &middot; Line: 48.5</div>
 </div>
 </div>
-<div class="verdict">The QLD derby again does not do quiet &mdash; every meeting since 2022 has cleared 42 points, the weighted H2H sits over 55, and the sample is unusually tight for this kind of history (sd 10.6). Cowboys play the second-highest-scoring home fixture in the league. Against a 48.5 line that&#39;s already mid-pack for the round, the model&#39;s composite sits nearly 5pts clear. Under the site&#39;s convention only UNDER leans get rated tiers, but the OVER case here is as strong as any SOLID this season. WATCH only, advisory, leans OVER.</div>
+<div class="verdict">The QLD derby does not do quiet &mdash; every meeting since 2022 has cleared 42 points, the plain hit rate has the line cleared in two of every three meetings, and the sample is unusually tight for this kind of history (sd 10.6). Cowboys play the second-highest-scoring home fixture in the league. This isn&#39;t a game to back the standard under in.</div>
+<div class="shootout-box">
+<span class="shootout-label">&#128293; Shootout risk</span>
+<div class="shootout-text">The standard Under is unsafe here &mdash; H2H has cleared 48.5 in 6 of the last 9 meetings (67%), sd is tight (10.6), and every meeting since 2022 has gone 42+. If you want exposure to this game, consider an alternate-totals Over well below the posted line &mdash; roughly <strong>Over 30.5&ndash;36.5</strong> (line minus 12 to minus 18) &mdash; rather than the standard Over 48.5, which is close to a coin flip. Check Sportsbet&#39;s alternate totals market for the live price; this isn&#39;t a recommendation to back the over at the posted line.</div>
+</div>
 </div>
 
 <div class="game-card">
 <div class="game-title">St George Illawarra Dragons v Gold Coast Titans</div>
 <div class="game-meta">Sun 26 Jul &middot; 2:00pm AEST &middot; St George Venues Jubilee Stadium, Kogarah</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; mixed, leans OVER</span>
+<span class="tier-badge tier-watch">&#128992; WATCH &mdash; no clear lean</span>
 <div class="signals">
 <div class="signal">
 <div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">weighted avg 44.67pts</div>
-<div class="sig-sub">raw 45.75 &middot; sd 13.2 &middot; n=8 &middot; last 4: 32, 48, 54, 36</div>
+<div class="sig-val">4/8 (50%) under 45.5</div>
+<div class="sig-sub">weighted avg 44.67 &middot; raw 45.75 &middot; sd 13.2 &middot; n=8 &middot; last 4: 32, 48, 54, 36</div>
 </div>
 <div class="signal">
 <div class="sig-label">Season form</div>
@@ -294,18 +303,18 @@ footer a { color:var(--text-muted); }
 <div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: &minus;1.8 &middot; Line: 45.5</div>
 </div>
 </div>
-<div class="verdict">A genuine split signal. H2H and season market tendency both point under &mdash; Dragons and Titans are the two most under-prone teams in the competition this year &mdash; but recent season form for both sides (particularly the Dragons at home, 50.3 combined) runs hotter than their reputation suggests. The composite lands just above the line. Respect the disagreement between signals here. WATCH only, leans OVER against the market-tendency grain.</div>
+<div class="verdict">A genuine split. The plain H2H hit rate is an even 4/8, and while season market tendency points under hard (both teams the most under-prone in the comp), recent season form for both sides &mdash; particularly the Dragons at home, 50.3 combined &mdash; runs hotter than their reputation suggests. No clean lean either way, and nowhere near the bar for a Shootout Risk flag either. WATCH only.</div>
 </div>
 
 <div class="game-card">
 <div class="game-title">Manly Sea Eagles v Cronulla Sharks</div>
 <div class="game-meta">Sun 26 Jul &middot; 4:05pm AEST &middot; 4 Pines Park, Sydney</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; data leans OVER</span>
+<span class="tier-badge tier-watch">&#128992; WATCH &mdash; even split, tight sample</span>
 <div class="signals">
 <div class="signal">
 <div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">weighted avg 48.67pts</div>
-<div class="sig-sub">raw 48.5 &middot; sd 8.1 (tightest of the round) &middot; n=8 &middot; last 4: 60, 42, 44, 50 &middot; every meeting since 2022 has been 34+</div>
+<div class="sig-val">4/8 (50%) under 46.5</div>
+<div class="sig-sub">weighted avg 48.67 &middot; raw 48.5 &middot; sd 8.1 (tightest of the round) &middot; n=8 &middot; last 4: 60, 42, 44, 50 &middot; every meeting since 2022 has been 34+</div>
 </div>
 <div class="signal">
 <div class="sig-label">Season form</div>
@@ -323,7 +332,7 @@ footer a { color:var(--text-muted); }
 <div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: &minus;1.5 &middot; Line: 46.5</div>
 </div>
 </div>
-<div class="verdict">The most consistent fixture on the slate &mdash; every meeting since 2022 has landed 34 points or higher, and the H2H standard deviation (8.1) is the tightest of any game this round. That consistency sits comfortably above the 46.5 line. Season form for Manly at home runs cooler, which is the only thing keeping this from a stronger lean. Alphr&#39;s own model also backs the over here. WATCH only, advisory, leans OVER.</div>
+<div class="verdict">The tightest H2H spread of the round (sd 8.1) &mdash; this fixture rarely swings wildly &mdash; but the plain hit rate against the current line is an even 4/8 split, so despite the consistency this doesn&#39;t clear the bar for a Shootout Risk flag. Call it a genuine coin flip on the total. WATCH only.</div>
 </div>
 
 <h2>Season track record</h2>
@@ -333,7 +342,7 @@ footer a { color:var(--text-muted); }
 </div>
 
 <div class="disclaimer">
-&#9888;&#65039; Round 21 stays in the post-Origin rebound phase &mdash; model expectations carry a +2pt uplift and tier thresholds remain tightened (HIGH needs +6.5, SOLID needs +4). Team lists are extended squads named 22&ndash;23 Jul; final 17s are trimmed roughly an hour before kickoff &mdash; verify before placing. Latrell Mitchell (Rabbitohs) not named; Will Warbrick (Storm) not named this week. Eels v Panthers kicks off Thursday evening &mdash; check team lists are still current before any lean. H2H data from rugbyleagueproject.org (2022&ndash;2026, recency weighted 2&times; for 2024+). Season form and market O/U tendency from aussportstipping.com. Lines are Sportsbet via alphr.com.au (21 Jul).<br>
+&#9888;&#65039; Round 21 stays in the post-Origin rebound phase &mdash; model expectations carry a +2pt uplift and tier thresholds remain tightened (HIGH needs +6.5, SOLID needs +4). New this round: the Shootout Risk flag (see methodology note above) &mdash; it is not a recommendation to bet the standard Over at the posted line, only a suggested alternate-totals range to check on Sportsbet if you want exposure to a game that&#39;s unsafe for the under. Team lists are extended squads named 22&ndash;23 Jul; final 17s are trimmed roughly an hour before kickoff &mdash; verify before placing. Latrell Mitchell (Rabbitohs) not named; Will Warbrick (Storm) not named this week. Eels v Panthers kicks off Thursday evening &mdash; check team lists are still current before any lean. H2H data from rugbyleagueproject.org (2022&ndash;2026, recency weighted 2&times; for 2024+, plain hit-rate also shown per game to avoid outlier-driven distortion). Season form and market O/U tendency from aussportstipping.com. Lines are Sportsbet via alphr.com.au (21 Jul).<br>
 Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
 </div>
 

@@ -167,13 +167,21 @@ footer a { color:var(--text-muted); }
 <div class="multi-result multi-none">Multi tracking not active this round &mdash; introduced from Round 17. NOT TRACKED</div>
 </div>
 
+<h2>Methodology change &middot; 23 Jul 2026</h2>
+<div class="about" style="background:#fff7ed; border-color:#fdba74;">
+<p><strong>The tier system had a bias, and we've fixed it.</strong> Since Round 15, HIGH and SOLID had only ever been awarded to UNDER leans &mdash; the tier definitions literally scored games on "% under," so a genuinely strong OVER signal had no tier to go to and got filed as a generic WATCH note, however clear the data actually was (Round 21's Cowboys v Broncos &mdash; H2H cleared the line in 67% of meetings since 2022, sd 10.6 &mdash; was about to be published as an unremarkable WATCH before this was caught).</p>
+<p>We considered making HIGH/SOLID fully symmetric for overs too, and decided against it. The product's real edge is finding safe unders &mdash; a mirrored overs tier would dilute that and turn this into something it isn't. Instead, genuine over-signals now get a dedicated <strong>Shootout Risk</strong> flag: a warning that the standard under is unsafe in that game, paired with a suggested alternate-totals Over range well below the market line (roughly line minus 12 to minus 18) rather than a straight bet-the-over call at even-money risk. It's gated to real conviction only (plain H2H hit-rate &le;35% under, n&ge;6, sd&le;16, not contradicted by season market tendency) &mdash; expect zero to two flags most rounds, not a parallel tier system.</p>
+<p>One knock-on fix: game cards now show the <em>plain</em> H2H hit-rate (count under the line &divide; games) alongside the recency-weighted average, not just the weighted figure. Several Round 20/21 "leans OVER" WATCH calls turned out to be near-even or actually under-favoured on the plain count once checked &mdash; the weighted average alone was getting pulled around by one or two recent blowouts. This doesn't change any graded HIGH/SOLID record (those were always unders and stay unders), but it does mean some of the WATCH commentary language in earlier rounds was overstating over-signals that weren't really there.</p>
+</div>
+
 <h2>About the model</h2>
 <div class="about">
-<p>Confidence tiers (HIGH / SOLID / WATCH / PASS) are based on H2H history, 2026 season form, and market line analysis &mdash; not a fixed scoring threshold.</p>
-<p>HIGH = strongest signal (H2H and form aligned, gap vs line 6pts+; +6.5 in the post-Origin rebound phase). SOLID = clear edge (gap 3&ndash;5.9pts, majority of signals agree; +4 in rebound phase). WATCH = marginal or volatile &mdash; shown as advisory only, never counted in hit rate. PASS = no clear edge.</p>
-<p>Multi recommendations are built from HIGH-tier legs only from R20 onwards (HIGH and SOLID prior to R20). WATCH games are never included regardless of proximity to threshold. In the post-Origin rebound phase, no multi is forced if fewer than two HIGH legs exist.</p>
-<p>Every round is tagged with its season phase (Origin window / post-Origin rebound / run home) and the model tracks expectation error per phase &mdash; the line-lag detector feeding the over-module decision, reviewed late July 2026.</p>
-<p>Scoring lean tracking started Round 15, 2026. Round 16 had no picks. Multi tracking started Round 17, 2026. Phase tagging and expectation-error tracking added Round 19, 2026.</p>
+<p>Confidence tiers (HIGH / SOLID / WATCH / PASS) are based on H2H history, 2026 season form, and market line analysis &mdash; not a fixed scoring threshold. HIGH and SOLID are reserved for UNDER leans only &mdash; that's the model's actual edge and the only bets it grades a track record on.</p>
+<p>HIGH = strongest signal (H2H and form aligned, gap vs line 6pts+; +6.5 in the post-Origin rebound phase). SOLID = clear edge (gap 3&ndash;5.9pts, majority of signals agree; +4 in rebound phase). WATCH = marginal, volatile, or a genuine over-lean &mdash; shown as advisory only, never counted in hit rate. PASS = no clear edge.</p>
+<p><strong>Shootout Risk</strong> (added Round 21) is a separate, non-tier warning for games where backing the standard under would be a bad bet &mdash; it comes with a suggested alternate-totals Over range instead of a graded pick, and is never included in the multi.</p>
+<p>Multi recommendations are built from HIGH-tier UNDER legs only from R20 onwards (HIGH and SOLID prior to R20). WATCH games and Shootout Risk flags are never included regardless of proximity to threshold. In the post-Origin rebound phase, no multi is forced if fewer than two HIGH legs exist.</p>
+<p>Every round is tagged with its season phase (Origin window / post-Origin rebound / run home) and the model tracks expectation error per phase.</p>
+<p>Scoring lean tracking started Round 15, 2026. Round 16 had no picks. Multi tracking started Round 17, 2026. Phase tagging and expectation-error tracking added Round 19, 2026. Tier symmetry bias identified and Shootout Risk flag introduced Round 21, 2026.</p>
 </div>
 
 <footer>

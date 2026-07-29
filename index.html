@@ -3,352 +3,365 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NRL Totals &middot; Round 21 Scoring Report</title>
+<title>NRL Totals · Round 22 Scoring Report</title>
 <style>
-:root { --bg:#fafafa; --surface:#ffffff; --border:#e4e4e7; --text:#18181b; --text-muted:#6b7280; --text-subtle:#9ca3af; --green:#15803d; --green-bg:#f0fdf4; --blue:#1d4ed8; --blue-bg:#eff6ff; --amber:#b45309; --amber-bg:#fef9c3; --orange:#c2410c; --orange-bg:#fff7ed; --radius:8px; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
-.container { max-width:760px; margin:0 auto; padding:32px 20px 80px; }
-header { padding-bottom:24px; border-bottom:2px solid var(--border); margin-bottom:32px; }
-h1 { font-size:26px; font-weight:700; letter-spacing:-0.02em; }
-.meta { font-size:13px; color:var(--text-muted); margin-top:4px; }
-.data-flags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
-.flag { font-size:11px; padding:2px 10px; border:1px solid var(--border); border-radius:3px; color:var(--text-muted); }
-.flag-warn { border-color:#fca5a5; background:#fff1f2; color:#b91c1c; }
-.flag-ok { border-color:#86efac; background:#f0fdf4; color:var(--green); }
-.flag-info { border-color:#bfdbfe; background:#eff6ff; color:var(--blue); }
-nav { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
-nav a { font-size:13px; color:var(--text-muted); text-decoration:none; padding:4px 12px; border:1px solid var(--border); border-radius:4px; }
-nav a:hover { color:var(--text); border-color:var(--text-muted); }
-h2 { font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-muted); margin:32px 0 14px; }
-.summary-box { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; margin-bottom:24px; }
-.summary-row { font-size:14px; padding:3px 0; }
-.multi-box { background:var(--blue-bg); border:1px solid #bfdbfe; border-radius:var(--radius); padding:20px; margin-bottom:32px; }
-.multi-title { font-size:15px; font-weight:600; color:var(--blue); margin-bottom:12px; }
-.multi-leg { font-size:14px; padding:6px 0; border-bottom:1px solid #dbeafe; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
-.multi-leg:last-of-type { border-bottom:none; }
-.multi-leg-label { font-size:11px; font-weight:600; color:var(--blue); min-width:36px; }
-.multi-note { font-size:12px; color:var(--text-muted); margin-top:12px; padding-top:12px; border-top:1px solid #bfdbfe; }
-.game-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:14px; }
-.game-title { font-size:17px; font-weight:600; margin-bottom:2px; }
-.game-meta { font-size:12px; color:var(--text-muted); margin-bottom:12px; }
-.tier-badge { display:inline-block; font-size:12px; font-weight:600; padding:3px 12px; border-radius:12px; margin-bottom:12px; }
-.tier-high { background:var(--green-bg); color:var(--green); }
-.tier-solid { background:var(--amber-bg); color:var(--amber); }
-.tier-watch { background:var(--orange-bg); color:var(--orange); }
-.tier-unavailable { background:#f4f4f5; color:var(--text-muted); }
-.signals { font-size:13px; color:var(--text-muted); display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:8px; margin-bottom:12px; }
-.signal { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:10px 12px; }
-.sig-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-subtle); margin-bottom:3px; }
-.sig-val { font-weight:600; font-size:14px; color:var(--text); }
-.sig-sub { font-size:12px; color:var(--text-muted); margin-top:2px; }
-.verdict { font-size:14px; font-weight:500; padding-top:12px; border-top:1px solid var(--border); }
-.record-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
-.record-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px; text-align:center; }
-.record-pct { font-size:30px; font-weight:700; }
-.record-label { font-size:11px; color:var(--text-muted); margin-top:4px; text-transform:uppercase; letter-spacing:0.05em; }
-.shootout-box { background:#fff7ed; border:1px solid #fdba74; border-radius:8px; padding:14px 16px; margin-top:12px; }
-.shootout-label { display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:#c2410c; background:#ffedd5; padding:2px 10px; border-radius:10px; margin-bottom:8px; }
-.shootout-text { font-size:13px; color:#7c2d12; line-height:1.5; }
-.summary-row.shootout { color:#c2410c; font-weight:600; }
-.disclaimer { font-size:12px; color:var(--text-subtle); margin-top:32px; padding-top:20px; border-top:1px solid var(--border); line-height:1.8; }
-footer { margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--text-muted); }
-footer a { color:var(--text-muted); }
-@media (max-width:520px) { .record-grid { grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); } .signals { grid-template-columns:1fr; } }
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
+  --green: #15803d;   --green-bg: #f0fdf4;
+  --blue: #1d4ed8;    --blue-bg: #eff6ff;
+  --amber: #b45309;   --amber-bg: #fef9c3;
+  --orange: #c2410c;  --orange-bg: #fff7ed;
+  --red: #b91c1c;     --red-bg: #fef2f2;
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+.container { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+header { padding-bottom: 24px; border-bottom: 2px solid var(--border); margin-bottom: 32px; }
+h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.meta { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.data-flags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.flag { font-size: 11px; padding: 2px 10px; border: 1px solid var(--border); border-radius: 3px; color: var(--text-muted); }
+.flag-warn { border-color: #fca5a5; background: #fff1f2; color: #b91c1c; }
+.flag-ok { border-color: #86efac; background: #f0fdf4; color: var(--green); }
+nav { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; padding: 4px 12px; border: 1px solid var(--border); border-radius: 4px; }
+nav a:hover { color: var(--text); border-color: var(--text-muted); }
+h2 { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 32px 0 14px; }
+.summary-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 24px; }
+.summary-row { font-size: 14px; padding: 3px 0; }
+.multi-box { background: var(--blue-bg); border: 1px solid #bfdbfe; border-radius: var(--radius); padding: 20px; margin-bottom: 32px; }
+.multi-title { font-size: 15px; font-weight: 600; color: var(--blue); margin-bottom: 12px; }
+.multi-leg { font-size: 14px; padding: 6px 0; border-bottom: 1px solid #dbeafe; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.multi-leg:last-of-type { border-bottom: none; }
+.multi-leg-label { font-size: 11px; font-weight: 600; color: var(--blue); min-width: 36px; }
+.multi-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid #bfdbfe; }
+.game-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 14px; }
+.game-title { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
+.game-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+.tier-badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-bottom: 12px; }
+.tier-high { background: var(--green-bg); color: var(--green); }
+.tier-solid { background: var(--amber-bg); color: var(--amber); }
+.tier-watch { background: var(--orange-bg); color: var(--orange); }
+.signals { font-size: 13px; color: var(--text-muted); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-bottom: 12px; }
+.signal { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; }
+.sig-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-subtle); margin-bottom: 3px; }
+.sig-val { font-weight: 600; font-size: 14px; color: var(--text); }
+.sig-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.verdict { font-size: 14px; font-weight: 500; padding-top: 12px; border-top: 1px solid var(--border); }
+.shootout-box { background: var(--red-bg); border: 1px solid #fca5a5; border-radius: 6px; padding: 12px 14px; margin: 12px 0; font-size: 13px; color: var(--red); }
+.shootout-label { font-weight: 700; margin-bottom: 4px; }
+.record-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.record-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+.record-pct { font-size: 30px; font-weight: 700; }
+.record-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.disclaimer { font-size: 12px; color: var(--text-subtle); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); line-height: 1.8; }
+footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+footer a { color: var(--text-muted); }
+@media (max-width: 520px) { .record-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); } .signals { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <div class="container">
 
 <header>
-<h1>NRL Totals &middot; Round 21</h1>
-<div class="meta">8 games &middot; 23&ndash;26 July 2026 &middot; Post-Origin rebound phase &middot; H2H 2022&ndash;2026 &middot; Teams verified (extended squads, final 17 TBC) &middot; Dolphins on bye</div>
-<div class="data-flags">
-<span class="flag flag-info">Phase: Post-Origin rebound &middot; adjustment +2</span>
-<span class="flag flag-ok">H2H: 2022&ndash;2026</span>
-<span class="flag flag-ok">Teams: named squads 22&ndash;23 Jul (extended)</span>
-<span class="flag flag-ok">Lines: Sportsbet via alphr.com.au (21 Jul)</span>
-<span class="flag flag-warn">Eels v Panthers kicks off tonight (Thu)</span>
-</div>
-<nav>
-<a href="tryscorers.html">Try scorers &rarr;</a>
-<a href="history.html">Record &amp; history &rarr;</a>
-<a href="season-learnings.html">Season learnings &rarr;</a>
-</nav>
+  <h1>NRL Totals &middot; Round 22</h1>
+  <div class="meta">8 games &middot; 30 Jul&ndash;2 Aug 2026 &middot; Sea Eagles on bye &middot; H2H 2022&ndash;2026 &middot; Teams confirmed 29 Jul via RLP</div>
+  <div class="data-flags">
+    <span class="flag flag-warn">No HIGH-tier legs this round &mdash; no multi</span>
+    <span class="flag flag-ok">H2H: 2022&ndash;2026</span>
+    <span class="flag flag-ok">Teams: confirmed 29 Jul</span>
+    <span class="flag flag-ok">Lines: Sportsbet via alphr.com.au (28 Jul)</span>
+  </div>
+  <nav>
+    <a href="tryscorers.html">Try scorers &rarr;</a>
+    <a href="history.html">Record &amp; history &rarr;</a>
+  </nav>
 </header>
-
-<h2>Season phase</h2>
-<div class="multi-box">
-<div class="multi-title">Post-Origin rebound continues &mdash; plus a methodology fix</div>
-<div class="multi-note" style="border-top:none; padding-top:0; margin-top:0;">The +2pt rebound uplift and tightened tier thresholds (HIGH needs +6.5, SOLID needs +4) stay in force through R24. Separately: we found and fixed a real bias in the tier system. HIGH and SOLID had only ever been awarded to unders since Round 15 &mdash; a genuinely strong OVER signal had nowhere to go and got filed as a generic WATCH note regardless of how clear the data was. Re-checking last round's WATCH-leans-OVER calls against the plain H2H hit rate (not just the recency-weighted average) showed most of them were actually closer to a coin flip than a real lean &mdash; the weighted average was getting pulled around by one or two recent blowouts. From this round on, genuine over-signals get a dedicated <strong>Shootout Risk</strong> flag: a warning that the standard under is unsafe, paired with a suggested alternate-totals Over range well below the line, rather than a straight bet-the-over call. The core model's edge stays in finding safe unders &mdash; this doesn't change that, it just stops burying the real risk cases in noise.</div>
-</div>
 
 <h2>Quick summary</h2>
 <div class="summary-box">
-<div class="summary-row">&#128994; <strong>HIGH:</strong> none this round (rebound-phase thresholds)</div>
-<div class="summary-row">&#128993; <strong>SOLID:</strong> Raiders v Wests Tigers</div>
-<div class="summary-row shootout">&#128293; <strong>SHOOTOUT RISK:</strong> Cowboys v Broncos &mdash; H2H has cleared the line in 67% of meetings since 2022; consider an alternate-totals Over well below 48.5 instead of backing the standard under here</div>
-<div class="summary-row">&#128992; <strong>WATCH:</strong> Eels v Panthers (uncertain, blowout risk, tonight) &middot; Knights v Roosters (mixed, small under lean) &middot; Rabbitohs v Storm (mixed) &middot; Bulldogs v Warriors (even, pick&#39;em) &middot; Dragons v Titans (no clear lean) &middot; Sea Eagles v Sharks (even split, tight sample)</div>
+  <div class="summary-row">&#128993; <strong>SOLID:</strong> Cowboys v Roosters &middot; Dragons v Dolphins &middot; Sharks v Rabbitohs</div>
+  <div class="summary-row">&#128992; <strong>WATCH:</strong> Storm v Bulldogs &middot; Titans v Warriors &middot; Panthers v Raiders &middot; Broncos v Knights &middot; Wests Tigers v Eels</div>
+  <div class="summary-row">No games met the Shootout Risk gate this round.</div>
 </div>
 
 <h2>Multi recommendation</h2>
 <div class="multi-box">
-<div class="multi-title">No multi this round</div>
-<div class="multi-note" style="border-top:none; padding-top:0; margin-top:0;">&#9888;&#65039; Only one rated leg this round (SOLID) and zero HIGH-tier games &mdash; the model does not force a multi from a single leg. Raiders/Wests Tigers UNDER 51.5 (~$1.91 Sportsbet) is the standalone pick of the week if you want single-game exposure. Verify lines and final 17s before placing. Not financial advice.</div>
+  <div class="multi-title">No multi this round</div>
+  <div class="multi-note">No game cleared the HIGH tier (gap &ge;6pts with full signal agreement) this week &mdash; the biggest blended gap was Sharks v Rabbitohs at 5.3pts. Rather than force a multi from thinner legs, this round's plays are presented as three individual SOLID singles below. Not financial advice &mdash; gamble responsibly, 1800 858 858.</div>
 </div>
 
 <h2>Game analysis</h2>
 
+<!-- GAME 1 -->
 <div class="game-card">
-<div class="game-title">Parramatta Eels v Penrith Panthers</div>
-<div class="game-meta">Thu 23 Jul &middot; 7:50pm AEST &middot; CommBank Stadium, Sydney &middot; TONIGHT</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; uncertain, blowout risk</span>
-<div class="signals">
-<div class="signal">
-<div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">8/11 (73%) under 44.5</div>
-<div class="sig-sub">weighted avg 46.75 &middot; raw 45.1 &middot; sd 13.3 &middot; n=11 &middot; last 4: 70, 28, 42, 68 &middot; 2026: Penrith 48&ndash;20</div>
-</div>
-<div class="signal">
-<div class="sig-label">Season form</div>
-<div class="sig-val">~45.7pts combined</div>
-<div class="sig-sub">Eels home avg 45.8 &middot; Panthers away avg 45.6 &middot; both 65% under this season</div>
-</div>
-<div class="signal">
-<div class="sig-label">Market context</div>
-<div class="sig-val">Panthers $1.19 favourites</div>
-<div class="sig-sub">15th vs 1st &middot; blowout risk both ways &middot; Cleary, Jenkins, To&#39;o all in for Penrith</div>
-</div>
-<div class="signal">
-<div class="sig-label">Model expectation</div>
-<div class="sig-val">~47.3pts</div>
-<div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: &minus;2.8 &middot; Line: 44.5</div>
-</div>
-</div>
-<div class="verdict">The plain H2H history actually favours the under here &mdash; 8 of 11 meetings since 2022 landed under 44.5 &mdash; despite the two brutal recent blowouts (70, 68) that drag the recency-weighted average above the line. Both teams also run under their own season totals more often than not. The risk is real (huge favourites, capable of a blowout either direction) but the sample doesn&#39;t clear the bar for a Shootout Risk flag &mdash; most of the history was under. WATCH only, genuinely uncertain &mdash; kicks off tonight.</div>
+  <div class="game-title">North QLD Cowboys v Sydney Roosters</div>
+  <div class="game-meta">Thu 30 Jul &middot; 7:50pm AEST &middot; Queensland Country Bank Stadium, Townsville &middot; Sunny, light winds &mdash; no weather modifier</div>
+  <span class="tier-badge tier-solid">&#128993; SOLID</span>
+  <div class="signals">
+    <div class="signal">
+      <div class="sig-label">H2H 2022&ndash;2026</div>
+      <div class="sig-val">4/6 under 45.5</div>
+      <div class="sig-sub">Raw avg 37.0pts &middot; last 4: 26, 34, 50, 30</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Weighted H2H avg</div>
+      <div class="sig-val">~37.3pts</div>
+      <div class="sig-sub">2024&ndash;2026 at 2&times; &middot; sd 9.5 &middot; n=6</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">2026 season form</div>
+      <div class="sig-val">Cowboys 48.0 / Roosters 45.2</div>
+      <div class="sig-sub">Combined form avg 46.6pts &middot; market under-tendency 59.5%</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Model expectation</div>
+      <div class="sig-val">~41.3pts</div>
+      <div class="sig-sub">Gap vs line: +4.2pts &middot; Line: Under 45.5</div>
+    </div>
+  </div>
+  <div class="verdict">H2H clears 45.5 in 4 of the last 6 meetings (66.7%), and the market's season-long O/U tendency for both sides also leans under (59.5% combined). Blending H2H with 2026 form pulls the implied total to ~41.3pts against a 45.5 line &mdash; a 4.2pt gap. Both teams named close to full-strength sides with no halfback or hooker outs. SOLID confidence UNDER.</div>
 </div>
 
+<!-- GAME 2 -->
 <div class="game-card">
-<div class="game-title">Newcastle Knights v Sydney Roosters</div>
-<div class="game-meta">Fri 24 Jul &middot; 6:00pm AEST &middot; McDonald Jones Stadium, Newcastle</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; mixed signals</span>
-<div class="signals">
-<div class="signal">
-<div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">4/6 (67%) under 45.5</div>
-<div class="sig-sub">weighted avg 40.2 &middot; raw 39.7 &middot; sd 16.2 (wide) &middot; n=6 &middot; last 4: 34, 42, 20, 62</div>
-</div>
-<div class="signal">
-<div class="sig-label">Season form</div>
-<div class="sig-val">~47.3pts combined</div>
-<div class="sig-sub">Knights home avg 45.7 (44% under) &middot; Roosters away avg 48.9 (59% under)</div>
-</div>
-<div class="signal">
-<div class="sig-label">Team news</div>
-<div class="sig-val">Both near full strength</div>
-<div class="sig-sub">Dylan Brown debuts at five-eighth for Newcastle &middot; Tedesco back from injury for Sydney &middot; no modifier</div>
-</div>
-<div class="signal">
-<div class="sig-label">Model expectation</div>
-<div class="sig-val">~44.2pts</div>
-<div class="sig-sub">Phase +2 &middot; weather &minus;1 (Newcastle dry) &middot; Gap vs line: +1.3 &middot; Line: 45.5</div>
-</div>
-</div>
-<div class="verdict">H2H history says under &mdash; the weighted average sits nearly 5pts below the line &mdash; but the 2026 season form for both sides runs hotter than that history suggests, especially the Roosters&#39; away numbers. Tedesco&#39;s return adds attacking polish for Sydney. Wide H2H variance (sd 16) means this one carries real uncertainty either way. WATCH only, small under lean, not rated.</div>
+  <div class="game-title">St George Illawarra Dragons v Dolphins</div>
+  <div class="game-meta">Fri 31 Jul &middot; 6:00pm AEST &middot; WIN Stadium, Wollongong &middot; Clear, no rain forecast &mdash; no weather modifier</div>
+  <span class="tier-badge tier-solid">&#128993; SOLID</span>
+  <div class="signals">
+    <div class="signal">
+      <div class="sig-label">H2H 2023&ndash;2026</div>
+      <div class="sig-val">3/5 under 49.5</div>
+      <div class="sig-sub">Raw avg 44.0pts &middot; last 4: 38, 38, 32, 62 &middot; n=5 (all meetings since Dolphins' 2023 entry)</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Weighted H2H avg</div>
+      <div class="sig-val">~44.0pts</div>
+      <div class="sig-sub">2024&ndash;2026 at 2&times; &middot; sd 10.7</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">2026 season form</div>
+      <div class="sig-val">Dragons 45.3 / Dolphins 49.6</div>
+      <div class="sig-sub">Combined form avg 47.5pts &middot; market under-tendency 63.9%</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Model expectation</div>
+      <div class="sig-val">~45.5pts</div>
+      <div class="sig-sub">Gap vs line: +4.0pts &middot; Line: Under 49.5</div>
+    </div>
+  </div>
+  <div class="verdict">The Dragons-Dolphins series has run under 49.5 in 3 of 5 meetings, and both clubs' season-long O/U tendency skews under (63.9% combined) &mdash; St George in particular is the most under-friendly home side in the competition this year. Dolphins name a near-full-strength side (Cobbo, Tabuai-Fidow, Isaako, Nikorima all included). Blended implied total ~45.5pts vs the 49.5 line. SOLID confidence UNDER.</div>
 </div>
 
+<!-- GAME 3 -->
 <div class="game-card">
-<div class="game-title">South Sydney Rabbitohs v Melbourne Storm</div>
-<div class="game-meta">Fri 24 Jul &middot; 8:00pm AEST &middot; Accor Stadium, Sydney</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; mixed signals</span>
-<div class="signals">
-<div class="signal">
-<div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">6/9 (67%) under 46.5</div>
-<div class="sig-sub">weighted avg 46.79 &middot; raw 43.8 &middot; sd 14.2 (wide) &middot; n=9 &middot; last 4: 44, 40, 49, 54</div>
-</div>
-<div class="signal">
-<div class="sig-label">Season form</div>
-<div class="sig-val">~47.7pts combined</div>
-<div class="sig-sub">Rabbitohs home avg 49.8 (comp&#39;s highest-scoring side, 52.2 season avg) &middot; Storm away avg 45.6</div>
-</div>
-<div class="signal">
-<div class="sig-label">Team news</div>
-<div class="sig-val">Jahrome Hughes returns</div>
-<div class="sig-sub">Storm halfback back after missing R20 &middot; Latrell Mitchell still not named for Souths &middot; no modifier</div>
-</div>
-<div class="signal">
-<div class="sig-label">Model expectation</div>
-<div class="sig-val">~48.2pts</div>
-<div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: &minus;1.7 &middot; Line: 46.5</div>
-</div>
-</div>
-<div class="verdict">The plain H2H history actually favours the under here (6 of 9 meetings), even though the recency-weighted average sits above the line &mdash; pulled up by a 74-point outlier in 2024 and Souths&#39; status as the competition&#39;s highest scorers this season. Hughes returning adds a bit more uncertainty to Melbourne&#39;s attack. Genuinely mixed, and doesn&#39;t clear the bar for a Shootout Risk flag. WATCH only.</div>
+  <div class="game-title">Melbourne Storm v Canterbury Bulldogs</div>
+  <div class="game-meta">Fri 31 Jul &middot; 8:00pm AEST &middot; AAMI Park, Melbourne &middot; Dry, 0mm forecast &mdash; no weather modifier</div>
+  <span class="tier-badge tier-watch">&#128992; WATCH &mdash; mixed signals</span>
+  <div class="signals">
+    <div class="signal">
+      <div class="sig-label">H2H 2022&ndash;2026</div>
+      <div class="sig-val">3/6 under 42.5</div>
+      <div class="sig-sub">Raw avg 40.0pts &middot; last 4: 30, 34, 44, 50</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Weighted H2H avg</div>
+      <div class="sig-val">~39.8pts</div>
+      <div class="sig-sub">2024&ndash;2026 at 2&times; &middot; sd 6.7</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Storm news</div>
+      <div class="sig-val">Harry Grant (hooker) OUT</div>
+      <div class="sig-sub">Hughes captains in his absence &middot; &minus;4pts modifier</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Market tendency conflict</div>
+      <div class="sig-val">Storm 42% U / Bulldogs 61% U</div>
+      <div class="sig-sub">Storm lean Over this season &mdash; signals disagree</div>
+    </div>
+  </div>
+  <div class="verdict">This is a low market line (42.5) for a reason &mdash; both books and this model see it as close to a coin flip. H2H sits almost exactly on the line pre-modifier (39.8 weighted vs 42.5), and the season-long market signal is contradictory: the Bulldogs trend under, but the Storm trend over. Grant's absence at hooker is a genuine downgrade for Melbourne's attack, but with the market itself split, this stays a WATCH rather than a lean either way.</div>
 </div>
 
+<!-- GAME 4 -->
 <div class="game-card">
-<div class="game-title">Canberra Raiders v Wests Tigers</div>
-<div class="game-meta">Sat 25 Jul &middot; 3:00pm AEST &middot; GIO Stadium, Canberra</div>
-<span class="tier-badge tier-solid">&#128993; SOLID &mdash; UNDER 51.5 &middot; top pick</span>
-<div class="signals">
-<div class="signal">
-<div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">6/8 (75%) under 51.5</div>
-<div class="sig-sub">weighted avg 45.77 &middot; raw 46.3 &middot; sd 15.3 (wide) &middot; n=8 &middot; last 4: 72, 28, 34, 47</div>
-</div>
-<div class="signal">
-<div class="sig-label">Season form</div>
-<div class="sig-val">~42.3pts combined</div>
-<div class="sig-sub">Raiders home avg 43.3 (61% under) &middot; Tigers away avg 41.3 (worst away scoring in NRL, 56% under)</div>
-</div>
-<div class="signal">
-<div class="sig-label">Market context</div>
-<div class="sig-val">Raiders $1.23 heavy favourites</div>
-<div class="sig-sub">12th vs 14th &middot; Raiders near full strength &middot; no modifier</div>
-</div>
-<div class="signal">
-<div class="sig-label">Model expectation</div>
-<div class="sig-val">~45.3pts</div>
-<div class="sig-sub">Phase +2 &middot; weather &minus;1 (Canberra dry, cold) &middot; Gap vs line: +6.2 &middot; Line: 51.5</div>
-</div>
-</div>
-<div class="verdict">Every hard signal agrees here: season form, market O/U tendency and the raw H2H average all sit well clear of a 51.5 line that&#39;s the highest of the round. Wests Tigers have the worst away-scoring output in the competition (41.3 combined) and Canberra keep most home games tight even as big favourites. The one soft spot is H2H variance (sd 15.3, skewed by a 72-point outlier in 2024), which is what keeps this SOLID rather than pushing it over the rebound-phase HIGH bar. Cleanest under case of the week.</div>
+  <div class="game-title">Gold Coast Titans v New Zealand Warriors</div>
+  <div class="game-meta">Sat 1 Aug &middot; 3:00pm AEST &middot; Cbus Super Stadium, Gold Coast &middot; No material weather modifier</div>
+  <span class="tier-badge tier-watch">&#128992; WATCH &mdash; thin gap</span>
+  <div class="signals">
+    <div class="signal">
+      <div class="sig-label">H2H 2022&ndash;2026</div>
+      <div class="sig-val">4/8 under 49.5</div>
+      <div class="sig-sub">Raw avg 49.75pts &middot; last 4: 72, 40, 50, 48</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Weighted H2H avg</div>
+      <div class="sig-val">~50.7pts</div>
+      <div class="sig-sub">2024&ndash;2026 at 2&times; &middot; sd 9.7</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">2026 season form</div>
+      <div class="sig-val">Titans 46.2 / Warriors 44.6</div>
+      <div class="sig-sub">Combined form avg 45.4pts &middot; market under-tendency 69.4%</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Model expectation</div>
+      <div class="sig-val">~48.4pts</div>
+      <div class="sig-sub">Gap vs line: +1.1pts &middot; Line: Under 49.5</div>
+    </div>
+  </div>
+  <div class="verdict">H2H alone is right on the line (50.7 weighted vs 49.5), but 2026 form for both sides is meaningfully lower-scoring and the market's season-long under tendency is strong (69.4% combined). Blended gap lands at just 1.1pts &mdash; not enough separation for a confident lean given the H2H disagreement. Both teams full strength. WATCH.</div>
 </div>
 
+<!-- GAME 5 -->
 <div class="game-card">
-<div class="game-title">Canterbury Bulldogs v New Zealand Warriors</div>
-<div class="game-meta">Sat 25 Jul &middot; 5:30pm AEST &middot; Accor Stadium, Sydney</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; essentially pick&#39;em</span>
-<div class="signals">
-<div class="signal">
-<div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">3/6 (50%) under 43.5</div>
-<div class="sig-sub">weighted avg 41.33 &middot; raw 41.5 &middot; sd 13.5 &middot; n=6 &middot; last 4: 36, 25, 52, 46</div>
-</div>
-<div class="signal">
-<div class="sig-label">Season form</div>
-<div class="sig-val">~42.9pts combined</div>
-<div class="sig-sub">Bulldogs home avg 38.4 (lowest in NRL, 59% under) &middot; Warriors away avg 47.3 (65% under)</div>
-</div>
-<div class="signal">
-<div class="sig-label">Team news</div>
-<div class="sig-val">Both full strength</div>
-<div class="sig-sub">Crichton captaining Bulldogs, back in the 13 &middot; Warriors unchanged spine &middot; no modifier</div>
-</div>
-<div class="signal">
-<div class="sig-label">Model expectation</div>
-<div class="sig-val">~43.0pts</div>
-<div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: +0.5 &middot; Line: 43.5</div>
-</div>
-</div>
-<div class="verdict">Canterbury&#39;s home ground remains the lowest-scoring in the league, but the Warriors&#39; away form is strong enough to offset it &mdash; the two signals land almost exactly on the posted line. Both teams run under their own totals more often than not this season, which nudges it slightly under, but the gap is under a point after the rebound adjustment. Too close to call with any conviction. WATCH only.</div>
+  <div class="game-title">Penrith Panthers v Canberra Raiders</div>
+  <div class="game-meta">Sat 1 Aug &middot; 5:30pm AEST &middot; Glen Willow Oval, Mudgee &middot; No material weather modifier</div>
+  <span class="tier-badge tier-watch">&#128992; WATCH &mdash; on the line</span>
+  <div class="signals">
+    <div class="signal">
+      <div class="sig-label">H2H 2022&ndash;2026</div>
+      <div class="sig-val">4/6 under 44.5</div>
+      <div class="sig-sub">Raw avg 43.8pts &middot; last 4: 65, 40, 36, 48</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Weighted H2H avg</div>
+      <div class="sig-val">~43.0pts</div>
+      <div class="sig-sub">2024&ndash;2026 at 2&times; &middot; sd 10.7</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Panthers news</div>
+      <div class="sig-val">Nathan Cleary BACK</div>
+      <div class="sig-sub">Cogger shifts to five-eighth &middot; strengthens Panthers attack, no negative modifier applies</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Model expectation</div>
+      <div class="sig-val">~44.2pts</div>
+      <div class="sig-sub">Gap vs line: +0.3pts &middot; Line: Under 44.5</div>
+    </div>
+  </div>
+  <div class="verdict">Blended implied total sits within a third of a point of the 44.5 line &mdash; effectively no edge either way. Cleary's return boosts Penrith's ceiling, which argues against leaning under despite reasonable H2H history (66.7% clearance). Market under-tendency (62.3% combined) offsets that somewhat. Too close to call with confidence. WATCH.</div>
 </div>
 
+<!-- GAME 6 -->
 <div class="game-card">
-<div class="game-title">North Queensland Cowboys v Brisbane Broncos</div>
-<div class="game-meta">Sat 25 Jul &middot; 7:35pm AEST &middot; Queensland Country Bank Stadium, Townsville</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; Shootout Risk flagged below</span>
-<div class="signals">
-<div class="signal">
-<div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">3/9 (33%) under 48.5</div>
-<div class="sig-sub">weighted avg 55.43 &middot; raw 54.4 &middot; sd 10.6 (tight) &middot; n=9 &middot; last 4: 60, 42, 68, 66 &middot; every meeting since 2022 has topped 42</div>
-</div>
-<div class="signal">
-<div class="sig-label">Season form</div>
-<div class="sig-val">~48.0pts combined</div>
-<div class="sig-sub">Cowboys home avg 53.1 (2nd-highest home total in NRL) &middot; Broncos away avg 42.9</div>
-</div>
-<div class="signal">
-<div class="sig-label">Team news</div>
-<div class="sig-val">Both near full strength</div>
-<div class="sig-sub">Dearden captaining Cowboys, Clifford at five-eighth &middot; Reynolds/Mam spine intact for Brisbane &middot; no modifier</div>
-</div>
-<div class="signal">
-<div class="sig-label">Model expectation</div>
-<div class="sig-val">~53.2pts</div>
-<div class="sig-sub">Phase +2 &middot; weather &minus;1 (Townsville dry) &middot; Gap vs line: &minus;4.7 &middot; Line: 48.5</div>
-</div>
-</div>
-<div class="verdict">The QLD derby does not do quiet &mdash; every meeting since 2022 has cleared 42 points, the plain hit rate has the line cleared in two of every three meetings, and the sample is unusually tight for this kind of history (sd 10.6). Cowboys play the second-highest-scoring home fixture in the league. This isn&#39;t a game to back the standard under in.</div>
-<div class="shootout-box">
-<span class="shootout-label">&#128293; Shootout risk</span>
-<div class="shootout-text">The standard Under is unsafe here &mdash; H2H has cleared 48.5 in 6 of the last 9 meetings (67%), sd is tight (10.6), and every meeting since 2022 has gone 42+. If you want exposure to this game, consider an alternate-totals Over well below the posted line &mdash; roughly <strong>Over 30.5&ndash;36.5</strong> (line minus 12 to minus 18) &mdash; rather than the standard Over 48.5, which is close to a coin flip. Check Sportsbet&#39;s alternate totals market for the live price; this isn&#39;t a recommendation to back the over at the posted line.</div>
-</div>
+  <div class="game-title">Brisbane Broncos v Newcastle Knights</div>
+  <div class="game-meta">Sat 1 Aug &middot; 7:35pm AEST &middot; Suncorp Stadium, Brisbane &middot; No material weather modifier</div>
+  <span class="tier-badge tier-watch">&#128992; WATCH &mdash; leans Over, not a Shootout Risk</span>
+  <div class="signals">
+    <div class="signal">
+      <div class="sig-label">H2H 2022&ndash;2026</div>
+      <div class="sig-val">3/5 under 45.5</div>
+      <div class="sig-sub">Raw avg 46.4pts &middot; last 4: 38, 44, 44, 58</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Weighted H2H avg</div>
+      <div class="sig-val">~47.7pts</div>
+      <div class="sig-sub">2024&ndash;2026 at 2&times; &middot; sd 6.6</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Both fullbacks IN</div>
+      <div class="sig-val">Walsh (Bris) &amp; Ponga (Newc) playing</div>
+      <div class="sig-sub">Both sides' key attacking weapons available &mdash; no negative modifier</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Model expectation</div>
+      <div class="sig-val">~47.3pts</div>
+      <div class="sig-sub">Gap vs line: &minus;1.8pts &middot; Line: Under 45.5</div>
+    </div>
+  </div>
+  <div class="verdict">This one leans mildly Over: weighted H2H (47.7) and blended form (47.3) both sit above the 45.5 line, and both clubs' first-choice fullbacks &mdash; Reece Walsh and Kalyn Ponga, their primary attacking threats &mdash; are named to play. That said, the plain H2H under-rate is 60% and the gap is small (60% under% and n=5 means this doesn't clear the Shootout Risk gate). Treated as a plain WATCH, not a lean.</div>
 </div>
 
+<!-- GAME 7 -->
 <div class="game-card">
-<div class="game-title">St George Illawarra Dragons v Gold Coast Titans</div>
-<div class="game-meta">Sun 26 Jul &middot; 2:00pm AEST &middot; St George Venues Jubilee Stadium, Kogarah</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; no clear lean</span>
-<div class="signals">
-<div class="signal">
-<div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">4/8 (50%) under 45.5</div>
-<div class="sig-sub">weighted avg 44.67 &middot; raw 45.75 &middot; sd 13.2 &middot; n=8 &middot; last 4: 32, 48, 54, 36</div>
-</div>
-<div class="signal">
-<div class="sig-label">Season form</div>
-<div class="sig-val">~48.4pts combined</div>
-<div class="sig-sub">Dragons home avg 50.3 &middot; Titans away avg 46.5</div>
-</div>
-<div class="signal">
-<div class="sig-label">Market tendency</div>
-<div class="sig-val">76% combined under</div>
-<div class="sig-sub">Both Dragons and Titans sit at 76% under this season &mdash; the two most under-prone teams in the NRL</div>
-</div>
-<div class="signal">
-<div class="sig-label">Model expectation</div>
-<div class="sig-val">~47.3pts</div>
-<div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: &minus;1.8 &middot; Line: 45.5</div>
-</div>
-</div>
-<div class="verdict">A genuine split. The plain H2H hit rate is an even 4/8, and while season market tendency points under hard (both teams the most under-prone in the comp), recent season form for both sides &mdash; particularly the Dragons at home, 50.3 combined &mdash; runs hotter than their reputation suggests. No clean lean either way, and nowhere near the bar for a Shootout Risk flag either. WATCH only.</div>
+  <div class="game-title">Cronulla Sharks v South Sydney Rabbitohs</div>
+  <div class="game-meta">Sun 2 Aug &middot; 2:00pm AEST &middot; Ocean Protect Stadium, Sydney &middot; No material weather modifier</div>
+  <span class="tier-badge tier-solid">&#128993; SOLID &mdash; strongest H2H signal of the round</span>
+  <div class="signals">
+    <div class="signal">
+      <div class="sig-label">H2H 2022&ndash;2026</div>
+      <div class="sig-val">8/9 under 50.5</div>
+      <div class="sig-sub">Raw avg 41.4pts &middot; last 4: 26, 39, 26, 48</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Weighted H2H avg</div>
+      <div class="sig-val">~40.6pts</div>
+      <div class="sig-sub">2024&ndash;2026 at 2&times; &middot; sd 9.6</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Signal conflict</div>
+      <div class="sig-val">Both teams trend Over in 2026</div>
+      <div class="sig-sub">Sharks &amp; Rabbitohs both top-3 for points scored this season &middot; Latrell Mitchell OUT for Souths</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Model expectation</div>
+      <div class="sig-val">~45.2pts</div>
+      <div class="sig-sub">Gap vs line: +5.3pts &middot; Line: Under 50.5</div>
+    </div>
+  </div>
+  <div class="verdict">The H2H record here is the standout signal of the round &mdash; under 50.5 in 8 of the last 9 meetings (88.9%), including 3 of the last 4. That's offset by the fact both clubs are among the competition's highest-scoring teams in 2026, which blends the implied total up to ~45.2pts and pulls this out of HIGH tier. Latrell Mitchell's absence for Souths (no ball-playing centre threat) supports the under case further, though it isn't a modifier-eligible position. Genuinely strong history, weaker current form &mdash; SOLID rather than HIGH.</div>
 </div>
 
+<!-- GAME 8 -->
 <div class="game-card">
-<div class="game-title">Manly Sea Eagles v Cronulla Sharks</div>
-<div class="game-meta">Sun 26 Jul &middot; 4:05pm AEST &middot; 4 Pines Park, Sydney</div>
-<span class="tier-badge tier-watch">&#128992; WATCH &mdash; even split, tight sample</span>
-<div class="signals">
-<div class="signal">
-<div class="sig-label">H2H Since 2022</div>
-<div class="sig-val">4/8 (50%) under 46.5</div>
-<div class="sig-sub">weighted avg 48.67 &middot; raw 48.5 &middot; sd 8.1 (tightest of the round) &middot; n=8 &middot; last 4: 60, 42, 44, 50 &middot; every meeting since 2022 has been 34+</div>
-</div>
-<div class="signal">
-<div class="sig-label">Season form</div>
-<div class="sig-val">~44.8pts combined</div>
-<div class="sig-sub">Sea Eagles home avg 42.2 &middot; Sharks away avg 47.4</div>
-</div>
-<div class="signal">
-<div class="sig-label">Team news</div>
-<div class="sig-val">Both full strength</div>
-<div class="sig-sub">Tom Trbojevic captaining Manly &middot; Sharks spine unchanged &middot; no modifier</div>
-</div>
-<div class="signal">
-<div class="sig-label">Model expectation</div>
-<div class="sig-val">~48.0pts</div>
-<div class="sig-sub">Phase +2 &middot; weather &minus;1 (Sydney dry) &middot; Gap vs line: &minus;1.5 &middot; Line: 46.5</div>
-</div>
-</div>
-<div class="verdict">The tightest H2H spread of the round (sd 8.1) &mdash; this fixture rarely swings wildly &mdash; but the plain hit rate against the current line is an even 4/8 split, so despite the consistency this doesn&#39;t clear the bar for a Shootout Risk flag. Call it a genuine coin flip on the total. WATCH only.</div>
+  <div class="game-title">Wests Tigers v Parramatta Eels</div>
+  <div class="game-meta">Sun 2 Aug &middot; 4:05pm AEST &middot; CommBank Stadium, Sydney &middot; No material weather modifier</div>
+  <span class="tier-badge tier-watch">&#128992; WATCH &mdash; extreme variance</span>
+  <div class="signals">
+    <div class="signal">
+      <div class="sig-label">H2H 2022&ndash;2026</div>
+      <div class="sig-val">4/8 under 47.5</div>
+      <div class="sig-sub">Raw avg 49.75pts &middot; last 4: 86, 38, 60, 42</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Weighted H2H avg</div>
+      <div class="sig-val">~50.5pts</div>
+      <div class="sig-sub">2024&ndash;2026 at 2&times; &middot; sd 15.7 (widest range of the round: 33&ndash;86pts)</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Both halfbacks IN</div>
+      <div class="sig-val">Luai (WT) &amp; Moses (Parra) playing</div>
+      <div class="sig-sub">No negative modifier &mdash; both attacking engines available</div>
+    </div>
+    <div class="signal">
+      <div class="sig-label">Variance warning</div>
+      <div class="sig-val">50% under the line historically</div>
+      <div class="sig-sub">Doesn't clear the Shootout Risk gate (needs &le;35%) &mdash; too volatile to flag either way</div>
+    </div>
+  </div>
+  <div class="verdict">This fixture has produced everything from a 33-point defensive arm-wrestle to an 86-point shootout in the last two years &mdash; the widest H2H range in the competition. The weighted average (50.5) sits just above the 47.5 line, but with a standard deviation of nearly 16 points, that number isn't trustworthy in either direction. Both halfbacks are fit and firing. Genuine 50/50 game &mdash; WATCH only, not a bet.</div>
 </div>
 
 <h2>Season track record</h2>
-<div class="record-grid" style="grid-template-columns:repeat(2,1fr);">
-<div class="record-card"><div class="record-pct">76% / 73%</div><div class="record-label">Scoring leans<br>13/17 excl. WATCH &middot; 22/30 incl.</div></div>
-<div class="record-card"><div class="record-pct">1/3</div><div class="record-label">Multis won<br>R17 HIT &middot; R18 bust &middot; R19 bust &middot; R20 no multi</div></div>
+<div class="record-grid">
+  <div class="record-card">
+    <div class="record-pct">78% <span style="font-size:16px;color:var(--text-muted)">/ 73%</span></div>
+    <div class="record-label">Scoring leans<br>excl./incl. WATCH &middot; R15&ndash;R18</div>
+  </div>
+  <div class="record-card">
+    <div class="record-pct">5/6</div>
+    <div class="record-label">Multi legs hit<br>R17&ndash;R18</div>
+  </div>
+  <div class="record-card">
+    <div class="record-pct">50%</div>
+    <div class="record-label">Multis won<br>1 hit / 2 tracked</div>
+  </div>
 </div>
 
 <div class="disclaimer">
-&#9888;&#65039; Round 21 stays in the post-Origin rebound phase &mdash; model expectations carry a +2pt uplift and tier thresholds remain tightened (HIGH needs +6.5, SOLID needs +4). New this round: the Shootout Risk flag (see methodology note above) &mdash; it is not a recommendation to bet the standard Over at the posted line, only a suggested alternate-totals range to check on Sportsbet if you want exposure to a game that&#39;s unsafe for the under. Team lists are extended squads named 22&ndash;23 Jul; final 17s are trimmed roughly an hour before kickoff &mdash; verify before placing. Latrell Mitchell (Rabbitohs) not named; Will Warbrick (Storm) not named this week. Eels v Panthers kicks off Thursday evening &mdash; check team lists are still current before any lean. H2H data from rugbyleagueproject.org (2022&ndash;2026, recency weighted 2&times; for 2024+, plain hit-rate also shown per game to avoid outlier-driven distortion). Season form and market O/U tendency from aussportstipping.com. Lines are Sportsbet via alphr.com.au (21 Jul).<br>
-Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
+  &#9888;&#65039; Rounds 19&ndash;21 were not analysed (task inactive) &mdash; tracking resumes this round. No HIGH-tier legs this round; three SOLID singles instead of a multi. H2H data from rugbyleagueproject.org (2022&ndash;2026). Lines and market tendency sourced from Sportsbet via alphr.com.au and aussportstipping.com (28&ndash;29 Jul). Team sheets confirmed 29 Jul via rugbyleagueproject.org &mdash; verify on game day for late changes.<br>
+  Analysis only &middot; Not financial advice &middot; Gamble responsibly &mdash; 1800 858 858
 </div>
-
 <footer>
-<p>NRL Totals Model &middot; Round 21 analysis &middot; Data: nrl.com, rugbyleagueproject.org, zerotackle.com, alphr.com.au, aussportstipping.com</p>
-<p><a href="tryscorers.html">Try scorers &rarr;</a> &middot; <a href="history.html">Record &amp; history &rarr;</a> &middot; <a href="season-learnings.html">Season learnings &rarr;</a></p>
+  <p>NRL Totals Model &middot; Round 22 analysis &middot; Data: nrl.com, rugbyleagueproject.org, zerotackle.com, alphr.com.au, aussportstipping.com, bom.gov.au</p>
+  <p><a href="tryscorers.html">Try scorers &rarr;</a> &middot; <a href="history.html">Record &amp; history &rarr;</a></p>
 </footer>
 
 </div>

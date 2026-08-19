@@ -20,6 +20,11 @@ h2{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;}
 .stat-pct{font-size:30px;font-weight:700;}
 .stat-label{font-size:11px;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:0.05em;}
+.phase-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.phase-table th,.phase-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);}
+.phase-table th{background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted);}
+.phase-table tr:last-child td{border-bottom:none;}
+.review-note{background:var(--amber-bg);border:1px solid #fde68a;border-radius:var(--radius);padding:14px 16px;font-size:13px;color:#78350f;margin-bottom:24px;line-height:1.7;}
 .round-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px;}
 .round-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
 .round-title{font-size:16px;font-weight:600;}
@@ -50,7 +55,7 @@ h2{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em
 .about-box p{font-size:13px;color:var(--text-muted);margin-bottom:6px;}
 footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);}
 footer a{color:var(--text-muted);}
-@media(max-width:520px){.season-stats{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.season-stats{grid-template-columns:repeat(2,1fr);} .phase-table{font-size:12px;}}
 </style>
 </head>
 <body>
@@ -68,35 +73,298 @@ footer a{color:var(--text-muted);}
   <h2>Season totals</h2>
   <div class="season-stats">
     <div class="stat-card">
-      <div class="stat-pct">78% <span style="font-size:18px;color:var(--text-muted)">/ 73%</span></div>
-      <div class="stat-label">Scoring leans<br>7/9 excl. WATCH &middot; 11/15 incl.<br><span style="font-size:10px;opacity:.7">Rounds 15, 17, 18 only &mdash; see gap note</span></div>
+      <div class="stat-pct">63% <span style="font-size:18px;color:var(--text-muted)">/ 64%</span></div>
+      <div class="stat-label">Scoring leans<br>15/24 excl. WATCH &middot; 32/50 incl.</div>
     </div>
     <div class="stat-card">
-      <div class="stat-pct">5/6</div>
-      <div class="stat-label">Multi legs hit<br>R17: 3/3 &middot; R18: 2/3</div>
+      <div class="stat-pct">1/3</div>
+      <div class="stat-label">Multis won<br>R17 HIT &middot; R18/R19 bust &middot; R20&ndash;R23 no multi</div>
     </div>
     <div class="stat-card">
-      <div class="stat-pct">50%</div>
-      <div class="stat-label">Multis won<br>1 hit / 2 tracked<br><span style="font-size:10px;opacity:.7">Tracking from R17</span></div>
+      <div class="stat-pct">R24</div>
+      <div class="stat-label">Current round<br>Analysis in progress</div>
     </div>
+  </div>
+
+  <h2>Phase-segmented tracking</h2>
+  <table class="phase-table">
+    <tr><th>Phase</th><th>Rounds</th><th>Leans (excl. WATCH)</th><th>Expectation error</th><th>Avg posted line</th></tr>
+    <tr><td>Origin window</td><td>R15&ndash;R19</td><td>10/14 (71%)</td><td>+3.0 (R19 only)</td><td>47.6 (R19)</td></tr>
+    <tr><td>Post-Origin rebound</td><td>R20&ndash;R24</td><td>5/10 (50%)</td><td>&minus;4.3 (R20), &minus;0.2 (R21), +10.5 (R22), +0.0 (R23)</td><td>46.8 (R20), 46.5 (R21), 46.9 (R22), 47.0 (R23)</td></tr>
+    <tr><td>Run home</td><td>R25&ndash;R27</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+  </table>
+
+  <div class="review-note">
+    <strong>Over-module decision rule (review carried into R23):</strong> R22 added a third post-Origin rebound data point and it's the messiest one yet. The round's one true outlier &mdash; Sydney Roosters 82&ndash;12 over North Qld Cowboys, a 94-point total against a SOLID under lean set at 45.5 &mdash; is the model's single worst expectation miss of the 2026 season (+52.7pts vs a 41.3pt expectation), well past the previous record set in R19 (Dolphins v Sharks, +23.8). It alone drags the round's average expectation error to +10.5. Strip that one game out and the remaining six rated/near-rated games came in close to flat. Rated leans for the round finished 1/3 (Sharks v Rabbitohs HIT; Cowboys v Roosters and Dragons v Dolphins both MISS, the latter by just half a point). Three rounds into the rebound phase, the phase's rated hit rate has slipped to 4/7 (57%) and single-game variance remains the dominant risk, not systematic model bias &mdash; blowouts like the Roosters game are rare but large enough to swing the whole phase's numbers on their own. No structural change proposed yet; carrying the review into R23.
   </div>
 
   <h2>Round history</h2>
 
-  <!-- GAP: ROUNDS 19-24 -->
+  <!-- ROUND 23 -->
   <div class="round-block">
     <div class="round-header">
-      <div class="round-title">Rounds 19&ndash;24 &mdash; 10 Jul&ndash;16 Aug 2026</div>
-      <div class="round-date">Task did not run</div>
+      <div class="round-title">Round 23 &mdash; 6&ndash;9 Aug 2026 (Indigenous Round)</div>
+      <div class="round-date">Analysis: 4 Aug 2026 &middot; Results final &middot; Phase: Post-Origin rebound</div>
     </div>
-    <div class="round-note">This model wasn't run for six rounds between the Round 18 report (2 Jul) and Round 25 (19 Aug). No scoring leans or try-scorer picks were generated for Rounds 19&ndash;24, and results for those rounds have not been backfilled into this record. Round 25 (below, in the current scoring report) picks back up from here &mdash; treat the season stats above as covering Rounds 15, 17 and 18 only, not a continuous run.</div>
+    <div class="section-label">Scoring leans &mdash; excl. WATCH: 1/3 (33%) &middot; incl. WATCH: 3/6 (50%)</div>
+    <div class="pick-row">
+      <span class="pick-game">St George Illawarra Dragons v Cronulla Sharks</span>
+      <span class="pick-lean">UNDER 51.5 <span class="tier-badge tier-high">HIGH</span></span>
+      <span class="hit">HIT &check; (40 total)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Dolphins v Brisbane Broncos</span>
+      <span class="pick-lean">UNDER 48.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="miss">MISS &cross; (72 total &mdash; 40&ndash;32 shootout, both attacks firing)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Canberra Raiders v Newcastle Knights</span>
+      <span class="pick-lean">UNDER 46.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="miss">MISS &cross; (54 total &mdash; rain forecast didn't suppress scoring)</span>
+    </div>
+    <div class="advisory-note">Advisory (WATCH &mdash; not counted in hit rate):</div>
+    <div class="pick-row">
+      <span class="pick-game">Gold Coast Titans v North Queensland Cowboys</span>
+      <span class="pick-lean">WATCH &mdash; leaned UNDER 48.5</span>
+      <span class="hit">38 total (advisory HIT)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Warriors v Penrith Panthers</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 41.5</span>
+      <span class="miss">40 total (advisory MISS)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Sydney Roosters v Canterbury Bulldogs</span>
+      <span class="pick-lean">WATCH &mdash; leaned UNDER 45.5</span>
+      <span class="hit">38 total (advisory HIT)</span>
+    </div>
+    <div class="section-label">Multi recommendation</div>
+    <div class="multi-row">
+      No multi recommended this round &mdash; only one HIGH-tier leg (Dragons v Sharks), presented as three individual singles rather than forced into a multi.<br>
+      <span class="multi-outcome not-tracked">NOT TRACKED</span>
+    </div>
+  </div>
+
+  <!-- ROUND 22 -->
+  <div class="round-block">
+    <div class="round-header">
+      <div class="round-title">Round 22 &mdash; 30 Jul&ndash;2 Aug 2026</div>
+      <div class="round-date">Analysis: 28 Jul 2026 &middot; Results final &middot; Phase: Post-Origin rebound</div>
+    </div>
+    <div class="section-label">Scoring leans &mdash; excl. WATCH: 1/3 (33%) &middot; incl. WATCH: 2/6 (33%)</div>
+    <div class="pick-row">
+      <span class="pick-game">North Qld Cowboys v Sydney Roosters</span>
+      <span class="pick-lean">UNDER 45.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="miss">MISS &cross; (94 total &mdash; 82&ndash;12 blowout, worst miss of the season)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">St George Illawarra Dragons v Dolphins</span>
+      <span class="pick-lean">UNDER 49.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="miss">MISS &cross; (50 total, by half a point)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Cronulla Sharks v South Sydney Rabbitohs</span>
+      <span class="pick-lean">UNDER 50.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="hit">HIT &check; (48 total)</span>
+    </div>
+    <div class="advisory-note">Advisory (WATCH &mdash; not counted in hit rate unless a clear direction was stated):</div>
+    <div class="pick-row">
+      <span class="pick-game">Titans v New Zealand Warriors</span>
+      <span class="pick-lean">WATCH &mdash; thin under lean</span>
+      <span class="hit">HIT &check; (48 total, advisory)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Penrith Panthers v Canberra Raiders</span>
+      <span class="pick-lean">WATCH &mdash; on the line</span>
+      <span class="miss">MISS &cross; (60 total, advisory)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Brisbane Broncos v Newcastle Knights</span>
+      <span class="pick-lean">WATCH &mdash; leaned Over</span>
+      <span class="miss">MISS &cross; (36 total, advisory &mdash; leaned Over, finished well under)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Melbourne Storm v Canterbury Bulldogs</span>
+      <span class="pick-lean">WATCH &mdash; mixed signals, no direction</span>
+      <span class="pass-note">58 total (not rated &mdash; no lean stated)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Wests Tigers v Parramatta Eels</span>
+      <span class="pick-lean">WATCH &mdash; extreme variance, no direction</span>
+      <span class="pass-note">29 total (not rated &mdash; no lean stated)</span>
+    </div>
+    <div class="section-label">Multi recommendation</div>
+    <div class="multi-row">
+      No multi recommended this round &mdash; three SOLID singles, zero HIGH-tier legs, model doesn't force a multi without at least two HIGH legs in the rebound phase.<br>
+      <span class="multi-outcome not-tracked">NOT TRACKED</span>
+    </div>
+  </div>
+
+  <!-- ROUND 21 -->
+  <div class="round-block">
+    <div class="round-header">
+      <div class="round-title">Round 21 &mdash; 23&ndash;26 Jul 2026</div>
+      <div class="round-date">Analysis: 21 Jul 2026 &middot; Results final &middot; Phase: Post-Origin rebound</div>
+    </div>
+    <div class="section-label">Scoring leans &mdash; excl. WATCH: 0/1 (0%) &middot; incl. WATCH: 5/8 (63%)</div>
+    <div class="pick-row">
+      <span class="pick-game">Canberra Raiders v Wests Tigers</span>
+      <span class="pick-lean">UNDER 51.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="miss">MISS &cross; (66 total)</span>
+    </div>
+    <div class="advisory-note">Advisory (WATCH &mdash; not counted in hit rate):</div>
+    <div class="pick-row">
+      <span class="pick-game">Parramatta Eels v Penrith Panthers</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 44.5</span>
+      <span class="miss">42 total (advisory MISS)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Newcastle Knights v Sydney Roosters</span>
+      <span class="pick-lean">WATCH &mdash; small under lean 45.5</span>
+      <span class="hit">45 total (advisory HIT)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">South Sydney Rabbitohs v Melbourne Storm</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 46.5</span>
+      <span class="hit">54 total (advisory HIT)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Canterbury Bulldogs v New Zealand Warriors</span>
+      <span class="pick-lean">WATCH &mdash; pick'em, marginal under 43.5</span>
+      <span class="hit">24 total (advisory HIT)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">North Qld Cowboys v Brisbane Broncos</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 48.5</span>
+      <span class="miss">28 total (advisory MISS)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">St George Illawarra Dragons v Gold Coast Titans</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 45.5</span>
+      <span class="hit">56 total (advisory HIT)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Manly Sea Eagles v Cronulla Sharks</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 46.5</span>
+      <span class="hit">60 total (advisory HIT)</span>
+    </div>
+    <div class="section-label">Multi recommendation</div>
+    <div class="multi-row">
+      No multi recommended this round &mdash; only one rated leg (SOLID) and zero HIGH-tier games.<br>
+      <span class="multi-outcome not-tracked">NOT TRACKED</span>
+    </div>
+  </div>
+
+  <!-- ROUND 20 -->
+  <div class="round-block">
+    <div class="round-header">
+      <div class="round-title">Round 20 &mdash; 16&ndash;19 Jul 2026</div>
+      <div class="round-date">Analysis: 16 Jul 2026 &middot; Results final &middot; Phase: Post-Origin rebound (Women in League Round)</div>
+    </div>
+    <div class="section-label">Scoring leans &mdash; excl. WATCH: 3/3 (100%) &middot; incl. WATCH: 6/8 (75%)</div>
+    <div class="pick-row">
+      <span class="pick-game">Penrith Panthers v Brisbane Broncos</span>
+      <span class="pick-lean">UNDER 44.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="hit">HIT &check; (26 total)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Sydney Roosters v Melbourne Storm</span>
+      <span class="pick-lean">UNDER 45.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="hit">HIT &check; (20 total)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">New Zealand Warriors v St George Illawarra Dragons</span>
+      <span class="pick-lean">UNDER 46.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="hit">HIT &check; (32 total)</span>
+    </div>
+    <div class="advisory-note">Advisory (WATCH &mdash; not counted in hit rate):</div>
+    <div class="pick-row">
+      <span class="pick-game">Cronulla Sharks v Newcastle Knights</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 46.5</span>
+      <span class="miss">38 total (advisory MISS)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Canberra Raiders v South Sydney Rabbitohs</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 48.5</span>
+      <span class="hit">58 total (advisory HIT)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Canterbury Bulldogs v Wests Tigers</span>
+      <span class="pick-lean">WATCH &mdash; under lean 45.5</span>
+      <span class="hit">32 total (advisory HIT)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Gold Coast Titans v Manly Sea Eagles</span>
+      <span class="pick-lean">WATCH &mdash; under lean 46.5</span>
+      <span class="miss">70 total (advisory MISS)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Dolphins v North Queensland Cowboys</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 50.5</span>
+      <span class="hit">52 total (advisory HIT)</span>
+    </div>
+    <div class="section-label">Multi recommendation</div>
+    <div class="multi-row">
+      No multi recommended this round &mdash; zero HIGH-tier legs under rebound-phase thresholds.<br>
+      <span class="multi-outcome not-tracked">NOT TRACKED</span>
+    </div>
+  </div>
+
+  <!-- ROUND 19 -->
+  <div class="round-block">
+    <div class="round-header">
+      <div class="round-title">Round 19 &mdash; 10&ndash;12 Jul 2026</div>
+      <div class="round-date">Analysis: 9 Jul 2026 &middot; Results final &middot; Phase: Origin window (GIII backup round)</div>
+    </div>
+    <div class="section-label">Scoring leans &mdash; excl. WATCH: 3/5 (60%) &middot; incl. WATCH: 5/7 (71%)</div>
+    <div class="pick-row">
+      <span class="pick-game">Wests Tigers v Warriors</span>
+      <span class="pick-lean">UNDER 45.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="hit">HIT &check; (38 total)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Dolphins v Sharks</span>
+      <span class="pick-lean">UNDER 49.5 <span class="tier-badge tier-high">HIGH</span></span>
+      <span class="miss">MISS &cross; (66 total)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Bulldogs v Raiders</span>
+      <span class="pick-lean">UNDER 45.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="miss">MISS &cross; (56 total)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Roosters v Eels</span>
+      <span class="pick-lean">UNDER 47.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="hit">HIT &check; (40 total)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Sea Eagles v Cowboys</span>
+      <span class="pick-lean">UNDER 48.5 <span class="tier-badge tier-solid">SOLID</span></span>
+      <span class="hit">HIT &check; (37 total)</span>
+    </div>
+    <div class="advisory-note">Advisory (WATCH &mdash; not counted in hit rate):</div>
+    <div class="pick-row">
+      <span class="pick-game">Rabbitohs v Knights</span>
+      <span class="pick-lean">WATCH &mdash; leaned OVER 48.5</span>
+      <span class="hit">50 total (advisory HIT)</span>
+    </div>
+    <div class="pick-row">
+      <span class="pick-game">Storm v Titans</span>
+      <span class="pick-lean">WATCH &mdash; mixed, under lean</span>
+      <span class="hit">40 total (advisory HIT)</span>
+    </div>
+    <div class="section-label">Multi recommendation</div>
+    <div class="multi-row">
+      3-leg UNDER multi: Dolphins/Sharks UNDER 49.5 + Sea Eagles/Cowboys UNDER 48.5 + Tigers/Warriors UNDER 45.5 (~$6.97) &mdash;
+      <span class="multi-outcome miss">BUST</span> &mdash; Leg 1 failed (Cronulla 66&ndash;0 = 66pts); Legs 2 &amp; 3 both hit.
+    </div>
   </div>
 
   <!-- ROUND 18 -->
   <div class="round-block">
     <div class="round-header">
-      <div class="round-title">Round 18 &mdash; 3&ndash;6 Jul 2026</div>
-      <div class="round-date">Analysis: 2 Jul 2026</div>
+      <div class="round-title">Round 18 &mdash; 3&ndash;5 Jul 2026</div>
+      <div class="round-date">Analysis: 2 Jul 2026 &middot; Results final &middot; Phase: Origin window</div>
     </div>
     <div class="section-label">Scoring leans &mdash; excl. WATCH: 2/3 (67%) &middot; incl. WATCH: 4/5 (80%)</div>
     <div class="pick-row">
@@ -127,8 +395,8 @@ footer a{color:var(--text-muted);}
     </div>
     <div class="section-label">Multi recommendation</div>
     <div class="multi-row">
-      3-leg UNDER multi: Panthers/Rabbitohs UNDER 46.5 + Broncos/Sharks UNDER 49.5 + Knights/Dolphins UNDER 50.5 (~$6.97)<br>
-      <span class="multi-outcome miss">BUST &mdash; Leg 1 failed (Panthers 36&ndash;14 = 50pts) &middot; legs 2 &amp; 3 both hit</span>
+      3-leg UNDER multi: Panthers/Rabbitohs UNDER 46.5 + Broncos/Sharks UNDER 49.5 + Knights/Dolphins UNDER 50.5 (~$6.97) &mdash;
+      <span class="multi-outcome miss">BUST</span> &mdash; Leg 1 failed (Panthers 36&ndash;14 = 50pts); Legs 2 &amp; 3 both hit
     </div>
   </div>
 
@@ -136,7 +404,7 @@ footer a{color:var(--text-muted);}
   <div class="round-block">
     <div class="round-header">
       <div class="round-title">Round 17 &mdash; 25&ndash;28 Jun 2026</div>
-      <div class="round-date">Analysis: 25 Jun 2026</div>
+      <div class="round-date">Analysis: 25 Jun 2026 &middot; Results final &middot; Phase: Origin window</div>
     </div>
     <div class="section-label">Scoring leans &mdash; excl. WATCH: 3/3 (100%) &middot; incl. WATCH: 5/6 (83%)</div>
     <div class="pick-row">
@@ -172,8 +440,8 @@ footer a{color:var(--text-muted);}
     </div>
     <div class="section-label">Multi recommendation</div>
     <div class="multi-row">
-      3-leg UNDER multi: Raiders/Dragons UNDER 52.5 + Titans/Bulldogs UNDER 45.5 + Sea Eagles/Storm UNDER 47.5<br>
-      <span class="multi-outcome hit">HIT &check; &mdash; All 3 legs landed (40, 42, 34 pts)</span>
+      3-leg UNDER multi: Raiders/Dragons UNDER 52.5 + Titans/Bulldogs UNDER 45.5 + Sea Eagles/Storm UNDER 47.5 &mdash;
+      <span class="multi-outcome hit">HIT &check;</span> &mdash; All 3 legs landed (40, 42, 34 pts)
     </div>
   </div>
 
@@ -260,12 +528,21 @@ footer a{color:var(--text-muted);}
     <div style="margin-top:6px;"><span class="multi-outcome not-tracked">NOT TRACKED</span></div>
   </div>
 
+  <h2>Methodology change &middot; 23 Jul 2026</h2>
+  <div class="about-box">
+    <p><strong>The tier system had a bias, and we've fixed it.</strong> Since Round 15, HIGH and SOLID had only ever been awarded to UNDER leans &mdash; the tier definitions literally scored games on "% under," so a genuinely strong OVER signal had no tier to go to and got filed as a generic WATCH note, however clear the data actually was (Round 21's Cowboys v Broncos &mdash; H2H cleared the line in 67% of meetings since 2022, sd 10.6 &mdash; was about to be published as an unremarkable WATCH before this was caught).</p>
+    <p>We considered making HIGH/SOLID fully symmetric for overs too, and decided against it. The product's real edge is finding safe unders &mdash; a mirrored overs tier would dilute that and turn this into something it isn't. Instead, genuine over-signals now get a dedicated <strong>Shootout Risk</strong> flag: a warning that the standard under is unsafe in that game, paired with a suggested alternate-totals Over range well below the market line (roughly line minus 12 to minus 18) rather than a straight bet-the-over call at even-money risk. It's gated to real conviction only (plain H2H hit-rate &le;35% under, n&ge;6, sd&le;16, not contradicted by season market tendency) &mdash; expect zero to two flags most rounds, not a parallel tier system.</p>
+    <p>One knock-on fix: game cards now show the <em>plain</em> H2H hit-rate (count under the line &divide; games) alongside the recency-weighted average, not just the weighted figure. Several Round 20/21 "leans OVER" WATCH calls turned out to be near-even or actually under-favoured on the plain count once checked &mdash; the weighted average alone was getting pulled around by one or two recent blowouts. This doesn't change any graded HIGH/SOLID record (those were always unders and stay unders), but it does mean some of the WATCH commentary language in earlier rounds was overstating over-signals that weren't really there.</p>
+  </div>
+
   <div class="about-box">
     <h3>About the model</h3>
-    <p>Confidence tiers (HIGH / SOLID / WATCH / PASS) are based on H2H history, 2026 season form, and market line analysis &mdash; not a fixed scoring threshold.</p>
-    <p>HIGH = strongest signal (85%+ of recent matchups finish under the line). SOLID = clear edge (70&ndash;84%). WATCH = marginal or volatile &mdash; shown as advisory only, never counted in hit rate. PASS = no clear edge.</p>
-    <p>Multi recommendations include only HIGH and SOLID tier leans. WATCH games are never included regardless of proximity to threshold.</p>
-    <p>Scoring lean tracking started Round 15, 2026. Round 16 had no picks. Multi tracking started Round 17, 2026. Rounds 19&ndash;24 were not processed &mdash; see the gap note above.</p>
+    <p>Confidence tiers (HIGH / SOLID / WATCH / PASS) are based on H2H history, 2026 season form, and market line analysis &mdash; not a fixed scoring threshold. HIGH and SOLID are reserved for UNDER leans only &mdash; that's the model's actual edge and the only bets it grades a track record on.</p>
+    <p>HIGH = strongest signal (H2H and form aligned, gap vs line 6pts+; +6.5 in the post-Origin rebound phase). SOLID = clear edge (gap 3&ndash;5.9pts, majority of signals agree; +4 in rebound phase). WATCH = marginal, volatile, or a genuine over-lean &mdash; shown as advisory only, never counted in hit rate. PASS = no clear edge.</p>
+    <p><strong>Shootout Risk</strong> (added Round 21) is a separate, non-tier warning for games where backing the standard under would be a bad bet &mdash; it comes with a suggested alternate-totals Over range instead of a graded pick, and is never included in the multi. None triggered in Round 22 or Round 23.</p>
+    <p>Multi recommendations are built from HIGH-tier UNDER legs only from R20 onwards (HIGH and SOLID prior to R20). WATCH games and Shootout Risk flags are never included regardless of proximity to threshold. In the post-Origin rebound phase, no multi is forced if fewer than two HIGH legs exist &mdash; that's been the case in R20, R21 and R22, and again in R23 (one HIGH leg only).</p>
+    <p>Every round is tagged with its season phase (Origin window / post-Origin rebound / run home) and the model tracks expectation error per phase.</p>
+    <p>Scoring lean tracking started Round 15, 2026. Round 16 had no picks. Multi tracking started Round 17, 2026. Phase tagging and expectation-error tracking added Round 19, 2026. Tier symmetry bias identified and Shootout Risk flag introduced Round 21, 2026. Round 22 produced the season's largest single-game expectation miss (+52.7pts, Roosters 82&ndash;12 Cowboys).</p>
   </div>
 
   <footer>
